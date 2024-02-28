@@ -37,4 +37,6 @@ public class Producto_bodega {
         this.volTotal=volTotal;
     }
 
+    
+
 }

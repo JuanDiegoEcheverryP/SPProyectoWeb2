@@ -1,7 +1,7 @@
 package com.proyecto.spaceinvaders.NaveEspacial.model;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +30,7 @@ public class TipoNave {
     private String foto;
 
     @OneToMany (mappedBy = "tipoNave")
-    private ArrayList<Nave> Naves= new ArrayList<>();
+    private List<Nave> Naves= new ArrayList<>();
 
     public TipoNave(String tipo, Float volBodega,  Float velocidad, String foto)
     {
@@ -39,6 +39,5 @@ public class TipoNave {
         this.velocidad=velocidad;
         this.foto=foto;
     }
-
 
 }

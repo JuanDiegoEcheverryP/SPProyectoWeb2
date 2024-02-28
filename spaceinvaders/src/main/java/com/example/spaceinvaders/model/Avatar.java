@@ -1,7 +1,7 @@
 package com.proyecto.spaceinvaders.NaveEspacial.model;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,5 +26,11 @@ public class Avatar {
     private String imagen;
 
     @OneToMany (mappedBy = "avatar")
-    private ArrayList<Jugador> Jugadores= new ArrayList<>();
+    private List<Jugador> Jugadores= new ArrayList<>();
+
+    public Avatar(String nombre, String url)
+    {
+        this.nombre=nombre;
+        this.imagen=url;
+    }
 }

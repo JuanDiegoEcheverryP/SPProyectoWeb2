@@ -1,6 +1,5 @@
 package com.proyecto.spaceinvaders.NaveEspacial.init;
 
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
 
@@ -8,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.proyecto.spaceinvaders.NaveEspacial.model.Avatar;
 import com.proyecto.spaceinvaders.NaveEspacial.model.Camino;
+import com.proyecto.spaceinvaders.NaveEspacial.model.Estrella;
 import com.proyecto.spaceinvaders.NaveEspacial.model.Nave;
 import com.proyecto.spaceinvaders.NaveEspacial.model.Planeta;
 import com.proyecto.spaceinvaders.NaveEspacial.model.Producto;
 import com.proyecto.spaceinvaders.NaveEspacial.model.Producto_bodega;
 import com.proyecto.spaceinvaders.NaveEspacial.model.Stock_planeta;
 import com.proyecto.spaceinvaders.NaveEspacial.model.TipoNave;
+import com.proyecto.spaceinvaders.NaveEspacial.model.Jugador;
 import com.proyecto.spaceinvaders.NaveEspacial.repository.AvatarRepository;
 import com.proyecto.spaceinvaders.NaveEspacial.repository.CaminoRepository;
 import com.proyecto.spaceinvaders.NaveEspacial.repository.EstrellaRepository;
@@ -77,12 +79,24 @@ public class DBInitializer implements CommandLineRunner{
         //500 productos
         //20 naves
 
-        //Nave base= new Nave();
+        //1200 planetas
+        //15
+        String[] planetanombre3={"Aquamarine","Puce","Blue","Mauv","Teal","Crimson","Violet","Yellow", "Khaki","Orange","Indigo","Maroon","Fuscia","Green","Red", "Turquoise"};
+        //16
+        String[] planetanombre2={"Lactulose","Naproxen","Lisinopril","Rifampin","Metoclopramide","Rifampin","Doxycycline","Spoonbill","Suricate","Elephant","dragon","Vulture","macaw","Lapwing","jackal"};
+        //5
+        String[] planetanombre1={"Planemo","Enana","Plutoide","Mesoplaneta","Protoplaneta"};
 
-        //PERSONAJES
+        
+        
+        Estrella estrella=new Estrella("enana roja",1,2,3);
+        estrellaRepository.save(estrella);
+        Planeta planeta=new Planeta("Saturno",true,"https://shorturl.at/kuFO8",estrella);
+        planetaRepository.save(planeta);
+
 
         String[] tipoNaveNombre1={"nave", "nao"};
-        String[] tipoNaveNombre2={"Violaceae", "Asteraceae","Orchidaceae", "Portulacaceae","Physciaceae","Asteraceae","Sapotaceae","Hymenophyllaceae","Pinaceae","Asteraceae"};
+        String[] tipoNaveNombre2={"Violaceae", "Asteraceae","Orchidaceae", "Portulacaceae","Physciaceae","Aster","Sapotaceae","Hymenophyllaceae","Pinaceae","Astirrea"};
         String imagenNave="https://shorturl.at/tvwUW", nombreTipoNave;
         float volumenBodega, velocidad;
 
@@ -97,18 +111,71 @@ public class DBInitializer implements CommandLineRunner{
             }
         }
 
+       
+
+        String[] equipoNombre={"Mountain Marsh Larkspur","Riverswamp Nutrush","Ballhead Ragwort","Rough Goose Neck Moss","Cara De Caballo","Caracas Pepper","Prairie Pleuridium Moss","Fineflower Gilia","Eurasian Woodrush","Cartilage Lichen"};
+        String nombreNave;
+        Float credito, tiempo;
+        int contador=0;
+        List<Planeta> planetas = planetaRepository.findAll();
+        List<TipoNave> tiposNave = tipoNaveRepository.findAll();
+
+        for(String nombre : equipoNombre)
+        {
+            nombreNave=nombre;
+            credito=rand.nextFloat() * 1000+1;
+            tiempo=rand.nextFloat() * 10000+1;
+            //Nave nave=new Nave(nombreNave,credito,tiempo,planetas.get(contador),tiposNave.get(contador));
+            Nave nave=new Nave(nombreNave,credito,tiempo,planeta,tiposNave.get(contador));
+            naveRepository.save(nave);
+            contador++;
+        }
+
+
+        String[] avatarNombre={"Tails","Zero","Ness","Samus","Yoshi","Diddi","Geno"};
+        String imagenAvatar="https://shorturl.at/gkJTU";
+
+        for(String nombre : avatarNombre)
+        {
+            Avatar avatar=new Avatar(nombre,imagenAvatar);
+
+            avatarRepository.save(avatar);
+        }
+
+ 
+        List<Nave> naves = naveRepository.findAll();
+        List<Avatar> avatares = avatarRepository.findAll();
 
         String[] nombreJugadorPt1 = {"Cedric","Sorcha","Pacorro","Riobard","Cecilius","Cybil","Jasmina","Gizela","Nonie","Sileas"};
         String[] nombreJugadorPt2 = {"Turban","Float","Yateman","Tibols","Matthis","Elcy","Maidlow","Lamburne","Wadmore","Elcox"};
 
         String nombreJugador,contrasena;
+        int contadorJugadores=0;
 
+        for(String nombre1:nombreJugadorPt1 )
+        {
+            for(String nombre2:nombreJugadorPt2)
+            {
+                nombreJugador=nombre1+" "+nombre2;
+                contrasena="12345";
 
-
-        String[] equipoNombre={"Mountain Marsh Larkspur","Riverswamp Nutrush","Ballhead Ragwort","Rough Goose Neck Moss","Cara De Caballo","Caracas Pepper","Prairie Pleuridium Moss","Fineflower Gilia","Eurasian Woodrush","Cartilage Lichen"};
-        String nombreNave;
-        Float credito, tiempo;
-
+                //poner capitanes
+                if(contadorJugadores<10)
+                {
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,CAPITAN,naves.get(contadorJugadores),avatares.get(rand.nextInt(7))));
+                }
+                //poner navegantes
+                else if(contadorJugadores<20)
+                {
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,PILOTO,naves.get(contadorJugadores-10),avatares.get(rand.nextInt(7))));
+                }
+                else
+                {
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,COMERCIANTE,naves.get(rand.nextInt(9)),avatares.get(rand.nextInt(7))));
+                }
+                contadorJugadores++;
+            }
+        }
 
     
         String[] nombreProducto1={"Goldenrod","Mauv","Turquoise","Puce","Khaki","Orange","Pink","Red","Indigo","Violet"};
@@ -118,6 +185,7 @@ public class DBInitializer implements CommandLineRunner{
         String nombreProducto;
         String imagenProducto="https://shorturl.at/afzIM";
         float volumen;
+      
 
         //CREACION DE PRODUCTOS
         for (String nombre1 : nombreProducto1) {
@@ -131,77 +199,45 @@ public class DBInitializer implements CommandLineRunner{
             }
         }
         
-        
-/* 
-        //1200 planetas
-        //15
-        String[] planetanombre3={"Aquamarine","Puce","Blue","Mauv","Teal","Crimson","Violet","Yellow", "Khaki","Orange","Indigo","Maroon","Fuscia","Green","Red", "Turquoise"};
-        //16
-        String[] planetanombre2={"Lactulose","Naproxen","Lisinopril","Rifampin","Metoclopramide","Rifampin","Doxycycline","Spoonbill","Suricate","Elephant","dragon","Vulture","macaw","Lapwing","jackal"};
-        //5
-        String[] planetanombre1={"Planemo","Enana","Plutoide","Mesoplaneta","Protoplaneta"};
-
-        /*
         //LLENAR LAS TABLAS INTERMEDIAS DE STOCK PLANETS Y BODEGA
 
         //AQUI PARA LLENAR EL STOCK
-        List<Planeta> planetas = planetaRepository.findAll();
         List<Producto> productos = productoRepository.findAll();
 
         for (Producto producto : productos) {
             // Para cada planeta existente
-            for (Planeta planeta : planetas) {
-                // Crear un nuevo stock para el producto en este planeta
-                Stock_planeta stockPlaneta = new Stock_planeta(rand.nextLong() * 1000001, rand.nextLong() * 1000001, rand.nextInt(200)); // Suponiendo que inicialmente hay 100 unidades
-                stockPlaneta.setProducto(producto);
-                stockPlaneta.setPlaneta(planeta);
+            for (Planeta planetaa : planetas) {
+                if(planeta.getHabitado())
+                {
+                    // Crear un nuevo stock para el producto en este planeta
+                    Stock_planeta stockPlaneta = new Stock_planeta(rand.nextLong(1000000) + 1, rand.nextLong(1000000) + 1, rand.nextInt(200)); // Suponiendo que inicialmente hay 100 unidades
+                    stockPlaneta.setProducto(producto);
+                    stockPlaneta.setPlaneta(planetaa);
+                    
+                    // Guardar el stock del producto en el planeta
+                    stockPlanetaRepository.save(stockPlaneta);
+                    
+                }
                 
-                // Guardar el stock del producto en el planeta
-                stockPlanetaRepository.save(stockPlaneta);
-                
-                // Asociar el stock al producto
-                producto.anadirStockPlaneta(stockPlaneta);
-                
-                // Asociar el stock al planeta
-                planeta.anadirStockPlaneta(stockPlaneta);
-
-                planetaRepository.save(planeta);
             }
-            // Guardar el producto después de asociar el stock
-            productoRepository.save(producto);
         }
-       
 
         //AQUI PARA LLENAR LA BODEGA
+        int contadorNaves=0;
 
-        List<Nave> naves = naveRepository.findAll();
-        int contador=0;
-
-        for (Producto producto : productos) {
+        for (int i=0; i< productos.size() && contadorNaves<10; contadorNaves++) {
              // Para cada nave existente
-            for (int i=0; i<2; i++) {
+            for (int j=0; j<2; j++) {
                 // Crear un nuevo stock para el producto en este planeta
-                Producto_bodega productoBodega = new Producto_bodega(8, producto.getVolumen()*8); // Suponiendo que inicialmente hay 100 unidades
-                productoBodega.setProducto(producto);
-                productoBodega.setNave(naves.get(contador));
-                
-                // Guardar el stock del producto en el planeta
+                Producto_bodega productoBodega = new Producto_bodega(8, productos.get(i+j).getVolumen()*8); // Suponiendo que inicialmente hay 100 unidades
+                productoBodega.setProducto(productos.get(i));
+                productoBodega.setNave(naves.get(contadorNaves));
                 productoBodegaRepository.save(productoBodega);
-                
-                // Asociar el stock al producto
-                producto.anadirProductoBodega(productoBodega);
-                
-                // Asociar el stock al planeta
-                naves.get(contador).anadirProductoBodega(productoBodega);
-
-                naveRepository.save(naves.get(contador));
-
-                contador++;
+                i++;
             }
             // Guardar el producto después de asociar el stock
-            productoRepository.save(producto);
         }
         
-        */
+
     }
 }

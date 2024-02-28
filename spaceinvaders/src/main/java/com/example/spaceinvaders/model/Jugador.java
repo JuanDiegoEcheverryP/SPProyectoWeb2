@@ -32,4 +32,13 @@ public class Jugador {
     @ManyToOne
     private Avatar avatar;
 
+    public Jugador(String nombre, String contrasena, String rol, Nave naveJuego, Avatar avatar)
+    {
+        this.nombre=nombre;
+        this.contrasena=contrasena;
+        this.rol=rol;
+        this.naveJuego=naveJuego;
+        this.avatar=avatar;
+    }
+
 }

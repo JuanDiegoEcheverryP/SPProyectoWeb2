@@ -23,7 +23,7 @@ public class Stock_planeta {
     private Long FactorDemanda;
     private Long FactorOferta;
     private Integer stock;
-    private String imagen; //Este seria una url a una imagen
+    //private String imagen; //Este seria una url a una imagen
 
     //FK
     @ManyToOne
@@ -31,7 +31,7 @@ public class Stock_planeta {
 
     @ManyToOne
     private Producto producto;
-    
+
     public Stock_planeta(Long FactorDemanda,Long FactorOferta,Integer stock)
     {
         this.FactorDemanda=FactorDemanda;

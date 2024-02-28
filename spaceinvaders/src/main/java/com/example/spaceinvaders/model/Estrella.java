@@ -1,5 +1,5 @@
 package com.proyecto.spaceinvaders.NaveEspacial.model;
-
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,12 +38,20 @@ public class Estrella {
     private Integer coord_z;
     
     @OneToMany (mappedBy = "estrellaFinal")
-    private ArrayList<Camino> listaCaminosFinal = new ArrayList<>();
+    private List<Camino> listaCaminosFinal = new ArrayList<>();
 
     @OneToMany (mappedBy = "estrellaInicio")
-    private ArrayList<Camino> listaCaminosInicio = new ArrayList<>();
+    private List<Camino> listaCaminosInicio = new ArrayList<>();
 
     @OneToMany (mappedBy = "estrella")
-    ArrayList<Planeta> listaPlanetas = new ArrayList<>();
+    private List<Planeta> listaPlanetas = new ArrayList<>();
+
+    public Estrella(String nombre,Integer coord_x,Integer coord_y,Integer coord_z)
+    {
+        this.nombre=nombre;
+        this.coord_x=coord_x;
+        this.coord_y=coord_y;
+        this.coord_z=coord_z;
+    }
    
 }

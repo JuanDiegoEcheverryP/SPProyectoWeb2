@@ -1,6 +1,7 @@
 package com.proyecto.spaceinvaders.NaveEspacial.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,19 +32,26 @@ public class Nave {
     private Planeta localizacion; // Correcting the mapping to Planeta entity
 
     @OneToMany(mappedBy = "nave")
-    private ArrayList<Producto_bodega> productosDeBodega = new ArrayList<>();
-
-        
+    private List<Producto_bodega> productosDeBodega = new ArrayList<>();
+    
     public void anadirProductoBodega(Producto_bodega nuevo)
     {
         productosDeBodega.add(nuevo);
     }
 
-
     @ManyToOne
     private TipoNave tipoNave;
 
     @OneToMany(mappedBy = "naveJuego")
-    private ArrayList<Jugador> jugadores = new ArrayList<>();
+    private List<Jugador> jugadores = new ArrayList<>();
+
+    public Nave(String nombre, Float credito, Float tiempo,Planeta localizacion,TipoNave tipoNave )
+    {
+        this.nombre=nombre;
+        this.tiempo=tiempo;
+        this.credito=credito;
+        this.localizacion=localizacion;
+        this.tipoNave=tipoNave;
+    }
     
 }

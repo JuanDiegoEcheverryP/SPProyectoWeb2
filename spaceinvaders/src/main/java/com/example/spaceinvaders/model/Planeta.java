@@ -1,5 +1,5 @@
 package com.proyecto.spaceinvaders.NaveEspacial.model;
-
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,24 +21,35 @@ public class Planeta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(unique=true)
     private String nombre;
+
+    private Boolean habitado;
     
     private String imagen; //Este seria una url a una imagen
 
     @OneToMany (mappedBy = "planeta")
-    ArrayList<Stock_planeta> listaStock = new ArrayList<>();
-
+    private List<Stock_planeta> listaStock = new ArrayList<>();
+    
     public void anadirStockPlaneta(Stock_planeta nuevo)
     {
         listaStock .add(nuevo);
     }
-    
+
     @OneToMany (mappedBy = "localizacion")
-    ArrayList<Nave> listaNaves = new ArrayList<>();
+    private List<Nave> listaNaves = new ArrayList<>();
 
     @ManyToOne
     private Estrella estrella;
+
+    public Planeta(String nombre,Boolean habitado,String imagen,Estrella estrella)
+    {
+        this.nombre=nombre;
+        this.habitado=habitado;
+        this.imagen=imagen;
+        this.estrella=estrella;
+    }
 }
 
 
