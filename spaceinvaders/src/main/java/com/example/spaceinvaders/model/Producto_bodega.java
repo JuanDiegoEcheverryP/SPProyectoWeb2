@@ -1,4 +1,4 @@
-package com.proyecto.spaceinvaders.NaveEspacial.model;
+package com.example.spaceinvaders.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

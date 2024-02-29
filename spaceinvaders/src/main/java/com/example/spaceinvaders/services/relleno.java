@@ -1,4 +1,4 @@
-package com.proyecto.spaceinvaders.NaveEspacial.services;
+package com.example.spaceinvaders.services;
 
 public class relleno {
     

@@ -1,4 +1,4 @@
-package com.proyecto.spaceinvaders.NaveEspacial.init;
+package com.example.spaceinvaders.init;
 
 import java.util.Random;
 import java.util.List;
@@ -7,26 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.proyecto.spaceinvaders.NaveEspacial.model.Avatar;
-import com.proyecto.spaceinvaders.NaveEspacial.model.Camino;
-import com.proyecto.spaceinvaders.NaveEspacial.model.Estrella;
-import com.proyecto.spaceinvaders.NaveEspacial.model.Nave;
-import com.proyecto.spaceinvaders.NaveEspacial.model.Planeta;
-import com.proyecto.spaceinvaders.NaveEspacial.model.Producto;
-import com.proyecto.spaceinvaders.NaveEspacial.model.Producto_bodega;
-import com.proyecto.spaceinvaders.NaveEspacial.model.Stock_planeta;
-import com.proyecto.spaceinvaders.NaveEspacial.model.TipoNave;
-import com.proyecto.spaceinvaders.NaveEspacial.model.Jugador;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.AvatarRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.CaminoRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.EstrellaRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.JugadorRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.NaveRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.PlanetaRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.ProductoBodegaRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.ProductoRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.StockPlanetaRepository;
-import com.proyecto.spaceinvaders.NaveEspacial.repository.TipoNaveRepository;
+import com.example.spaceinvaders.model.Avatar;
+import com.example.spaceinvaders.model.Camino;
+import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.Nave;
+import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.model.Producto;
+import com.example.spaceinvaders.model.Producto_bodega;
+import com.example.spaceinvaders.model.Stock_planeta;
+import com.example.spaceinvaders.model.TipoNave;
+import com.example.spaceinvaders.model.Jugador;
+import com.example.spaceinvaders.repository.AvatarRepository;
+import com.example.spaceinvaders.repository.CaminoRepository;
+import com.example.spaceinvaders.repository.EstrellaRepository;
+import com.example.spaceinvaders.repository.JugadorRepository;
+import com.example.spaceinvaders.repository.NaveRepository;
+import com.example.spaceinvaders.repository.PlanetaRepository;
+import com.example.spaceinvaders.repository.ProductoBodegaRepository;
+import com.example.spaceinvaders.repository.ProductoRepository;
+import com.example.spaceinvaders.repository.StockPlanetaRepository;
+import com.example.spaceinvaders.repository.TipoNaveRepository;
 
 
 @Component

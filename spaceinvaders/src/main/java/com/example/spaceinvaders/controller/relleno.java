@@ -1,4 +1,4 @@
-package com.proyecto.spaceinvaders.NaveEspacial.controller;
+package com.example.spaceinvaders.controller;
 
 public class relleno {
     

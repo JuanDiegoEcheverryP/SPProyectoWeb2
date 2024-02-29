@@ -1,4 +1,4 @@
-package com.proyecto.spaceinvaders.NaveEspacial.model;
+package com.example.spaceinvaders.model;
 
 
 import lombok.Getter;
