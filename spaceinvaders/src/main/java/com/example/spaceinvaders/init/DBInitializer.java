@@ -107,7 +107,16 @@ public class DBInitializer implements CommandLineRunner{
         Float distancia;
         //INGRESAR ESTRELLAS 
         //PRIMERO QUE CADA ESTRELLA NUMERO 5000 SE CONECTE CON LAS 5000 DE ABAJO
-       for(int i=0; i<7;i++)
+
+        Avatar a = new Avatar("uno","https://www.webwise.ie/wp-content/uploads/2020/12/IMG1207.jpg");
+        Avatar b = new Avatar("dos","https://wallpapers.com/images/hd/aesthetic-among-us-pictures-u11hsmpkwm0s66zo.jpg");
+        Avatar c = new Avatar("tres","https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs2/176434146/original/eec65e10cb8001a489c287bad580bf58ae52451d/make-you-an-among-us-profile-picture.jpg");
+        
+        avatarRepository.save(a);
+        avatarRepository.save(b);
+        avatarRepository.save(c);
+       
+        for(int i=0; i<7;i++)
         {
             ref=estrellas.get((i+1)*5000-1);
             if(i==0)
