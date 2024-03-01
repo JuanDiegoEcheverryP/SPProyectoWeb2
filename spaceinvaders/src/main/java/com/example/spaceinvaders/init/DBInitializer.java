@@ -71,6 +71,9 @@ public class DBInitializer implements CommandLineRunner{
     {
 
         Random rand = new Random();
+        //Estrella estrella=new Estrella("enana roja",1,2,3);
+        //estrellaRepository.delete(estrella);
+
         //40000 estrellas
         //400 estrellas tienen 1 a 3 estrellas
         //codas deben estar conectadas
@@ -78,21 +81,72 @@ public class DBInitializer implements CommandLineRunner{
         //10 equipos
         //500 productos
         //20 naves
+        String[] estrellaNombre1={"Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray", "Yankee", "Zulu",  "Gamma",  "Deltaris", "Epsilon", "Zeta", "Theta", "Kappa", "Lambda", "Omicron", "Omega"};
+        String[] estrellaNombre2= {"Canis", "Polar", "Borealis", "Betelgeuse", "Canopo", "Scuti", "Rigel", "Sirio", "Canopus", "Albirero", "Lusitania", "Libertas", "Mimosa", "Nekkar", "Polaris", "Rigelia", "Pegasus", "Orion", "Azrael", "Atlas", "Belenos", "Celaneo", "Helvetios", "Intercrus", "Australis", "Borealisis", "Macondo", "Columbae", "Capricorni", "Coronae", "Vega", "Centauri", "Carina", "Alnilam", "Hadar"} ;
+        String[] estrellaNombre3= {"azul","blanco azulada","blanco amarillento","amarillo","anaranjado amarillento","anaranjado","anaranjado rojizo","rojo naranja","rojo","carmesi","cafe","marron","enana","subenana","sub gigante","gigante","supergigante","colosa","super colosa","masiva","super masiva","hipergigante","brillante","super brillante","opaca","errante","binaria","ternaria","cambiante","duende","neutra","extrana","anormal","pulsar","albireo"};
 
+        int contadorEstrellas = 0;
+        String nombreEstrella;
+
+        for (int i=0; i<estrellaNombre1.length && contadorEstrellas<40000; i++) {
+            for (int j=0; j<estrellaNombre2.length && contadorEstrellas<40000; j++) {
+                for (int k=0; k<estrellaNombre3.length && contadorEstrellas<40000; k++) {
+
+                    nombreEstrella=estrellaNombre1[i]+" "+estrellaNombre2[j]+" "+estrellaNombre3[k];
+                    Estrella estrella= new Estrella(nombreEstrella,i*(300/40)+rand.nextFloat(1),j*(300/40)+rand.nextFloat(1),k*(300/40)+rand.nextFloat(1));
+                    estrellaRepository.save(estrella);
+                    contadorEstrellas++;
+                }
+            }
+        }
+
+        List<Estrella> estrellas = estrellaRepository.findAll();
         //1200 planetas
         //15
         String[] planetanombre3={"Aquamarine","Puce","Blue","Mauv","Teal","Crimson","Violet","Yellow", "Khaki","Orange","Indigo","Maroon","Fuscia","Green","Red", "Turquoise"};
         //16
-        String[] planetanombre2={"Lactulose","Naproxen","Lisinopril","Rifampin","Metoclopramide","Rifampin","Doxycycline","Spoonbill","Suricate","Elephant","dragon","Vulture","macaw","Lapwing","jackal"};
+        String[] planetanombre2={"Lactulose","Naproxen","Lisinopril","Rifampin","Metoclopramide","Rifampinmin","Doxycycline","Spoonbill","Suricate","Elephant","dragon","Vulture","macaw","Lapwing","jackal"};
         //5
         String[] planetanombre1={"Planemo","Enana","Plutoide","Mesoplaneta","Protoplaneta"};
 
-        
-        
-        Estrella estrella=new Estrella("enana roja",1,2,3);
-        estrellaRepository.save(estrella);
-        Planeta planeta=new Planeta("Saturno",true,"https://shorturl.at/kuFO8",estrella);
-        planetaRepository.save(planeta);
+        String planetaNombre;
+        Boolean habitado;
+        String imagen="https://shorturl.at/kuFO8";
+        int planetaXestrella=0,contEstrella=0;
+
+        for (String nombre1 : planetanombre1) {
+            for (String nombre2 : planetanombre2) {
+                for (String nombre3 : planetanombre3) {
+
+                    planetaNombre=nombre1+" "+nombre2+" "+nombre3;
+
+                    if(contEstrella<400)
+                    {
+                        habitado=true;
+                    }
+                    else
+                    {
+                        habitado=false;
+                    }
+
+                    if(planetaXestrella==0)
+                    {
+                        planetaXestrella=rand.nextInt(3) + 1;
+                        Planeta planeta=new Planeta(planetaNombre,habitado,imagen,estrellas.get(contEstrella));
+                        planetaRepository.save(planeta);
+                        planetaXestrella--;
+                        contEstrella++;
+                    }
+                    else
+                    {
+                        Planeta planeta=new Planeta(planetaNombre,habitado,imagen,estrellas.get(contEstrella));
+                        planetaRepository.save(planeta);
+                        planetaXestrella--;
+                    }
+
+                }
+            }
+        }
 
 
         String[] tipoNaveNombre1={"nave", "nao"};
@@ -104,14 +158,13 @@ public class DBInitializer implements CommandLineRunner{
             for (String nombre2 : tipoNaveNombre2) {
 
                 nombreTipoNave=nombre1 + " " + nombre2;
-                volumenBodega= rand.nextFloat() * 1000+1;
-                velocidad=rand.nextFloat() * 100+1;
+                volumenBodega= rand.nextFloat(1000) +1;
+                velocidad=rand.nextFloat(100) +1;
                 TipoNave tipoNave=new TipoNave(nombreTipoNave,volumenBodega,velocidad,imagenNave);
                 tipoNaveRepository.save(tipoNave);
             }
         }
 
-       
 
         String[] equipoNombre={"Mountain Marsh Larkspur","Riverswamp Nutrush","Ballhead Ragwort","Rough Goose Neck Moss","Cara De Caballo","Caracas Pepper","Prairie Pleuridium Moss","Fineflower Gilia","Eurasian Woodrush","Cartilage Lichen"};
         String nombreNave;
@@ -126,7 +179,7 @@ public class DBInitializer implements CommandLineRunner{
             credito=rand.nextFloat() * 1000+1;
             tiempo=rand.nextFloat() * 10000+1;
             //Nave nave=new Nave(nombreNave,credito,tiempo,planetas.get(contador),tiposNave.get(contador));
-            Nave nave=new Nave(nombreNave,credito,tiempo,planeta,tiposNave.get(contador));
+            Nave nave=new Nave(nombreNave,credito,tiempo,planetas.get(rand.nextInt(1200)),tiposNave.get(contador));
             naveRepository.save(nave);
             contador++;
         }
@@ -198,7 +251,7 @@ public class DBInitializer implements CommandLineRunner{
                 }
             }
         }
-        
+ 
         //LLENAR LAS TABLAS INTERMEDIAS DE STOCK PLANETS Y BODEGA
 
         //AQUI PARA LLENAR EL STOCK
@@ -206,13 +259,13 @@ public class DBInitializer implements CommandLineRunner{
 
         for (Producto producto : productos) {
             // Para cada planeta existente
-            for (Planeta planetaa : planetas) {
+            for (Planeta planeta : planetas) {
                 if(planeta.getHabitado())
                 {
                     // Crear un nuevo stock para el producto en este planeta
                     Stock_planeta stockPlaneta = new Stock_planeta(rand.nextLong(1000000) + 1, rand.nextLong(1000000) + 1, rand.nextInt(200)); // Suponiendo que inicialmente hay 100 unidades
                     stockPlaneta.setProducto(producto);
-                    stockPlaneta.setPlaneta(planetaa);
+                    stockPlaneta.setPlaneta(planeta);
                     
                     // Guardar el stock del producto en el planeta
                     stockPlanetaRepository.save(stockPlaneta);
@@ -221,7 +274,7 @@ public class DBInitializer implements CommandLineRunner{
                 
             }
         }
-
+ 
         //AQUI PARA LLENAR LA BODEGA
         int contadorNaves=0;
 
@@ -237,7 +290,6 @@ public class DBInitializer implements CommandLineRunner{
             }
             // Guardar el producto después de asociar el stock
         }
-        
 
     }
 }

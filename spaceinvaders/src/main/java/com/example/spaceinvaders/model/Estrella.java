@@ -31,11 +31,11 @@ public class Estrella {
 
     //la idea es que no hayan dos o mas estrellas en la misma posicion
     @Column(nullable = false)
-    private Integer coord_x;
+    private Float coord_x;
     @Column(nullable = false)
-    private Integer coord_y;
+    private Float coord_y;
     @Column(nullable = false)
-    private Integer coord_z;
+    private Float coord_z;
     
     @OneToMany (mappedBy = "estrellaFinal")
     private List<Camino> listaCaminosFinal = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Estrella {
     @OneToMany (mappedBy = "estrella")
     private List<Planeta> listaPlanetas = new ArrayList<>();
 
-    public Estrella(String nombre,Integer coord_x,Integer coord_y,Integer coord_z)
+    public Estrella(String nombre,Float coord_x,Float coord_y,Float coord_z)
     {
         this.nombre=nombre;
         this.coord_x=coord_x;
