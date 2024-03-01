@@ -31,10 +31,6 @@ public class AvatarController {
     }
 
     //http://localhost:8080/avatar/crear/?nombre="avatarX"&imagen="urlX"
-    //En postman puedes ponerlo en params de la siguiente forma:
-    //      Key             Value
-    //      nombre          avatarX
-    //      imagen          urlX
     @PostMapping("/crear")
     public Avatar create(@RequestParam("nombre") String name, @RequestParam("imagen") String url) {
         Avatar newAvatar = new Avatar(name,url);
@@ -42,10 +38,6 @@ public class AvatarController {
     }
 
     //http://localhost:8080/avatar/actualizar/id?nombre="avatarX"&imagen="urlX"
-    //En postman puedes ponerlo en params de la siguiente forma:
-    //      Key             Value
-    //      nombre          avatarX
-    //      imagen          urlX
     @PutMapping("/actualizar/{id}")
     public Avatar update(@PathVariable Long id, @RequestParam("nombre") String name, @RequestParam("imagen") String url) {
         Avatar avatar = new Avatar(name,url);
@@ -58,5 +50,3 @@ public class AvatarController {
         avatarService.delete(id);
     }
 }
-
-//La herramienta postman es muy util para ver que funcionen estas rutas
