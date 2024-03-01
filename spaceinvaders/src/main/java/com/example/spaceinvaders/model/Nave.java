@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.Id;
+import jakarta.persistence.CascadeType;
 
 @Getter
 @Setter
@@ -31,7 +32,7 @@ public class Nave {
     @ManyToOne
     private Planeta localizacion; // Correcting the mapping to Planeta entity
 
-    @OneToMany(mappedBy = "nave")
+    @OneToMany(mappedBy = "nave",cascade = CascadeType.ALL)
     private List<Producto_bodega> productosDeBodega = new ArrayList<>();
     
     public void anadirProductoBodega(Producto_bodega nuevo)

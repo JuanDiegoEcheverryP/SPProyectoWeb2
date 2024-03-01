@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.OneToMany;
-
+import jakarta.persistence.CascadeType;
 
 @Getter
 @Setter
@@ -28,7 +28,7 @@ public class Producto {
     private float volumen;
     private String imagen;
 
-    @OneToMany (mappedBy ="producto")
+    @OneToMany (mappedBy ="producto",cascade = CascadeType.ALL)
     private List<Stock_planeta> listaStockPlanetas = new ArrayList<>();
 
     public void anadirStockPlaneta(Stock_planeta nuevo)
@@ -37,7 +37,7 @@ public class Producto {
     }
 
 
-    @OneToMany (mappedBy = "producto")
+    @OneToMany (mappedBy = "producto",cascade = CascadeType.ALL)
     private List<Producto_bodega> listaPRoductoBodega = new ArrayList<>();
 
     public void anadirProductoBodega(Producto_bodega nuevo)

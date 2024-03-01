@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import java.util.ArrayList;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.CascadeType;
 
 @Getter
 @Setter
@@ -29,7 +30,7 @@ public class Planeta {
     
     private String imagen; //Este seria una url a una imagen
 
-    @OneToMany (mappedBy = "planeta")
+    @OneToMany (mappedBy = "planeta",cascade = CascadeType.ALL)
     private List<Stock_planeta> listaStock = new ArrayList<>();
     
     public void anadirStockPlaneta(Stock_planeta nuevo)

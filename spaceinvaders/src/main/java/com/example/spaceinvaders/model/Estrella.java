@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-
+import jakarta.persistence.CascadeType;
 
 @Getter
 @Setter
@@ -37,13 +37,13 @@ public class Estrella {
     @Column(nullable = false)
     private Float coord_z;
     
-    @OneToMany (mappedBy = "estrellaFinal")
+    @OneToMany (mappedBy = "estrellaFinal",cascade = CascadeType.ALL)
     private List<Camino> listaCaminosFinal = new ArrayList<>();
 
-    @OneToMany (mappedBy = "estrellaInicio")
+    @OneToMany (mappedBy = "estrellaInicio",cascade = CascadeType.ALL)
     private List<Camino> listaCaminosInicio = new ArrayList<>();
 
-    @OneToMany (mappedBy = "estrella")
+    @OneToMany (mappedBy = "estrella",cascade = CascadeType.ALL)
     private List<Planeta> listaPlanetas = new ArrayList<>();
 
     public Estrella(String nombre,Float coord_x,Float coord_y,Float coord_z)

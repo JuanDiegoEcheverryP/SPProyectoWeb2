@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import java.util.Optional;
 
 import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Camino;
@@ -101,6 +102,55 @@ public class DBInitializer implements CommandLineRunner{
         }
 
         List<Estrella> estrellas = estrellaRepository.findAll();
+        int inicio;
+        Estrella ref,destino;
+        Float distancia;
+        //INGRESAR ESTRELLAS 
+        //PRIMERO QUE CADA ESTRELLA NUMERO 5000 SE CONECTE CON LAS 5000 DE ABAJO
+       for(int i=0; i<7;i++)
+        {
+            ref=estrellas.get((i+1)*5000-1);
+            if(i==0)
+            {
+                inicio=5000*i;
+            }
+            else
+            {
+                inicio=5000*i-1;
+            }
+                
+            for(;inicio<5000+5000*i-1;inicio++)
+            {
+                destino=estrellas.get(inicio);
+
+                distancia=calcularDistancia(ref.getCoord_x(),destino.getCoord_x(),ref.getCoord_y(),destino.getCoord_y(),ref.getCoord_z(),destino.getCoord_z());
+
+                Camino caminoIda= new Camino(ref, destino,"caminoCincomiles",distancia);
+                caminoRepository.save(caminoIda);
+                Camino caminoVuelta= new Camino(destino,ref,"caminoCincomiles",distancia);
+                caminoRepository.save(caminoVuelta);
+            }
+        }
+        
+        //DESPUES CONEXIONES ALEATORIAS
+        for(Estrella estrella: estrellas)
+        {
+            for(int i=0; i<3; i++)
+            {
+                destino=estrellas.get(rand.nextInt(40000));
+                distancia=calcularDistancia(estrella.getCoord_x(),destino.getCoord_x(),estrella.getCoord_y(),destino.getCoord_y(),estrella.getCoord_z(),destino.getCoord_z());
+
+                Optional<Camino> caminoExistente = caminoRepository.findByEstrellaInicioAndEstrellaFinal(estrella, destino);
+                
+                if (!caminoExistente.isPresent() && distancia!=-1) {
+                    Camino caminoIda= new Camino(estrella, destino,"camino",distancia);
+                    caminoRepository.save(caminoIda);
+                    Camino caminoVuelta= new Camino(destino,estrella,"camino",distancia);
+                    caminoRepository.save(caminoVuelta);
+                }   
+            }
+        }
+
         //1200 planetas
         //15
         String[] planetanombre3={"Aquamarine","Puce","Blue","Mauv","Teal","Crimson","Violet","Yellow", "Khaki","Orange","Indigo","Maroon","Fuscia","Green","Red", "Turquoise"};
@@ -291,5 +341,27 @@ public class DBInitializer implements CommandLineRunner{
             // Guardar el producto después de asociar el stock
         }
 
+    }
+
+    private float calcularDistancia(float x,float x2,float y,float y2,float z,float z2)
+    {
+        float distancia=0f;
+       
+        if(x==x2 && y==y2 && z==z2)
+        {
+            return -1f;
+        }
+
+        // Calcula las diferencias en cada dimensión
+        double diferencia_x = x - x2;
+        double diferencia_y = y - y2;
+        double diferencia_z = z - z2;
+
+        // Calcula la distancia euclidiana
+        distancia = (float)Math.sqrt(diferencia_x * diferencia_x +
+                                      diferencia_y * diferencia_y +
+                                      diferencia_z * diferencia_z);
+
+        return distancia;
     }
 }
