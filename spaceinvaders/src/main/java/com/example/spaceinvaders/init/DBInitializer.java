@@ -82,6 +82,10 @@ public class DBInitializer implements CommandLineRunner{
         //10 equipos
         //500 productos
         //20 naves
+        System.out.println("---------------------------------------------------------------------------------------\n");
+        System.out.println("Cargando informacion...\n");
+
+        System.out.println("Cargando estrellas... (este demora un poco)\n");
         String[] estrellaNombre1={"Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray", "Yankee", "Zulu",  "Gamma",  "Deltaris", "Epsilon", "Zeta", "Theta", "Kappa", "Lambda", "Omicron", "Omega"};
         String[] estrellaNombre2= {"Canis", "Polar", "Borealis", "Betelgeuse", "Canopo", "Scuti", "Rigel", "Sirio", "Canopus", "Albirero", "Lusitania", "Libertas", "Mimosa", "Nekkar", "Polaris", "Rigelia", "Pegasus", "Orion", "Azrael", "Atlas", "Belenos", "Celaneo", "Helvetios", "Intercrus", "Australis", "Borealisis", "Macondo", "Columbae", "Capricorni", "Coronae", "Vega", "Centauri", "Carina", "Alnilam", "Hadar"} ;
         String[] estrellaNombre3= {"azul","blanco azulada","blanco amarillento","amarillo","anaranjado amarillento","anaranjado","anaranjado rojizo","rojo naranja","rojo","carmesi","cafe","marron","enana","subenana","sub gigante","gigante","supergigante","colosa","super colosa","masiva","super masiva","hipergigante","brillante","super brillante","opaca","errante","binaria","ternaria","cambiante","duende","neutra","extrana","anormal","pulsar","albireo"};
@@ -108,6 +112,8 @@ public class DBInitializer implements CommandLineRunner{
         //INGRESAR ESTRELLAS 
         //PRIMERO QUE CADA ESTRELLA NUMERO 5000 SE CONECTE CON LAS 5000 DE ABAJO
 
+        /*
+        //Esto es un codigo de prueba de los controladores
         Avatar a = new Avatar("uno","hola");
         Avatar b = new Avatar("dos","hola");
         Avatar c = new Avatar("tres","hola");
@@ -118,7 +124,8 @@ public class DBInitializer implements CommandLineRunner{
 
         TipoNave f = new TipoNave("test", (float)5.5, (float) 6.6, "Hola");
         tipoNaveRepository.save(f);
-       
+         */
+        System.out.println("Cargando caminos... (este particularmente demora mucho)\n");
         for(int i=0; i<7;i++)
         {
             ref=estrellas.get((i+1)*5000-1);
@@ -163,6 +170,7 @@ public class DBInitializer implements CommandLineRunner{
             }
         }
 
+        System.out.println("Cargando planetas...\n");
         //1200 planetas
         //15
         String[] planetanombre3={"Aquamarine","Puce","Blue","Mauv","Teal","Crimson","Violet","Yellow", "Khaki","Orange","Indigo","Maroon","Fuscia","Green","Red", "Turquoise"};
@@ -210,7 +218,7 @@ public class DBInitializer implements CommandLineRunner{
             }
         }
 
-
+        System.out.println("Cargando tipoNave...\n");
         String[] tipoNaveNombre1={"nave", "nao"};
         String[] tipoNaveNombre2={"Violaceae", "Asteraceae","Orchidaceae", "Portulacaceae","Physciaceae","Aster","Sapotaceae","Hymenophyllaceae","Pinaceae","Astirrea"};
         String imagenNave="https://shorturl.at/tvwUW", nombreTipoNave;
@@ -227,7 +235,7 @@ public class DBInitializer implements CommandLineRunner{
             }
         }
 
-
+        System.out.println("Cargando naves...\n");
         String[] equipoNombre={"Mountain Marsh Larkspur","Riverswamp Nutrush","Ballhead Ragwort","Rough Goose Neck Moss","Cara De Caballo","Caracas Pepper","Prairie Pleuridium Moss","Fineflower Gilia","Eurasian Woodrush","Cartilage Lichen"};
         String nombreNave;
         Float credito, tiempo;
@@ -246,7 +254,7 @@ public class DBInitializer implements CommandLineRunner{
             contador++;
         }
 
-
+        System.out.println("Cargando avatares...\n");
         String[] avatarNombre={"Tails","Zero","Ness","Samus","Yoshi","Diddi","Geno"};
         String imagenAvatar="https://shorturl.at/gkJTU";
 
@@ -257,7 +265,7 @@ public class DBInitializer implements CommandLineRunner{
             avatarRepository.save(avatar);
         }
 
- 
+        System.out.println("Cargando jugadores...\n");
         List<Nave> naves = naveRepository.findAll();
         List<Avatar> avatares = avatarRepository.findAll();
 
@@ -292,7 +300,7 @@ public class DBInitializer implements CommandLineRunner{
             }
         }
 
-    
+        System.out.println("Cargando productos...\n");
         String[] nombreProducto1={"Goldenrod","Mauv","Turquoise","Puce","Khaki","Orange","Pink","Red","Indigo","Violet"};
         String[] nombreProducto2={"Cheese","Beef","Cumin","Pepper","Curry Powder","Bread","Eggs","Napkin","Pumpkin","Pasta"};
         String[] nombreProducto3={"Magpie","Pygmy","Turtle","barbet","Goose"};
@@ -317,6 +325,7 @@ public class DBInitializer implements CommandLineRunner{
         //LLENAR LAS TABLAS INTERMEDIAS DE STOCK PLANETS Y BODEGA
 
         //AQUI PARA LLENAR EL STOCK
+        System.out.println("Cargando stockPlaneta...\n");
         List<Producto> productos = productoRepository.findAll();
 
         for (Producto producto : productos) {
@@ -338,6 +347,7 @@ public class DBInitializer implements CommandLineRunner{
         }
  
         //AQUI PARA LLENAR LA BODEGA
+        System.out.println("Cargando bodegas...\n");
         int contadorNaves=0;
 
         for (int i=0; i< productos.size() && contadorNaves<10; contadorNaves++) {
