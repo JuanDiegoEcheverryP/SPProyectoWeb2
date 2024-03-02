@@ -1,52 +1,35 @@
 package com.example.spaceinvaders.controller;
 
-import com.example.spaceinvaders.model.Avatar;
-import com.example.spaceinvaders.services.AvatarService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@RestController
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.spaceinvaders.model.Avatar;
+import com.example.spaceinvaders.services.AvatarService;
+
+@Controller
 @RequestMapping("/avatar")
 public class AvatarController {
 
-    private final AvatarService avatarService;
+    Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public AvatarController(AvatarService avatarService) {
-        this.avatarService = avatarService;
-    }
+    private AvatarService avatarService;
 
-    //localhost:8080/avatar/listar
-    @GetMapping
-    public List<Avatar> findAll() {
-        return avatarService.getAll();
-    }
-
-    //localhost:8080/avatar/buscarPorId/x
-    @GetMapping("buscarPorId/{id}")
-    public Avatar findById(@PathVariable Long id) {
-        return avatarService.getById(id);
-    }
-
-    //http://localhost:8080/avatar/crear/?nombre="avatarX"&imagen="urlX"
-    @PostMapping("/crear")
-    public Avatar create(@RequestParam("nombre") String name, @RequestParam("imagen") String url) {
-        Avatar newAvatar = new Avatar(name,url);
-        return avatarService.create(newAvatar);
-    }
-
-    //http://localhost:8080/avatar/actualizar/id?nombre="avatarX"&imagen="urlX"
-    @PutMapping("/actualizar/{id}")
-    public Avatar update(@PathVariable Long id, @RequestParam("nombre") String name, @RequestParam("imagen") String url) {
-        Avatar avatar = new Avatar(name,url);
-        return avatarService.update(id, avatar);
-    }
-
-    //localhost:8080/avatar/borrar/id
-    @DeleteMapping("/borrar/{id}")
-    public void delete(@PathVariable Long id) {
-        avatarService.delete(id);
+    @GetMapping("/list")
+    public String listarPersonas(Model model) {
+        List<Avatar> naves = avatarService.listarAvatars();
+        model.addAttribute("avatar", naves);
+        return "avatar-list";
     }
 }
