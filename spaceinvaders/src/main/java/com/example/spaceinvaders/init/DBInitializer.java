@@ -81,12 +81,7 @@ public class DBInitializer implements CommandLineRunner{
         //10 equipos
         //500 productos
         //20 naves
-<<<<<<< Updated upstream
-        System.out.println("---------------------------------------------------------------------------------------\n");
-        System.out.println("Cargando informacion...\n");
-
-        System.out.println("Cargando estrellas... (este demora un poco)\n");
-=======
+        
         insertarEstrellas();
 
         insetarCaminos();

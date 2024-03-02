@@ -11366,3 +11366,6 @@ alter table if exists stock_planeta add constraint FK664ks0wmvoqjx0mb0e4251irw f
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-03-01 19:22:43.318377-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ESTRELLA" not found; SQL statement:
+insert into estrella (coord_x,coord_y,coord_z,nombre,id) values (?,?,?,?,?) [42102-224]
