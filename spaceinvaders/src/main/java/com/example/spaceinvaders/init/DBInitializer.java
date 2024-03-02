@@ -81,7 +81,7 @@ public class DBInitializer implements CommandLineRunner{
         //10 equipos
         //500 productos
         //20 naves
-        
+
         insertarEstrellas();
 
         insetarCaminos();

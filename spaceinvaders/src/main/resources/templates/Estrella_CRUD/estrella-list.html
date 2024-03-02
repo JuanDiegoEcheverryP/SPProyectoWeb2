@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Estrellas</title>
+</head>
+<body>
+    <h1>Listado de Estrellas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>coord x</th>
+                <th>coord y</th>
+                <th>coord z</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="estrella : ${estrella}">
+                <td style="padding-left: 20px;" th:text="${estrella.id}"></td>
+                <td style="padding-left: 20px;" th:text="${estrella.nombre}"></td>
+                <td style="padding-left: 20px;" th:text="${estrella.coord_x}"></td>
+                <td style="padding-left: 20px;" th:text="${estrella.coord_y}"></td>
+                <td style="padding-left: 20px;" th:text="${estrella.coord_z}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
