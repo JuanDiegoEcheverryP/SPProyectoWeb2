@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Producto_bodega {
+public class ProductoBodega {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +31,7 @@ public class Producto_bodega {
     @ManyToOne
     private Producto producto;
 
-    public Producto_bodega(Integer cantidad, Float volTotal)
+    public ProductoBodega(Integer cantidad, Float volTotal)
     {
         this.cantidad=cantidad;
         this.volTotal=volTotal;

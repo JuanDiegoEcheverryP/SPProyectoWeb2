@@ -30,6 +30,6 @@ public class TipoNaveController {
     public String listarPersonas(Model model) {
         List<TipoNave> naves = tipoNaveService.listarTipoNaves();
         model.addAttribute("tipoNave", naves);
-        return "tipoNave-list";
+        return "TipoNave_CRUD/tipoNave-list";
     }
 }

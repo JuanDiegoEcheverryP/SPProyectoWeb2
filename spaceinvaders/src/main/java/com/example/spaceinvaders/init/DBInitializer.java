@@ -14,7 +14,7 @@ import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.model.Producto;
-import com.example.spaceinvaders.model.Producto_bodega;
+import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.Stock_planeta;
 import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.model.Jugador;
@@ -82,31 +82,39 @@ public class DBInitializer implements CommandLineRunner{
         //500 productos
         //20 naves
 
+        System.out.println("Cargando estrellas");
         insertarEstrellas();
 
+        System.out.println("Cargando caminos");
         insetarCaminos();
 
+        System.out.println("Cargando planetas");
         insetarPlanetas();
 
+        System.out.println("Cargando tiposNave");
         insetarTiposNave();
 
+        System.out.println("Cargando naves");
         insetarNaves();
 
+        System.out.println("Cargando Avatares");
         insetarAvatares();
 
- 
+        System.out.println("Cargando Jugadores");
         insetarJuagadores();
 
+        System.out.println("Cargando Productos");
         insetarProductos();
- 
-        //LLENAR LAS TABLAS INTERMEDIAS DE STOCK PLANETS Y BODEGA
 
         //AQUI PARA LLENAR EL STOCK
+        System.out.println("Cargando Planetas");
        insetarStockPlaneta();
  
         //AQUI PARA LLENAR LA BODEGA
+        System.out.println("Cargando ProductosBodega");
         insetarProductoBodega();
 
+        System.out.println("Se han cargado todos los datos");
     }
 
     private float calcularDistancia(float x,float x2,float y,float y2,float z,float z2)
@@ -175,7 +183,6 @@ public class DBInitializer implements CommandLineRunner{
         TipoNave f = new TipoNave("test", (float)5.5, (float) 6.6, "Hola");
         tipoNaveRepository.save(f);
          */
-        System.out.println("Cargando caminos... (este particularmente demora mucho)\n");
         for(int i=0; i<7;i++)
         {
             ref=estrellas.get((i+1)*5000-1);
@@ -297,7 +304,6 @@ public class DBInitializer implements CommandLineRunner{
     {
         List<Estrella> estrellas = estrellaRepository.findAll();
 
-        System.out.println("Cargando planetas...\n");
         //1200 planetas
         //15
         String[] planetanombre3={"Aquamarine","Puce","Blue","Mauv","Teal","Crimson","Violet","Yellow", "Khaki","Orange","Indigo","Maroon","Fuscia","Green","Red", "Turquoise"};
@@ -426,7 +432,7 @@ public class DBInitializer implements CommandLineRunner{
              // Para cada nave existente
             for (int j=0; j<2; j++) {
                 // Crear un nuevo stock para el producto en este planeta
-                Producto_bodega productoBodega = new Producto_bodega(8, productos.get(i+j).getVolumen()*8); // Suponiendo que inicialmente hay 100 unidades
+                ProductoBodega productoBodega = new ProductoBodega(8, productos.get(i+j).getVolumen()*8); // Suponiendo que inicialmente hay 100 unidades
                 productoBodega.setProducto(productos.get(i));
                 productoBodega.setNave(naves.get(contadorNaves));
                 productoBodegaRepository.save(productoBodega);

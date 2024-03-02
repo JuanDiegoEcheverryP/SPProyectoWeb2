@@ -33,9 +33,9 @@ public class Nave {
     private Planeta localizacion; // Correcting the mapping to Planeta entity
 
     @OneToMany(mappedBy = "nave",cascade = CascadeType.ALL)
-    private List<Producto_bodega> productosDeBodega = new ArrayList<>();
+    private List<ProductoBodega> productosDeBodega = new ArrayList<>();
     
-    public void anadirProductoBodega(Producto_bodega nuevo)
+    public void anadirProductoBodega(ProductoBodega nuevo)
     {
         productosDeBodega.add(nuevo);
     }

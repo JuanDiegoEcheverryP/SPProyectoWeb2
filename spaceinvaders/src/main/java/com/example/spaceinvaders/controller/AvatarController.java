@@ -30,6 +30,6 @@ public class AvatarController {
     public String listarPersonas(Model model) {
         List<Avatar> naves = avatarService.listarAvatars();
         model.addAttribute("avatar", naves);
-        return "avatar-list";
+        return "Avatar_CRUD/avatar-list";
     }
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Jugadores</title>
+</head>
+<body>
+    <h1>Lista de Jugadores</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Credito</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="jugagor : ${jugadores}">
+                <td th:text="${jugagor.id}"></td>
+                <td th:text="${jugagor.nombre}"></td>
+                <td th:text="${jugagor.contrasena}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

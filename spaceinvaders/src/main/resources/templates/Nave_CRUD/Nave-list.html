@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Naves</title>
+</head>
+<body>
+    <h1>Lista de Naves</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Credito</th>
+                <th>Tiempo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="nave : ${naves}">
+                <td th:text="${nave.id}"></td>
+                <td th:text="${nave.nombre}"></td>
+                <td th:text="${nave.credito}"></td>
+                <td th:text="${nave.tiempo}"></td>
+                <!--<td th:text="${nave.localizacion.nombre}"></td>-->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

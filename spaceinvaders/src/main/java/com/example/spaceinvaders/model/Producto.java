@@ -38,9 +38,9 @@ public class Producto {
 
 
     @OneToMany (mappedBy = "producto",cascade = CascadeType.ALL)
-    private List<Producto_bodega> listaPRoductoBodega = new ArrayList<>();
+    private List<ProductoBodega> listaPRoductoBodega = new ArrayList<>();
 
-    public void anadirProductoBodega(Producto_bodega nuevo)
+    public void anadirProductoBodega(ProductoBodega nuevo)
     {
         listaPRoductoBodega.add(nuevo);
     }
