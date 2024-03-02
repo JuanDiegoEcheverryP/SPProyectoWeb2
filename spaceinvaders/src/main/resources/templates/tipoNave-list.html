@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Tipos de Nave</title>
+</head>
+<body>
+    <h1>Listado de Tipos de Nave</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>volBodega</th>
+                <th>velocidad</th>
+                <th>foto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tipoNave : ${tipoNave}">
+                <td style="padding-left: 20px;" th:text="${tipoNave.id}"></td>
+                <td style="padding-left: 20px;" th:text="${tipoNave.tipo}"></td>
+                <td style="padding-left: 20px;" th:text="${tipoNave.volBodega}"></td>
+                <td style="padding-left: 20px;" th:text="${tipoNave.velocidad}"></td>
+                <td style="padding-left: 20px;" th:text="${tipoNave.foto}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
