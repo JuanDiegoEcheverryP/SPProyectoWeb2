@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Nave</title>
+</head>
+
+<body>
+
+    <form method="get" action="#" th:action="@{/nave/search}">
+        <label for="searchText">Buscar por nombre</label>
+        <input type="text" id="searchText" name="searchText">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h1>Naves</h1>
+    <table class="entity-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Credito</th>
+                <th>Tiempo</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="nave : ${naves}" th:if="${nave.nombre}">
+                <td th:text="${nave.id}"></td>
+                <td th:text="${nave.nombre}"></td>
+                <td th:text="${nave.credito}"></td>
+                <td th:text="${nave.tiempo}"></td>
+                <td>
+                    <a th:href="@{/person/ver/{id}(id=${nave.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/nave/editar/{id}(id=${nave.id})}">Editar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

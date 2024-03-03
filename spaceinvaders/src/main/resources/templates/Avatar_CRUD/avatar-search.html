@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Avatar</title>
+</head>
+
+<body>
+
+    <form method="get" action="#" th:action="@{/avatar/search}">
+        <label for="searchText">Buscar por nombre</label>
+        <input type="text" id="searchText" name="searchText">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h1>Avatars</h1>
+    <table class="entity-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Imagen</th>
+                <th>Ver</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="avatar : ${avatars}" th:if="${avatar.nombre}">
+                <td th:text="${avatar.id}"></td>
+                <td th:text="${avatar.nombre}"></td>
+                <td th:text="${avatar.imagen}"></td>
+                <td>
+                    <a th:href="@{/person/ver/{id}(id=${avatar.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/avatar/editar/{id}(id=${avatar.id})}">Editar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
