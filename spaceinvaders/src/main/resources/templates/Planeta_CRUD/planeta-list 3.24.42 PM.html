@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Planetas</title>
+</head>
+<body>
+    <h1>Listado de Planetas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>habitado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="planeta : ${planeta}">
+                <td style="padding-left: 20px;" th:text="${planeta.id}"></td>
+                <td style="padding-left: 20px;" th:text="${planeta.nombre}"></td>
+                <td style="padding-left: 20px;" th:text="${planeta.habitado}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

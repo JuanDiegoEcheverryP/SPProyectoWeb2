@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.spaceinvaders.exceptions.NotNullException;
 import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
+import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
 import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.services.EstrellaService;
-import com.example.spaceinvaders.services.EstrellaValidationService;
 
 @Controller
 @RequestMapping("/estrella")
@@ -96,35 +97,106 @@ public class EstrellaController {
         model.addAttribute("estrellas", estrellas);
         return "Estrella_CRUD/estrella-search";
     }
-    
-    @RequestMapping("/searcher")
-    public String buscador() {
-        return "Estrella_CRUD/estrella-search";
-    }
 
     @PostMapping(value = "/guardar")
-    public String guardarEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws RepeatedCoordinateException, RepeatedNameException {
+    public String guardarEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws RepeatedCoordinateException, RepeatedNameException, NotNullException {
         String err = estrellaService.estrellaValidationCoord(estrella);
         String err2 = estrellaService.estrellaValidationNombre(estrella);
     
         if (result.hasErrors() || !err.isEmpty() || !err2.isEmpty()) {
-            System.out.println(err+" "+err2);
             
             if (!err2.isEmpty()) {
-                throw new RepeatedNameException("Ya existe una estrella con ese nombre");
+                throw new RepeatedNameException(err2);
             }  
            
             if (!err.isEmpty()) {
-                throw new RepeatedCoordinateException("Una estrella ya tiene esas coordenadas");
+                throw new RepeatedCoordinateException(err);
             }   
 
             return "Estrella_CRUD/estrella-edit"; // Regresa a la vista para mostrar los errores
         }
+        else if (estrella.getCoord_x()==null || estrella.getCoord_y()==null || estrella.getCoord_z()==null || estrella.getNombre()==null)
+        {
+            throw new NotNullException("todos los campos deben estar llenos");
+        }
     
         estrellaService.guardarEstrella(estrella);
-        return "redirect:/estrella/list";
+        return "redirect:/estrella/menu";
     }
     
-    @DeleteMapping("/borrar/{id}")
+    @GetMapping("/borrar-form/{id}")
+    public String borrarFormEstrella(Model model, @PathVariable Long id)
+    {
+        Estrella estrella = estrellaService.recuperarEstrella(id);
+        model.addAttribute("estrella", estrella);
+        return "Estrella_CRUD/estrella-delete";
+    }
+
+    @PostMapping("/borrar")
+    public String borrarEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws UnableToDeletePlanetaException
+    {
+        String err= estrellaService.estrellaValidationPlaneta(estrella);
+
+        if(!err.isEmpty())
+        {
+            System.out.println(err);
+            throw new UnableToDeletePlanetaException(err);
+        }
+        
+        estrellaService.borrarEstrella(estrella);
+
+        return "redirect:/estrella/menu";
+    }
+
+    @PostMapping("/crear")
+    public String crearEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException
+    {
+       //estrellaService
+       String err = estrellaService.estrellaValidationCoord(estrella);
+        String err2 = estrellaService.estrellaValidationNombre(estrella);
+    
+        if (result.hasErrors() || !err.isEmpty() || !err2.isEmpty()) {
+            
+            if (!err2.isEmpty()) {
+                throw new RepeatedNameException(err2);
+            }  
+           
+            if (!err.isEmpty()) {
+                throw new RepeatedCoordinateException(err);
+            }   
+
+            return "Estrella_CRUD/estrella-crear"; // Regresa a la vista para mostrar los errores
+        }
+        else if (estrella.getCoord_x()==null || estrella.getCoord_y()==null || estrella.getCoord_z()==null || estrella.getNombre()==null)
+        {
+            throw new NotNullException("todos los campos deben estar llenos");
+        }
+
+        
+        estrellaService.crearEstrella(estrella);
+
+        return "redirect:/estrella/menu";
+    }
+
+    @RequestMapping("/creador")
+    public String creador(Model model) {
+        model.addAttribute("estrella", new Estrella());
+        return "Estrella_CRUD/estrella-create";
+    }
+
+    @RequestMapping("/menu")
+    public String menu() {
+        return "Estrella_CRUD/estrella-menu";
+    }
+
+    @RequestMapping("/researcher")
+    public String buscador() {
+        return "Estrella_CRUD/estrella-search";
+    }
+
+    @RequestMapping("/listar")
+    public String listar() {
+        return "redirect:/estrella/list";
+    }
     
 }

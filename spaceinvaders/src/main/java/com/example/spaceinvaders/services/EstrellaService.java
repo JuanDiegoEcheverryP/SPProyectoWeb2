@@ -3,6 +3,7 @@ package com.example.spaceinvaders.services;
 import org.springframework.stereotype.Service;
 
 import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.repository.CaminoRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
 
@@ -11,16 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class EstrellaService {
+    Logger log = LoggerFactory.getLogger(getClass());
     
     @Autowired
     private EstrellaRepository estrellaRepository;
 
     @Autowired
-    private CaminoRepository caminoRepository;
+    private CaminoService caminoService;
+
+    @Autowired
+    private PlanetaService planetaService;
 
     public Estrella buscarEstrella()
     {
@@ -90,5 +97,32 @@ public class EstrellaService {
         }
 
         return mensaje;
+    }
+
+    public String estrellaValidationPlaneta(Estrella estrella)
+    {
+        List<Planeta> planetas=estrellaRepository.findNavesByPlanetaId(estrella.getId());
+        
+        String mensaje="";
+
+        for(Planeta p:planetas)
+        {
+            mensaje=planetaService.validationEstrellaPlanetaBorrar(p);
+
+            if(!mensaje.isEmpty())
+            {
+                return mensaje;
+            }
+        }
+        //espera el mensaje de planetas service
+
+        return mensaje;
+    }
+
+    public Estrella crearEstrella(Estrella estrella) {
+
+        Estrella nueva=estrellaRepository.save(estrella);
+        caminoService.nuevoCaminoUnaEstrella(estrella);
+        return nueva;
     }
 }

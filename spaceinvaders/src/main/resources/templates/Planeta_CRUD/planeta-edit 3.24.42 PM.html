@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Editar Planeta</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Editar Planeta</h1>
+        <form action="#" th:action="@{/planeta/guardar}" th:object="${planeta}" method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            
+            <label for="planetaNombre">Nombre: </label>
+            <input type="text" th:field="*{nombre}" id="planetaNombre">
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
+            
+            <label for="habitado">El planera estara habitado: </label>
+            <input type="checkbox" th:field="*{habitado}" />
+            <span th:if="${#fields.hasErrors('habitado')}" th:errors="*{habitado}"
+                th:class="${#fields.hasErrors('habitado')} ? 'error' : ''"></span>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/planeta/list}">Cancelar</a>
+</body>
+
+</html>

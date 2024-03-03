@@ -35,4 +35,17 @@ public class MyCustomErrorController {
         return new ModelAndView("pagina-error");
     }
 
+    @ExceptionHandler(UnableToDeletePlanetaException.class)
+    public ModelAndView handlePlanetaBorrar(Model model, UnableToDeletePlanetaException exception) {
+        model.addAttribute("exceptionText", exception.getMessage());
+        return new ModelAndView("pagina-error");
+    }
+
+    @ExceptionHandler(NotNullException.class)
+    public ModelAndView handleNulls(Model model, NotNullException exception) {
+        model.addAttribute("exceptionText", exception.getMessage());
+        return new ModelAndView("pagina-error");
+    }
+
+
 }   

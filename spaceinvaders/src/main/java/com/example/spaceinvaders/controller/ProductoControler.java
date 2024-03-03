@@ -1,5 +1,5 @@
 package com.example.spaceinvaders.controller;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,22 +14,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.spaceinvaders.model.Avatar;
-import com.example.spaceinvaders.services.AvatarService;
+import com.example.spaceinvaders.exceptions.NotNullException;
+import com.example.spaceinvaders.exceptions.RepeatedNameException;
+import com.example.spaceinvaders.model.Producto;
+import com.example.spaceinvaders.services.PlanetaService;
+import com.example.spaceinvaders.services.ProductoService;
 
 @Controller
-@RequestMapping("/avatar")
-public class AvatarController {
-
+@RequestMapping("/producto")
+public class ProductoControler {
+    
     Logger log = LoggerFactory.getLogger(getClass());
-
+    
     @Autowired
-    private AvatarService avatarService;
-
-    @GetMapping("/list")
-    public String listarPersonas(Model model) {
-        List<Avatar> naves = avatarService.listarAvatars();
-        model.addAttribute("avatar", naves);
-        return "Avatar_CRUD/avatar-list";
-    }
+    private ProductoService  productoService;
 }
+
