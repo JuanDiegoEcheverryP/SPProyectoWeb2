@@ -9,6 +9,7 @@ import com.example.spaceinvaders.repository.EstrellaRepository;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,6 +41,7 @@ public class EstrellaService {
 
     public Estrella guardarEstrella(Estrella estrella)
     {
+
         return estrellaRepository.save(estrella);
     }
 
@@ -62,5 +64,31 @@ public class EstrellaService {
 
     public List<Estrella> buscarEstrellasQueEmpiecenCon(String textoBusqueda) {
         return estrellaRepository.findAllByNombreContainingIgnoreCase(textoBusqueda);
+    }
+
+    public String estrellaValidationNombre(Estrella estrella)
+    {
+        String mensaje="";
+        List<Estrella> estrellaEvalNombre=estrellaRepository.findAllByNombre(estrella.getNombre());
+
+       if(!estrellaEvalNombre.isEmpty() && estrellaEvalNombre.get(0).getId()!=estrella.getId())
+        {
+            mensaje="Ya existe una estrella con ese nombre";
+        }
+
+        return mensaje;
+    }
+
+    public String estrellaValidationCoord(Estrella estrella)
+    {
+        String mensaje="";
+        List<Estrella> estrellaEvalCoord=estrellaRepository.findByCoords(estrella.getCoord_x(), estrella.getCoord_y(), estrella.getCoord_z());
+
+       if( !estrellaEvalCoord.isEmpty() && estrellaEvalCoord.get(0).getId()!=estrella.getId())
+        {
+            mensaje="Una estrella ya tiene esas coordenadas";
+        }
+
+        return mensaje;
     }
 }

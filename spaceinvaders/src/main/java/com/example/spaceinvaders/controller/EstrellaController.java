@@ -8,14 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
+import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.services.EstrellaService;
+import com.example.spaceinvaders.services.EstrellaValidationService;
 
 @Controller
 @RequestMapping("/estrella")
@@ -26,7 +31,8 @@ public class EstrellaController {
     @Autowired
     private EstrellaService estrellaService;
 
-     @GetMapping("/list")
+
+    @GetMapping("/list")
     public String listarEstrellas(Model model) {
         List<Estrella> estrellas = estrellaService.listaEstrellas();
         model.addAttribute("estrella", estrellas);
@@ -37,7 +43,7 @@ public class EstrellaController {
     public String editarEstrella(Model model, @PathVariable Long id) {
         Estrella estrella = estrellaService.recuperarEstrella(id);
         model.addAttribute("estrella", estrella);
-        return "Estrella_CRUD/estrella-search";
+        return "Estrella_CRUD/estrella-edit";
     }
 
     @GetMapping("/ver/{idEstrella}")
@@ -96,13 +102,29 @@ public class EstrellaController {
         return "Estrella_CRUD/estrella-search";
     }
 
-     /* @PostMapping(value = "/save")
-    public String guardarPersona(@Valid Estrella estrella, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-     return "Estrella_CRUD/estrella-edit";
+    @PostMapping(value = "/guardar")
+    public String guardarEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws RepeatedCoordinateException, RepeatedNameException {
+        String err = estrellaService.estrellaValidationCoord(estrella);
+        String err2 = estrellaService.estrellaValidationNombre(estrella);
+    
+        if (result.hasErrors() || !err.isEmpty() || !err2.isEmpty()) {
+            System.out.println(err+" "+err2);
+            
+            if (!err2.isEmpty()) {
+                throw new RepeatedNameException("Ya existe una estrella con ese nombre");
+            }  
+           
+            if (!err.isEmpty()) {
+                throw new RepeatedCoordinateException("Una estrella ya tiene esas coordenadas");
+            }   
+
+            return "Estrella_CRUD/estrella-edit"; // Regresa a la vista para mostrar los errores
         }
-        estrellaService.guardarPersona(estrella);
-        return "redirect:/person/list";
-    }*/ 
+    
+        estrellaService.guardarEstrella(estrella);
+        return "redirect:/estrella/list";
+    }
+    
+    @DeleteMapping("/borrar/{id}")
     
 }

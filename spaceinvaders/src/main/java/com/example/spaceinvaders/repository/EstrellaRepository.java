@@ -21,5 +21,7 @@ public interface EstrellaRepository extends JpaRepository<Estrella, Long> {
 
     List<Estrella> findAllByNombreContainingIgnoreCase(String text);
 
+    @Query("SELECT e FROM Estrella e WHERE e.coord_x = :coordX AND e.coord_y = :coordY AND e.coord_z = :coordZ")
+    List<Estrella> findByCoords(@Param("coordX") Float coordX, @Param("coordY") Float coordY, @Param("coordZ") Float coordZ);
 }
 
