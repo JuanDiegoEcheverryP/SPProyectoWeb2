@@ -5,7 +5,11 @@ import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeleteJugadorException;
 import com.example.spaceinvaders.model.Nave;
+import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.services.NaveService;
+import com.example.spaceinvaders.services.PlanetaService;
+import com.example.spaceinvaders.services.TipoNaveService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +34,13 @@ public class NaveController {
 
     @Autowired
     private NaveService naveService;
+
+    @Autowired
+    private TipoNaveService tipoNaveService;
+
+    @Autowired
+    private PlanetaService planetaService;
+
 
     @GetMapping("/list")
     public String listarNaves(Model model) {
@@ -162,6 +173,10 @@ public class NaveController {
     @RequestMapping("/creador")
     public String creador(Model model) {
         model.addAttribute("nave", new Nave());
+        List<TipoNave>  tipoNaveTodos=tipoNaveService.listarTipoNaves();
+        List<Planeta>  planetaTodos=planetaService.listaPlanetas();
+        model.addAttribute("tipoNaves", tipoNaveTodos);
+        model.addAttribute("planetas", planetaTodos);
         return "Nave_CRUD/nave-create";
     }
 

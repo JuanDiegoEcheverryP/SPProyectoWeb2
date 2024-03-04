@@ -2,13 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Crear Jugador</title>
+    <title>Crear Nave</title>
 </head>
 
 <body>
     <div class="formcontainer">
-        <h1>Crear Jugador</h1>
+        <h1>Crear Nave</h1>
         <form action="#" th:action="@{/nave/crear}" th:object="${nave}" method="post">
+
+            <label for="naveTipo">Tipo nave: </label>
+            <select th:field="*{tipoNave.id}">
+                <option th:each="tipoNave : ${tipoNaves}" th:value="${tipoNave.id}" th:text="${tipoNave.nombre}"></option>
+            </select>
+
+            <label for="naveTipo">Tipo nave: </label>
+            <select th:field="*{localizacion.id}">
+                <option th:each="localizacion : ${planetas}" th:value="${localizacion.id}" th:text="${localizacion.nombre}"></option>
+            </select>
             
             <label for="naveNombre">Nombre: </label>
             <input type="text" th:field="*{nombre}" id="naveNombre">
