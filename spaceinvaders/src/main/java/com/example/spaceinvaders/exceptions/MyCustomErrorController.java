@@ -2,7 +2,6 @@ package com.example.spaceinvaders.exceptions;
 
 import java.util.NoSuchElementException;
 
-import org.hibernate.TransientPropertyValueException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

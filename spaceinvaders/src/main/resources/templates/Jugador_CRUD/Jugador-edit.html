@@ -10,7 +10,7 @@
         <h1>Jugador</h1>
         <form action="#" th:action="@{/jugador/guardar}" th:object="${jugador}" method="post">
             <input type="hidden" th:field="*{id}" id="id">
-            
+
             <label for="jugadorNombre">Nombre: </label>
             <input type="text" th:field="*{nombre}" id="jugadorNombre">
             <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"

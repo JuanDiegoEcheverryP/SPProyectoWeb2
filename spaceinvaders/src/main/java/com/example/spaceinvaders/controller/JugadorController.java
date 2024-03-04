@@ -5,8 +5,14 @@ import com.example.spaceinvaders.exceptions.OutOfLimitsException;
 import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
+import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Jugador;
+import com.example.spaceinvaders.model.Nave;
+import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.model.Producto;
+import com.example.spaceinvaders.services.AvatarService;
 import com.example.spaceinvaders.services.JugadorService;
+import com.example.spaceinvaders.services.NaveService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +37,12 @@ public class JugadorController {
 
     @Autowired
     private JugadorService jugadorService;
+
+    @Autowired
+    private AvatarService avatarService;
+
+    @Autowired
+    private NaveService naveService;
 
     @GetMapping("/list")
     public String listarJugadors(Model model) {
@@ -136,6 +148,7 @@ public class JugadorController {
     {
        //jugadorService
         String err2 = jugadorService.jugadorValidationNombre(jugador);
+        System.out.println(jugador.getId());
     
         if (result.hasErrors() || !err2.isEmpty()) {
             
@@ -154,7 +167,11 @@ public class JugadorController {
 
     @RequestMapping("/creador")
     public String creador(Model model) {
-        model.addAttribute("estrella", new Jugador());
+        model.addAttribute("jugador", new Jugador());
+        List<Avatar> avatarTodos=avatarService.listarAvatars();
+        List<Nave>  naveTodos=naveService.listaNaves();
+        model.addAttribute("avatares", avatarTodos);
+        model.addAttribute("naves", naveTodos);
         return "Jugador_CRUD/jugador-create";
     }
 
