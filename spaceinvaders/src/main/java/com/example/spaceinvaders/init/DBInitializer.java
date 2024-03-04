@@ -86,7 +86,7 @@ public class DBInitializer implements CommandLineRunner{
         insertarEstrellas();
 
         System.out.println("Cargando caminos");
-        insetarCaminos();
+        //insetarCaminos();
 
         System.out.println("Cargando planetas");
         insetarPlanetas();

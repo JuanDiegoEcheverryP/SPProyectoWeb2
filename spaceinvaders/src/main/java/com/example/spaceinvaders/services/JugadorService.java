@@ -1,6 +1,7 @@
 package com.example.spaceinvaders.services;
 
 import com.example.spaceinvaders.model.Jugador;
+import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.repository.JugadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,18 @@ public class JugadorService {
 
     public List<Jugador> buscarJugadorsQueEmpiecenCon(String textoBusqueda) {
         return jugadorRepository.findAllByNombreContainingIgnoreCase(textoBusqueda);
+    }
+
+    public String jugadorValidationNombre(Jugador jugador)
+    {
+        String mensaje="";
+        List<Jugador> jugadorEvalNombre=jugadorRepository.findAllByNombre(jugador.getNombre());
+
+        if(!jugadorEvalNombre.isEmpty() && jugadorEvalNombre.get(0).getId()!=jugador.getId())
+        {
+            mensaje="Ya existe un jugador con ese nombre";
+        }
+
+        return mensaje;
     }
 }

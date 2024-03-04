@@ -1,6 +1,12 @@
 package com.example.spaceinvaders.controller;
 
+import com.example.spaceinvaders.exceptions.NotNullException;
+import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
+import com.example.spaceinvaders.exceptions.RepeatedNameException;
+import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
+import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
+import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.services.JugadorService;
 
@@ -9,8 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,14 +38,14 @@ public class JugadorController {
     public String listarJugadors(Model model) {
         List<Jugador> jugadors = jugadorService.obtenerTodasLasJugadors();
         model.addAttribute("jugadores", jugadors);
-        return "Jugador_CRUD/Jugador-list";
+        return "Jugador_CRUD/jugador-list";
     }
         
     @GetMapping("/editar/{id}")
     public String editarJugador(Model model, @PathVariable Long id) {
         Jugador jugador = jugadorService.recuperarJugador(id);
-        model.addAttribute("jugadors", jugador);
-        return "Jugador_CRUD/jugador-search";
+        model.addAttribute("jugador", jugador);
+        return "Jugador_CRUD/jugador-edit";
     }
 
     @GetMapping("/ver/{idJugador}")
@@ -90,10 +98,38 @@ public class JugadorController {
         model.addAttribute("jugadors", jugadors);
         return "Jugador_CRUD/jugador-search";
     }
+
+    @PostMapping(value = "/guardar")
+    public String guardarNave(@Valid Jugador jugador, BindingResult result, Model model) throws RepeatedNameException, NotNullException {
+        String err = jugadorService.jugadorValidationNombre(jugador);
     
-    @RequestMapping("/searcher")
-    public String buscador() {
-        return "Jugador_CRUD/jugador-search";
+        if (result.hasErrors() || !err.isEmpty()) {
+            
+            if (!err.isEmpty()) {
+                throw new RepeatedNameException(err);
+            }    
+
+            return "Jugador_CRUD/jugador-edit"; // Regresa a la vista para mostrar los errores
+        }
+    
+        jugadorService.guardarJugador(jugador);
+        return "redirect:/jugador/menu";
     }
 
+    @GetMapping("/borrar-form/{id}")
+    public String borrarFormJugador(Model model, @PathVariable Long id)
+    {
+        Jugador jugador = jugadorService.recuperarJugador(id);
+        model.addAttribute("jugador", jugador);
+        return "Jugador_CRUD/jugador-delete";
+    }
+
+    @PostMapping("/borrar")
+    public String borrarJugador(@Valid Jugador jugador, BindingResult result, Model model) throws UnableToDeletePlanetaException
+    {
+
+        jugadorService.borrarJugador(jugador);
+
+        return "redirect:/jugador/list";
+    }
 }
