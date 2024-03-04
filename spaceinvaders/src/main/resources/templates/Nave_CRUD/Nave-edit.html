@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Editar Nave</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Nave</h1>
+        <form action="#" th:action="@{/nave/guardar}" th:object="${nave}" method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            
+            <label for="naveNombre">Nombre: </label>
+            <input type="text" th:field="*{nombre}" id="naveNombre">
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
+            
+            <label for="naveCredito">Credito: </label>
+            <input type="text" th:field="*{credito}" id="naveCredito">
+            <span th:if="${#fields.hasErrors('credito')}" th:errors="*{credito}"
+                th:class="${#fields.hasErrors('credito')} ? 'error' : ''"></span>
+
+            <label for="naveTiempo">Tiempo: </label>
+            <input type="text" th:field="*{tiempo}" id="naveTiempo">
+            <span th:if="${#fields.hasErrors('tiempo')}" th:errors="*{tiempo}"
+                th:class="${#fields.hasErrors('tiempo')} ? 'error' : ''"></span>
+
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/nave/list}">Cancelar</a>
+</body>
+
+</html>

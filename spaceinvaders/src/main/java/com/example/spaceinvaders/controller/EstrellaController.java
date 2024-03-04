@@ -46,7 +46,7 @@ public class EstrellaController {
     }
 
     @GetMapping("/ver/{idEstrella}")
-    String verPersona(Model model, @PathVariable("idEstrella") Long id) {
+    String verEstrella(Model model, @PathVariable("idEstrella") Long id) {
         Estrella estrella = estrellaService.recuperarEstrella(id);
         model.addAttribute("estrella", estrella);
         return "Estrella_CRUD/estrella-view";

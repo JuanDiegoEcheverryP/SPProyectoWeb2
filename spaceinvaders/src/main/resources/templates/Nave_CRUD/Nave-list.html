@@ -21,7 +21,15 @@
                 <td th:text="${nave.nombre}"></td>
                 <td th:text="${nave.credito}"></td>
                 <td th:text="${nave.tiempo}"></td>
-                <!--<td th:text="${nave.localizacion.nombre}"></td>-->
+                <td>
+                    <a th:href="@{/nave/ver/{id}(id=${nave.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/nave/editar/{id}(id=${nave.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/nave/borrar-form/{id}(id=${nave.id})}">Borrar</a>
+                </td>
             </tr>
         </tbody>
     </table>

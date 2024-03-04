@@ -1,5 +1,6 @@
 package com.example.spaceinvaders.services;
 
+import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.repository.NaveRepository;
@@ -14,7 +15,7 @@ public class NaveService {
     @Autowired
     private NaveRepository naveRepository;
 
-    public List<Nave> obtenerTodasLasNaves() {
+    public List<Nave> listaNaves() {
         return naveRepository.findAll();
     }
 
@@ -49,4 +50,21 @@ public class NaveService {
         return naveRepository.findAllByNombreContainingIgnoreCase(textoBusqueda);
     }
 
+    public String naveValidationNombre(Nave nave)
+    {
+        String mensaje="";
+        List<Nave> naveEvalNombre=naveRepository.findAllByNombre(nave.getNombre());
+
+        if(!naveEvalNombre.isEmpty() && naveEvalNombre.get(0).getId()!=nave.getId())
+        {
+            mensaje="Ya existe una nave con ese nombre";
+        }
+
+        return mensaje;
+    }
+
+    public Nave crearNave(Nave nave) {
+        Nave nueva=naveRepository.save(nave);
+        return nueva;
+    }
 }
