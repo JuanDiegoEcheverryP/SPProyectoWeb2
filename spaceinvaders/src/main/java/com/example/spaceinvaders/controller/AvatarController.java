@@ -16,14 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.spaceinvaders.exceptions.NotNullException;
-import com.example.spaceinvaders.exceptions.OutOfLimitsException;
-import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
 import com.example.spaceinvaders.model.Avatar;
-import com.example.spaceinvaders.model.Estrella;
-import com.example.spaceinvaders.model.Jugador;
-import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.services.AvatarService;
 
 @Controller
@@ -145,7 +140,6 @@ public class AvatarController {
     @PostMapping("/crear")
     public String crearAvatar(@Valid Avatar avatar, BindingResult result, Model model) throws RepeatedNameException, NotNullException
     {
-       //estrellaService
         String err2 = avatarService.avatarValidationNombre(avatar);
     
         if (result.hasErrors() || !err2.isEmpty()) {

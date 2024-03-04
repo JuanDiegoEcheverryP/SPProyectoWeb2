@@ -53,8 +53,7 @@ public class NaveController {
     }
 
     @GetMapping("/search")
-    public String listEstrella(@RequestParam(required = false) String searchText, Model model) {
-        log.info("Solicitud GET recibida en /estrella/search");
+    public String listNave(@RequestParam(required = false) String searchText, Model model) {
 
         List<Nave> nave=new ArrayList<>();
 
@@ -106,7 +105,7 @@ public class NaveController {
                 throw new RepeatedNameException(err);
             }    
 
-            return "Estrella_CRUD/estrella-edit"; // Regresa a la vista para mostrar los errores
+            return "Nave_CRUD/nave-edit"; // Regresa a la vista para mostrar los errores
         }
     
         naveService.guardarNave(nave);
@@ -137,13 +136,12 @@ public class NaveController {
          */
         naveService.borrarNave(nave);
 
-        return "redirect:/estrella/menu";
+        return "redirect:/nave/menu";
     }
 
     @PostMapping("/crear")
-    public String crearEstrella(@Valid Nave nave, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException
+    public String crearNave(@Valid Nave nave, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException
     {
-       //estrellaService
         String err2 = naveService.naveValidationNombre(nave);
     
         if (result.hasErrors() || !err2.isEmpty()) {

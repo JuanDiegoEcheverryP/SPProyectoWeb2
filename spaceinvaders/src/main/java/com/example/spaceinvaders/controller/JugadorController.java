@@ -1,15 +1,11 @@
 package com.example.spaceinvaders.controller;
 
 import com.example.spaceinvaders.exceptions.NotNullException;
-import com.example.spaceinvaders.exceptions.OutOfLimitsException;
-import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
 import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
-import com.example.spaceinvaders.model.Planeta;
-import com.example.spaceinvaders.model.Producto;
 import com.example.spaceinvaders.services.AvatarService;
 import com.example.spaceinvaders.services.JugadorService;
 import com.example.spaceinvaders.services.NaveService;
@@ -110,7 +106,7 @@ public class JugadorController {
     }
 
     @PostMapping(value = "/guardar")
-    public String guardarNave(@Valid Jugador jugador, BindingResult result, Model model) throws RepeatedNameException, NotNullException {
+    public String guardarJugador(@Valid Jugador jugador, BindingResult result, Model model) throws RepeatedNameException, NotNullException {
         String err = jugadorService.jugadorValidationNombre(jugador);
     
         if (result.hasErrors() || !err.isEmpty()) {

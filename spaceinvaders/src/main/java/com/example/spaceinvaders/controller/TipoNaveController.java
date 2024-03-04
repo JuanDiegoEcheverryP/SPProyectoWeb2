@@ -56,8 +56,6 @@ public class TipoNaveController {
     public String listTipoNave(@RequestParam(required = false) String searchText, Model model) {
         List<TipoNave> naves = tipoNaveService.listarTipoNaves();
 
-        log.info("Solicitud GET recibida en /estrella/search");
-
         if (searchText == null || searchText.trim().equals("")) {
             log.info("No hay texto de búsqueda. Retornando todo");
             naves= tipoNaveService.listarTipoNaves();
@@ -114,7 +112,7 @@ public class TipoNaveController {
     }
 
     @GetMapping("/borrar-form/{id}")
-    public String borrarFormEstrella(Model model, @PathVariable Long id)
+    public String borrarFormTipoNave(Model model, @PathVariable Long id)
     {
         TipoNave nave = tipoNaveService.recuperarTipoNave(id);
         model.addAttribute("nave", nave);
@@ -122,7 +120,7 @@ public class TipoNaveController {
     }
 
     @PostMapping("/borrar")
-    public String borrarEstrella(@Valid TipoNave nave, BindingResult result, Model model) throws UnableToDeletePlanetaException
+    public String borrarTipoNave(@Valid TipoNave nave, BindingResult result, Model model) throws UnableToDeletePlanetaException
     {
         /*
         String err= tipoNaveService.estrellaValidationPlaneta(nave);
@@ -140,9 +138,8 @@ public class TipoNaveController {
     }
 
     @PostMapping("/crear")
-    public String crearEstrella(@Valid TipoNave tipoNave, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException, OutOfLimitsException
+    public String crearTipoNave(@Valid TipoNave tipoNave, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException, OutOfLimitsException
     {
-       //estrellaService
         String err2 = tipoNaveService.tipoNaveValidationNombre(tipoNave);
     
         if (result.hasErrors() || !err2.isEmpty()) {
