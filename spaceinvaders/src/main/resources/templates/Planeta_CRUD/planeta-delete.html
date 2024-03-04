@@ -7,7 +7,7 @@
 
 <body>
     <div class="formcontainer">
-        <h1>Estrella</h1>
+        <h1>Eliminar planeta</h1>
         <form action="#" th:action="@{/planeta/borrar}" th:object="${planeta}" method="post">
             <input type="hidden" th:field="*{id}" id="id">
             
@@ -19,7 +19,7 @@
     
     
 
-    <a th:href="@{/planeta/list}">Cancelar</a>
+    <a th:href="@{/planeta/menu}">Cancelar</a>
 </body>
 
 </html>

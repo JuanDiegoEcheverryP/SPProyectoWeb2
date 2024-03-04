@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Editar Estrella</title>
+    <title>Editar producto</title>
 </head>
 
 <body>
     <div class="formcontainer">
-        <h1>Estrella</h1>
+        <h1>Editar Producto</h1>
         <form action="#" th:action="@{/producto/guardar}" th:object="${producto}" method="post">
             <input type="hidden" th:field="*{id}" id="id">
             
@@ -27,7 +27,7 @@
     
     
 
-    <a th:href="@{/producto/list}">Cancelar</a>
+    <a th:href="@{/producto/menu}">Cancelar</a>
 </body>
 
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Crear Stock Planeta</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Crear Stock Planeta</h1>
+        <form action="#" th:action="@{/stock-planeta/crear}" th:object="${stock}" method="post">
+
+            <label for="stockPlanetaNombre">Planeta: </label>
+            <select th:field="*{planeta.id}">
+                <option th:each="planeta : ${planetas}" th:value="${planeta.id}" th:text="${planeta.nombre}"></option>
+            </select>
+
+            <label for="stockProductoNombre">Producto: </label>
+            <select th:field="*{producto.id}">
+                <option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.nombre}"></option>
+            </select>
+
+            <label for="fDemanda">Factor de demanda: </label>
+            <input type="text" th:field="*{FactorDemanda}" id="stockPlanetaNombre">
+            <span th:if="${#fields.hasErrors('FactorDemanda')}" th:errors="*{FactorDemanda}"
+                th:class="${#fields.hasErrors('FactorDemanda')} ? 'error' : ''"></span>
+            
+            <label for="fOferta">Factor de oferta: </label>
+            <input type="text" th:field="*{FactorOferta}" id="stockPlanetaCoordX">
+            <span th:if="${#fields.hasErrors('FactorOferta')}" th:errors="*{FactorOferta}"
+                th:class="${#fields.hasErrors('FactorOferta')} ? 'error' : ''"></span>
+
+            <label for="stockPlanetaCoordY">Stock: </label>
+            <input type="text" th:field="*{stock}" id="stock">
+            <span th:if="${#fields.hasErrors('stock')}" th:errors="*{coord_y}"
+                th:class="${#fields.hasErrors('stock')} ? 'error' : ''"></span>
+
+            <button type="submit">CREAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/stockPlaneta/menu}">Cancelar</a>
+</body>
+
+</html>

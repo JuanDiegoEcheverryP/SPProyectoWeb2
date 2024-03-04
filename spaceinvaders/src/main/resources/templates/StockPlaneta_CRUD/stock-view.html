@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Ver Stock</title>
+</head>
+
+<body>
+    <h1>Ver Stock</h1>
+    <p th:text="|producto: ${stock.producto.nombre}|"></p>
+    <p th:text="|planeta: ${stock.planeta.nombre}|"></p>
+    <p th:text="|stock: ${stock.stock}|"></p>
+    <p th:text="|factor de demanda: ${stock.FactorDemanda}|"></p>
+    <p th:text="|factor de oferta: ${stock.FactorOferta}|"></p>
+    <a th:href="@{/stock-planeta/menu}">Volver</a>
+</body>
+
+</html>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.spaceinvaders.exceptions.NotNullException;
+import com.example.spaceinvaders.exceptions.OutOfLimitsException;
 import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
@@ -97,7 +98,7 @@ public class EstrellaController {
     }
 
     @PostMapping(value = "/guardar")
-    public String guardarEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws RepeatedCoordinateException, RepeatedNameException, NotNullException {
+    public String guardarEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws RepeatedCoordinateException, RepeatedNameException, NotNullException, OutOfLimitsException {
         String err = estrellaService.estrellaValidationCoord(estrella);
         String err2 = estrellaService.estrellaValidationNombre(estrella);
     
@@ -116,6 +117,10 @@ public class EstrellaController {
         else if (estrella.getCoord_x()==null || estrella.getCoord_y()==null || estrella.getCoord_z()==null || estrella.getNombre()==null)
         {
             throw new NotNullException("todos los campos deben estar llenos");
+        }
+        else if (estrella.getCoord_x()>300 || estrella.getCoord_x()<0 || estrella.getCoord_y()>300 || estrella.getCoord_y()<0 || estrella.getCoord_z()>300 || estrella.getCoord_z()<0)
+        {
+            throw new OutOfLimitsException("Las coordenadas solo pueden estar entre 0 y 300");
         }
     
         estrellaService.guardarEstrella(estrella);
@@ -147,7 +152,7 @@ public class EstrellaController {
     }
 
     @PostMapping("/crear")
-    public String crearEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException
+    public String crearEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException, OutOfLimitsException
     {
        //estrellaService
        String err = estrellaService.estrellaValidationCoord(estrella);
@@ -168,6 +173,10 @@ public class EstrellaController {
         else if (estrella.getCoord_x()==null || estrella.getCoord_y()==null || estrella.getCoord_z()==null || estrella.getNombre()==null)
         {
             throw new NotNullException("todos los campos deben estar llenos");
+        }
+        else if (estrella.getCoord_x()>300 || estrella.getCoord_x()<0 || estrella.getCoord_y()>300 || estrella.getCoord_y()<0 || estrella.getCoord_z()>300 || estrella.getCoord_z()<0)
+        {
+            throw new OutOfLimitsException("Las coordenadas solo pueden estar entre 0 y 300");
         }
 
         

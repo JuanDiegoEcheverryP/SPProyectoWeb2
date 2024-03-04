@@ -2,6 +2,7 @@ package com.example.spaceinvaders.exceptions;
 
 import java.util.NoSuchElementException;
 
+import org.hibernate.TransientPropertyValueException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -47,5 +48,16 @@ public class MyCustomErrorController {
         return new ModelAndView("pagina-error");
     }
 
+    @ExceptionHandler(OutOfLimitsException.class)
+    public ModelAndView handleOutOfLimits(Model model, OutOfLimitsException exception) {
+        model.addAttribute("exceptionText", exception.getMessage());
+        return new ModelAndView("pagina-error");
+    }
 
+    @ExceptionHandler(RepeatedStockException.class)
+    public ModelAndView handleRepeatedStock(Model model, RepeatedStockException exception) {
+        model.addAttribute("exceptionText", exception.getMessage());
+        return new ModelAndView("pagina-error");
+    }
+    
 }   

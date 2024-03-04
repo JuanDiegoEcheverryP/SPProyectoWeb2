@@ -19,7 +19,9 @@ import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
 import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.repository.StockPlanetaRepository;
 import com.example.spaceinvaders.services.PlanetaService;
+import com.example.spaceinvaders.services.StockPlanetaService;
 
 @Controller
 @RequestMapping("/planeta")
@@ -30,6 +32,8 @@ public class PlanetaController {
     @Autowired
     private PlanetaService planetaService;
 
+    @Autowired
+    private StockPlanetaService stockPlanetaService;
 
     @GetMapping("/list")
     public String listarplanetas(Model model) {
@@ -111,6 +115,12 @@ public class PlanetaController {
         }
         else if (planeta.getHabitado()==null || planeta.getNombre()==null ||planeta.getNombre()=="") {
             throw new NotNullException("todos los campos deben estar llenos");
+        }
+
+        if(planeta.getHabitado()==false)
+        {
+            //toca borrar todo lo de stock planeta porque esta deshabitado
+            stockPlanetaService.deleteAllByPlaneta(planeta);
         }
     
         planetaService.guardarPlaneta(planeta);

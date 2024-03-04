@@ -52,7 +52,7 @@ public class EstrellaService {
     }
 
     public List<Estrella> buscarEstrellasQueContengan(String textoBusqueda) {
-        return estrellaRepository.findAllByNombreStartingWithIgnoreCase(textoBusqueda);
+        return estrellaRepository.findAllByNombreContainingIgnoreCase(textoBusqueda);
     }
 
     public List<Estrella> buscarEstrellasQueTerminenCon(String textoBusqueda) {

@@ -57,7 +57,7 @@ public class PlanetaService {
     }
 
     public List<Planeta> buscarPlanetasQueContengan(String textoBusqueda) {
-        return planetaRepository.findAllByNombreStartingWithIgnoreCase(textoBusqueda);
+        return planetaRepository.findAllByNombreContainingIgnoreCase(textoBusqueda);
     }
 
     public List<Planeta> buscarPlanetasQueTerminenCon(String textoBusqueda) {

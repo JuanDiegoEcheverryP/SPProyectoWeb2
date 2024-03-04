@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Stock</title>
+</head>
+
+<body>
+    <a th:href="@{/stock-planeta/menu}">Atras</a>
+    <form method="get" action="#" th:action="@{/stock-planeta/search}">
+        <label for="searchText">Buscar por nombre del producto o planeta</label>
+        <input type="text" id="searchText" name="searchText">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h1>Stock encontrado:</h1>
+    <table class="entity-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Planeta</th>
+                <th>Stock</th>
+                <th>Factor de demanda</th>
+                <th>Factor de Oferta</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="stock : ${stock}" th:if="${stock.stock}">
+                <td th:text="${stock.id}"></td>
+                <td th:text="${stock.producto.nombre}"></td>
+                <td th:text="${stock.planeta.nombre}"></td>
+                <td th:text="${stock.stock}"></td>
+                <td th:text="${stock.FactorDemanda}"></td>
+                <td th:text="${stock.FactorOferta}"></td>
+                <td>
+                    <a th:href="@{/stock-planeta/ver/{id}(id=${stock.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/stock-planeta/editar/{id}(id=${stock.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/stock-planeta/borrar-form/{id}(id=${stock.id})}">Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

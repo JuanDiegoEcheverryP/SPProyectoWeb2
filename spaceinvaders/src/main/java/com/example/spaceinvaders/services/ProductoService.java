@@ -47,7 +47,7 @@ public class ProductoService {
     }
 
     public List<Producto> buscarProductosQueContengan(String textoBusqueda) {
-        return productoRepository.findAllByNombreStartingWithIgnoreCase(textoBusqueda);
+        return productoRepository.findAllByNombreContainingIgnoreCase(textoBusqueda);
     }
 
     public List<Producto> buscarProductosQueTerminenCon(String textoBusqueda) {
