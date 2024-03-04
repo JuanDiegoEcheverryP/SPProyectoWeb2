@@ -2,27 +2,23 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Estrellas</title>
+    <title>Listado de Productos</title>
 </head>
 <body>
-    <h1>Listado de Estrellas</h1>
+    <h1>Listado de Productos</h1>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>coord x</th>
-                <th>coord y</th>
-                <th>coord z</th>
+                <th>Volumen</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="estrella : ${estrella}">
-                <td style="padding-left: 20px;" th:text="${estrella.id}"></td>
-                <td style="padding-left: 20px;" th:text="${estrella.nombre}"></td>
-                <td style="padding-left: 20px;" th:text="${estrella.coord_x}"></td>
-                <td style="padding-left: 20px;" th:text="${estrella.coord_y}"></td>
-                <td style="padding-left: 20px;" th:text="${estrella.coord_z}"></td>
+            <tr th:each="producto : ${producto}">
+                <td style="padding-left: 20px;" th:text="${producto.id}"></td>
+                <td style="padding-left: 20px;" th:text="${producto.nombre}"></td>
+                <td style="padding-left: 20px;" th:text="${producto.volumen}"></td>
             </tr>
         </tbody>
     </table>

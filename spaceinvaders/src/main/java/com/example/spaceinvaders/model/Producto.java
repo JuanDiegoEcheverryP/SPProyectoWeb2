@@ -28,7 +28,7 @@ public class Producto {
     private Float volumen;
     private String imagen;
 
-    @OneToMany (mappedBy ="producto",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy ="producto",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Stock_planeta> listaStockPlanetas = new ArrayList<>();
 
     public void anadirStockPlaneta(Stock_planeta nuevo)

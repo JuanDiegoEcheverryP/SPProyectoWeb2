@@ -30,7 +30,7 @@ public class Planeta {
     
     private String imagen; //Este seria una url a una imagen
 
-    @OneToMany (mappedBy = "planeta",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "planeta",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Stock_planeta> listaStock = new ArrayList<>();
     
     public void anadirStockPlaneta(Stock_planeta nuevo)

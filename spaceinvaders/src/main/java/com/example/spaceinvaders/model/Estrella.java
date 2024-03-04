@@ -37,13 +37,13 @@ public class Estrella {
     @Column(nullable = false)
     private Float coord_z;
     
-    @OneToMany (mappedBy = "estrellaFinal",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "estrellaFinal",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Camino> listaCaminosFinal = new ArrayList<>();
 
-    @OneToMany (mappedBy = "estrellaInicio",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "estrellaInicio",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Camino> listaCaminosInicio = new ArrayList<>();
 
-    @OneToMany (mappedBy = "estrella",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "estrella",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Planeta> listaPlanetas = new ArrayList<>();
 
     public Estrella(String nombre,Float coord_x,Float coord_y,Float coord_z)

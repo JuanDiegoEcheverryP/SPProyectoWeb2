@@ -25,6 +25,7 @@
                 <th>coord z</th>
                 <th>Ver</th>
                 <th>Editar</th>
+                <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +41,9 @@
                 </td>
                 <td>
                     <a th:href="@{/estrella/editar/{id}(id=${estrella.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/estrella/borrar-form/{id}(id=${estrella.id})}">Borrar</a>
                 </td>
             </tr>
         </tbody>

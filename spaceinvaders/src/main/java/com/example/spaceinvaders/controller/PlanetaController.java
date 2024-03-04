@@ -109,7 +109,7 @@ public class PlanetaController {
            
             return "planeta_CRUD/planeta-edit"; // Regresa a la vista para mostrar los errores
         }
-        else if (planeta.getHabitado()==null || planeta.getNombre()==null) {
+        else if (planeta.getHabitado()==null || planeta.getNombre()==null ||planeta.getNombre()=="") {
             throw new NotNullException("todos los campos deben estar llenos");
         }
     
@@ -155,7 +155,7 @@ public class PlanetaController {
 
             return "planeta_CRUD/planeta-crear"; // Regresa a la vista para mostrar los errores
         }
-        else if (planeta.getHabitado()==null || planeta.getNombre()==null) {
+        else if (planeta.getHabitado()==null || planeta.getNombre()==null || planeta.getNombre()=="") {
             throw new NotNullException("todos los campos deben estar llenos");
         }
         
