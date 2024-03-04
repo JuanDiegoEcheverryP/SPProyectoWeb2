@@ -4,9 +4,6 @@ import com.example.spaceinvaders.exceptions.NotNullException;
 import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeleteJugadorException;
-import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
-import com.example.spaceinvaders.model.Estrella;
-import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.services.NaveService;
 

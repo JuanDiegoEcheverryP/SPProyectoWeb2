@@ -61,4 +61,10 @@ public class TipoNaveService {
 
         return mensaje;
     }
+
+    public TipoNave crearTipoNave(TipoNave tipoNave) {
+
+        TipoNave nueva=tipoNaveRepository.save(tipoNave);
+        return nueva;
+    }
 }

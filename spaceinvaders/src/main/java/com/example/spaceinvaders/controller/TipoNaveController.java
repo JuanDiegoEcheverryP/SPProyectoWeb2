@@ -1,6 +1,5 @@
 package com.example.spaceinvaders.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -15,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.exceptions.NotNullException;
+import com.example.spaceinvaders.exceptions.OutOfLimitsException;
+import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
+import com.example.spaceinvaders.exceptions.RepeatedNameException;
+import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
 import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.services.TipoNaveService;
 
@@ -91,5 +94,90 @@ public class TipoNaveController {
 
         model.addAttribute("tipoNave", naves);
         return "TipoNave_CRUD/tipoNave-search";
+    }
+
+    @PostMapping(value = "/guardar")
+    public String guardarTipoNave(@Valid TipoNave tipoNave, BindingResult result, Model model) throws  RepeatedNameException, NotNullException {
+        String err2 = tipoNaveService.tipoNaveValidationNombre(tipoNave);
+    
+        if (result.hasErrors()|| !err2.isEmpty()) {
+            
+            if (!err2.isEmpty()) {
+                throw new RepeatedNameException(err2);
+            }  
+
+            return "TipoNave_CRUD/tipoNave-edit"; // Regresa a la vista para mostrar los errores
+        }
+    
+        tipoNaveService.guardarTipoNave(tipoNave);
+        return "redirect:/tipoNave/list";
+    }
+
+    @GetMapping("/borrar-form/{id}")
+    public String borrarFormEstrella(Model model, @PathVariable Long id)
+    {
+        TipoNave nave = tipoNaveService.recuperarTipoNave(id);
+        model.addAttribute("nave", nave);
+        return "TipoNave_CRUD/tipoNave-delete";
+    }
+
+    @PostMapping("/borrar")
+    public String borrarEstrella(@Valid TipoNave nave, BindingResult result, Model model) throws UnableToDeletePlanetaException
+    {
+        /*
+        String err= tipoNaveService.estrellaValidationPlaneta(nave);
+
+        if(!err.isEmpty())
+        {
+            System.out.println(err);
+            throw new UnableToDeletePlanetaException(err);
+        }
+        
+        
+         */
+        tipoNaveService.borrarTipoNave(nave);
+        return "redirect:/nave/menu";
+    }
+
+    @PostMapping("/crear")
+    public String crearEstrella(@Valid TipoNave tipoNave, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException, OutOfLimitsException
+    {
+       //estrellaService
+        String err2 = tipoNaveService.tipoNaveValidationNombre(tipoNave);
+    
+        if (result.hasErrors() || !err2.isEmpty()) {
+            
+            if (!err2.isEmpty()) {
+                throw new RepeatedNameException(err2);
+            }  
+
+            return "TipoNave_CRUD/tipoNave-crear"; // Regresa a la vista para mostrar los errores
+        }
+
+        
+        tipoNaveService.crearTipoNave(tipoNave);
+
+        return "redirect:/tipoNave/menu";
+    }
+
+    @RequestMapping("/creador")
+    public String creador(Model model) {
+        model.addAttribute("tipoNave", new TipoNave());
+        return "TipoNave_CRUD/tipoNave-create";
+    }
+
+    @RequestMapping("/menu")
+    public String menu() {
+        return "TipoNave_CRUD/tipoNave-menu";
+    }
+
+    @RequestMapping("/researcher")
+    public String buscador() {
+        return "TipoNave_CRUD/tipoNave-search";
+    }
+
+    @RequestMapping("/listar")
+    public String listar() {
+        return "redirect:/tipoNave/list";
     }
 }

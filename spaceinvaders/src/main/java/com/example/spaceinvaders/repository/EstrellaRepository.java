@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.spaceinvaders.model.Estrella;
-import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
 
 
