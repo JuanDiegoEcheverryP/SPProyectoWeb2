@@ -19,6 +19,15 @@
                 <td style="padding-left: 20px;" th:text="${avatar.id}"></td>
                 <td style="padding-left: 20px;" th:text="${avatar.nombre}"></td>
                 <td style="padding-left: 20px;" th:text="${avatar.imagen}"></td>
+                <td>
+                    <a th:href="@{/avatar/ver/{id}(id=${avatar.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/avatar/editar/{id}(id=${avatar.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/avatar/borrar-form/{id}(id=${avatar.id})}">Borrar</a>
+                </td>
             </tr>
         </tbody>
     </table>

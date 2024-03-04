@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Crear Avatar</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Crear Avatar</h1>
+        <form action="#" th:action="@{/avatar/crear}" th:object="${avatar}" method="post">
+            
+            <label for="avatarNombre">Nombre: </label>
+            <input type="text" th:field="*{nombre}" id="avatarNombre">
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
+            
+            <label for="avatarImagen">Imagen: </label>
+            <input type="text" th:field="*{imagen}" id="avatarImagen">
+            <span th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}"
+                th:class="${#fields.hasErrors('imagen')} ? 'error' : ''"></span>
+
+            <button type="submit">CREAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/avatar/menu}">Cancelar</a>
+</body>
+
+</html>

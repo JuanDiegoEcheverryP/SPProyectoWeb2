@@ -144,9 +144,8 @@ public class JugadorController {
     }
 
     @PostMapping("/crear")
-    public String crearJugador(@Valid Jugador jugador, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException, OutOfLimitsException
+    public String crearJugador(@Valid Jugador jugador, BindingResult result, Model model) throws RepeatedNameException, NotNullException
     {
-       //jugadorService
         String err2 = jugadorService.jugadorValidationNombre(jugador);
         System.out.println(jugador.getId());
     
