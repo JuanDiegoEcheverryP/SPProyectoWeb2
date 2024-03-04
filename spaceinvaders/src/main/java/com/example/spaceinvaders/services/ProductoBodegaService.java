@@ -1,5 +1,6 @@
 package com.example.spaceinvaders.services;
 
+import com.example.spaceinvaders.model.Producto;
 import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.repository.ProductoBodegaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +17,10 @@ public class ProductoBodegaService {
     public List<ProductoBodega> obtenerTodasLasProductoBodegas() {
         return productoBodegaRepository.findAll();
     }
+
+    public List<ProductoBodega> buscarBodegasConProducto(Producto producto)
+    {
+        return productoBodegaRepository.findAllByProductoId(producto.getId());
+    }
+    
 }

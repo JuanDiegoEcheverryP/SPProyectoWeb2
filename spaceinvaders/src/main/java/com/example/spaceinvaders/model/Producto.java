@@ -25,7 +25,7 @@ public class Producto {
     @Column(unique=true)
     private String nombre;
     @Column(nullable = false)
-    private float volumen;
+    private Float volumen;
     private String imagen;
 
     @OneToMany (mappedBy ="producto",cascade = CascadeType.ALL)
@@ -37,7 +37,7 @@ public class Producto {
     }
 
 
-    @OneToMany (mappedBy = "producto",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "producto")
     private List<ProductoBodega> listaPRoductoBodega = new ArrayList<>();
 
     public void anadirProductoBodega(ProductoBodega nuevo)

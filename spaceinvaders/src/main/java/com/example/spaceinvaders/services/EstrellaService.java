@@ -7,10 +7,7 @@ import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.repository.CaminoRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
 
-import java.security.PublicKey;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +25,6 @@ public class EstrellaService {
 
     @Autowired
     private PlanetaService planetaService;
-
-    public Estrella buscarEstrella()
-    {
-        Estrella nueva=new Estrella();
-
-        return nueva;
-    }
 
     public List<Estrella> listaEstrellas()
     {

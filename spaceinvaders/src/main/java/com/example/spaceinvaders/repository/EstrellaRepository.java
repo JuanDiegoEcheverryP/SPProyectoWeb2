@@ -17,7 +17,7 @@ public interface EstrellaRepository extends JpaRepository<Estrella, Long> {
     
     List<Estrella> findAllByNombre(String text);
 
-     List<Estrella> findAllByNombreStartingWithIgnoreCase(String text);
+    List<Estrella> findAllByNombreStartingWithIgnoreCase(String text);
 
     List<Estrella> findAllByNombreEndingWithIgnoreCase(String text);
 
