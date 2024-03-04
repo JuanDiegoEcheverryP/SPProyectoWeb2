@@ -22,7 +22,7 @@ public class TipoNave {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique=true)
-    private String tipo;
+    private String nombre;
     @Column(nullable = false)
     private Float volBodega;
     @Column(nullable = false)
@@ -34,7 +34,7 @@ public class TipoNave {
 
     public TipoNave(String tipo, Float volBodega,  Float velocidad, String foto)
     {
-        this.tipo=tipo;
+        this.nombre=tipo;
         this.volBodega=volBodega;
         this.velocidad=velocidad;
         this.foto=foto;

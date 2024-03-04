@@ -1,5 +1,6 @@
 package com.example.spaceinvaders.services;
 
+import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Jugador;
@@ -61,5 +62,11 @@ public class JugadorService {
         }
 
         return mensaje;
+    }
+
+    public Jugador crearJugador(Jugador jugador) {
+
+        Jugador nueva=jugadorRepository.save(jugador);
+        return nueva;
     }
 }

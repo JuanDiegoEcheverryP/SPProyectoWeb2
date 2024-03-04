@@ -19,7 +19,6 @@ import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
 import com.example.spaceinvaders.model.Planeta;
-import com.example.spaceinvaders.repository.StockPlanetaRepository;
 import com.example.spaceinvaders.services.PlanetaService;
 import com.example.spaceinvaders.services.StockPlanetaService;
 

@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Tipos de Nave</title>
+    <title>Buscar Tipo Nave</title>
 </head>
+
 <body>
-    <h1>Listado de Tipos de Nave</h1>
-    <table>
+
+    <form method="get" action="#" th:action="@{/tipoNave/search}">
+        <label for="searchText">Buscar por nombre</label>
+        <input type="text" id="searchText" name="searchText">
+        <button type="submit">Buscar</button>
+    </form>
+    <a th:href="@{/tipoNave/menu}">Atras</a>
+
+    <h1>Estrellas</h1>
+    <table class="entity-list">
         <thead>
             <tr>
                 <th>ID</th>
@@ -17,6 +27,7 @@
             </tr>
         </thead>
         <tbody>
+
             <tr th:each="tipoNave : ${tipoNave}">
                 <td style="padding-left: 20px;" th:text="${tipoNave.id}"></td>
                 <td style="padding-left: 20px;" th:text="${tipoNave.nombre}"></td>
@@ -35,5 +46,7 @@
             </tr>
         </tbody>
     </table>
+
 </body>
+
 </html>

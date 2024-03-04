@@ -1,12 +1,10 @@
 package com.example.spaceinvaders.controller;
 
 import com.example.spaceinvaders.exceptions.NotNullException;
+import com.example.spaceinvaders.exceptions.OutOfLimitsException;
 import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
-import com.example.spaceinvaders.model.Estrella;
-import com.example.spaceinvaders.model.Jugador;
-import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.services.JugadorService;
 
@@ -132,4 +130,48 @@ public class JugadorController {
 
         return "redirect:/jugador/list";
     }
+
+    @PostMapping("/crear")
+    public String crearJugador(@Valid Jugador jugador, BindingResult result, Model model) throws RepeatedNameException, RepeatedCoordinateException, NotNullException, OutOfLimitsException
+    {
+       //jugadorService
+        String err2 = jugadorService.jugadorValidationNombre(jugador);
+    
+        if (result.hasErrors() || !err2.isEmpty()) {
+            
+            if (!err2.isEmpty()) {
+                throw new RepeatedNameException(err2);
+            }  
+
+            return "Jugador_CRUD/jugador-create"; // Regresa a la vista para mostrar los errores
+        }
+
+        
+        jugadorService.crearJugador(jugador);
+
+        return "redirect:/jugador/menu";
+    }
+
+    @RequestMapping("/creador")
+    public String creador(Model model) {
+        model.addAttribute("estrella", new Jugador());
+        return "Jugador_CRUD/jugador-create";
+    }
+
+    @RequestMapping("/menu")
+    public String menu() {
+        return "Jugador_CRUD/jugador-menu";
+    }
+
+    @RequestMapping("/researcher")
+    public String buscador() {
+        return "Jugador_CRUD/jugador-search";
+    }
+
+    @RequestMapping("/listar")
+    public String listar() {
+        return "redirect:/jugador/list";
+    }
 }
+
+//Crear no sirve
