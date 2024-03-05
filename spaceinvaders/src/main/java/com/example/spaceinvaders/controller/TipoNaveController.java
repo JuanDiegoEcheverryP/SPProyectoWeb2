@@ -18,6 +18,7 @@ import com.example.spaceinvaders.exceptions.NotNullException;
 import com.example.spaceinvaders.exceptions.OutOfLimitsException;
 import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
+import com.example.spaceinvaders.exceptions.UnableToDeleteJugadorException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
 import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.services.TipoNaveService;
@@ -120,15 +121,15 @@ public class TipoNaveController {
     }
 
     @PostMapping("/borrar")
-    public String borrarTipoNave(@Valid TipoNave nave, BindingResult result, Model model) throws UnableToDeletePlanetaException
+    public String borrarTipoNave(@Valid TipoNave nave, BindingResult result, Model model) throws UnableToDeletePlanetaException, UnableToDeleteJugadorException
     {
-        
+
         String err= tipoNaveService.validationTipoNaveBorrar(nave);
 
         if(!err.isEmpty())
         {
             System.out.println(err);
-            throw new UnableToDeletePlanetaException(err);
+            throw new UnableToDeleteJugadorException(err);
         }
         
         tipoNaveService.borrarTipoNave(nave);

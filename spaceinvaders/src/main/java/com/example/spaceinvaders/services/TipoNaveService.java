@@ -3,6 +3,7 @@ package com.example.spaceinvaders.services;
 import java.util.List;
 
 import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.repository.NaveRepository;
@@ -67,6 +68,7 @@ public class TipoNaveService {
         return mensaje;
     }
 
+
     public String validationTipoNaveBorrar(TipoNave tipoNave) {
         String mensaje = "";
         List<Nave> naveEval = naveRepository.findNaveByTipoNaveId(tipoNave.getId());
@@ -74,6 +76,20 @@ public class TipoNaveService {
         if (!naveEval.isEmpty()) {
             return "Hay naves con ese tipo de nave";
         }
+
+        return mensaje;
+    }
+
+    public String tipoNaveValidationExisteNave(TipoNave tipoNave)
+    {
+        String mensaje="";
+        List<Nave> tipoNaveEval=tipoNaveRepository.findNavesByNaveId(tipoNave.getId());
+
+       if(!tipoNaveEval.isEmpty())
+        {
+            mensaje="No se puede borrar este tipo de nave porque hay naves que la estan usando";
+        }
+
         return mensaje;
     }
 
