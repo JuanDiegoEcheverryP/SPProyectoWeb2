@@ -18,17 +18,17 @@
             
             
             <label for="fDemanda">Factor de demanda: </label>
-            <input type="text" th:field="*{FactorDemanda}" id="stockPlanetaNombre">
+            <input type="text" th:field="*{FactorDemanda}" id="stockPlanetaNombre" required>
             <span th:if="${#fields.hasErrors('FactorDemanda')}" th:errors="*{FactorDemanda}"
                 th:class="${#fields.hasErrors('FactorDemanda')} ? 'error' : ''"></span>
             
             <label for="fOferta">Factor de oferta: </label>
-            <input type="text" th:field="*{FactorOferta}" id="stockPlanetaCoordX">
+            <input type="text" th:field="*{FactorOferta}" id="stockPlanetaCoordX" required>
             <span th:if="${#fields.hasErrors('FactorOferta')}" th:errors="*{FactorOferta}"
                 th:class="${#fields.hasErrors('FactorOferta')} ? 'error' : ''"></span>
 
             <label for="stockPlanetaCoordY">Stock: </label>
-            <input type="text" th:field="*{stock}" id="stock">
+            <input type="text" th:field="*{stock}" id="stock" required>
             <span th:if="${#fields.hasErrors('stock')}" th:errors="*{coord_y}"
                 th:class="${#fields.hasErrors('stock')} ? 'error' : ''"></span>
 

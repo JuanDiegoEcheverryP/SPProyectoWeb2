@@ -11,12 +11,12 @@
         <form action="#" th:action="@{/producto/crear}" th:object="${producto}" method="post">
             
             <label for="productoNombre">Nombre: </label>
-            <input type="text" th:field="*{nombre}" id="productoNombre">
+            <input type="text" th:field="*{nombre}" id="productoNombre" required>
             <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
                 th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
             
             <label for="productoVolumen">Volumen: </label>
-            <input type="text" th:field="*{volumen}" id="productoCoordX">
+            <input type="text" th:field="*{volumen}" id="productoCoordX" required>
             <span th:if="${#fields.hasErrors('volumen')}" th:errors="*{volumen}"
                 th:class="${#fields.hasErrors('volumen')} ? 'error' : ''"></span>
 

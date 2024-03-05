@@ -13,7 +13,7 @@
             <input type="hidden" th:field="*{id}" id="id">
             
             <label for="planetaNombre">Nombre: </label>
-            <input type="text" th:field="*{nombre}" id="planetaNombre">
+            <input type="text" th:field="*{nombre}" id="planetaNombre" required>
             <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
                 th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
             

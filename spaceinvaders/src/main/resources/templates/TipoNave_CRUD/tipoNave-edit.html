@@ -12,22 +12,22 @@
             <input type="hidden" th:field="*{id}" id="id">
             
             <label for="tipoNaveNombre">Nombre: </label>
-            <input type="text" th:field="*{nombre}" id="tipoNaveNombre">
+            <input type="text" th:field="*{nombre}" id="tipoNaveNombre" required>
             <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
                 th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
             
             <label for="tipoNavevolBodega">volBodega: </label>
-            <input type="text" th:field="*{volBodega}" id="tipoNavevolBodega">
+            <input type="text" th:field="*{volBodega}" id="tipoNavevolBodega" required>
             <span th:if="${#fields.hasErrors('volBodega')}" th:errors="*{volBodega}"
                 th:class="${#fields.hasErrors('volBodega')} ? 'error' : ''"></span>
 
             <label for="tipoNavevelocidad">velocidad: </label>
-            <input type="text" th:field="*{velocidad}" id="tipoNavevelocidad">
+            <input type="text" th:field="*{velocidad}" id="tipoNavevelocidad" required>
             <span th:if="${#fields.hasErrors('velocidad')}" th:errors="*{velocidad}"
                 th:class="${#fields.hasErrors('velocidad')} ? 'error' : ''"></span>
             
             <label for="tipoNavefoto">foto: </label>
-            <input type="text" th:field="*{foto}" id="tipoNavefoto">
+            <input type="text" th:field="*{foto}" id="tipoNavefoto" required>
             <span th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}"
                 th:class="${#fields.hasErrors('foto')} ? 'error' : ''"></span>
 

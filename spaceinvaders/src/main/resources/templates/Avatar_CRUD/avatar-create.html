@@ -12,12 +12,12 @@
         <form action="#" th:action="@{/avatar/crear}" th:object="${avatar}" method="post">
             
             <label for="avatarNombre">Nombre: </label>
-            <input type="text" th:field="*{nombre}" id="avatarNombre">
+            <input type="text" th:field="*{nombre}" id="avatarNombre" required>
             <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
                 th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
             
             <label for="avatarImagen">Imagen: </label>
-            <input type="text" th:field="*{imagen}" id="avatarImagen">
+            <input type="text" th:field="*{imagen}" id="avatarImagen" required>
             <span th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}"
                 th:class="${#fields.hasErrors('imagen')} ? 'error' : ''"></span>
 
