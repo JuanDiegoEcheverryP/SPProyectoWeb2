@@ -138,9 +138,9 @@ public class NaveController {
     @PostMapping("/borrar")
     public String borrarNave(@Valid Nave nave, BindingResult result, Model model) throws UnableToDeleteJugadorException
     {
-        /*
+        
         //Falta esto
-        String err= naveService.estrellaValidationPlaneta(nave);
+        String err= naveService.naveValidarBorrar(nave);
 
         if(!err.isEmpty())
         {
@@ -148,7 +148,6 @@ public class NaveController {
             throw new UnableToDeleteJugadorException(err);
         }
         
-         */
         naveService.borrarNave(nave);
 
         return "redirect:/nave/menu";

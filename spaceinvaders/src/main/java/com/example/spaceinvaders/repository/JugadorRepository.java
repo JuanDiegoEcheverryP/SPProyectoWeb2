@@ -13,6 +13,12 @@ import com.example.spaceinvaders.model.Jugador;
 @Repository
 public interface JugadorRepository extends JpaRepository<Jugador, Long> {
 
+    @Query("SELECT n FROM Jugador n WHERE n.avatar.id = :idAvatar")
+    List<Jugador>findJugadoresByAvatarId(@Param("idAvatar") Long idAvatar);
+
+    @Query("SELECT n FROM Jugador n WHERE n.naveJuego.id = :idNave")
+    List<Jugador>findJugadoresByNaveId(@Param("idNave") Long idNave);
+
     List<Jugador> findAllByNombre(String text);
 
     List<Jugador> findAllByNombreStartingWithIgnoreCase(String text);

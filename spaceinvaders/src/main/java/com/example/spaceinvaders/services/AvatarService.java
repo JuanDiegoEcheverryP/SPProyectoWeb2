@@ -74,6 +74,11 @@ public class AvatarService {
         //Falta validar que se pueda borrar
         String mensaje="";
 
+        List<Jugador> jugadorEval = jugadorRepository.findJugadoresByAvatarId(avatar.getId());
+
+        if(!jugadorEval.isEmpty()){
+            mensaje= "Hay usuarios con ese avatar";
+        }
         return mensaje;
     }
 
