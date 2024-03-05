@@ -194,9 +194,9 @@ public class StockProductoController {
     public String creador(Model model) {
         model.addAttribute("stock", new Stock_planeta());
         List<Producto> productosTodos=productoService.listaProductos();
-        List<Planeta>  planetasTodos=planetaService.listaPlanetas();
+        List<Planeta>  planetasHabitados=planetaService.listaPlanetas();
         model.addAttribute("productos", productosTodos);
-        model.addAttribute("planetas", planetasTodos);
+        model.addAttribute("planetas", planetasHabitados);
         return "StockPlaneta_CRUD/stock-create";
     }
 

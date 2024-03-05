@@ -33,7 +33,7 @@ public class PlanetaService {
 
     public List<Planeta> listaPlanetas()
     {
-        return planetaRepository.findAll();
+        return planetaRepository.findAllByHabitadoTrue();
     }
 
     public Planeta recuperarPlaneta(Long id)

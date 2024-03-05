@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 
 
@@ -23,4 +24,7 @@ public interface NaveRepository extends JpaRepository<Nave, Long> {
     List<Nave> findAllByNombreEndingWithIgnoreCase(String text);
 
     List<Nave> findAllByNombreContainingIgnoreCase(String text);
+
+    @Query("SELECT j FROM Jugador j WHERE j.naveJuego.id = :idNave")
+    List<Jugador> findNavesByNaveId(@Param("idNave") Long idNave);
 }

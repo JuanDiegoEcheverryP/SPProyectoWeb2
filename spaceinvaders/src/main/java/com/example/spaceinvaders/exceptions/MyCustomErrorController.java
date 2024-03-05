@@ -58,5 +58,11 @@ public class MyCustomErrorController {
         model.addAttribute("exceptionText", exception.getMessage());
         return new ModelAndView("pagina-error");
     }
+
+    @ExceptionHandler(UnableToDeleteJugadorException.class)
+    public ModelAndView handleExisteNave(Model model, UnableToDeleteJugadorException exception) {
+        model.addAttribute("exceptionText", exception.getMessage());
+        return new ModelAndView("pagina-error");
+    }
     
 }   

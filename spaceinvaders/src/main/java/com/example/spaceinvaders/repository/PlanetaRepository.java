@@ -25,5 +25,6 @@ public interface PlanetaRepository extends JpaRepository<Planeta, Long> {
 
     List<Planeta> findAllByNombreContainingIgnoreCase(String text);
     
+    List<Planeta> findAllByHabitadoTrue();
 }
 
