@@ -122,8 +122,8 @@ public class TipoNaveController {
     @PostMapping("/borrar")
     public String borrarTipoNave(@Valid TipoNave nave, BindingResult result, Model model) throws UnableToDeletePlanetaException
     {
-        /*
-        String err= tipoNaveService.estrellaValidationPlaneta(nave);
+        
+        String err= tipoNaveService.validationTipoNaveBorrar(nave);
 
         if(!err.isEmpty())
         {
@@ -131,8 +131,6 @@ public class TipoNaveController {
             throw new UnableToDeletePlanetaException(err);
         }
         
-        
-         */
         tipoNaveService.borrarTipoNave(nave);
         return "redirect:/nave/menu";
     }

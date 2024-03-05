@@ -3,9 +3,12 @@ package com.example.spaceinvaders.services;
 import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
+import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.repository.JugadorRepository;
 import com.example.spaceinvaders.repository.NaveRepository;
+import com.example.spaceinvaders.repository.ProductoBodegaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,9 @@ public class NaveService {
 
     @Autowired
     private JugadorRepository jugadorRepository;
+
+    @Autowired
+    private ProductoBodegaRepository bodegaRepository;
 
     public List<Nave> listaNaves() {
         return naveRepository.findAll();
@@ -72,10 +78,15 @@ public class NaveService {
         String mensaje="";
 
         List<Jugador> jugadorEval = jugadorRepository.findJugadoresByNaveId(nave.getId());
-
+        List<ProductoBodega> bodegaEval = bodegaRepository.findProductosBodegaByNaveId(nave.getId());
         if(!jugadorEval.isEmpty()){
-            mensaje= "Hay usuarios en esa nave";
+            return "Hay usuarios en esa nave";
         }
+        else if (!bodegaEval.isEmpty()) {
+            return "Hay productos en esa nave";
+        }
+
+
         return mensaje;
     }
 

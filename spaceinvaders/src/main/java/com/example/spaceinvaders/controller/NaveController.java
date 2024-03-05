@@ -4,6 +4,7 @@ import com.example.spaceinvaders.exceptions.NotNullException;
 import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeleteJugadorException;
+import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.model.TipoNave;
@@ -136,7 +137,7 @@ public class NaveController {
     }
 
     @PostMapping("/borrar")
-    public String borrarNave(@Valid Nave nave, BindingResult result, Model model) throws UnableToDeleteJugadorException
+    public String borrarNave(@Valid Nave nave, BindingResult result, Model model) throws UnableToDeletePlanetaException
     {
         
         //Falta esto
@@ -145,7 +146,7 @@ public class NaveController {
         if(!err.isEmpty())
         {
             System.out.println(err);
-            throw new UnableToDeleteJugadorException(err);
+            throw new UnableToDeletePlanetaException(err);
         }
         
         naveService.borrarNave(nave);

@@ -3,7 +3,9 @@ package com.example.spaceinvaders.services;
 import java.util.List;
 
 import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.TipoNave;
+import com.example.spaceinvaders.repository.NaveRepository;
 import com.example.spaceinvaders.repository.TipoNaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ import org.springframework.stereotype.Service;
 public class TipoNaveService {
     @Autowired
     private TipoNaveRepository tipoNaveRepository;
+
+    @Autowired
+    private NaveRepository naveRepository;
 
     public List<TipoNave> listarTipoNaves() {
         return tipoNaveRepository.findAll();
@@ -59,6 +64,16 @@ public class TipoNaveService {
             mensaje="Ya existe un tipo de Nave con ese nombre";
         }
 
+        return mensaje;
+    }
+
+    public String validationTipoNaveBorrar(TipoNave tipoNave) {
+        String mensaje = "";
+        List<Nave> naveEval = naveRepository.findNaveByTipoNaveId(tipoNave.getId());
+
+        if (!naveEval.isEmpty()) {
+            return "Hay naves con ese tipo de nave";
+        }
         return mensaje;
     }
 
