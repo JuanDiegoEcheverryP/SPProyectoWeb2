@@ -180,9 +180,9 @@ public class ProductoControler {
         return "Producto_CRUD/producto-search";
     }
 
-    @RequestMapping("/listar")
+   /*@RequestMapping("/listar")
     public String listar() {
         return "redirect:/producto/list";
-    }
+    } */ 
 }
 

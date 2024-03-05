@@ -189,8 +189,8 @@ public class PlanetaController {
         return "planeta_CRUD/planeta-search";
     }
 
-    @RequestMapping("/listar")
+    /*@RequestMapping("/listar")
     public String listar() {
         return "redirect:/planeta/list";
-    }
+    }*/
 }

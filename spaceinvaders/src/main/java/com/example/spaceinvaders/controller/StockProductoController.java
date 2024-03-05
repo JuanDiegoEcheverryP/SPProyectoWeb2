@@ -210,9 +210,9 @@ public class StockProductoController {
         return "StockPlaneta_CRUD/stock-search";
     }
 
-    @RequestMapping("/listar")
+    /*@RequestMapping("/listar")
     public String listar() {
         return "redirect:/stock-planeta/list";
-    }
+    }*/
     
 }

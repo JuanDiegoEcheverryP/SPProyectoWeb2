@@ -201,9 +201,9 @@ public class EstrellaController {
         return "Estrella_CRUD/estrella-search";
     }
 
-    @RequestMapping("/listar")
+   /* @RequestMapping("/listar")
     public String listar() {
         return "redirect:/estrella/list";
-    }
+    }*/ 
     
 }
