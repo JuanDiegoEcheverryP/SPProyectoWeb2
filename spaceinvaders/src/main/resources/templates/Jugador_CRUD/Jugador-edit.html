@@ -21,10 +21,13 @@
             <span th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"
                 th:class="${#fields.hasErrors('contrasena')} ? 'error' : ''"></span>
             
-            <label for="jugadorRol">Rol: </label>
-            <input type="text" th:field="*{rol}" id="jugadorRol">
-            <span th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}"
-                th:class="${#fields.hasErrors('rol')} ? 'error' : ''"></span>
+                <label for="jugadorRol">Rol: </label>
+                <select th:field="*{rol}" id="jugadorRol">
+                    <option value="capitan">Capitan</option>
+                    <option value="piloto">Piloto</option>
+                    <option value="comerciante">Comerciante</option>
+                </select>
+                <span th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}" th:class="${#fields.hasErrors('rol')} ? 'error' : ''"></span>
 
             <button type="submit">Enviar</button>
         </form>

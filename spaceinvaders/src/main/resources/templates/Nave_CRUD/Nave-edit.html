@@ -11,6 +11,16 @@
         <form action="#" th:action="@{/nave/guardar}" th:object="${nave}" method="post">
             <input type="hidden" th:field="*{id}" id="id">
             
+            <label for="naveTipo">Tipo nave: </label>
+            <select th:field="*{tipoNave.id}">
+                <option th:each="tipoNave : ${tipoNaves}" th:value="${tipoNave.id}" th:text="${tipoNave.nombre}"></option>
+            </select>
+
+            <label for="naveTipo">localizacion: </label>
+            <select th:field="*{localizacion.id}">
+                <option th:each="localizacion : ${planetas}" th:value="${localizacion.id}" th:text="${localizacion.nombre}"></option>
+            </select>
+
             <label for="naveNombre">Nombre: </label>
             <input type="text" th:field="*{nombre}" id="naveNombre">
             <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"

@@ -53,6 +53,10 @@ public class NaveController {
     public String editarNave(Model model, @PathVariable Long id) {
         Nave nave = naveService.recuperarNave(id);
         model.addAttribute("nave", nave);
+        List<TipoNave>  tipoNaveTodos=tipoNaveService.listarTipoNaves();
+        List<Planeta>  planetaTodos=planetaService.listaPlanetas();
+        model.addAttribute("tipoNaves", tipoNaveTodos);
+        model.addAttribute("planetas", planetaTodos);
         return "Nave_CRUD/nave-edit";
     }
 
