@@ -26,12 +26,12 @@
                 th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
             
             <label for="naveCredito">Credito: </label>
-            <input type="text" th:field="*{credito}" id="naveCredito" required>
+            <input type="number" min="0" step="any" th:field="*{credito}" id="naveCredito" required>
             <span th:if="${#fields.hasErrors('credito')}" th:errors="*{credito}"
                 th:class="${#fields.hasErrors('credito')} ? 'error' : ''"></span>
 
             <label for="naveTiempo">Tiempo: </label>
-            <input type="text" th:field="*{tiempo}" id="naveTiempo" required>
+            <input type="number" min="0" step="any" th:field="*{tiempo}" id="naveTiempo" required>
             <span th:if="${#fields.hasErrors('tiempo')}" th:errors="*{tiempo}"
                 th:class="${#fields.hasErrors('tiempo')} ? 'error' : ''"></span>
 

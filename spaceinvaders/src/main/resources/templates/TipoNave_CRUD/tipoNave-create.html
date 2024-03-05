@@ -17,12 +17,12 @@
             th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
         
         <label for="tipoNavevolBodega">volBodega: </label>
-        <input type="text" th:field="*{volBodega}" id="tipoNavevolBodega" required>
+        <input type="number" min="0" step="any" th:field="*{volBodega}" id="tipoNavevolBodega" required>
         <span th:if="${#fields.hasErrors('volBodega')}" th:errors="*{volBodega}"
             th:class="${#fields.hasErrors('volBodega')} ? 'error' : ''"></span>
 
         <label for="tipoNavevelocidad">velocidad: </label>
-        <input type="text" th:field="*{velocidad}" id="tipoNavevelocidad">
+        <input type="number" min="0" step="any" th:field="*{velocidad}" id="tipoNavevelocidad">
         <span th:if="${#fields.hasErrors('velocidad')}" th:errors="*{velocidad}"
             th:class="${#fields.hasErrors('velocidad')} ? 'error' : ''"></span>
         

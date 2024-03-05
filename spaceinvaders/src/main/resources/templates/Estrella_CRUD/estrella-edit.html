@@ -17,17 +17,17 @@
                 th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
             
             <label for="estrellaCoordX">Coordenada X: </label>
-            <input type="text" th:field="*{coord_x}" id="estrellaCoordX" required>
+            <input type="number" min="0" step="any" th:field="*{coord_x}" id="estrellaCoordX" required>
             <span th:if="${#fields.hasErrors('coord_x')}" th:errors="*{coord_x}"
                 th:class="${#fields.hasErrors('coord_x')} ? 'error' : ''"></span>
 
             <label for="estrellaCoordY">Coordenada Y: </label>
-            <input type="text" th:field="*{coord_y}" id="estrellaCoordX" required>
+            <input type="number" min="0" step="any" th:field="*{coord_y}" id="estrellaCoordX" required>
             <span th:if="${#fields.hasErrors('coord_y')}" th:errors="*{coord_y}"
                 th:class="${#fields.hasErrors('coord_y')} ? 'error' : ''"></span>
             
             <label for="estrellaCoordZ">Coordenada Z: </label>
-            <input type="text" th:field="*{coord_z}" id="estrellaCoordZ" required>
+            <input type="number" min="0" step="any" th:field="*{coord_z}" id="estrellaCoordZ" required>
             <span th:if="${#fields.hasErrors('coord_z')}" th:errors="*{coord_z}"
                 th:class="${#fields.hasErrors('coord_z')} ? 'error' : ''"></span>
 
