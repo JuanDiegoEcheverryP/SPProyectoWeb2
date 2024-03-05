@@ -16,6 +16,9 @@
                 <th>Stock</th>
                 <th>Factor Oferta</th>
                 <th>Factor Demanda</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +29,15 @@
                 <td style="padding-left: 20px;" th:text="${stock.stock}"></td>
                 <td style="padding-left: 20px;" th:text="${stock.FactorOferta}"></td>
                 <td style="padding-left: 20px;" th:text="${stock.FactorDemanda}"></td>
+                <td>
+                    <a th:href="@{/stock-planeta/ver/{id}(id=${stock.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/stock-planeta/editar/{id}(id=${stock.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/stock-planeta/borrar-form/{id}(id=${stock.id})}">Borrar</a>
+                </td>
             </tr>
         </tbody>
     </table>

@@ -13,6 +13,9 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Volumen</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +23,15 @@
                 <td style="padding-left: 20px;" th:text="${producto.id}"></td>
                 <td style="padding-left: 20px;" th:text="${producto.nombre}"></td>
                 <td style="padding-left: 20px;" th:text="${producto.volumen}"></td>
+                <td>
+                    <a th:href="@{/producto/ver/{id}(id=${producto.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/producto/editar/{id}(id=${producto.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/producto/borrar-form/{id}(id=${producto.id})}">Borrar</a>
+                </td>
             </tr>
         </tbody>
     </table>

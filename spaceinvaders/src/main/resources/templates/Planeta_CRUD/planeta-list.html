@@ -13,6 +13,9 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>habitado</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +23,15 @@
                 <td style="padding-left: 20px;" th:text="${planeta.id}"></td>
                 <td style="padding-left: 20px;" th:text="${planeta.nombre}"></td>
                 <td style="padding-left: 20px;" th:text="${planeta.habitado}"></td>
+                <td>
+                    <a th:href="@{/planeta/ver/{id}(id=${planeta.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/planeta/editar/{id}(id=${planeta.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/planeta/borrar-form/{id}(id=${planeta.id})}">Borrar</a>
+                </td>
             </tr>
         </tbody>
     </table>
