@@ -18,7 +18,10 @@ import com.example.spaceinvaders.exceptions.NotNullException;
 import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
+import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.model.Producto;
+import com.example.spaceinvaders.services.EstrellaService;
 import com.example.spaceinvaders.services.PlanetaService;
 import com.example.spaceinvaders.services.StockPlanetaService;
 
@@ -33,6 +36,10 @@ public class PlanetaController {
 
     @Autowired
     private StockPlanetaService stockPlanetaService;
+
+    @Autowired
+    private EstrellaService estrellaService;
+
 
     @GetMapping("/list")
     public String listarplanetas(Model model) {
@@ -166,7 +173,9 @@ public class PlanetaController {
 
     @RequestMapping("/creador")
     public String creador(Model model) {
+        List<Estrella> estrellasTodas=estrellaService.listaEstrellas();
         model.addAttribute("planeta", new Planeta());
+        model.addAttribute("estrella", estrellasTodas.subList(0,1000));
         return "planeta_CRUD/planeta-create";
     }
 

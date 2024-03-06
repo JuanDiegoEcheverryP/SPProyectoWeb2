@@ -10,6 +10,11 @@
         <h1>Crear Planeta</h1>
         <form action="#" th:action="@{/planeta/crear}" th:object="${planeta}" method="post">
             
+            <label for="stockPlanetaNombre">Estrella a la que le pertenece: </label>
+            <select th:field="*{estrella.id}">
+                <option th:each="estrella : ${estrella}" th:value="${estrella.id}" th:text="${estrella.nombre}"></option>
+            </select>
+
             <label for="planetaNombre">Nombre: </label>
             <input type="text" th:field="*{nombre}" id="planetaNombre" required>
             <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
