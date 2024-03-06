@@ -46,6 +46,9 @@ public class Estrella {
     @OneToMany (mappedBy = "estrella",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Planeta> listaPlanetas = new ArrayList<>();
 
+    @OneToMany (mappedBy = "localizacion")
+    private List<Nave> listaNaves = new ArrayList<>();
+
     public Estrella(String nombre,Float coord_x,Float coord_y,Float coord_z)
     {
         this.nombre=nombre;

@@ -271,7 +271,7 @@ public class DBInitializer implements CommandLineRunner{
                 }
                 else
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,COMERCIANTE,naves.get(rand.nextInt(9)),avatares.get(rand.nextInt(7))));
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,COMERCIANTE,naves.get(rand.nextInt(10)),avatares.get(rand.nextInt(7))));
                 }
                 contadorJugadores++;
             }
@@ -284,7 +284,7 @@ public class DBInitializer implements CommandLineRunner{
         String nombreNave;
         Float credito, tiempo;
         int contador=0;
-        List<Planeta> planetas = planetaRepository.findAll();
+        List<Estrella> estrellas = estrellaRepository.findAll();
         List<TipoNave> tiposNave = tipoNaveRepository.findAll();
 
         for(String nombre : equipoNombre)
@@ -293,7 +293,7 @@ public class DBInitializer implements CommandLineRunner{
             credito=rand.nextFloat() * 1000+1;
             tiempo=rand.nextFloat() * 10000+1;
             //Nave nave=new Nave(nombreNave,credito,tiempo,planetas.get(contador),tiposNave.get(contador));
-            Nave nave=new Nave(nombreNave,credito,tiempo,planetas.get(rand.nextInt(1200)),tiposNave.get(contador));
+            Nave nave=new Nave(nombreNave,credito,tiempo,estrellas.get(rand.nextInt(40000)),tiposNave.get(contador));
             naveRepository.save(nave);
             contador++;
         }
@@ -317,20 +317,13 @@ public class DBInitializer implements CommandLineRunner{
         String imagen="https://shorturl.at/kuFO8";
         int planetaXestrella=0,contEstrella=0;
 
-        for (String nombre1 : planetanombre1) {
-            for (String nombre2 : planetanombre2) {
-                for (String nombre3 : planetanombre3) {
+        for (int i=0; i<planetanombre1.length && contEstrella<400; i++) {
+            for (int j=0; j<planetanombre2.length && contEstrella<400; j++) {
+                for (int k=0; k<planetanombre3.length && contEstrella<400; k++) {
 
-                    planetaNombre=nombre1+" "+nombre2+" "+nombre3;
-
-                    if(contEstrella<400)
-                    {
-                        habitado=true;
-                    }
-                    else
-                    {
-                        habitado=false;
-                    }
+                    planetaNombre=planetanombre1[i]+" "+planetanombre2[j]+" "+planetanombre3[k];
+                    
+                    habitado=rand.nextBoolean();
 
                     if(planetaXestrella==0)
                     {
@@ -402,14 +395,14 @@ public class DBInitializer implements CommandLineRunner{
         List<Producto> productos = productoRepository.findAll();
         List<Planeta> planetas = planetaRepository.findAll();
 
-        for (Producto producto : productos) {
+        for (int i=0; i<productos.size()/2; i++) {
             // Para cada planeta existente
             for (Planeta planeta : planetas) {
                 if(planeta.getHabitado())
                 {
                     // Crear un nuevo stock para el producto en este planeta
                     Stock_planeta stockPlaneta = new Stock_planeta(rand.nextLong(1000000) + 1, rand.nextLong(1000000) + 1, rand.nextInt(200)); // Suponiendo que inicialmente hay 100 unidades
-                    stockPlaneta.setProducto(producto);
+                    stockPlaneta.setProducto(productos.get(i));
                     stockPlaneta.setPlaneta(planeta);
                     
                     // Guardar el stock del producto en el planeta

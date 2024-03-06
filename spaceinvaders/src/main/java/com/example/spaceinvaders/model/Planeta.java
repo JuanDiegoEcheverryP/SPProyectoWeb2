@@ -38,9 +38,6 @@ public class Planeta {
         listaStock .add(nuevo);
     }
 
-    @OneToMany (mappedBy = "localizacion")
-    private List<Nave> listaNaves = new ArrayList<>();
-
     @ManyToOne
     private Estrella estrella;
 

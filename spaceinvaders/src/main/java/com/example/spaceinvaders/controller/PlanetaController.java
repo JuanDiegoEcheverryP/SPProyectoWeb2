@@ -63,7 +63,7 @@ public class PlanetaController {
 
         if (searchText == null || searchText.trim().equals("")) {
             log.info("No hay texto de búsqueda. Retornando todo");
-            planetas= planetaService.listaPlanetas();
+            planetas= planetaService.listaTodos();
         } 
         else if (searchText.startsWith("*") && searchText.endsWith("*")) {
             
@@ -136,17 +136,8 @@ public class PlanetaController {
         
     @PostMapping("/borrar")
     public String borrarplaneta(@Valid Planeta planeta, BindingResult result, Model model) throws UnableToDeletePlanetaException
-    {
-        String err= planetaService.validationEstrellaPlanetaBorrar(planeta);
-
-        if(!err.isEmpty())
-        {
-            System.out.println(err);
-            throw new UnableToDeletePlanetaException(err);
-        }
-        
+    { 
         planetaService.borrarPlaneta(planeta);
-
         return "redirect:/planeta/menu";
     }
 

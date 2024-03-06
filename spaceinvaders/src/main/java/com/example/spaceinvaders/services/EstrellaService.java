@@ -3,6 +3,7 @@ package com.example.spaceinvaders.services;
 import org.springframework.stereotype.Service;
 
 import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.repository.CaminoRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
@@ -89,21 +90,17 @@ public class EstrellaService {
         return mensaje;
     }
 
-    public String estrellaValidationPlaneta(Estrella estrella)
+    public String estrellaValidationNaves(Estrella estrella)
     {
-        List<Planeta> planetas=estrellaRepository.findNavesByPlanetaId(estrella.getId());
+        List<Nave> naves=estrellaRepository.findNavesByEstrellaId(estrella.getId());
         
         String mensaje="";
 
-        for(Planeta p:planetas)
+        if(!naves.isEmpty())
         {
-            mensaje=planetaService.validationEstrellaPlanetaBorrar(p);
-
-            if(!mensaje.isEmpty())
-            {
-                return mensaje;
-            }
+            mensaje="La estrella no se puede borrar porque existen naves en la estrella";
         }
+
         //espera el mensaje de planetas service
 
         return mensaje;

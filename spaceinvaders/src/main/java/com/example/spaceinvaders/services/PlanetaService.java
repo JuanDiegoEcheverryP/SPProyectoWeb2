@@ -17,23 +17,14 @@ public class PlanetaService {
     @Autowired
     private PlanetaRepository planetaRepository;
 
-    public String validationEstrellaPlanetaBorrar(Planeta p)
-    {
-        String mensaje="";
-
-        List<Nave> planetaEval=planetaRepository.findNavesByPlanetaId(p.getId());
-
-       if( !planetaEval.isEmpty())
-       {
-            mensaje="Hay naves presentes en la localizacion, no se puede borrar la entidad solicitada";
-       }
-
-        return mensaje;
-    }
-
     public List<Planeta> listaPlanetas()
     {
         return planetaRepository.findAllByHabitadoTrue();
+    }
+
+    public List<Planeta> listaTodos()
+    {
+        return planetaRepository.findAll();
     }
 
     public Planeta recuperarPlaneta(Long id)

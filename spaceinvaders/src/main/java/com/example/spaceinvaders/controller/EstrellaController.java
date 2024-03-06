@@ -31,7 +31,7 @@ public class EstrellaController {
     @Autowired
     private EstrellaService estrellaService;
 
-
+    
     @GetMapping("/list")
     public String listarEstrellas(Model model) {
         List<Estrella> estrellas = estrellaService.listaEstrellas();
@@ -138,7 +138,7 @@ public class EstrellaController {
     @PostMapping("/borrar")
     public String borrarEstrella(@Valid Estrella estrella, BindingResult result, Model model) throws UnableToDeletePlanetaException
     {
-        String err= estrellaService.estrellaValidationPlaneta(estrella);
+        String err= estrellaService.estrellaValidationNaves(estrella);
 
         if(!err.isEmpty())
         {

@@ -30,7 +30,7 @@ public class Nave {
     private Float tiempo;
 
     @ManyToOne
-    private Planeta localizacion; // Correcting the mapping to Planeta entity
+    private Estrella localizacion; // Correcting the mapping to Planeta entity
 
     @OneToMany(mappedBy = "nave",cascade = CascadeType.ALL)
     private List<ProductoBodega> productosDeBodega = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Nave {
     @OneToMany(mappedBy = "naveJuego")
     private List<Jugador> jugadores = new ArrayList<>();
 
-    public Nave(String nombre, Float credito, Float tiempo,Planeta localizacion,TipoNave tipoNave )
+    public Nave(String nombre, Float credito, Float tiempo,Estrella localizacion,TipoNave tipoNave )
     {
         this.nombre=nombre;
         this.tiempo=tiempo;

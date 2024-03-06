@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
 
 
@@ -25,7 +26,7 @@ public interface EstrellaRepository extends JpaRepository<Estrella, Long> {
     @Query("SELECT e FROM Estrella e WHERE e.coord_x = :coordX AND e.coord_y = :coordY AND e.coord_z = :coordZ")
     List<Estrella> findByCoords(@Param("coordX") Float coordX, @Param("coordY") Float coordY, @Param("coordZ") Float coordZ);
 
-    @Query("SELECT p FROM Planeta p WHERE p.estrella.id = :idEstrella")
-    List<Planeta> findNavesByPlanetaId(@Param("idEstrella") Long idEstrella);
+    @Query("SELECT n FROM Nave n WHERE n.localizacion.id = :idEstrella")
+    List<Nave> findNavesByEstrellaId(@Param("idEstrella") Long idEstrella);
 }
 
