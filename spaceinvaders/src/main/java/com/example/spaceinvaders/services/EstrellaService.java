@@ -24,9 +24,6 @@ public class EstrellaService {
     @Autowired
     private CaminoService caminoService;
 
-    @Autowired
-    private PlanetaService planetaService;
-
     public List<Estrella> listaEstrellas()
     {
         return estrellaRepository.findAll();
