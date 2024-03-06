@@ -43,7 +43,7 @@ public class PlanetaController {
 
     @GetMapping("/list")
     public String listarplanetas(Model model) {
-        List<Planeta> planetas = planetaService.listaPlanetas();
+        List<Planeta> planetas = planetaService.listaTodos();
         model.addAttribute("planeta", planetas);
         return "planeta_CRUD/planeta-list";
     }
