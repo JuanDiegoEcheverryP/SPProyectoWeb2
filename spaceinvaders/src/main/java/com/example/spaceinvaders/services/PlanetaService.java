@@ -72,8 +72,8 @@ public class PlanetaService {
         return mensaje;
     }
 
-    public Planeta crearPlaneta(Planeta planeta) {
-
+    public Planeta crearPlaneta(Planeta planeta) 
+    {
         planeta.setImagen("https://shorturl.at/kuFO8");
         Planeta nueva=planetaRepository.save(planeta);
         return nueva;
