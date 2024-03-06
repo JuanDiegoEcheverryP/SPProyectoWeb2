@@ -18,7 +18,7 @@
 
             <label for="naveTipo">localizacion: </label>
             <select th:field="*{localizacion.id}">
-                <option th:each="localizacion : ${planetas}" th:value="${localizacion.id}" th:text="${localizacion.nombre}"></option>
+                <option th:each="localizacion : ${estrella}" th:value="${localizacion.id}" th:text="${localizacion.nombre}"></option>
             </select>
 
             <label for="naveNombre">Nombre: </label>

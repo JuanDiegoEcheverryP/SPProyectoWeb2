@@ -5,9 +5,11 @@ import com.example.spaceinvaders.exceptions.RepeatedCoordinateException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;
 import com.example.spaceinvaders.exceptions.UnableToDeleteJugadorException;
 import com.example.spaceinvaders.exceptions.UnableToDeletePlanetaException;
+import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.model.TipoNave;
+import com.example.spaceinvaders.services.EstrellaService;
 import com.example.spaceinvaders.services.NaveService;
 import com.example.spaceinvaders.services.PlanetaService;
 import com.example.spaceinvaders.services.TipoNaveService;
@@ -40,7 +42,7 @@ public class NaveController {
     private TipoNaveService tipoNaveService;
 
     @Autowired
-    private PlanetaService planetaService;
+    private EstrellaService estrellaService;
 
 
     @GetMapping("/list")
@@ -55,9 +57,9 @@ public class NaveController {
         Nave nave = naveService.recuperarNave(id);
         model.addAttribute("nave", nave);
         List<TipoNave>  tipoNaveTodos=tipoNaveService.listarTipoNaves();
-        List<Planeta>  planetaTodos=planetaService.listaPlanetas();
+        List<Estrella>  planetaTodos=estrellaService.listaEstrellas();
         model.addAttribute("tipoNaves", tipoNaveTodos);
-        model.addAttribute("planetas", planetaTodos);
+        model.addAttribute("estrella", planetaTodos.subList(0,2000));//Se decidio limitarlo a 2000 arbitrariamente ya que, como son tantas estrellas, demora demasiado en cargar, sin embargo se puede quitar esto y se podrian elegir todas las estrellas
         return "Nave_CRUD/nave-edit";
     }
 
@@ -178,9 +180,9 @@ public class NaveController {
     public String creador(Model model) {
         model.addAttribute("nave", new Nave());
         List<TipoNave>  tipoNaveTodos=tipoNaveService.listarTipoNaves();
-        List<Planeta>  planetaTodos=planetaService.listaPlanetas();
+        List<Estrella>  planetaTodos=estrellaService.listaEstrellas();
         model.addAttribute("tipoNaves", tipoNaveTodos);
-        model.addAttribute("planetas", planetaTodos);
+        model.addAttribute("estrella", planetaTodos.subList(0,2000));//Se decidio limitarlo a 2000 arbitrariamente ya que, como son tantas estrellas, demora demasiado en cargar
         return "Nave_CRUD/nave-create";
     }
 
