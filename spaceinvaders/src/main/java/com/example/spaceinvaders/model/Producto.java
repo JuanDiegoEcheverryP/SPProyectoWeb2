@@ -10,6 +10,9 @@ import lombok.Setter;
 import jakarta.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 
@@ -29,6 +32,7 @@ public class Producto {
     private String imagen;
 
     @OneToMany (mappedBy ="producto",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnore
     private List<Stock_planeta> listaStockPlanetas = new ArrayList<>();
 
     public void anadirStockPlaneta(Stock_planeta nuevo)
@@ -38,6 +42,7 @@ public class Producto {
 
 
     @OneToMany (mappedBy = "producto")
+    @JsonIgnore
     private List<ProductoBodega> listaPRoductoBodega = new ArrayList<>();
 
     public void anadirProductoBodega(ProductoBodega nuevo)

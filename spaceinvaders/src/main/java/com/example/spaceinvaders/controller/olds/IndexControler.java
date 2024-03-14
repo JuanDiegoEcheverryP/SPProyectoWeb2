@@ -1,4 +1,4 @@
-package com.example.spaceinvaders.controller;
+package com.example.spaceinvaders.controller.olds;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

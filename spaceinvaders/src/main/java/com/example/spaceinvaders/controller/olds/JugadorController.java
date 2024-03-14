@@ -1,4 +1,4 @@
-package com.example.spaceinvaders.controller;
+package com.example.spaceinvaders.controller.olds;
 
 import com.example.spaceinvaders.exceptions.NotNullException;
 import com.example.spaceinvaders.exceptions.RepeatedNameException;

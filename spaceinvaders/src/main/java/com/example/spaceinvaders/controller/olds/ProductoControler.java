@@ -1,4 +1,4 @@
-package com.example.spaceinvaders.controller;
+package com.example.spaceinvaders.controller.olds;
 import java.util.ArrayList;
 import java.util.List;
 

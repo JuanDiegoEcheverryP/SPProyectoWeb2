@@ -1,5 +1,8 @@
 package com.example.spaceinvaders.model;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +34,7 @@ public class Planeta {
     private String imagen; //Este seria una url a una imagen
 
     @OneToMany (mappedBy = "planeta",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnore
     private List<Stock_planeta> listaStock = new ArrayList<>();
     
     public void anadirStockPlaneta(Stock_planeta nuevo)
@@ -39,6 +43,7 @@ public class Planeta {
     }
 
     @ManyToOne
+    @JsonIgnore
     private Estrella estrella;
 
     public Planeta(String nombre,Boolean habitado,String imagen,Estrella estrella)

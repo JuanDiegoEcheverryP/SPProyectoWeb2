@@ -44,4 +44,5 @@ public interface StockPlanetaRepository  extends JpaRepository<Stock_planeta, Lo
     @Query("SELECT sp FROM Stock_planeta sp WHERE sp.planeta.id = :idPlaneta")
     List<Stock_planeta> findExactByPlanetas(@Param("idPlaneta") Long idPlaneta);
 
+    List<Stock_planeta> findByPlanetaId(Long planetaId);
 }

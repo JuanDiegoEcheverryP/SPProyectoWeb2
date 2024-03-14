@@ -1,5 +1,5 @@
 package com.example.spaceinvaders.controller;
 
-public @interface Valid {
-
+public class JuagadorController {
+    
 }
