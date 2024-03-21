@@ -1,7 +1,5 @@
 package com.example.spaceinvaders.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +27,6 @@ public class Jugador {
     private String rol;
 
     @ManyToOne
-    @JsonIgnore
     private Nave naveJuego;
 
     @ManyToOne

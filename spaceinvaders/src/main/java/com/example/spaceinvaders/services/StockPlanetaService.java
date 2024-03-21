@@ -28,13 +28,6 @@ public class StockPlanetaService {
         return stockPlanetaRepository.findById(id).orElseThrow();
     }
 
-    public List<Stock_planeta> recuperarStockDePlaneta(Long id)
-    {
-        List<Stock_planeta> stockSinPrecios=stockPlanetaRepository.findByPlanetaId(id);
-        
-        return stockSinPrecios;
-    }
-
     public Stock_planeta guardarStockPlaneta(Stock_planeta stockPlaneta)
     {
 

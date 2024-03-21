@@ -2,9 +2,6 @@ package com.example.spaceinvaders.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +30,6 @@ public class TipoNave {
     private String foto;
 
     @OneToMany (mappedBy = "tipoNave")
-    @JsonIgnore
     private List<Nave> Naves= new ArrayList<>();
 
     public TipoNave(String tipo, Float volBodega,  Float velocidad, String foto)

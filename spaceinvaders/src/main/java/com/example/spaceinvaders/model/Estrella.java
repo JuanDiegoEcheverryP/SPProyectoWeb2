@@ -1,8 +1,5 @@
 package com.example.spaceinvaders.model;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,11 +38,9 @@ public class Estrella {
     private Float coord_z;
     
     @OneToMany (mappedBy = "estrellaFinal",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<Camino> listaCaminosFinal = new ArrayList<>();
 
     @OneToMany (mappedBy = "estrellaInicio",cascade = CascadeType.ALL,orphanRemoval = true)
-    @JsonIgnore
     private List<Camino> listaCaminosInicio = new ArrayList<>();
 
     @OneToMany (mappedBy = "estrella",cascade = CascadeType.ALL,orphanRemoval = true)
