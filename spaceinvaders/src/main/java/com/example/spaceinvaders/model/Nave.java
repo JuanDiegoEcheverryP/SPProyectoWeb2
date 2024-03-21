@@ -2,9 +2,6 @@ package com.example.spaceinvaders.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,7 +33,6 @@ public class Nave {
     private Estrella localizacion; // Correcting the mapping to Planeta entity
 
     @OneToMany(mappedBy = "nave",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<ProductoBodega> productosDeBodega = new ArrayList<>();
     
     public void anadirProductoBodega(ProductoBodega nuevo)
@@ -45,7 +41,6 @@ public class Nave {
     }
 
     @ManyToOne
-    @JsonIgnore
     private TipoNave tipoNave;
 
     @OneToMany(mappedBy = "naveJuego")
