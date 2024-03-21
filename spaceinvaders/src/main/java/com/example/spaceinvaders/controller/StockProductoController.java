@@ -2,7 +2,6 @@ package com.example.spaceinvaders.controller;
 
 import java.util.List;
 
-import org.h2.bnf.context.DbSchema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

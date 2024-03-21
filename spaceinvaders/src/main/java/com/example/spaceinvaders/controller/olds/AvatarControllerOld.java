@@ -23,7 +23,7 @@ import com.example.spaceinvaders.services.AvatarService;
 
 @Controller
 @RequestMapping("/avatar")
-public class AvatarController {
+public class AvatarControllerOld {
 
     Logger log = LoggerFactory.getLogger(getClass());
 
