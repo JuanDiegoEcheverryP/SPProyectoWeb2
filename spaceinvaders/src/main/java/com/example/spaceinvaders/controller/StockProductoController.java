@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Stock_planeta;
 import com.example.spaceinvaders.services.PlanetaService;
 import com.example.spaceinvaders.services.ProductoService;
@@ -42,7 +41,7 @@ public class StockProductoController {
             @ApiResponse(responseCode = "404", description = "Persona no encontrada", content = @Content) })
    */
     @GetMapping("planeta/{idPlaneta}")
-    public List<Stock_planeta> recuperarPersona(@PathVariable Long idPlaneta) {
+    public List<Stock_planeta> recuperarProductosXPlaneta(@PathVariable Long idPlaneta) {
         return stockPlanetaService.recuperarStockDePlaneta(idPlaneta);
     }
     

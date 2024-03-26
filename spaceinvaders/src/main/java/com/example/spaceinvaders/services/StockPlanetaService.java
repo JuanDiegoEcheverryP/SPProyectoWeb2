@@ -31,6 +31,7 @@ public class StockPlanetaService {
     public List<Stock_planeta> recuperarStockDePlaneta(Long id)
     {
         List<Stock_planeta> stockSinPrecios=stockPlanetaRepository.findByPlanetaId(id);
+
         
         return stockSinPrecios;
     }
