@@ -21,14 +21,31 @@ public class ProductoDTO {
 
     private String imagen;
 
-    private Float precio;
+    private Float precioDemanda;
 
-    public ProductoDTO(String nombre,String imagen,float volumen,Long FactorDemanda,Long FactorOferta,Integer stock)
+    private Float precioOferta;
+
+    Integer max;
+
+    public ProductoDTO(Long id,String nombre,String imagen,Float volumen,Long FactorDemanda,Long FactorOferta,Integer stock)
     {
+        this.id=id;
         this.nombre=nombre;
         this.imagen=imagen;
         this.volumen=volumen;
-        this.precio=(float) (FactorDemanda/(1+stock));
+        this.precioDemanda=(float) (FactorDemanda/(1+stock));
+        this.precioOferta=(float) (FactorOferta/(1+stock));
+    }
+
+    public ProductoDTO(Long id,String nombre,String imagen,Float volumen,Long FactorDemanda,Long FactorOferta,Integer stock, Integer max)
+    {
+        this.id=id;
+        this.nombre=nombre;
+        this.imagen=imagen;
+        this.volumen=volumen;
+        this.precioDemanda=(float) (FactorDemanda/(1+stock));
+        this.precioOferta=(float) (FactorOferta/(1+stock));
+        this.max=max;
     }
 
 }

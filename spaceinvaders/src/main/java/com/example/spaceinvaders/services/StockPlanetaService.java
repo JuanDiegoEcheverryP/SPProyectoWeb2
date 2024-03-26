@@ -1,4 +1,5 @@
 package com.example.spaceinvaders.services;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.spaceinvaders.model.Stock_planeta;
+import com.example.spaceinvaders.model.DTO.ProductoDTO;
 import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.model.Producto;
 import com.example.spaceinvaders.repository.StockPlanetaRepository;
 
 @Service
@@ -28,12 +31,40 @@ public class StockPlanetaService {
         return stockPlanetaRepository.findById(id).orElseThrow();
     }
 
-    public List<Stock_planeta> recuperarStockDePlaneta(Long id)
+    public List<ProductoDTO> recuperarStockDePlaneta(Long id)
     {
-        List<Stock_planeta> stockSinPrecios=stockPlanetaRepository.findByPlanetaId(id);
+        List<Object[]> productos=stockPlanetaRepository.findProductsByPlanetaId(id);
+        List<ProductoDTO> stockSinPrecios=new ArrayList<>();
 
-        
+        for (Object[] productoData : productos) {
+            Stock_planeta stockPlaneta = (Stock_planeta) productoData[0]; // Extract Stock_planeta from array
+            
+            Producto producto = (Producto) productoData[1]; // Extract Producto from array
+
+            // Create ProductoDTO object from retrieved data
+            ProductoDTO productoDTO = new ProductoDTO(producto.getId(),producto.getNombre(),producto.getImagen(),producto.getVolumen(),stockPlaneta.getFactorDemanda(), stockPlaneta.getFactorOferta(),stockPlaneta.getStock());            // Set properties of productoDTO using data from stockPlaneta and producto
+            // Add productoDTO to stockSinPrecios list
+            stockSinPrecios.add(productoDTO);
+        }
         return stockSinPrecios;
+    }
+
+    public ProductoDTO recuperarProductoXPlaneta(Long idPlaneta, Long idProducto)
+    {
+        List<Object[]> productoObtained=stockPlanetaRepository.findProductsByPlanetaIdAndProductoID(idPlaneta,idProducto);
+        ProductoDTO productoDTO=new ProductoDTO();
+
+        for (Object[] productoData : productoObtained) {
+            Stock_planeta stockPlaneta = (Stock_planeta) productoData[0]; // Extract Stock_planeta from array
+            
+            Producto producto = (Producto) productoData[1]; // Extract Producto from array
+
+            // Create ProductoDTO object from retrieved data
+            productoDTO = new ProductoDTO(producto.getId(),producto.getNombre(),producto.getImagen(),producto.getVolumen(),stockPlaneta.getFactorDemanda(), stockPlaneta.getFactorOferta(),stockPlaneta.getStock(),stockPlaneta.getStock());            // Set properties of productoDTO using data from stockPlaneta and producto
+            // Add productoDTO to stockSinPrecios list
+        }
+       
+        return productoDTO;
     }
 
     public Stock_planeta guardarStockPlaneta(Stock_planeta stockPlaneta)

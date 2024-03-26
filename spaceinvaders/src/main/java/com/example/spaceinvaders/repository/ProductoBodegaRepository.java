@@ -16,4 +16,11 @@ public interface ProductoBodegaRepository extends JpaRepository<ProductoBodega, 
     List<ProductoBodega> findProductosBodegaByNaveId(@Param("idNave") Long idNave);
     
     List<ProductoBodega> findAllByProductoId(Long id);
+
+    @Query("SELECT sp, p, pb FROM Stock_planeta sp " +
+    "JOIN sp.producto p " +
+    "JOIN p.listaPRoductoBodega pb " +
+    "WHERE sp.planeta.id = :planetaId AND sp.producto.id = :productoId AND pb.id = :bodegaId")
+    List<Object[]> findProductByPlanetaIdAndProductoID(Long planetaId, Long productoId, Long bodegaId);
+
 }
