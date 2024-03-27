@@ -1,0 +1,36 @@
+#html_body {
+    width: 100vw;
+    height: 100vh;
+    padding-left: 30px;
+    background-image: url('../../assets/saturn_athmosphere.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.logo {
+    height: 55.67px;
+    width: 173.72px;
+    margin-right: 50px;
+    left: 225px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    top: 15px;
+    right: 200px;
+    font-size: 24px
+}
+
+.nav img {
+    width: 60px;
+    height: 60px;;
+}
