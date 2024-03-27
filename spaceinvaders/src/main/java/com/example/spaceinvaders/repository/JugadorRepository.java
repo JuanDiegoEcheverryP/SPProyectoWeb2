@@ -1,7 +1,6 @@
 package com.example.spaceinvaders.repository;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -26,5 +25,8 @@ public interface JugadorRepository extends JpaRepository<Jugador, Long> {
     List<Jugador> findAllByNombreEndingWithIgnoreCase(String text);
 
     List<Jugador> findAllByNombreContainingIgnoreCase(String text);
+
+    @Query("SELECT j FROM Jugador j WHERE j.nombre = :nombre AND j.contrasena = :contrasena")
+    List<Jugador> findJugadorByContrasenAndNombre(@Param("nombre") String nombre, @Param("contrasena") String contrasena);
 }
 
