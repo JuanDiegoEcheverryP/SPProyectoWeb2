@@ -24,7 +24,8 @@
                 <span>CerrarSesion</span>
             </button>
         </div>
-    </div>      
+    </div>
+    <!--
     <table>
         <thead>
             <tr>
@@ -45,4 +46,39 @@
             </tr>
         </tbody>
     </table>
+    -->
+
+    <div class="tituloItems">
+        <button>Items bodega</button>
+    </div>
+    <div class="flexbox" >
+        <div *ngFor="let producto of productosBodegaNave" (click)="mostrarInformacion(producto)">
+            <img src="../../assets/caja.png" alt="Imagen del botón">
+        </div>
+    </div>
+    <diV class="imagenProductoSeleccionado" *ngIf="seleccionado">
+        <img src="../../assets/caja.png" alt="Imagen del botón">
+    </diV>
+    <diV class="infoProductoSeleccionado" *ngIf="seleccionado">
+        <p>Id Producto:</p>
+        <p class="resultado">{{productoSeleccionado.id}}</p>
+
+        <p>Nombre Producto:</p>
+        <p class="resultado">{{productoSeleccionado.nombre}}</p>
+
+        <p>Cantidad:</p>
+        <p class="resultado">{{productoSeleccionado.cantidad}}</p>
+        
+        <p>Espacio ocupado en bodega</p>
+        <p class="resultado">{{productoSeleccionado.volumen}}</p>
+    </diV>
+    <diV class="botonVender">
+        <button>Vender</button>
+    </diV>
+    <diV class="botonComprar">
+        <button>Comprar</button>
+    </diV>
+    <diV class="botonRegresar">
+        <button>Regresar</button>
+    </diV>
 </div>

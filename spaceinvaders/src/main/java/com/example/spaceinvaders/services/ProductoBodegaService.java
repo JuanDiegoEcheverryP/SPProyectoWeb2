@@ -62,7 +62,6 @@ public class ProductoBodegaService {
             productoDTO = new ProductoDTO(producto.getId(),producto.getNombre(),producto.getImagen(),producto.getVolumen(),stockPlaneta.getFactorDemanda(), stockPlaneta.getFactorOferta(),stockPlaneta.getStock(),productoBodega.getCantidad());            // Set properties of productoDTO using data from stockPlaneta and producto
             // Add productoDTO to stockSinPrecios list
         }
-       
         return productoDTO;
     }
 
@@ -111,14 +110,12 @@ public class ProductoBodegaService {
             }
             else
             {
-                 Float nuevoVol=(productoBodega.getVol()/productoBodega.getCantidad())*nuevaCantidad;
+                Float nuevoVol=(productoBodega.getVol()/productoBodega.getCantidad())*nuevaCantidad;
             
                 productoBodegaRepository.updateCantidad(idNave, idProducto, nuevaCantidad);
                 productoBodegaRepository.updateVolumen(idNave, idProducto, nuevoVol);
             }
-           
         }
-       
     }
 
     public List<ProductoBodega> buscarProductosPorBodega(Long id) {
