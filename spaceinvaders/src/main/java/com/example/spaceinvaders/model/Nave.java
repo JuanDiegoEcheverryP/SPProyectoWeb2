@@ -36,6 +36,10 @@ public class Nave {
     @JsonIgnore
     private Estrella localizacion; // Correcting the mapping to Planeta entity
 
+    @ManyToOne
+    @JsonIgnore
+    private Planeta localizacionPlaneta;
+
     @OneToMany(mappedBy = "nave",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ProductoBodega> productosDeBodega = new ArrayList<>();
