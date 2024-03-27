@@ -1,0 +1,21 @@
+<div>
+    <p> Avatares</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>imagen</th>
+                <th>Ver</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let avatar of avatares">
+                <td>{{avatar.nombre}}</td>
+                <td>{{avatar.imagen}}</td>
+                <td><a [routerLink]="['/avatar/view', avatar.id]">Ver</a></td>
+                <td><a [routerLink]="['/avatar/edit', avatar.id]">Editar</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
