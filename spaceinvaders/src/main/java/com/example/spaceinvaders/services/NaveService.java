@@ -26,6 +26,34 @@ public class NaveService {
     @Autowired
     private ProductoBodegaRepository bodegaRepository;
 
+    public boolean validarCreditoNave(Long idNave,Float total)
+    {
+        if(0<naveRepository.findCreditoById(idNave)-total)
+            return true;
+
+        return false;
+    }
+
+    public boolean validarCapacidadBodega(Long idNave,Long idProducto,int cant)
+    {
+        //pedir la suma de toda la bodega de la nave 
+        Float volActual=naveRepository.sumVolByNaveId(idNave);
+        //pedir el volumen del producto multiplicarlo por la cantidad 
+        Float volTotalProducto=cant*naveRepository.findVolumenByProductoId(idProducto);
+        //obtener la capacidad de la nave
+        Float capacidad=naveRepository.findCapacidadBodegaByNaveId(idNave);
+
+        if(volActual+volTotalProducto<=capacidad)
+            return true;
+
+        return false;
+    }
+
+    public void actualizarCreditos(Long idNave,Float total)
+    {
+        naveRepository.sumarCreditoNave(idNave, total);
+    }
+
     public List<Nave> listaNaves() {
         return naveRepository.findAll();
     }

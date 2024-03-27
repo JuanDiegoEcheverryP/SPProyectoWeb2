@@ -3,11 +3,14 @@ package com.example.spaceinvaders.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.spaceinvaders.model.Stock_planeta;
+
+import jakarta.transaction.Transactional;
 
 
 @Repository
@@ -51,6 +54,14 @@ public interface StockPlanetaRepository  extends JpaRepository<Stock_planeta, Lo
 
     @Query("SELECT sp, p FROM Stock_planeta sp JOIN FETCH sp.producto p WHERE sp.planeta.id = :planetaId AND sp.producto.id = :productoId")
     List<Object[]> findProductsByPlanetaIdAndProductoID(Long planetaId, Long productoId);
+
+    @Query("SELECT sp.stock FROM Stock_planeta sp WHERE sp.planeta.id = :planetaId AND sp.producto.id = :productoId")
+    Integer findStockByPlanetaIdAndProductoId(@Param("planetaId") Long planetaId, @Param("productoId") Long productoId);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Stock_planeta sp SET sp.stock = sp.stock - :cantidad WHERE sp.planeta.id = :planetaId AND sp.producto.id = :productoId")
+    int actualizarStock(@Param("planetaId") Long planetaId, @Param("productoId") Long productoId, @Param("cantidad") Integer cantidad);
 
 
 }

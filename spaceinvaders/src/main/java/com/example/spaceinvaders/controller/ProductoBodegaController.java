@@ -26,10 +26,10 @@ public class ProductoBodegaController {
     @Autowired
     private ProductoBodegaService BodegaService;
 
-    @GetMapping("{idBodega}/producto/{idProducto}/planeta/{idPlaneta}")
-    public ResponseEntity<ProductoDTO> recuperarProductosXPlaneta(@PathVariable Long idPlaneta, @PathVariable Long idProducto,@PathVariable Long idBodega) {
+    @GetMapping("nave/{idNave}/producto/{idProducto}/planeta/{idPlaneta}")
+    public ResponseEntity<ProductoDTO> recuperarProductosXPlaneta(@PathVariable Long idPlaneta, @PathVariable Long idProducto,@PathVariable Long idNave) {
         
-        ProductoDTO producto = BodegaService.recuperarProductoXBodega(idPlaneta,idProducto,idBodega);
+        ProductoDTO producto = BodegaService.recuperarProductoXBodega(idPlaneta,idProducto,idNave);
         return ResponseEntity.ok().body(producto);
        
         /*try {

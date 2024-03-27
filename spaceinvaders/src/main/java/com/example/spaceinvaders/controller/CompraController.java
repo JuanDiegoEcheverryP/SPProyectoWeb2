@@ -1,12 +1,17 @@
 package com.example.spaceinvaders.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.example.spaceinvaders.model.DTO.CompraVentaDTO;
 import com.example.spaceinvaders.services.NaveService;
 import com.example.spaceinvaders.services.ProductoBodegaService;
 import com.example.spaceinvaders.services.StockPlanetaService;
@@ -19,23 +24,46 @@ public class CompraController {
     Logger log = LoggerFactory.getLogger(getClass());
     
     @Autowired
-    private ProductoBodegaService BodegaService;
+    private ProductoBodegaService bodegaService;
 
     @Autowired
     private NaveService naveService;
 
     @Autowired
-    private StockPlanetaService prodcutoService;
+    private StockPlanetaService stockService;
 
-    //PASOS
-    //YA SE EVALUO SI SE PODIA COMPRAR ESA CANTIDAD 
-    //Y SE EVALUO SI SE PUEDE COMPRAR CON DICHOS CREDITOS
-    //ya se valuo si podia comprarlo segun su bodega
-
-    //SE DEBE:
-    //actualizar el stock del planeta segun el caso (aumentar o restar)
-    //se debe reducir o aumentar la cantidad del producto en la bodega 
-        //tambien puede ser el caso que se debe crear el producto en la bodega
-        //o que se tenga que borrar
-    //se deben reducir o aumentar la cantidad de creditos
+    @PutMapping("")
+    public String procesarCompra(@RequestBody CompraVentaDTO venta) {
+        boolean stockCompra = stockService.validarStockCompra(venta.getIdproducto(), venta.getIdPlaneta(), venta.getCantidadProducto());
+        boolean creditoNave = naveService.validarCreditoNave(venta.getIdNave(), venta.getTotal());
+        boolean capacidadBodega = naveService.validarCapacidadBodega(venta.getIdNave(), venta.getIdproducto(), venta.getCantidadProducto());
+        
+        if (stockCompra && creditoNave && capacidadBodega) {
+            try {
+                // Iniciar transacción
+                // Actualizar la bodega
+                bodegaService.actualizarBodega(venta.getIdNave(), venta.getIdproducto(), venta.getCantidadProducto(), 1);
+                // Actualizar el crédito de la nave
+                naveService.actualizarCreditos(venta.getIdNave(), venta.getTotal());
+                // Actualizar el stock
+                stockService.actualizarStock(venta.getIdproducto(), venta.getIdPlaneta(), venta.getCantidadProducto());
+                // Confirmar transacción
+                return "Compra exitosa";
+            } catch (Exception e) {
+                // Si hay un error, revertir transacción
+                // Registrar el error
+                // Devolver mensaje de error
+                return "Error al realizar la compra: " + e.getMessage();
+            }
+        } else {
+            // Devolver mensaje indicando la causa de la falla
+            if (!stockCompra) {
+                return "No hay suficiente stock disponible";
+            } else if (!creditoNave) {
+                return "La nave no tiene suficiente crédito";
+            } else {
+                return "La bodega no tiene suficiente capacidad para almacenar el producto";
+            }
+        }
+    }
 }

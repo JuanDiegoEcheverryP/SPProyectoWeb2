@@ -1,10 +1,14 @@
 package com.example.spaceinvaders.services;
 
+import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Producto;
 import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.Stock_planeta;
 import com.example.spaceinvaders.model.DTO.ProductoDTO;
+import com.example.spaceinvaders.repository.NaveRepository;
 import com.example.spaceinvaders.repository.ProductoBodegaRepository;
+import com.example.spaceinvaders.repository.ProductoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,13 @@ public class ProductoBodegaService {
     @Autowired
     private ProductoBodegaRepository productoBodegaRepository;
 
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    @Autowired
+    private NaveRepository naveRepository;
+
+
     public List<ProductoBodega> obtenerTodasLasProductoBodegas() {
         return productoBodegaRepository.findAll();
     }
@@ -25,9 +36,9 @@ public class ProductoBodegaService {
         return productoBodegaRepository.findAllByProductoId(producto.getId());
     }
 
-    public ProductoDTO recuperarProductoXBodega(Long idPlaneta, Long idProducto, Long idBodega)
+    public ProductoDTO recuperarProductoXBodega(Long idPlaneta, Long idProducto, Long idNave)
     {
-        List<Object[]> productoObtained=productoBodegaRepository.findProductByPlanetaIdAndProductoID(idPlaneta,idProducto,idBodega);
+        List<Object[]> productoObtained=productoBodegaRepository.findProductByPlanetaIdAndProductoIDAndNaveID(idPlaneta,idProducto,idNave);
         ProductoDTO productoDTO=new ProductoDTO();
 
         for (Object[] productoData : productoObtained) {
@@ -43,6 +54,53 @@ public class ProductoBodegaService {
         }
        
         return productoDTO;
+    }
+
+    public void actualizarBodega(Long idNave,Long idProducto, Integer cantidadProducto, int tipoTransaccion)
+    {
+        ProductoBodega productoBodega = productoBodegaRepository.findByNaveIdAndProductoId(idNave, idProducto);
+
+        if(tipoTransaccion==1)//es compra
+        {
+                    // Verificar si el producto ya existe en la bodega
+            
+            if (productoBodega != null) {
+                // El producto ya existe en la bodega, actualizar la cantidad
+                int nuevaCantidad=productoBodega.getCantidad() + cantidadProducto;
+                Float nuevoVol=(productoBodega.getVol()/productoBodega.getCantidad())*nuevaCantidad;
+                
+
+                productoBodegaRepository.updateCantidad(idNave, idProducto, nuevaCantidad);
+                productoBodegaRepository.updateVolumen(idNave, idProducto, nuevoVol);
+
+            } else {
+                // El producto no existe en la bodega, crear una nueva entrada
+                Producto producto = productoRepository.findById(idProducto)
+                                        .orElseThrow(() -> new RuntimeException("No se encontró el producto con ID: " + idProducto));
+                Nave nave = naveRepository.findById(idNave)
+                                .orElseThrow(() -> new RuntimeException("No se encontró la nave con ID: " + idNave));
+                
+                ProductoBodega nuevaBodega = new ProductoBodega();
+                nuevaBodega.setProducto(producto);
+                nuevaBodega.setNave(nave);
+                nuevaBodega.setCantidad(cantidadProducto);
+                nuevaBodega.setVol(producto.getVolumen()); // Aquí debes proporcionar el volumen del producto
+
+                productoBodegaRepository.save(nuevaBodega);
+            }
+
+        }
+        else //es una venta
+        {
+            //solo es restar del volumen y la cantidad
+            int nuevaCantidad=productoBodega.getCantidad() - cantidadProducto;
+            Float nuevoVol=(productoBodega.getVol()/productoBodega.getCantidad())*nuevaCantidad;
+            
+            productoBodegaRepository.updateCantidad(idNave, idProducto, nuevaCantidad);
+            productoBodegaRepository.updateVolumen(idNave, idProducto, nuevoVol);
+
+        }
+       
     }
     
 }

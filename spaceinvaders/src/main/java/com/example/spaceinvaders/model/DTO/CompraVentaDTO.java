@@ -1,5 +1,12 @@
 package com.example.spaceinvaders.model.DTO;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class CompraVentaDTO {
 
     //COMPRA Y VENTA
@@ -9,16 +16,16 @@ public class CompraVentaDTO {
 
     Long idPlaneta;
 
-    Long idBodega;
+    Long idNave;
 
     Float total;
 
 
-    CompraVentaDTO(Long idproducto, Integer cantidadProducto, Long idPlaneta,Long idBodega,Float total)
+    CompraVentaDTO(Long idproducto, Integer cantidadProducto, Long idNave,Long idBodega,Float total)
     {
         this.idproducto=idproducto; 
         this.idPlaneta=idPlaneta; 
-        this.idBodega=idBodega; 
+        this.idNave=idBodega; 
         this.cantidadProducto=cantidadProducto;
         this.total=total;
     }

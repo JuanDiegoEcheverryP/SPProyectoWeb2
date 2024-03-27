@@ -21,6 +21,19 @@ public class StockPlanetaService {
     @Autowired
     private StockPlanetaRepository stockPlanetaRepository;
 
+    public boolean validarStockCompra(Long idProducto,Long idPlaneta, int cant)
+    {
+        if(cant<=stockPlanetaRepository.findStockByPlanetaIdAndProductoId(idPlaneta, idProducto))
+            return true;
+
+        return false;
+    }  
+
+    public void actualizarStock(Long idProducto,Long idPlaneta, int cant)
+    {
+        stockPlanetaRepository.actualizarStock(idPlaneta, idProducto, cant);
+    }  
+
     public List<Stock_planeta> listaStockPlaneta()
     {
         return stockPlanetaRepository.findAll();

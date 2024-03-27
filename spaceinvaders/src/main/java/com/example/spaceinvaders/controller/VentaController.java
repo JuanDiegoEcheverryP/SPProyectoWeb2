@@ -11,48 +11,61 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.spaceinvaders.model.DTO.ActualizacionComercioDTO;
 import com.example.spaceinvaders.model.DTO.CompraVentaDTO;
 import com.example.spaceinvaders.services.NaveService;
 import com.example.spaceinvaders.services.ProductoBodegaService;
 import com.example.spaceinvaders.services.StockPlanetaService;
 
 @RestController
-@RequestMapping("/api/venta")
+@RequestMapping("/api/compra")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class VentaController {
 
     Logger log = LoggerFactory.getLogger(getClass());
     
     @Autowired
-    private ProductoBodegaService BodegaService;
+    private ProductoBodegaService bodegaService;
 
     @Autowired
     private NaveService naveService;
 
     @Autowired
-    private StockPlanetaService prodcutoService;
+    private StockPlanetaService stockService;
 
     @PutMapping("")
-    public Map<String, Object> actualizarPersona(@RequestBody CompraVentaDTO venta) {
+    public String procesarVenta(@RequestBody CompraVentaDTO compra) {
+        boolean stockCompra = stockService.validarStockCompra(compra.getIdproducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
+        boolean creditoNave = naveService.validarCreditoNave(compra.getIdNave(), compra.getTotal());
+        boolean capacidadBodega = naveService.validarCapacidadBodega(compra.getIdNave(), compra.getIdproducto(), compra.getCantidadProducto());
         
-        ActualizacionComercioDTO resultado=new ActualizacionComercioDTO();
-        
-        Map<String, Object> respuesta = new HashMap<>();
-        respuesta.put("cantidadTuplasModificadas", resultado);
-        return respuesta;
+        if (stockCompra && creditoNave && capacidadBodega) {
+            try {
+                // Iniciar transacción
+                // Actualizar la bodega
+                bodegaService.actualizarBodega(compra.getIdNave(), compra.getIdproducto(), compra.getCantidadProducto(), 1);
+                // Actualizar el crédito de la nave
+                naveService.actualizarCreditos(compra.getIdNave(), compra.getTotal());
+                // Actualizar el stock
+                stockService.actualizarStock(compra.getIdproducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
+                // Confirmar transacción
+                return "Compra exitosa";
+            } catch (Exception e) {
+                // Si hay un error, revertir transacción
+                // Registrar el error
+                // Devolver mensaje de error
+                return "Error al realizar la compra: " + e.getMessage();
+            }
+        } else {
+            // Devolver mensaje indicando la causa de la falla
+            if (!stockCompra) {
+                return "No hay suficiente stock disponible";
+            } else if (!creditoNave) {
+                return "La nave no tiene suficiente crédito";
+            } else {
+                return "La bodega no tiene suficiente capacidad para almacenar el producto";
+            }
+        }
     }
-
-    //PASOS
-    //YA SE EVALUO SI SE PODIA COMPRAR ESA CANTIDAD 
-    //Y SE EVALUO SI SE PUEDE COMPRAR CON DICHOS CREDITOS
-    //ya se valuo si podia comprarlo segun su bodega
-
-    //SE DEBE:
-    //actualizar el stock del planeta segun el caso (aumentar o restar)
-    //se debe reducir o aumentar la cantidad del producto en la bodega 
-        //tambien puede ser el caso que se debe crear el producto en la bodega
-        //o que se tenga que borrar
-    //se deben reducir o aumentar la cantidad de creditos
+    
+    
 }

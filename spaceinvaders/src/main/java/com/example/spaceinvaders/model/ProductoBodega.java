@@ -23,7 +23,7 @@ public class ProductoBodega {
     @Column(nullable = false)
     private Integer cantidad;
     @Column(nullable = false)
-    private Float volTotal;
+    private Float vol;
 
     @ManyToOne
     private Nave nave;
@@ -31,11 +31,12 @@ public class ProductoBodega {
     @ManyToOne
     private Producto producto;
 
-    public ProductoBodega(Integer cantidad, Float volTotal)
+    public ProductoBodega(Integer cantidad, Float vol)
     {
         this.cantidad=cantidad;
-        this.volTotal=volTotal;
+        this.vol=vol;
     }
+
 
     
 
