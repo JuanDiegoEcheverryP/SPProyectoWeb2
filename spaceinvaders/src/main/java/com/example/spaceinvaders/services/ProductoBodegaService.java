@@ -112,5 +112,11 @@ public class ProductoBodegaService {
         }
        
     }
+
+    public List<ProductoBodega> buscarProductosPorBodega(Long id) {
+        return productoBodegaRepository.findProductosByNnaveId(id); 
+    }
+
+    
     
 }

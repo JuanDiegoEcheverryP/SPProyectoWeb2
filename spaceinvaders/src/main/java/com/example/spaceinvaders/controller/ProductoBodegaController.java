@@ -1,5 +1,7 @@
 package com.example.spaceinvaders.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.DTO.ProductoDTO;
+import com.example.spaceinvaders.services.PlanetaService;
 import com.example.spaceinvaders.services.ProductoBodegaService;
+import com.example.spaceinvaders.services.ProductoService;
+import com.example.spaceinvaders.services.StockPlanetaService;
 
 @RestController
 @RequestMapping("/api/bodega")
@@ -39,6 +46,10 @@ public class ProductoBodegaController {
         }*/
     }
 
+    @GetMapping("/{id}")
+    public List<ProductoBodega> obtenerBodegaPorNaveId(@PathVariable Long id) {
+        return BodegaService.buscarProductosPorBodega(id);
+    }
 
 
 }

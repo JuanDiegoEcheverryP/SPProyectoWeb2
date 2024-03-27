@@ -93,7 +93,9 @@
 }
 
 .estrella1 {
+    position: fixed;
     top: 20vh;
+    left: 45vw;
 }
 
 .estrella1 img {
@@ -102,12 +104,60 @@
 }
 
 .estrella1 p {
+    position: fixed;
     margin-top: 30px;
     font-family: 'Koulen';
     letter-spacing: 3px;
     font-size: 24px;
+    top: 35vh;
+    left: 40vw;
 }
 
+
+.estrella2 {
+    position: fixed;
+    top: 30vh;
+    left: 25vw;
+}
+
+.estrella2 img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella2 p {
+    position: fixed;
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
+    top: 45vh;
+    left: 20vw;
+}
+
+.estrella3 {
+    position: fixed;
+    top: 35vh;
+    left: 70vw;
+}
+
+.estrella3 img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella3 p {
+    position: fixed;
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
+    top: 50vh;
+    left: 65vw;
+}
+
+
+/*
 .estrella2 {
     top: 5vh;
     right: 350px;
@@ -141,3 +191,5 @@
     letter-spacing: 3px;
     font-size: 24px;
 }
+
+*/

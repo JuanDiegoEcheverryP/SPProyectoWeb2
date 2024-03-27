@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.spaceinvaders.model.ProductoBodega;
+import com.example.spaceinvaders.model.DTO.ProductoDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -41,5 +42,9 @@ public interface ProductoBodegaRepository extends JpaRepository<ProductoBodega, 
 
     @Query("SELECT pb.cantidad FROM ProductoBodega pb WHERE pb.nave.id = :naveId AND pb.producto.id = :productoId")
     Integer findStockByNaveIdAndProductoId(@Param("naveId") Long naveId, @Param("productoId") Long productoId);
+
+    @Query("SELECT n FROM ProductoBodega n WHERE n.nave.id = :idNave")
+    List<ProductoBodega> findProductosByNnaveId(@Param("idNave") Long idNave);
+
 
 }

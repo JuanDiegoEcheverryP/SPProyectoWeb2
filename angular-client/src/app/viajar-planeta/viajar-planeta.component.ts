@@ -8,6 +8,7 @@ import { PlanetaService } from '../shared/planeta.service';
   styleUrl: './viajar-planeta.component.css'
 })
 export class ViajarPlanetaComponent {
+  
   public planetas: Planeta[] = [new Planeta(-1,"",false,""),new Planeta(-1,"",false,""),new Planeta(-1,"",false,"")];
 
   constructor(
@@ -18,6 +19,11 @@ export class ViajarPlanetaComponent {
     //Falta obtener estrella de origen
     //Falta obtener estrella final
     //Falta calcular mostrar el costo de viaje
-    this.planetaService.listarPlanetasPorId().subscribe(planetas => this.planetas = planetas)
+    //Falta obtener el id de la ruta que no se como se hace en esta version de angular y debe reemplazarse en la siguiente linea
+    this.planetaService.listarPlanetasPorId(3).subscribe(planetas => {
+      for (let i = 0; i < planetas.length; i++) {
+        this.planetas[i] = planetas[i]
+      }
+    });
   }
 }

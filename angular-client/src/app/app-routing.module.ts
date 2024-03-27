@@ -18,8 +18,8 @@ const routes: Routes = [
   { path: 'bodega', component: BodegaComponent },
   { path: 'visualizarMapa', component: VisualizarMapaComponent },
   { path: 'verInfoEstrella', component:  VerInfoEstrellaComponent},
-  { path: 'viajarPlaneta', component:  ViajarPlanetaComponent},
-  { path: 'viajarEstrella', component:  ViajarEstrellaComponent},
+  { path: 'viajarPlaneta/:idEstrella', component:  ViajarPlanetaComponent},
+  { path: 'viajarEstrella/:idEstrella', component:  ViajarEstrellaComponent},
   {path: '**', component: InicioComponent} //Inicio
 ];
 

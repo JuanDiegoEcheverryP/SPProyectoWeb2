@@ -18,7 +18,7 @@ export class PlanetaService {
         { "Content-Type": "application/json" }
     )
 
-    listarPlanetasPorId(): Observable<Planeta[]> {
-        return this.http.get<Planeta[]>(`${environment.serverUrl}/api/estrella/planetas/6`)
+    listarPlanetasPorId(id: number): Observable<Planeta[]> {
+        return this.http.get<Planeta[]>(`${environment.serverUrl}/api/estrella/planetas/${id}`)
     }
 }

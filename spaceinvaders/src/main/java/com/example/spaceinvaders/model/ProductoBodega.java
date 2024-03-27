@@ -1,5 +1,7 @@
 package com.example.spaceinvaders.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,9 +28,11 @@ public class ProductoBodega {
     private Float vol;
 
     @ManyToOne
+    @JsonIgnore
     private Nave nave;
 
     @ManyToOne
+    @JsonIgnore
     private Producto producto;
 
     public ProductoBodega(Integer cantidad, Float vol)

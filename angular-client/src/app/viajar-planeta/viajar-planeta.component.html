@@ -25,7 +25,7 @@
         </button>
         </div>
     </div>
-    <div>
+    <div *ngIf="planetas[0].id != -1">
         <ul class="flex-container space-evenly estrella1" >
             <img src="../../assets/planeta1.png">
         </ul>
@@ -33,6 +33,23 @@
             <p>{{planetas[0].nombre}}</p>
         </ul>
     </div>
+    <div *ngIf="planetas[1].id != -1">
+        <ul class="flex-container space-evenly estrella2">
+            <img src="../../assets/planeta2.png">
+        </ul>
+        <ul class="flex-container space-evenly estrella2">
+            <p>{{planetas[1].nombre}}</p>
+        </ul>
+    </div>
+    <div *ngIf="planetas[2].id != -1">
+        <ul class="flex-container space-evenly estrella3" >
+            <img src="../../assets/planeta3.png">
+        </ul>
+        <ul class="flex-container space-evenly estrella3" >
+            <p>{{planetas[2].nombre}}</p>
+        </ul>
+    </div>
+    <!--
     <div>
         <ul class="flex-container space-evenly estrella2" >
             <img src="../../assets/planeta2.png">
@@ -49,7 +66,7 @@
             <p>{{planetas[2].nombre}}</p>
         </ul>
     </div>
-    
+    -->
     <div>
         <ul class="flex-container space-evenly bottomBar" >
             <li class="flex-item">

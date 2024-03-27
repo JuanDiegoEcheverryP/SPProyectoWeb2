@@ -8,8 +8,6 @@ import { Avatar } from '../../model/avatar';
   styleUrl: './avatar-list.component.css'
 })
 export class AvatarListComponent {
-
-
   avatares: Avatar[] = [];
 
   constructor(

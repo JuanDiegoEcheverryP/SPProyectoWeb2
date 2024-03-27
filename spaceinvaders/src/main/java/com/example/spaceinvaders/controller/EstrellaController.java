@@ -30,4 +30,9 @@ public class EstrellaController {
     public List<Planeta> listarPlanetasPorEstrella(@PathVariable Long id) {
         return estrellaService.listaPlanetasEstrella(id);
     }
+
+    @GetMapping("/{id}")
+    public Estrella obtenerEstrellaPorId(@PathVariable Long id) {
+        return estrellaService.recuperarEstrella(id);
+    }
 }
