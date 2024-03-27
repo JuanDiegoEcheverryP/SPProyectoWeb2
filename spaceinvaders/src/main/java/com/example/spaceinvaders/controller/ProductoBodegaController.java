@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spaceinvaders.model.DTO.ProductoDTO;
-import com.example.spaceinvaders.services.PlanetaService;
 import com.example.spaceinvaders.services.ProductoBodegaService;
-import com.example.spaceinvaders.services.ProductoService;
-import com.example.spaceinvaders.services.StockPlanetaService;
 
 @RestController
 @RequestMapping("/api/bodega")

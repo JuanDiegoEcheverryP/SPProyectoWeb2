@@ -28,5 +28,8 @@ public interface EstrellaRepository extends JpaRepository<Estrella, Long> {
 
     @Query("SELECT n FROM Nave n WHERE n.localizacion.id = :idEstrella")
     List<Nave> findNavesByEstrellaId(@Param("idEstrella") Long idEstrella);
+
+    @Query("SELECT n FROM Planeta n WHERE n.estrella.id = :idEstrella")
+    List<Planeta> findEstrellasByEstrellaId(Long idEstrella);
 }
 

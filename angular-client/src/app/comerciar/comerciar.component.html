@@ -24,5 +24,25 @@
                 <span>CerrarSesion</span>
             </button>
         </div>
-        </div>      
+    </div>      
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Credito</th>
+                <th>Tiempo</th>
+                <th>Ver</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let nave of naves">
+                <td>{{nave.nombre}}</td>
+                <td>{{nave.credito}}</td>
+                <td>{{nave.tiempo}}</td>
+                <td><a [routerLink]="['/nave/view', nave.id]">Ver</a></td>
+                <td><a [routerLink]="['/nave/edit', nave.id]">Editar</a></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

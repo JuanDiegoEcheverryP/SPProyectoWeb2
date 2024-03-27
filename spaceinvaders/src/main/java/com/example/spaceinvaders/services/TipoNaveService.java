@@ -2,8 +2,6 @@ package com.example.spaceinvaders.services;
 
 import java.util.List;
 
-import com.example.spaceinvaders.model.Estrella;
-import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.repository.NaveRepository;

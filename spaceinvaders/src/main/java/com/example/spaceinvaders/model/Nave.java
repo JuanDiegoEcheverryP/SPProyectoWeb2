@@ -33,6 +33,7 @@ public class Nave {
     private Float tiempo;
 
     @ManyToOne
+    @JsonIgnore
     private Estrella localizacion; // Correcting the mapping to Planeta entity
 
     @OneToMany(mappedBy = "nave",cascade = CascadeType.ALL)
@@ -49,6 +50,7 @@ public class Nave {
     private TipoNave tipoNave;
 
     @OneToMany(mappedBy = "naveJuego")
+    @JsonIgnore
     private List<Jugador> jugadores = new ArrayList<>();
 
     public Nave(String nombre, Float credito, Float tiempo,Estrella localizacion,TipoNave tipoNave )

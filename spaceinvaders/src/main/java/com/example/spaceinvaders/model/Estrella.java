@@ -49,9 +49,11 @@ public class Estrella {
     private List<Camino> listaCaminosInicio = new ArrayList<>();
 
     @OneToMany (mappedBy = "estrella",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnore
     private List<Planeta> listaPlanetas = new ArrayList<>();
 
     @OneToMany (mappedBy = "localizacion")
+    @JsonIgnore
     private List<Nave> listaNaves = new ArrayList<>();
 
     public Estrella(String nombre,Float coord_x,Float coord_y,Float coord_z)
@@ -61,5 +63,5 @@ public class Estrella {
         this.coord_y=coord_y;
         this.coord_z=coord_z;
     }
-   
+
 }

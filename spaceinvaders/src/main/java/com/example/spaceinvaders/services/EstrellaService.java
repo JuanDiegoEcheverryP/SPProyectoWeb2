@@ -109,4 +109,8 @@ public class EstrellaService {
         caminoService.nuevoCaminoUnaEstrella(estrella);
         return nueva;
     }
+
+    public List<Planeta> listaPlanetasEstrella(Long id) {
+        return estrellaRepository.findEstrellasByEstrellaId(id);
+    }
 }

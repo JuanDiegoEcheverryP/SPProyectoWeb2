@@ -2,4 +2,31 @@
     <div class="nav">
         <img src="../../assets/logo.png" alt="logo" class="logo">
     </div>
+    <table>
+        <thead>
+            <tr>
+                <th>xxxxxxxxxxx</th>
+                <th>xxxxxxxxxxx</th>
+                <th>xxxxxxxxxxx</th>
+                <th>xxxxxxxxxxx</th>
+                <th>Nombre</th>
+                <th>Credito</th>
+                <th>Tiempo</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let nave of naves">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{nave.nombre}}</td>
+                <td>{{nave.volBodega}}</td>
+                <td>{{nave.velocidad}}</td>
+                <td>{{nave.foto}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
 </div>
