@@ -57,3 +57,53 @@
     height: 50px;
     width: 50px;
 }
+
+/*----------------*/
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    color: #FFF;
+}
+
+.space-evenly { 
+    justify-content: space-evenly; 
+}
+
+.bottomBar {
+    position: fixed;
+    width: 100vw;
+    bottom: 100px;
+}
+
+.bottomBar li button {
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    margin: 0 -10px;
+    padding: 7.5px 80px;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+}
+
+#botonBottom {
+    color: #FFF;
+    background: none;
+    border: none;
+}
+
+.estrella {
+    top: 20vh;
+}
+
+.estrella img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella p {
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
+}

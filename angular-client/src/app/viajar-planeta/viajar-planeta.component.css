@@ -12,28 +12,6 @@
     position: relative;
 }
 
-.logo {
-    height: 55.67px;
-    width: 173.72px;
-    margin-right: 50px;
-    left: 225px;
-}
-
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    top: 15px;
-    right: 200px;
-    font-size: 24px
-}
-
-.nav img {
-    width: 60px;
-    height: 60px;;
-}
-
 /*------------------------*/
 .navbar {
     display: flex;
@@ -78,4 +56,88 @@
 #navUsuario img {
     height: 50px;
     width: 50px;
+}
+
+/*----------------*/
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    color: #FFF;
+}
+
+.space-evenly { 
+    justify-content: space-evenly; 
+}
+
+.bottomBar {
+    position: fixed;
+    width: 100vw;
+    bottom: 100px;
+}
+
+.bottomBar li button {
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    margin: 0 -10px;
+    padding: 7.5px 80px;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+}
+
+#botonBottom {
+    color: #FFF;
+    background: none;
+    border: none;
+}
+
+.estrella1 {
+    top: 20vh;
+}
+
+.estrella1 img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella1 p {
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
+}
+
+.estrella2 {
+    top: 5vh;
+    right: 350px;
+}
+
+.estrella2 img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella2 p {
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
+}
+
+.estrella3 {
+    top: -15vh;
+    right: -350px;
+}
+
+.estrella3 img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella3 p {
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
 }
