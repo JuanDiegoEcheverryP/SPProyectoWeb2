@@ -54,6 +54,11 @@ public class NaveService {
         naveRepository.sumarCreditoNave(idNave, total);
     }
 
+    public Float obtenerVolumenTotal(Long idNave)
+    {
+        return naveRepository.sumVolByNaveId(idNave);
+    }
+
     public List<Nave> listaNaves() {
         return naveRepository.findAll();
     }

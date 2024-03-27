@@ -33,6 +33,10 @@ public class Planeta {
     
     private String imagen; //Este seria una url a una imagen
 
+    @OneToMany (mappedBy = "localizacionPlaneta")
+    @JsonIgnore
+    private List<Nave> listaNaves = new ArrayList<>();
+
     @OneToMany (mappedBy = "planeta",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
     private List<Stock_planeta> listaStock = new ArrayList<>();

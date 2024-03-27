@@ -14,17 +14,11 @@ import lombok.Setter;
 public class ProductoDTO {
 
     private Long id;
-
     private String nombre;
-
     private Float volumen;
-
     private String imagen;
-
     private Float precioDemanda;
-
     private Float precioOferta;
-
     Integer max;
 
     public ProductoDTO(Long id,String nombre,String imagen,Float volumen,Long FactorDemanda,Long FactorOferta,Integer stock)
