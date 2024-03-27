@@ -1,0 +1,143 @@
+#html_body {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/espacio.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/*------------------------*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Koulen';
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(51, 51, 51, 0.7);
+    color: white;
+}
+
+.navbar * {
+    letter-spacing: 3px;
+}
+
+.left-buttons, .right-buttons {
+    display: flex;
+}
+
+.right-buttons {
+    margin-left: auto;
+}
+
+.button-with-image {
+    display: flex;
+    align-items: center;
+    background:none;
+    color: white;
+    border: none;
+    padding: 0px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.button-with-image img {
+    margin-right: 10px;
+
+}
+
+#navUsuario img {
+    height: 50px;
+    width: 50px;
+}
+
+/*----------------*/
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    color: #FFF;
+}
+
+.space-evenly { 
+    justify-content: space-evenly; 
+}
+
+.bottomBar {
+    position: fixed;
+    width: 100vw;
+    bottom: 100px;
+}
+
+.bottomBar li button {
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    margin: 0 -10px;
+    padding: 7.5px 80px;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+}
+
+#botonBottom {
+    color: #FFF;
+    background: none;
+    border: none;
+}
+
+.estrella1 {
+    top: 20vh;
+}
+
+.estrella1 img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella1 p {
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
+}
+
+.estrella2 {
+    top: 5vh;
+    right: 350px;
+}
+
+.estrella2 img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella2 p {
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
+}
+
+.estrella3 {
+    top: -15vh;
+    right: -350px;
+}
+
+.estrella3 img {
+    width: 150px;
+    height: 150px;
+}
+
+.estrella3 p {
+    margin-top: 30px;
+    font-family: 'Koulen';
+    letter-spacing: 3px;
+    font-size: 24px;
+}
