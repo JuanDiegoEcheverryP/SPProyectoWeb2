@@ -6,11 +6,14 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AvatarListComponent } from './avatar/avatar-list/avatar-list.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    InicioComponent,
     AvatarListComponent,
+    InicioComponent,
   ],
   imports: [
     BrowserModule,

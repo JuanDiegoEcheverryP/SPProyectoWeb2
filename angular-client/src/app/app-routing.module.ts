@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AvatarListComponent } from './avatar/avatar-list/avatar-list.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 const routes: Routes = [
   { path: 'avatar/list', component: AvatarListComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'avatar/list' },
-  {path: '**', component: AvatarListComponent}
+  {path: '**', component: InicioComponent}
 ];
 
 @NgModule({

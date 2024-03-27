@@ -6,6 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import com.example.spaceinvaders.services.StockPlanetaService;
 
 @RestController
 @RequestMapping("/api/venta")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class VentaController {
 
     Logger log = LoggerFactory.getLogger(getClass());

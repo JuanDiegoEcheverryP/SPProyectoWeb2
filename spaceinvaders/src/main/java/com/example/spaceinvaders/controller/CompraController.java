@@ -3,6 +3,7 @@ package com.example.spaceinvaders.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +13,7 @@ import com.example.spaceinvaders.services.StockPlanetaService;
 
 @RestController
 @RequestMapping("/api/compra")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class CompraController {
 
     Logger log = LoggerFactory.getLogger(getClass());

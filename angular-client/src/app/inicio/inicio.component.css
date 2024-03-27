@@ -1,0 +1,121 @@
+#inicio_background {
+    width: 100vw;
+    height: 100vh;
+    padding-left: 30px;
+    background-image: url('../../assets/earth_athmosphere.png');
+    background-size: cover;
+    background-position: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.logo {
+    /*     float: left; */
+    height: 55.67px;
+    width: 173.72px;
+    margin-right: 50px;
+    /* position: relative; */
+    left: 225px;
+    /*     top: 20px; */
+}
+
+a, button {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    margin: 0px 50px;
+    font-family: 'Koulen';
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    top: 15px;
+    right: 200px;
+    font-size: 24px
+}
+
+.nav img {
+    width: 60px;
+    height: 60px;;
+}
+
+#github {
+    position: absolute;
+    top: 0;
+    right: -20px;
+}
+
+#nombreProyecto {
+    font-family: 'Koulen';
+    color: #fff;
+    font-size: 160px;
+    line-height: 120px;
+    letter-spacing: -2px;
+    margin-left: 30px;
+    position: absolute;
+    top: 200px;
+}
+
+#barra {
+    width: 70vw;
+    height: 10px;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(27,0,255,0) 100%);
+    position: absolute;
+    top: 460px;
+    margin-left: 30px;
+}
+
+#miniDescripcion {
+    font-family: 'Kufam';
+    width: 600px;
+    color: #fff;
+    font-size: 24px;
+    margin-left: 30px;
+    position: absolute;
+    top: 500px;
+}
+
+#autores {
+    font-family: 'Kufam';
+    width: 600px;
+    color: #fff;
+    font-size: 24px;
+    margin-left: 30px;
+    position: absolute;
+    top: 620px;
+}
+
+ul {
+    font-family: 'Kufam';
+    width: 600px;
+    color: #fff;
+    font-size: 18px;
+    margin-left: 50px;
+    position: absolute;
+    top: 650px;
+}
+
+li {
+    line-height: 30px;
+}
+
+#botonJugar {
+    font-family: 'Koulen';
+    width: 300px;
+    height: 60px;
+    color: #fff;
+    font-size: 36px;
+    margin-left: 30px;
+    position: absolute;
+    top: 730px;
+
+    background: none;
+    border: 2px solid #fff;
+}
