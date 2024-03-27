@@ -33,20 +33,20 @@ public class CompraController {
     private StockPlanetaService stockService;
 
     @PutMapping("")
-    public String procesarCompra(@RequestBody CompraVentaDTO venta) {
-        boolean stockCompra = stockService.validarStockCompra(venta.getIdproducto(), venta.getIdPlaneta(), venta.getCantidadProducto());
-        boolean creditoNave = naveService.validarCreditoNave(venta.getIdNave(), venta.getTotal());
-        boolean capacidadBodega = naveService.validarCapacidadBodega(venta.getIdNave(), venta.getIdproducto(), venta.getCantidadProducto());
+    public String procesarCompra(@RequestBody CompraVentaDTO compra) {
+        boolean stockCompra = stockService.validarStockCompra(compra.getIdproducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
+        boolean creditoNave = naveService.validarCreditoNave(compra.getIdNave(), compra.getTotal());
+        boolean capacidadBodega = naveService.validarCapacidadBodega(compra.getIdNave(), compra.getIdproducto(), compra.getCantidadProducto());
         
         if (stockCompra && creditoNave && capacidadBodega) {
             try {
                 // Iniciar transacción
                 // Actualizar la bodega
-                bodegaService.actualizarBodega(venta.getIdNave(), venta.getIdproducto(), venta.getCantidadProducto(), 1);
+                bodegaService.actualizarBodega(compra.getIdNave(), compra.getIdproducto(), compra.getCantidadProducto(), 1);
                 // Actualizar el crédito de la nave
-                naveService.actualizarCreditos(venta.getIdNave(), venta.getTotal());
+                naveService.actualizarCreditos(compra.getIdNave(), compra.getTotal());
                 // Actualizar el stock
-                stockService.actualizarStock(venta.getIdproducto(), venta.getIdPlaneta(), venta.getCantidadProducto());
+                stockService.actualizarStock(compra.getIdproducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
                 // Confirmar transacción
                 return "Compra exitosa";
             } catch (Exception e) {

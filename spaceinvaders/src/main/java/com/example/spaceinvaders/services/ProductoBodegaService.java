@@ -33,7 +33,17 @@ public class ProductoBodegaService {
 
     public List<ProductoBodega> buscarBodegasConProducto(Producto producto)
     {
+        
         return productoBodegaRepository.findAllByProductoId(producto.getId());
+    }
+
+    public boolean validarCantidadVenta(Long idProducto,Long idNave, int cant) {
+        
+        if(cant<=productoBodegaRepository.findStockByNaveIdAndProductoId(idNave, idProducto))
+            return true;
+
+        return false;
+        
     }
 
     public ProductoDTO recuperarProductoXBodega(Long idPlaneta, Long idProducto, Long idNave)

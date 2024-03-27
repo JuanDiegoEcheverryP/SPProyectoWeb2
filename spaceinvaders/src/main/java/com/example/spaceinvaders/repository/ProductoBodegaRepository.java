@@ -39,4 +39,7 @@ public interface ProductoBodegaRepository extends JpaRepository<ProductoBodega, 
     @Query("UPDATE ProductoBodega pb SET pb.vol = :vol WHERE pb.nave.id = :naveId AND pb.producto.id = :productoId")
     int updateVolumen(@Param("naveId") Long naveId, @Param("productoId") Long productoId, @Param("vol") Float vol);
 
+    @Query("SELECT pb.cantidad FROM ProductoBodega pb WHERE pb.nave.id = :naveId AND pb.producto.id = :productoId")
+    Integer findStockByNaveIdAndProductoId(@Param("naveId") Long naveId, @Param("productoId") Long productoId);
+
 }

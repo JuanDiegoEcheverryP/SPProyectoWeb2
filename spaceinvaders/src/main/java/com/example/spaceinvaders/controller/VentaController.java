@@ -17,7 +17,7 @@ import com.example.spaceinvaders.services.ProductoBodegaService;
 import com.example.spaceinvaders.services.StockPlanetaService;
 
 @RestController
-@RequestMapping("/api/compra")
+@RequestMapping("/api/venta")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class VentaController {
 
@@ -33,37 +33,30 @@ public class VentaController {
     private StockPlanetaService stockService;
 
     @PutMapping("")
-    public String procesarVenta(@RequestBody CompraVentaDTO compra) {
-        boolean stockCompra = stockService.validarStockCompra(compra.getIdproducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
-        boolean creditoNave = naveService.validarCreditoNave(compra.getIdNave(), compra.getTotal());
-        boolean capacidadBodega = naveService.validarCapacidadBodega(compra.getIdNave(), compra.getIdproducto(), compra.getCantidadProducto());
+    public String procesarVenta(@RequestBody CompraVentaDTO venta) {
+        boolean cantidadVenta = bodegaService.validarCantidadVenta(venta.getIdproducto(), venta.getIdNave(), venta.getCantidadProducto());
         
-        if (stockCompra && creditoNave && capacidadBodega) {
+        if (cantidadVenta ) {
             try {
                 // Iniciar transacción
                 // Actualizar la bodega
-                bodegaService.actualizarBodega(compra.getIdNave(), compra.getIdproducto(), compra.getCantidadProducto(), 1);
+                bodegaService.actualizarBodega(venta.getIdNave(), venta.getIdproducto(), venta.getCantidadProducto(), 0);
                 // Actualizar el crédito de la nave
-                naveService.actualizarCreditos(compra.getIdNave(), compra.getTotal());
+                naveService.actualizarCreditos(venta.getIdNave(), venta.getTotal()*-1);
                 // Actualizar el stock
-                stockService.actualizarStock(compra.getIdproducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
+                stockService.actualizarStock(venta.getIdproducto(), venta.getIdPlaneta(), venta.getCantidadProducto()*-1);
                 // Confirmar transacción
-                return "Compra exitosa";
+                return "Venta exitosa";
             } catch (Exception e) {
                 // Si hay un error, revertir transacción
                 // Registrar el error
                 // Devolver mensaje de error
-                return "Error al realizar la compra: " + e.getMessage();
+                return "Error al realizar la venta: " + e.getMessage();
             }
         } else {
             // Devolver mensaje indicando la causa de la falla
-            if (!stockCompra) {
-                return "No hay suficiente stock disponible";
-            } else if (!creditoNave) {
-                return "La nave no tiene suficiente crédito";
-            } else {
-                return "La bodega no tiene suficiente capacidad para almacenar el producto";
-            }
+           
+                return "No hay suficientes unidades disponibles";
         }
     }
     
