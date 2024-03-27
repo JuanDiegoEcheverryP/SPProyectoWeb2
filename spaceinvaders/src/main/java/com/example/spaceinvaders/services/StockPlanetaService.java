@@ -23,11 +23,13 @@ public class StockPlanetaService {
 
     public boolean validarStockCompra(Long idProducto,Long idPlaneta, int cant)
     {
+        log.error("hola cant "+ cant);
+        log.error("hola stock "+ stockPlanetaRepository.findStockByPlanetaIdAndProductoId(idPlaneta, idProducto));
         if(cant<=stockPlanetaRepository.findStockByPlanetaIdAndProductoId(idPlaneta, idProducto))
             return true;
 
         return false;
-    }  
+    }   
 
     public void actualizarStock(Long idProducto,Long idPlaneta, int cant)
     {

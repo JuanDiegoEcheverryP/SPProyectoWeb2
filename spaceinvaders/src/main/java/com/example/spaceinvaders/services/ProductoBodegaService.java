@@ -104,11 +104,19 @@ public class ProductoBodegaService {
         {
             //solo es restar del volumen y la cantidad
             int nuevaCantidad=productoBodega.getCantidad() - cantidadProducto;
-            Float nuevoVol=(productoBodega.getVol()/productoBodega.getCantidad())*nuevaCantidad;
-            
-            productoBodegaRepository.updateCantidad(idNave, idProducto, nuevaCantidad);
-            productoBodegaRepository.updateVolumen(idNave, idProducto, nuevoVol);
 
+            if(nuevaCantidad==0)
+            {
+                productoBodegaRepository.delete(productoBodega);
+            }
+            else
+            {
+                 Float nuevoVol=(productoBodega.getVol()/productoBodega.getCantidad())*nuevaCantidad;
+            
+                productoBodegaRepository.updateCantidad(idNave, idProducto, nuevaCantidad);
+                productoBodegaRepository.updateVolumen(idNave, idProducto, nuevoVol);
+            }
+           
         }
        
     }
