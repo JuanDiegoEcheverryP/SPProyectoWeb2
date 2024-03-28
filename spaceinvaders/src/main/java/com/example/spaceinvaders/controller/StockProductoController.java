@@ -39,7 +39,7 @@ public class StockProductoController {
             @ApiResponse(responseCode = "400", description = "Id suministrado es invalido", content = @Content),
             @ApiResponse(responseCode = "404", description = "Persona no encontrada", content = @Content) })
    */
-    @GetMapping("planeta/{idPlaneta}")
+    @GetMapping("/planeta/{idPlaneta}")
     public List<ProductoDTO> recuperarProductosXPlaneta(@PathVariable Long idPlaneta) {
         return stockPlanetaService.recuperarStockDePlaneta(idPlaneta);
     }

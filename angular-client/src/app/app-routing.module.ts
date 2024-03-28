@@ -14,12 +14,12 @@ import { ViajarEstrellaComponent } from './viajar-estrella/viajar-estrella.compo
 const routes: Routes = [
   { path: 'avatar/list', component: AvatarListComponent },
   { path: 'registrarNuevaTripulacion', component: RegistrarNuevaTripulacionComponent },
-  { path: 'comerciar', component: ComerciarComponent },
-  { path: 'bodega', component: BodegaComponent },
+  { path: 'comerciar/:idPlaneta', component: ComerciarComponent },
+  { path: 'bodega/:idNave', component: BodegaComponent },
   { path: 'visualizarMapa', component: VisualizarMapaComponent },
   { path: 'verInfoEstrella', component:  VerInfoEstrellaComponent},
-  { path: 'viajarPlaneta/:idEstrella', component:  ViajarPlanetaComponent},
   { path: 'viajarEstrella/:idEstrella', component:  ViajarEstrellaComponent},
+  { path: 'viajarPlaneta/:idEstrella', component:  ViajarPlanetaComponent},
   {path: '**', component: InicioComponent} //Inicio
 ];
 

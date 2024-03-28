@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
-import { Nave } from '../model/nave';
-import { NaveService } from '../shared/nave.service';
-import { ProductoxproductoBodega } from '../model/productoxproductoBodega';
-import { ProductoBodega } from '../model/producto_bodega';
-import { Producto } from '../model/producto';
-import { ProductoBodegaService } from '../shared/producto_bodega.service';
-import { ProductoService } from '../shared/producto.service';
+import { ProductoDTO } from '../model/productoDTO';
+import { StockProductoService } from '../shared/stockPlaneta.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-comerciar',
@@ -14,35 +10,33 @@ import { ProductoService } from '../shared/producto.service';
 })
 export class ComerciarComponent {
   seleccionado: boolean = false;
-  productoSeleccionado: ProductoxproductoBodega = new ProductoxproductoBodega(-1, "",-1,1,"");
+  productoSeleccionado: ProductoDTO = new ProductoDTO(-1,"",-1,"",-1,-1,-1);
 
-  productosBodegaNave: ProductoxproductoBodega[] = [];
-  productosBodega: ProductoBodega[] = [];
-  productos: Producto[] = [];
+  productosPlaneta: ProductoDTO[] = [];
 
   constructor(
-    private productoBodega: ProductoBodegaService,
-    private productoService: ProductoService,
+    private route: ActivatedRoute,
+    private stockProductoService: StockProductoService,
   ) { }
 
   ngOnInit(): void {
-    this.productoBodega.listarProductosPorNave(1).subscribe(productosBodega => {
-      this.productosBodega = productosBodega;
-      this.productoService.listarProductos().subscribe(productos => {
-        this.productos = productos;
-        productosBodega.forEach(element => {
-          let a = new ProductoxproductoBodega(element.id, productos[element.id].nombre, element.cantidad, element.volTotal, productos[element.id].imagen)
-          this.productosBodegaNave.push(a)
-        });
-        console.log(this.productosBodegaNave);
-      })
+    let a: number = -1;
+    this.route.params.subscribe(params => {
+      a = Number(params['idPlaneta']);
+      console.log('Parámetros de la ruta:', params);
     });
+    this.stockProductoService.listarProductosPlaneta(a).subscribe(productosPlaneta => {
+      this.productosPlaneta = productosPlaneta;
+      console.log(this.productosPlaneta);
+      
+    })
+    
   }
   
 
-  mostrarInformacion(producto: ProductoxproductoBodega) {
+  mostrarInformacion(Producto: ProductoDTO) {
     this.seleccionado = true;
-    this.productoSeleccionado = producto;
+    this.productoSeleccionado = Producto;
     console.log(this.productoSeleccionado);
     
   }

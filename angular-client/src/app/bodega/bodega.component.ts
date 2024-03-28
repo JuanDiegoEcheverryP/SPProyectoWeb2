@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { AvatarService } from '../shared/avatar.service';
-import { Avatar } from '../model/avatar';
 import { ProductoBodega } from '../model/producto_bodega';
 import { ProductoBodegaService } from '../shared/producto_bodega.service';
 import { Producto } from '../model/producto';
 import { ProductoService } from '../shared/producto.service';
 import { ProductoxproductoBodega } from '../model/productoxproductoBodega';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-bodega',
@@ -21,12 +20,17 @@ export class BodegaComponent {
   productos: Producto[] = [];
 
   constructor(
+    private route: ActivatedRoute,
     private productoBodega: ProductoBodegaService,
     private productoService: ProductoService,
   ) { }
 
   ngOnInit(): void {
-    this.productoBodega.listarProductosPorNave(1).subscribe(productosBodega => {
+    let idNave: number = -1;
+    this.route.params.subscribe(params => {
+      idNave = Number(params['idNave']); 
+    });
+    this.productoBodega.listarProductosPorNave(idNave).subscribe(productosBodega => {
       this.productosBodega = productosBodega;
       this.productoService.listarProductos().subscribe(productos => {
         this.productos = productos;

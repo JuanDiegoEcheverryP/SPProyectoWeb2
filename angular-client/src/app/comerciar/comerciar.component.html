@@ -49,10 +49,10 @@
     -->
 
     <div class="tituloItems">
-        <button>Items bodega</button>
+        <button>Items Planeta</button>
     </div>
     <div class="flexbox" >
-        <div *ngFor="let producto of productosBodegaNave" (click)="mostrarInformacion(producto)">
+        <div *ngFor="let producto of productosPlaneta" (click)="mostrarInformacion(producto)">
             <img src="../../assets/caja.png" alt="Imagen del botón">
         </div>
     </div>
@@ -66,11 +66,11 @@
         <p>Nombre Producto:</p>
         <p class="resultado">{{productoSeleccionado.nombre}}</p>
 
-        <p>Cantidad:</p>
-        <p class="resultado">{{productoSeleccionado.cantidad}}</p>
+        <p>Precio compra unidad:</p>
+        <p class="resultado">${{productoSeleccionado.precioDemanda}}</p>
         
-        <p>Espacio ocupado en bodega</p>
-        <p class="resultado">{{productoSeleccionado.volumen}}</p>
+        <p>Precio venta unidad</p>
+        <p class="resultado">${{productoSeleccionado.precioOferta}}</p>
     </diV>
     <diV class="botonVender">
         <button>Vender</button>
