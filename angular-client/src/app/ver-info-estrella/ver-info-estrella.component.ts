@@ -16,6 +16,8 @@ export class VerInfoEstrellaComponent {
   naves: Nave[] = [];
   planeta: Planeta[] = [];
 
+  public planetas: Planeta[] = [new Planeta(-1,"",false,""),new Planeta(-1,"",false,""),new Planeta(-1,"",false,"")];
+
   constructor(
     private route: ActivatedRoute,
     private naveService: NaveService,
@@ -34,6 +36,14 @@ export class VerInfoEstrellaComponent {
           this.planeta.push(planeta);
         })        
       });
+    });
+
+    this.planetaService.listarPlanetasPorId(idEstrella).subscribe(planetas => {
+      for (let i = 0; i < planetas.length; i++) {
+        this.planetas[i] = planetas[i]
+      }
+      console.log(this.planetas);
+      
     });
   }
 

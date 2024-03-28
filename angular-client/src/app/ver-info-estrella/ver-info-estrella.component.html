@@ -28,19 +28,22 @@
     <div id="circle-orbit-container">
 
         <!-- Circles closest to the central point -->
-        <div id="inner-orbit">
+        <div id="inner-orbit" *ngIf="planetas[0].id != -1">
             <div class="inner-orbit-cirlces"><img src="../../assets/planeta1.png" class="planet"></div>
         </div>
         <!-- Circles second closest to the central point -->
-        <div id="middle-orbit">
+        <div id="middle-orbit" *ngIf="planetas[1].id != -1">
             <div class="middle-orbit-cirlces"><img src="../../assets/planeta2.png" class="planet"></div>
         </div>
         <!-- Circles furthest away to the central point -->
-        <div id="outer-orbit">
+        <div id="outer-orbit" *ngIf="planetas[2].id != -1">
             <div class="outer-orbit-cirlces"><img src="../../assets/planeta3.png" class="planet"></div>
         </div>
-        <div id="sol">
+        <div id="sol" *ngIf="planetas[0].id != -1">
             <img src="../../assets/star.png" class="planet">
+        </div>
+        <div *ngIf="planetas[0].id == -1" class="anuncio">
+            <p>La estrella no tiene planetas</p>
         </div>
     </div>
     <div class="lista">

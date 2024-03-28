@@ -4,6 +4,7 @@
     background-image: url('../../assets/espacio.jpg');
     background-size: cover;
     background-position: center;
+
 }
 
 * {
@@ -79,3 +80,45 @@
     height: 50px;
     width: 50px;
 }
+
+.botones {
+    position: absolute;
+    width: 15vw;
+    height: 3vw;
+    background: rgb(180, 180, 180);
+    font-family: 'Koulen';
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.botonVerInformacionEstrella {
+    left: 75vw;
+    top: 30vh;
+}
+
+.botonRutas {
+    left: 75vw;
+    top: 40vh;
+}
+
+.botonViajar {
+    left: 75vw;
+    top: 50vh;
+}
+
+.botonRegresar {
+    left: 75vw;
+    top: 80vh;
+}
+
+.botonRegresar button {
+    width: 100%;
+    height: 100%;
+    background: rgb(180, 180, 180);
+    font-family: 'Koulen';
+    border: none;
+    border-radius: 20px;
+    font-size: 24px;
+}
+

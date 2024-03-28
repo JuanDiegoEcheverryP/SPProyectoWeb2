@@ -49,6 +49,9 @@
             <p>{{planetas[2].nombre}}</p>
         </ul>
     </div>
+    <div *ngIf="planetas[0].id == -1" class="anuncio">
+        <p>La estrella no tiene planetas</p>
+    </div>
     <!--
     <div>
         <ul class="flex-container space-evenly estrella2" >

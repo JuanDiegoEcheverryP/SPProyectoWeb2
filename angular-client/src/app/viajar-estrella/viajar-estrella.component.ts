@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Estrella } from '../model/estrella';
 import { EstrellaService } from '../shared/estrella.service';
 import { ActivatedRoute } from '@angular/router';
+import { Planeta } from '../model/planeta';
 
 @Component({
   selector: 'app-viajar-estrella',
@@ -10,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViajarEstrellaComponent {
   public estrella: Estrella = new Estrella(-1,"",-1,-1,-1);
+  public planetas: Planeta[] = [new Planeta(-1,"",false,""),new Planeta(-1,"",false,""),new Planeta(-1,"",false,"")];
 
   constructor(
     private route: ActivatedRoute,
