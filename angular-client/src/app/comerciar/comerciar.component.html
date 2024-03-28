@@ -3,50 +3,28 @@
         <div class="left-buttons">
             <button class="button-with-image">
                 <img src="../../assets/star-icon.png" alt="Imagen del botón" width="24" height="24">
-                <span>*Nombre estrella*</span>
+                <span>{{estrellaJugador.nombre}}</span>
             </button>
             <button class="button-with-image">
                 <img src="../../assets/planet-icon.png" alt="Imagen del botón" width="24" height="24">
-                <span>*Nombre planeta*</span>
+                <span>{{planetaNave.nombre}}</span>
             </button>
             <button class="button-with-image">
                 <img src="../../assets/money-icon.png" alt="Imagen del botón" width="24" height="24">
-                <span>*Dinero*</span>
+                <span>${{jugadorNave.credito}}</span>
             </button>
             <button class="button-with-image">
                 <img src="../../assets/clock-icon.png" alt="Imagen del botón" width="24" height="24">
-                <span>*Tiempo*</span>
+                <span>{{jugadorNave.tiempo}} l.y</span>
             </button>
         </div>
         <div class="right-buttons">
             <button class="button-with-image" id="navUsuario">
                 <img src="https://www.webwise.ie/wp-content/uploads/2020/12/IMG1207.jpg" alt="Imagen del botón" width="24" height="24">
-                <span>CerrarSesion</span>
+                <span>Cerrar Sesion</span>
             </button>
         </div>
     </div>
-    <!--
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Credito</th>
-                <th>Tiempo</th>
-                <th>Ver</th>
-                <th>Editar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let nave of naves">
-                <td>{{nave.nombre}}</td>
-                <td>{{nave.credito}}</td>
-                <td>{{nave.tiempo}}</td>
-                <td><a [routerLink]="['/nave/view', nave.id]">Ver</a></td>
-                <td><a [routerLink]="['/nave/edit', nave.id]">Editar</a></td>
-            </tr>
-        </tbody>
-    </table>
-    -->
 
     <div class="tituloItems">
         <button>Items Planeta</button>

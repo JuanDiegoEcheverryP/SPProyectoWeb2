@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.spaceinvaders.model.Jugador;
+import com.example.spaceinvaders.model.Nave;
 
 
 @Repository
@@ -28,5 +29,8 @@ public interface JugadorRepository extends JpaRepository<Jugador, Long> {
 
     @Query("SELECT j FROM Jugador j WHERE j.nombre = :nombre AND j.contrasena = :contrasena")
     List<Jugador> findJugadorByContrasenAndNombre(@Param("nombre") String nombre, @Param("contrasena") String contrasena);
+
+    @Query("SELECT n.naveJuego FROM Jugador n WHERE n.id = :idJugador")
+    Nave findNavePorJugadorId(@Param("idJugador") Long idJugador);
 }
 

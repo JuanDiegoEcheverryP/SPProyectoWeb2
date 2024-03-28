@@ -3,12 +3,15 @@ package com.example.spaceinvaders.controller;
 import java.util.List; // Make sure to import java.util.Lis
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spaceinvaders.model.Jugador;
+import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.DTO.JugadorLogIn;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
 import com.example.spaceinvaders.services.AvatarService;
@@ -44,6 +47,11 @@ public class JuagadorController {
         }
 
         return usuario;
+    }
+
+    @GetMapping("/nave/{id}")
+    public Nave obtenerNavePorJugadorId(@PathVariable Long id) {
+        return jugadorService.obtenerNavePorJugadorId(id);
     }
 
 }

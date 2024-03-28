@@ -75,4 +75,8 @@ public class JugadorService {
     {
         return jugadorRepository.findJugadorByContrasenAndNombre(jugador.getNombre(),jugador.getContrasena());
     }
+
+    public Nave obtenerNavePorJugadorId(Long id) {
+        return jugadorRepository.findNavePorJugadorId(id);
+    }
 }

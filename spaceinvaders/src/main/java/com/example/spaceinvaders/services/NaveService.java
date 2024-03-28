@@ -131,4 +131,9 @@ public class NaveService {
     public Planeta obtenerPlanetaPorNaveId(Long id) {
         return naveRepository.findPlanetByNaveId(id);
     }
+
+    public Estrella obtenerEstrellaPorNaveId(Long id) {
+        return naveRepository.findEstrellaByNaveId(id);
+    }
+    
 }

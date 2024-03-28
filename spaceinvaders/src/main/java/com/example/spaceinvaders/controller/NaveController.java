@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.model.ProductoBodega;
@@ -69,5 +70,11 @@ public class NaveController {
     @GetMapping("/obtenerPlaneta/{id}")
     public Planeta obtenerPlanetaPorNaveId(@PathVariable Long id) {
         return naveService.obtenerPlanetaPorNaveId(id);
+    }
+
+    
+    @GetMapping("/obtenerEstrella/{id}")
+    public Estrella obtenerEstrellaPorNaveId(@PathVariable Long id) {
+        return naveService.obtenerEstrellaPorNaveId(id);
     }
 }

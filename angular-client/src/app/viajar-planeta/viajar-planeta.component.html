@@ -1,28 +1,28 @@
 <div id="html_body">
     <div class="navbar">
         <div class="left-buttons">
-        <button class="button-with-image">
-            <img src="../../assets/star-icon.png" alt="Imagen del botón" width="24" height="24">
-            <span>*Nombre estrella*</span>
-        </button>
-        <button class="button-with-image">
-            <img src="../../assets/planet-icon.png" alt="Imagen del botón" width="24" height="24">
-            <span>*Nombre planeta*</span>
-        </button>
-        <button class="button-with-image">
-            <img src="../../assets/money-icon.png" alt="Imagen del botón" width="24" height="24">
-            <span>*Dinero*</span>
-        </button>
-        <button class="button-with-image">
-            <img src="../../assets/clock-icon.png" alt="Imagen del botón" width="24" height="24">
-            <span>*Tiempo*</span>
-        </button>
+            <button class="button-with-image">
+                <img src="../../assets/star-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>{{estrellaJugador.nombre}}</span>
+            </button>
+            <button class="button-with-image">
+                <img src="../../assets/planet-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>{{planetaNave.nombre}}</span>
+            </button>
+            <button class="button-with-image">
+                <img src="../../assets/money-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>${{jugadorNave.credito}}</span>
+            </button>
+            <button class="button-with-image">
+                <img src="../../assets/clock-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>{{jugadorNave.tiempo}} l.y</span>
+            </button>
         </div>
         <div class="right-buttons">
-        <button class="button-with-image" id="navUsuario">
-            <img src="https://www.webwise.ie/wp-content/uploads/2020/12/IMG1207.jpg" alt="Imagen del botón" width="24" height="24">
-            <span>CerrarSesion</span>
-        </button>
+            <button class="button-with-image" id="navUsuario">
+                <img src="https://www.webwise.ie/wp-content/uploads/2020/12/IMG1207.jpg" alt="Imagen del botón" width="24" height="24">
+                <span>Cerrar Sesion</span>
+            </button>
         </div>
     </div>
     <div *ngIf="planetas[0].id != -1">

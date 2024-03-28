@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { Nave } from '../model/nave';
 import { Planeta } from '../model/planeta';
+import { Estrella } from '../model/estrella';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class NaveService {
 
   obtenerPlanetaPorNaveId(id:number): Observable<Planeta> {
     return this.http.get<Planeta>(`${environment.serverUrl}/api/nave/obtenerPlaneta/${id}`)
+  }
+
+  obtenerEstrellaPorNaveId(id:number): Observable<Estrella> {
+    return this.http.get<Estrella>(`${environment.serverUrl}/api/nave/obtenerEstrella/${id}`)
   }
 }

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
@@ -54,4 +55,10 @@ public interface NaveRepository extends JpaRepository<Nave, Long> {
 
     @Query("SELECT n.localizacionPlaneta FROM Nave n WHERE n.id = :idNave")
     Planeta findPlanetByNaveId(@Param("idNave") Long idNave);
+
+    @Query("SELECT n.localizacion FROM Nave n WHERE n.id = :idNave")
+    Estrella findEstrellaByNaveId(@Param("idNave") Long idNave);
+
+
+    
 }
