@@ -2,6 +2,7 @@
     <div class="nav">
         <img src="../../assets/logo.png" alt="logo" class="logo">
     </div>
+    <!--
     <table>
         <thead>
             <tr>
@@ -28,5 +29,37 @@
             </tr>
         </tbody>
     </table>
-    
+    -->
+    <p id="titulo">Seleccionar Nave</p>
+    <ul class="flex-container space-between">
+        <li class="btn" (click)="anteriorNave()"><</li>
+            <ul class="contenido flex-container center">
+                <li class="imagen">
+                    <img src="../../assets/spaceship.jpg">
+                </li>
+                <li class="descripcion">
+                    <div class="informacion">
+                        <div class="infoText">
+                            <p class="inputName">Nombre de la nave: </p>
+                            <input type="text" id="nombreNave">
+                        </div>
+                        <br>
+                        <br>
+                        <p class="inputName">Caracteristicas:</p>
+                        <p>TipoNave: <span>{{actual.nombre}}</span></p>
+                        <p>Capacidad bodega: <span>{{actual.volBodega}}</span></p>
+                        <p>Velocidad: <span>{{actual.velocidad}}</span></p>
+                        <hr>
+                        <p class="importante">Importante: Cuando eliges crear una tripulacion, automaticamente te conviertes en el capitan de tu nave</p>
+                    </div>
+                    <div class="btnSeleccionar">
+                        <button>
+                            Seleccionar nave
+                        </button>
+                    </div>
+                </li>
+                
+            </ul>
+        <li class="btn" (click)="siguienteNave()">></li>
+      </ul>
 </div>
