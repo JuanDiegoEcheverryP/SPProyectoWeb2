@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
+import com.example.spaceinvaders.model.Planeta;
 
 import jakarta.transaction.Transactional;
 
@@ -50,4 +51,7 @@ public interface NaveRepository extends JpaRepository<Nave, Long> {
     @Transactional
     @Query("UPDATE Nave n SET n.credito = n.credito - :nuevoCredito WHERE n.id = :idNave")
     int sumarCreditoNave(@Param("idNave") Long idNave, @Param("nuevoCredito") Float nuevoCredito);
+
+    @Query("SELECT n.localizacionPlaneta FROM Nave n WHERE n.id = :idNave")
+    Planeta findPlanetByNaveId(@Param("idNave") Long idNave);
 }

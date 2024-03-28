@@ -113,4 +113,8 @@ public class EstrellaService {
     public List<Planeta> listaPlanetasEstrella(Long id) {
         return estrellaRepository.findEstrellasByEstrellaId(id);
     }
+
+    public List<Nave> buscarNavesPorEstrellaId(Long id) {
+        return estrellaRepository.findNavesByEstrellaId(id);
+    }
 }

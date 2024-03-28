@@ -4,7 +4,7 @@ import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.ProductoBodega;
-import com.example.spaceinvaders.model.Nave;
+import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.repository.JugadorRepository;
 import com.example.spaceinvaders.repository.NaveRepository;
 import com.example.spaceinvaders.repository.ProductoBodegaRepository;
@@ -126,5 +126,9 @@ public class NaveService {
     public Nave crearNave(Nave nave) {
         Nave nueva=naveRepository.save(nave);
         return nueva;
+    }
+
+    public Planeta obtenerPlanetaPorNaveId(Long id) {
+        return naveRepository.findPlanetByNaveId(id);
     }
 }

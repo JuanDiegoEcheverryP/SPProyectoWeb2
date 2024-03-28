@@ -24,5 +24,44 @@
                 <span>CerrarSesion</span>
             </button>
         </div>
-        </div>      
+    </div>
+    <div id="circle-orbit-container">
+
+        <!-- Circles closest to the central point -->
+        <div id="inner-orbit">
+            <div class="inner-orbit-cirlces"><img src="../../assets/planeta1.png" class="planet"></div>
+        </div>
+        <!-- Circles second closest to the central point -->
+        <div id="middle-orbit">
+            <div class="middle-orbit-cirlces"><img src="../../assets/planeta2.png" class="planet"></div>
+        </div>
+        <!-- Circles furthest away to the central point -->
+        <div id="outer-orbit">
+            <div class="outer-orbit-cirlces"><img src="../../assets/planeta3.png" class="planet"></div>
+        </div>
+        <div id="sol">
+            <img src="../../assets/star.png" class="planet">
+        </div>
+    </div>
+    <div class="lista">
+        <table>
+            <caption>Lista de naves</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Nombre nave</th>
+                    <th scope="col">Planeta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let nave of naves; let i = index">
+                    <td data-label="Account">{{nave.nombre}}</td>
+                    <td data-label="Due Date">{{planeta[i].nombre}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <diV class="botonRegresar">
+        <button>Regresar</button>
+    </diV>
 </div>

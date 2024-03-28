@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { Nave } from '../model/nave';
+import { Planeta } from '../model/planeta';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,13 @@ export class NaveService {
 
   listarNaves(): Observable<Nave[]> {
     return this.http.get<Nave[]>(`${environment.serverUrl}/api/nave/list`)
+  }
+
+  listarNavesPorEstrella(id:number): Observable<Nave[]> {
+    return this.http.get<Nave[]>(`${environment.serverUrl}/api/estrella/naves/${id}`)
+  }
+
+  obtenerPlanetaPorNaveId(id:number): Observable<Planeta> {
+    return this.http.get<Planeta>(`${environment.serverUrl}/api/nave/obtenerPlaneta/${id}`)
   }
 }

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.services.EstrellaService;
 
 @RestController
@@ -34,5 +36,10 @@ public class EstrellaController {
     @GetMapping("/{id}")
     public Estrella obtenerEstrellaPorId(@PathVariable Long id) {
         return estrellaService.recuperarEstrella(id);
+    }
+
+    @GetMapping("/naves/{id}")
+    public List<Nave> obtenerNavesPorEstrellaId(@PathVariable Long id) {
+        return estrellaService.buscarNavesPorEstrellaId(id);
     }
 }

@@ -79,3 +79,246 @@
     height: 50px;
     width: 50px;
 }
+
+/*--------------------*/
+/* ---------- Container for the orbiting circles animation ---------- */
+#circle-orbit-container {
+    position: relative;
+    top: 20vh;
+    left: 10vw;
+    height: 500px;
+    width: 500px;
+  }
+  
+  /* ---------- Inner orbit - This is the circles closest to the central point ---------- */
+  #inner-orbit {
+    position: absolute;
+    top: 170px;
+    left: 170px;
+    width: 150px;
+    height: 150px;
+    border: 2px #ffffff55 dashed;
+    border-radius: 100%;
+    -webkit-animation: spin-right 2s linear infinite;
+    animation: spin-right 15s linear infinite;
+  }
+  
+  /* ---------- Repeating styles for the inner orbiting circles ---------- */
+  .inner-orbit-cirlces {
+    position: absolute;
+    top: 95px;
+    left: -6px;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    
+  }
+  
+  /* ---------- Middle orbit - This is the circles second closest to the central point ---------- */
+  #middle-orbit {
+    position: absolute;
+    top: 85px;
+    left: 85px;
+    width: 325px;
+    height: 325px;
+    border: 2px #ffffff40 dashed;
+    border-radius: 100%;
+    -webkit-animation: spin-right 15s linear infinite;
+    animation: spin-right 35s linear infinite;
+  }
+  
+  /* ---------- Repeating styles for the inner orbiting circles ---------- */
+  .middle-orbit-cirlces {
+    position: absolute;
+    top: 25px;
+    left: 17px;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+  }
+  
+  /* ---------- Outer orbit - This is the circles furthest away from the central point ---------- */
+  #outer-orbit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 500px;
+    border: 2px #ffffff2c dashed;
+    border-radius: 100%;
+    -webkit-animation: spin-right 20s linear infinite;
+    animation: spin-right 75s linear infinite;
+  }
+  
+  /* ---------- Repeating styles for the outer orbiting circles ---------- */
+  .outer-orbit-cirlces {
+    position: absolute;
+    top: -5px;
+    left: 125px;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+  }
+  
+  /* ---------- Animation ---------- */
+  @-webkit-keyframes spin-right {
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+.planet {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#sol {
+    position: absolute;
+    top: 220px;
+    left: 220px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    animation: spin-right 75s linear infinite;
+  }
+
+
+/*-------------*/
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1c3; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #777; 
+}
+
+.lista {
+  position: absolute;
+  top: 20vh;
+  right: 5vw;
+  height: 500px;
+  padding-right: 10px;
+  overflow-y: scroll;
+}
+
+table {
+  
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 600px;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  letter-spacing: 5px;
+  margin: .5em 0 .75em;
+  padding: 10px;
+  background-color: #FFf;
+  font-family: 'Koulen';
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+  font-family: 'Koulen';
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+.botonRegresar {
+  position: absolute;
+  right: 5vw;
+  top: 80vh;
+  width: 15vw;
+  height: 3vw;
+  background: none;
+}
+
+.botonRegresar button {
+  width: 100%;
+  height: 100%;
+  background: rgb(180, 180, 180);
+  font-family: 'Koulen';
+  border: none;
+  border-radius: 20px;
+  font-size: 24px;
+}

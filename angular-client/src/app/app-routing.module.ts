@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'comerciar/:idPlaneta', component: ComerciarComponent },
   { path: 'bodega/:idNave', component: BodegaComponent },
   { path: 'visualizarMapa', component: VisualizarMapaComponent },
-  { path: 'verInfoEstrella', component:  VerInfoEstrellaComponent},
+  { path: 'verInfoEstrella/:idEstrella', component:  VerInfoEstrellaComponent},
   { path: 'viajarEstrella/:idEstrella', component:  ViajarEstrellaComponent},
   { path: 'viajarPlaneta/:idEstrella', component:  ViajarPlanetaComponent},
   {path: '**', component: InicioComponent} //Inicio
