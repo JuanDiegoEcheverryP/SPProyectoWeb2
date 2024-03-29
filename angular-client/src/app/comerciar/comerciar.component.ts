@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductoDTO } from '../model/productoDTO';
 import { StockProductoService } from '../shared/stockPlaneta.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Estrella } from '../model/estrella';
 import { Planeta } from '../model/planeta';
 import { Nave } from '../model/nave';
@@ -29,8 +29,8 @@ export class ComerciarComponent {
     private route: ActivatedRoute,
     private stockProductoService: StockProductoService,
     private jugadorService: JugadorService,
-    private naveService: NaveService
-
+    private naveService: NaveService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -77,5 +77,9 @@ export class ComerciarComponent {
     this.productoSeleccionado = Producto;
     console.log(this.productoSeleccionado);
     
+  }
+
+  cerrarSesion() {
+    this.router.navigate([``]);
   }
 }

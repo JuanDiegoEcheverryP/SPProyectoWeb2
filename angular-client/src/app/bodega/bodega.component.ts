@@ -4,7 +4,7 @@ import { ProductoBodegaService } from '../shared/producto_bodega.service';
 import { Producto } from '../model/producto';
 import { ProductoService } from '../shared/producto.service';
 import { ProductoxproductoBodega } from '../model/productoxproductoBodega';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Estrella } from '../model/estrella';
 import { Planeta } from '../model/planeta';
 import { JugadorService } from '../shared/jugador.service';
@@ -36,6 +36,7 @@ export class BodegaComponent {
     private productoService: ProductoService,
     private jugadorService: JugadorService,
     private naveService: NaveService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -84,5 +85,9 @@ export class BodegaComponent {
     this.productoSeleccionado = producto;
     console.log(this.productoSeleccionado);
     
+  }
+
+  cerrarSesion() {
+    this.router.navigate([``]);
   }
 }

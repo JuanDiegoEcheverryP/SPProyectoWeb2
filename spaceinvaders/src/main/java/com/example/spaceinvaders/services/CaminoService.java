@@ -1,5 +1,6 @@
 package com.example.spaceinvaders.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -51,5 +52,13 @@ public class CaminoService {
                                       diferencia_z * diferencia_z);
 
         return distancia;
+    }
+
+    public List<Camino> listarCaminos(Long id) {
+        return caminoRepository.findCaminosPorEstrellaInicio(id);
+    }
+
+    public List<Estrella> obtenerEstrellaFinalPorEstrellaInicioId(Long id) {
+        return caminoRepository.obtenerEstrellaFinalPorEstrellaInicioId(id);
     }
 }

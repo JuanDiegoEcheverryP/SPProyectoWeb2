@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Jugador;
-import com.example.spaceinvaders.model.Nave;
-
 
 @Repository
 public interface AvatarRepository extends JpaRepository<Avatar, Long> {

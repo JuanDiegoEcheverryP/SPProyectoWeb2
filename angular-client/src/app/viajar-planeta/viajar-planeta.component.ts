@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Planeta } from '../model/planeta';
 import { PlanetaService } from '../shared/planeta.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JugadorService } from '../shared/jugador.service';
 import { NaveService } from '../shared/nave.service';
 import { Estrella } from '../model/estrella';
@@ -26,6 +26,7 @@ export class ViajarPlanetaComponent {
     private planetaService: PlanetaService,
     private jugadorService: JugadorService,
     private naveService: NaveService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -61,5 +62,16 @@ export class ViajarPlanetaComponent {
         this.planetas[i] = planetas[i]
       }
     });
+  }
+
+  regresar() {
+    this.route.params.subscribe(params => {
+      this.idJugador = Number(params['idJugador']); 
+    });
+    this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+  }
+
+  cerrarSesion() {
+    this.router.navigate([``]);
   }
 }

@@ -3,7 +3,7 @@ import { AvatarService } from '../shared/avatar.service';
 import { Avatar } from '../model/avatar';
 import { NaveService } from '../shared/nave.service';
 import { Nave } from '../model/nave';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Planeta } from '../model/planeta';
 import { PlanetaService } from '../shared/planeta.service';
 import { Estrella } from '../model/estrella';
@@ -31,6 +31,7 @@ export class VerInfoEstrellaComponent {
     private naveService: NaveService,
     private planetaService: PlanetaService,
     private jugadorService: JugadorService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -80,4 +81,14 @@ export class VerInfoEstrellaComponent {
     });
   }
 
+  regresar() {
+    this.route.params.subscribe(params => {
+      this.idJugador = Number(params['idJugador']); 
+    });
+    this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+  }
+
+  cerrarSesion() {
+    this.router.navigate([``]);
+  }
 }

@@ -1,5 +1,7 @@
 package com.example.spaceinvaders.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +29,11 @@ public class Camino {
     Float distancia;
 
     @ManyToOne
+    @JsonIgnore
     private Estrella  estrellaInicio;
 
     @ManyToOne
+    @JsonIgnore
     private Estrella  estrellaFinal;
    
     public Camino(Estrella  estrellaInicio,Estrella  estrellaFinal, String nombre, Float distancia)

@@ -1,11 +1,8 @@
 package com.example.spaceinvaders.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
-import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.DTO.NaveDTO;
 import com.example.spaceinvaders.services.NaveService;
 

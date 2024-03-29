@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Producto;
-import com.example.spaceinvaders.services.AvatarService;
 import com.example.spaceinvaders.services.ProductoService;
 
 @RestController

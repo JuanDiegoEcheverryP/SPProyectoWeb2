@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Nave } from '../model/nave';
 import { JugadorService } from '../shared/jugador.service';
 import { Estrella } from '../model/estrella';
@@ -23,6 +23,7 @@ export class VisualizarMapaComponent {
     private route: ActivatedRoute,
     private jugadorService: JugadorService,
     private naveService: NaveService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -44,5 +45,9 @@ export class VisualizarMapaComponent {
         }
       })
     })
+  }
+
+  cerrarSesion() {
+    this.router.navigate([``]);
   }
 }

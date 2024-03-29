@@ -12,13 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spaceinvaders.model.Stock_planeta;
 import com.example.spaceinvaders.model.DTO.ProductoDTO;
-import com.example.spaceinvaders.services.PlanetaService;
-import com.example.spaceinvaders.services.ProductoService;
 import com.example.spaceinvaders.services.StockPlanetaService;
 
-import jakarta.persistence.EntityNotFoundException;
+//import jakarta.persistence.EntityNotFoundException;
 
 
 @RestController

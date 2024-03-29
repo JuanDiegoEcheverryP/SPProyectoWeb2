@@ -14,7 +14,6 @@ import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.DTO.JugadorLogIn;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
-import com.example.spaceinvaders.services.AvatarService;
 import com.example.spaceinvaders.services.JugadorService;
 
 @RestController
