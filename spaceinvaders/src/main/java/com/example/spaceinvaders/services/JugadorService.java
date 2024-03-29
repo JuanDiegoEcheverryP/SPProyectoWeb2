@@ -71,9 +71,9 @@ public class JugadorService {
         return nueva;
     }
 
-    public List<Jugador> obtenerJugadorXUsuarioXContrasena(JugadorLogIn jugador)
+    public List<Jugador> obtenerJugadorXUsuarioXContrasena(String nombre, String contrasena)
     {
-        return jugadorRepository.findJugadorByContrasenAndNombre(jugador.getNombre(),jugador.getContrasena());
+        return jugadorRepository.findJugadorByContrasenAndNombre(nombre,contrasena);
     }
 
     public Nave obtenerNavePorJugadorId(Long id) {

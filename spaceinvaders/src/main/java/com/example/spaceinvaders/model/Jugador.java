@@ -25,7 +25,7 @@ public class Jugador {
     @Column(nullable = false)
     private String contrasena;
 
-    @Column(columnDefinition = "VARCHAR(255) CHECK (rol IN ('capitan', 'piloto', 'comerciante'))",nullable = false)
+    @Column(columnDefinition = "VARCHAR(255) CHECK (rol IN ('capitan', 'piloto', 'comerciante'))")
     private String rol;
 
     @ManyToOne

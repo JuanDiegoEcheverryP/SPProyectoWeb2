@@ -2,9 +2,13 @@ package com.example.spaceinvaders.controller;
 
 import java.util.List; // Make sure to import java.util.Lis
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +31,10 @@ public class JuagadorController {
     //buscar jugador para iniciar sesion
     //este retorna el jugador, exceptuando su contrasena
     @PutMapping("login")
-    public UsuarioDTO iniciarSesion(@RequestBody JugadorLogIn jugador) {
+    public ResponseEntity<?> iniciarSesion(@RequestBody JugadorLogIn jugador) {
        
         
-        List<Jugador> encontrado=jugadorService.obtenerJugadorXUsuarioXContrasena(jugador);
+        List<Jugador> encontrado=jugadorService.obtenerJugadorXUsuarioXContrasena(jugador.getNombre(),jugador.getContrasena());
         UsuarioDTO usuario=new UsuarioDTO();
         
         if(encontrado.size()!=0)
@@ -42,15 +46,33 @@ public class JuagadorController {
         }
         else
         {
-
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                 .body("Contraseña o nombre de usuario incorrecto");
         }
 
-        return usuario;
+        return ResponseEntity.ok(usuario);
     }
 
     @GetMapping("/nave/{id}")
     public Nave obtenerNavePorJugadorId(@PathVariable Long id) {
         return jugadorService.obtenerNavePorJugadorId(id);
     }
+
+    @PostMapping("registro")
+    public ResponseEntity<?> registrarse(@RequestBody Jugador jugador) {
+        UsuarioDTO usuario = new UsuarioDTO();
+        
+        try {
+            jugadorService.crearJugador(jugador);
+            usuario.setAvatar(jugador.getAvatar().getImagen());
+            usuario.setNombre(jugador.getNombre());
+            usuario.setIdNave(null);
+            return ResponseEntity.ok(usuario);
+        } catch (DataIntegrityViolationException e) {
+            // El nombre de jugador ya existe, manejar el error aquí
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                 .body("El nombre de usuario ya está en uso");
+        }
+    } 
 
 }
