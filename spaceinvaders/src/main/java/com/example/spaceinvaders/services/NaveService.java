@@ -4,6 +4,7 @@ import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.ProductoBodega;
+import com.example.spaceinvaders.model.DTO.TripulacionDTO;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.repository.JugadorRepository;
 import com.example.spaceinvaders.repository.NaveRepository;
@@ -12,6 +13,7 @@ import com.example.spaceinvaders.repository.ProductoBodegaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -135,5 +137,40 @@ public class NaveService {
     public Estrella obtenerEstrellaPorNaveId(Long id) {
         return naveRepository.findEstrellaByNaveId(id);
     }
+
+    public List<TripulacionDTO> obtenerInfotripulaciones() {
+       
+        List<TripulacionDTO> tripulaciones = new ArrayList<>();
+
+        // Obtener las listas de capitanes y cantidad de tripulantes por nave
+        List<Object[]> capitanes = naveRepository.findCapitanesByNave();
+        List<Object[]> cant = naveRepository.countJugadoresByNave();
+
+        // Iterar sobre cada nave
+        for (Object[] capitan : capitanes) {
+            Long idNave = (Long) capitan[0]; // Obtener el ID de la nave
+            Jugador jugador = (Jugador) capitan[1]; // Obtener el capitán
+
+            // Buscar la cantidad de tripulantes de esta nave
+            Integer cantidadTripulantes = 0;
+            for (Object[] c : cant) {
+                Long idNaveCant = (Long) c[0];
+                if (idNave.equals(idNaveCant)) {
+                    cantidadTripulantes = ((Number) c[1]).intValue();
+                    break;
+                }
+            }
+
+            // Crear un objeto TripulacionDTO y agregarlo a la lista de tripulaciones
+            TripulacionDTO tripulacionDTO = new TripulacionDTO();
+            tripulacionDTO.setNave(naveRepository.findById(idNave).orElse(null));
+            tripulacionDTO.setCapitan(jugador.getNombre());
+            tripulacionDTO.setCantidadTripulantes(cantidadTripulantes);
+            tripulaciones.add(tripulacionDTO);
+        }
+
+        return tripulaciones;
+    }
     
+
 }

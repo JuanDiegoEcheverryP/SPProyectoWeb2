@@ -13,6 +13,7 @@ import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.model.DTO.NaveDTO;
+import com.example.spaceinvaders.model.DTO.TripulacionDTO;
 import com.example.spaceinvaders.services.NaveService;
 
 @RestController
@@ -72,5 +73,10 @@ public class NaveController {
     @GetMapping("/obtenerEstrella/{id}")
     public Estrella obtenerEstrellaPorNaveId(@PathVariable Long id) {
         return naveService.obtenerEstrellaPorNaveId(id);
+    }
+
+    @GetMapping("/tripulaciones")
+    public List<TripulacionDTO> obtenerInfotripulaciones() {
+        return naveService.obtenerInfotripulaciones();
     }
 }

@@ -59,6 +59,9 @@ public interface NaveRepository extends JpaRepository<Nave, Long> {
     @Query("SELECT n.localizacion FROM Nave n WHERE n.id = :idNave")
     Estrella findEstrellaByNaveId(@Param("idNave") Long idNave);
 
+    @Query("SELECT n.id as id, j as capitan FROM Nave n JOIN n.jugadores j WHERE j.rol = 'capitan'")
+    List<Object[]> findCapitanesByNave();
 
-    
+    @Query("SELECT n.id, COUNT(j) FROM Nave n JOIN n.jugadores j GROUP BY n.id")
+    List<Object[]> countJugadoresByNave();
 }

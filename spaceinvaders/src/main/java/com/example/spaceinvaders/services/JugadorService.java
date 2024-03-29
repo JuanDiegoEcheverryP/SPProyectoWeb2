@@ -3,7 +3,7 @@ package com.example.spaceinvaders.services;
 import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
-import com.example.spaceinvaders.model.DTO.JugadorLogIn;
+import com.example.spaceinvaders.model.DTO.JugadorLogInDTO;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.repository.JugadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +78,19 @@ public class JugadorService {
 
     public Nave obtenerNavePorJugadorId(Long id) {
         return jugadorRepository.findNavePorJugadorId(id);
+    }
+
+    public void actualizarRolJugador(Long id, String rol)
+    {
+        jugadorRepository.actualizarRol(rol, id);
+    }
+
+    public Long actualizarNaveJugador(Long id, Long naveid)
+    {
+        Nave nave=jugadorRepository.findNave(naveid);
+        System.out.println(nave);
+        jugadorRepository.actualizarNave(nave, id);
+
+        return nave.getId();
     }
 }
