@@ -1,6 +1,8 @@
 package com.example.spaceinvaders.init;
 
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -163,69 +165,61 @@ public class DBInitializer implements CommandLineRunner{
 
     private void insetarCaminos()
     {
+        //obtener todas la estrellas
         List<Estrella> estrellas = estrellaRepository.findAll();
-        int inicio;
+        //llenar una lista de 40000 espacios con el valor 10
+        List<Integer> caminosFaltantes = new ArrayList<>(Collections.nCopies(40000, 10));
+        
+        int cantidadTot=estrellas.size();
         Estrella ref,destino;
-        Float distancia;
-        //INGRESAR ESTRELLAS 
-        //PRIMERO QUE CADA ESTRELLA NUMERO 5000 SE CONECTE CON LAS 5000 DE ABAJO
-
-        /*
-        //Esto es un codigo de prueba de los controladores
-        Avatar a = new Avatar("uno","hola");
-        Avatar b = new Avatar("dos","hola");
-        Avatar c = new Avatar("tres","hola");
         
-        avatarRepository.save(a);
-        avatarRepository.save(b);
-        avatarRepository.save(c);
-
-        TipoNave f = new TipoNave("test", (float)5.5, (float) 6.6, "Hola");
-        tipoNaveRepository.save(f);
-         */
-        for(int i=0; i<7;i++)
+        //cada estrella debe tener exactamente 10 caminos
+        //recorrer todas la estrellas
+        for(int i=0; i<estrellas.size();i++)
         {
-            ref=estrellas.get((i+1)*5000-1);
-            if(i==0)
-            {
-                inicio=5000*i;
-            }
-            else
-            {
-                inicio=5000*i-1;
-            }
-                
-            for(;inicio<5000+5000*i-1;inicio++)
-            {
-                destino=estrellas.get(inicio);
 
-                distancia=calcularDistancia(ref.getCoord_x(),destino.getCoord_x(),ref.getCoord_y(),destino.getCoord_y(),ref.getCoord_z(),destino.getCoord_z());
-
-                Camino caminoIda= new Camino(ref, destino,"caminoCincomiles",distancia);
-                caminoRepository.save(caminoIda);
-                Camino caminoVuelta= new Camino(destino,ref,"caminoCincomiles",distancia);
-                caminoRepository.save(caminoVuelta);
-            }
-        }
-        
-        //DESPUES CONEXIONES ALEATORIAS
-        for(Estrella estrella: estrellas)
-        {
-            for(int i=0; i<3; i++)
+            if(caminosFaltantes.get(i)>0)
             {
-                destino=estrellas.get(rand.nextInt(40000));
-                distancia=calcularDistancia(estrella.getCoord_x(),destino.getCoord_x(),estrella.getCoord_y(),destino.getCoord_y(),estrella.getCoord_z(),destino.getCoord_z());
+                Integer distanciaDeRef=0;
+                if(caminosFaltantes.get(i)>=5)
+                {
+                    distanciaDeRef= 10-caminosFaltantes.get(i)+1;
+                }
+                else
+                {
+                    distanciaDeRef=caminosFaltantes.get(i)+1;
+                }
+               
+                Integer desfase=i+caminosFaltantes.get(i)+distanciaDeRef+1-cantidadTot;
+                //14+3+4-19=2
+                if(desfase>0)
+                {
+                    distanciaDeRef=distanciaDeRef-desfase;
+                }
 
-                Optional<Camino> caminoExistente = caminoRepository.findByEstrellaInicioAndEstrellaFinal(estrella, destino);
-                
-                if (!caminoExistente.isPresent() && distancia!=-1) {
-                    Camino caminoIda= new Camino(estrella, destino,"camino",distancia);
+                ref=estrellas.get(i);
+
+                for(int j=0; j<caminosFaltantes.get(i); j++)
+                {
+                    Integer posicion=i+distanciaDeRef+1+j;
+                    
+                    destino=estrellas.get(posicion);
+
+                    Float distancia=calcularDistancia(ref.getCoord_x(),destino.getCoord_x(),ref.getCoord_y(),destino.getCoord_y(),ref.getCoord_z(),destino.getCoord_z());
+
+                    Camino caminoIda= new Camino(ref, destino,ref.getNombre()+"-"+destino.getNombre(),distancia);
                     caminoRepository.save(caminoIda);
-                    Camino caminoVuelta= new Camino(destino,estrella,"camino",distancia);
+                    Camino caminoVuelta= new Camino(destino,ref,destino.getNombre()+"-"+ref.getNombre(),distancia);
                     caminoRepository.save(caminoVuelta);
-                }   
+
+                    caminosFaltantes.set(posicion, caminosFaltantes.get(posicion) - 1);
+                }
+
+                caminosFaltantes.set(i,0);
             }
+                     //ya sabiendo donde se inicia, se van a poner lo caminos       
         }
+
     }
 
     private void insetarAvatares()
@@ -240,6 +234,9 @@ public class DBInitializer implements CommandLineRunner{
             avatarRepository.save(avatar);
         }
     }
+    
+
+    
 
     private void insetarJuagadores()
     {
@@ -420,17 +417,23 @@ public class DBInitializer implements CommandLineRunner{
         List<Producto> productos = productoRepository.findAll();
         List<Nave> naves = naveRepository.findAll();
         int contadorNaves=0;
+        Integer cantidad=0;
 
         for (int i=0; i< productos.size() && contadorNaves<10; contadorNaves++) {
              // Para cada nave existente
-            for (int j=0; j<2; j++) {
+                TipoNave tipo=naves.get(contadorNaves).getTipoNave();
+                
+                do
+                {
+                    cantidad=rand.nextInt(9);
+                }while(tipo.getVolBodega()<=productos.get(i).getVolumen()*cantidad);
+
                 // Crear un nuevo stock para el producto en este planeta
-                ProductoBodega productoBodega = new ProductoBodega(8, productos.get(i+j).getVolumen()*8); // Suponiendo que inicialmente hay 100 unidades
+                ProductoBodega productoBodega = new ProductoBodega(cantidad, productos.get(i).getVolumen()*cantidad); // Suponiendo que inicialmente hay 100 unidades
                 productoBodega.setProducto(productos.get(i));
                 productoBodega.setNave(naves.get(contadorNaves));
                 productoBodegaRepository.save(productoBodega);
                 i++;
-            }
             // Guardar el producto después de asociar el stock
         }
     }

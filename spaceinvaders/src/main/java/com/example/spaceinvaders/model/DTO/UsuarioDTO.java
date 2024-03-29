@@ -8,6 +8,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UsuarioDTO {
 
+    Long id;
     String nombre;
     String rol;
     String avatar;
