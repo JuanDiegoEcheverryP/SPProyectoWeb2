@@ -1,7 +1,9 @@
 package com.example.spaceinvaders.controller;
 
 import java.util.HashMap;
-import java.util.List; 
+import java.util.List;
+
+import org.hibernate.validator.internal.util.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import com.example.spaceinvaders.model.DTO.JugadorLogInDTO;
 import com.example.spaceinvaders.model.DTO.PatchRolNave;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
 import com.example.spaceinvaders.services.JugadorService;
+import org.slf4j.Logger;
 
 @RestController
 @RequestMapping("/api/jugador")
@@ -30,13 +33,13 @@ public class JuagadorController {
 
     @Autowired
     private JugadorService jugadorService;
-
+    
     //buscar jugador para iniciar sesion
     //este retorna el jugador, exceptuando su contrasena
     @PutMapping("login")
     public ResponseEntity<?> iniciarSesion(@RequestBody JugadorLogInDTO jugador) {
        
-        
+        System.out.println("pollo");
         List<Jugador> encontrado=jugadorService.obtenerJugadorXUsuarioXContrasena(jugador.getNombre(),jugador.getContrasena());
         UsuarioDTO usuario=new UsuarioDTO();
         

@@ -14,6 +14,9 @@ import { VisualizarMapaComponent } from './visualizar-mapa/visualizar-mapa.compo
 import { VerInfoEstrellaComponent } from './ver-info-estrella/ver-info-estrella.component';
 import { ViajarPlanetaComponent } from './viajar-planeta/viajar-planeta.component';
 import { ViajarEstrellaComponent } from './viajar-estrella/viajar-estrella.component';
+import { IniciarsesionComponent } from './iniciarsesion/iniciarsesion.component';
+import { BarraMenuComponent } from './components/barra-menu/barra-menu.component';
+import { BarraEstadisticasComponent } from './components/barra-estadisticas/barra-estadisticas.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { ViajarEstrellaComponent } from './viajar-estrella/viajar-estrella.compo
     VerInfoEstrellaComponent,
     ViajarPlanetaComponent,
     ViajarEstrellaComponent,
+    IniciarsesionComponent,
+    BarraMenuComponent,
+    BarraEstadisticasComponent,
   ],
   imports: [
     BrowserModule,
