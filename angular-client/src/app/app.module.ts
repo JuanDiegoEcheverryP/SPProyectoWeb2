@@ -14,9 +14,11 @@ import { VisualizarMapaComponent } from './visualizar-mapa/visualizar-mapa.compo
 import { VerInfoEstrellaComponent } from './ver-info-estrella/ver-info-estrella.component';
 import { ViajarPlanetaComponent } from './viajar-planeta/viajar-planeta.component';
 import { ViajarEstrellaComponent } from './viajar-estrella/viajar-estrella.component';
-import { IniciarsesionComponent } from './iniciarsesion/iniciarsesion.component';
+import { IniciarsesionComponent } from './iniciar-sesion/iniciarsesion.component';
 import { BarraMenuComponent } from './components/barra-menu/barra-menu.component';
 import { BarraEstadisticasComponent } from './components/barra-estadisticas/barra-estadisticas.component';
+import { RegistroComponent } from './registro/registro.component';
+import { UnirseATripulacionComponent } from './unirse-a-tripulacion/unirse-a-tripulacion.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { BarraEstadisticasComponent } from './components/barra-estadisticas/barr
     IniciarsesionComponent,
     BarraMenuComponent,
     BarraEstadisticasComponent,
+    RegistroComponent,
+    UnirseATripulacionComponent,
   ],
   imports: [
     BrowserModule,

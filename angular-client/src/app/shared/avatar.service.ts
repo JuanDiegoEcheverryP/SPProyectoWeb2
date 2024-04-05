@@ -21,4 +21,8 @@ export class AvatarService {
   listarAvatares(): Observable<Avatar[]> {
     return this.http.get<Avatar[]>(`${environment.serverUrl}/api/avatar/list`)
   }
+
+  avatarId(id:number): Observable<Avatar> {
+    return this.http.get<Avatar>(`${environment.serverUrl}/api/avatar/${id}`)
+  }
 }

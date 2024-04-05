@@ -36,7 +36,7 @@ public class JuagadorController {
     
     //buscar jugador para iniciar sesion
     //este retorna el jugador, exceptuando su contrasena
-    @PutMapping("login")
+    @PostMapping("login")
     public ResponseEntity<?> iniciarSesion(@RequestBody JugadorLogInDTO jugador) {
        
         System.out.println("pollo");

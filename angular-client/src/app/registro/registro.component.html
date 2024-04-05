@@ -1,0 +1,29 @@
+<div>
+    <app-barra-menu />
+    <h3>REGISTRARSE</h3>
+    <form (ngSubmit)="registro()">
+        <input type="text" name="nombre-de-usuario" id="txtNombreUsuario" [(ngModel)]="jugadorRegistro.nombre" placeholder="nombre de usuario">
+        <input type="password" name="contrasena1" id="contrasena1" [(ngModel)]="jugadorRegistro.contrasena" placeholder="contrasena">
+        <input type="password" name="contrasena2" id="contrasena2" placeholder="digite nuevamente la contrasena">
+        <button type="submit">
+            Crear nueva tripulación
+        </button>
+        <button type="submit">
+            Unirse a una tripulación
+        </button>
+    </form>
+    <img [src]="jugadorRegistro.avatar?.imagen" alt="" id="AvatarFoto" (click)="obtenerAvatares()">
+    <p id="nombreAvatarSeleccionado">{{ jugadorRegistro.avatar?.nombre}}</p>
+    <button href="" (click)="obtenerAvatares()">Cambiar avatar</button>
+</div> 
+ 
+<div *ngIf="seleccionado">
+    <button (click)="cerrar()"></button>
+    <h2>Avatares</h2>
+    <div id="listaAvatares" *ngFor="let avatar of avatares">
+        <div class="divAvatar" (click)="asignarAvatar(avatar)">
+            <img [src]="avatar.imagen" [alt]="avatar.nombre" class="fotoAvatar">
+            <p class="nombreAvatar">{{ avatar.nombre }}</p>
+        </div>
+    </div>
+</div>

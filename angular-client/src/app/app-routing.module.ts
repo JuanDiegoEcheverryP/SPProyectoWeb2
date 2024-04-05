@@ -10,7 +10,8 @@ import { VisualizarMapaComponent } from './visualizar-mapa/visualizar-mapa.compo
 import { VerInfoEstrellaComponent } from './ver-info-estrella/ver-info-estrella.component';
 import { ViajarPlanetaComponent } from './viajar-planeta/viajar-planeta.component';
 import { ViajarEstrellaComponent } from './viajar-estrella/viajar-estrella.component';
-import { IniciarsesionComponent } from './iniciarsesion/iniciarsesion.component';
+import { IniciarsesionComponent } from './iniciar-sesion/iniciarsesion.component';
+import { RegistroComponent } from './registro/registro.component';
 import { BarraMenuComponent } from './components/barra-menu/barra-menu.component';
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'viajarEstrella/:idJugador/:idEstrella', component:  ViajarEstrellaComponent},
   { path: 'viajarPlaneta/:idJugador/:idEstrella', component:  ViajarPlanetaComponent},
   { path: 'iniciarsesion', component:  IniciarsesionComponent},
+  { path: 'registro', component:  RegistroComponent},
   {path: '**', component: InicioComponent} //Inicio
 
   
