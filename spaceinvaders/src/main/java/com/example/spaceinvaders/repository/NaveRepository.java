@@ -64,4 +64,10 @@ public interface NaveRepository extends JpaRepository<Nave, Long> {
 
     @Query("SELECT n.id, COUNT(j) FROM Nave n JOIN n.jugadores j GROUP BY n.id")
     List<Object[]> countJugadoresByNave();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Nave n SET n.localizacion = :estrella WHERE n.id = :idNave")
+    void actualizarLocalizacionEstrella(@Param("idNave") Long idNave, @Param("estrella") Estrella estrella);
+
 }

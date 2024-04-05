@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -78,5 +80,11 @@ public class NaveController {
     @GetMapping("/tripulaciones")
     public List<TripulacionDTO> obtenerInfotripulaciones() {
         return naveService.obtenerInfotripulaciones();
+    }
+
+    @PutMapping("/actualizar/{idNave}/{idEstrella}")
+    public List<Nave> actualizarLocalizacionEstrella(@PathVariable Long idNave,@PathVariable Long idEstrella) {
+        naveService.actualizarLocalizacionEstrella(idNave,idEstrella);
+        return naveService.listaNaves();
     }
 }

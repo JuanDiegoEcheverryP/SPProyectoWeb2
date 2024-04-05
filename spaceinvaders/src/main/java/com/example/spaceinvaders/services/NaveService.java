@@ -6,6 +6,7 @@ import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.DTO.TripulacionDTO;
 import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.repository.EstrellaRepository;
 import com.example.spaceinvaders.repository.JugadorRepository;
 import com.example.spaceinvaders.repository.NaveRepository;
 import com.example.spaceinvaders.repository.ProductoBodegaRepository;
@@ -27,6 +28,9 @@ public class NaveService {
 
     @Autowired
     private ProductoBodegaRepository bodegaRepository;
+
+    @Autowired
+    private EstrellaRepository estrellaRepository;
 
     public boolean validarCreditoNave(Long idNave,Float total)
     {
@@ -170,6 +174,12 @@ public class NaveService {
         }
 
         return tripulaciones;
+    }
+
+    public void actualizarLocalizacionEstrella(Long idNave, long idEstrella) {
+        Estrella nuevaEstrella = estrellaRepository.findById(idEstrella).orElseThrow();
+        System.out.println(nuevaEstrella.getNombre());
+        naveRepository.actualizarLocalizacionEstrella(idNave,nuevaEstrella);
     }
     
 
