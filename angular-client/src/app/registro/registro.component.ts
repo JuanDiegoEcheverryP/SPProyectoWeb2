@@ -6,6 +6,7 @@ import { UsuarioDTO } from '../model/usuario-dto';
 import { Jugador } from '../model/jugador';
 import { Router } from '@angular/router';
 import { InfoGeneralUsuarioService } from '../shared/info-general-usuario.service';
+import { RegistroDTO } from '../model/registro-dto';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { InfoGeneralUsuarioService } from '../shared/info-general-usuario.servic
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent {
-  jugadorRegistro: Jugador = new Jugador(0, "", "", null, null);
+  jugadorRegistro: RegistroDTO = new RegistroDTO(0, "", "", "", null, null);
   avatarUrl: string = "";
   nombreAvatar: string = "";
   avatares: Avatar[] = [];
@@ -29,17 +30,25 @@ export class RegistroComponent {
 
   registro() 
   {
+    console.log(this.jugadorRegistro.avatar);
+    
         this.registroService.registro(this.jugadorRegistro).subscribe(
           (usuario: UsuarioDTO) => {
             console.log('Respuesta del backend:', usuario);
-            this.shared.guardarInformacion(usuario)
+            //this.shared.guardarInformacion(usuario)
+            // Convertir el objeto usuario a una cadena JSON
+            const usuarioString = JSON.stringify(usuario);
+            
+            // Guardar la cadena JSON en sessionStorage
+            sessionStorage.setItem("infoJugador", usuarioString);
+            
             if(this.accionSeleccionada=="crear")
             {
-              this.router.navigate(['/registrarNuevaTripulacion']);
+              this.router.navigate([`/registrarNuevaTripulacion/${usuario.id}`]);
             }
             else if (this.accionSeleccionada=="unirse")
             {
-              this.router.navigate(['/unirseTripulacion']);
+              this.router.navigate([`/unirseTripulacion/${usuario.id}`]);
             }
             // Aquí puedes realizar cualquier acción con la respuesta del backend
           },
@@ -82,5 +91,7 @@ export class RegistroComponent {
   asignarAvatar(avatar: Avatar) {
     this.seleccionado = false;
     this.jugadorRegistro.avatar = avatar;
+    console.log(this.jugadorRegistro.avatar);
+    
   }
 }

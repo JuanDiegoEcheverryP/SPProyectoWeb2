@@ -8,6 +8,7 @@ import { JugadorLogIn } from '../model/jugadorLogIn';
 import { UsuarioDTO } from '../model/usuario-dto';
 import { Jugador } from '../model/jugador';
 import { PatchRolNave } from '../model/patch-rol-nave';
+import { RegistroDTO } from '../model/registro-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class JugadorService {
     return this.http.post<UsuarioDTO>(`${environment.serverUrl}/api/jugador/login`, jugador, { headers: this.headers });
   }
 
-  registro(jugador: Jugador): Observable<UsuarioDTO> {
+  registro(jugador: RegistroDTO): Observable<UsuarioDTO> {
     return this.http.post<UsuarioDTO>(`${environment.serverUrl}/api/jugador/registro`, jugador, { headers: this.headers });
   }
 
@@ -39,8 +40,8 @@ export class JugadorService {
     return this.http.patch<UsuarioDTO>(`${environment.serverUrl}/api/jugador/${id}/rol/nave`, patchRolNave, { headers: this.headers });
   }
 
-  obtenerJugador(id:number): Observable<Jugador> {
-    return this.http.get<Jugador>(`${environment.serverUrl}/api/jugador/${id}`);
+  obtenerJugador(id:number): Observable<UsuarioDTO> {
+    return this.http.get<UsuarioDTO>(`${environment.serverUrl}/api/jugador/${id}`);
   }
 
 

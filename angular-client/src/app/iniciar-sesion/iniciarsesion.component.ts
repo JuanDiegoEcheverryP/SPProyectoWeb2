@@ -21,9 +21,14 @@ export class IniciarsesionComponent {
     this.iniciarSesionService.iniciarSesion(this.jugadorLogIn).subscribe(
       (usuario: UsuarioDTO) => {
         console.log('Respuesta del backend:', usuario);
-        this.shared.guardarInformacion(usuario)
+        //this.shared.guardarInformacion(usuario)
+        // Convertir el objeto usuario a una cadena JSON
+        const usuarioString = JSON.stringify(usuario);
+        
+        // Guardar la cadena JSON en sessionStorage
+        sessionStorage.setItem("infoJugador", usuarioString);
+        
         this.router.navigate(['/menu']);
-        // Aquí puedes realizar cualquier acción con la respuesta del backend
       },
       (error) => {
         console.error('Error al iniciar sesión:', error);

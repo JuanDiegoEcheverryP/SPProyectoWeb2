@@ -10,5 +10,4 @@ public class JugadorLogInDTO {
 
     String nombre;
     String contrasena;
-    
 }

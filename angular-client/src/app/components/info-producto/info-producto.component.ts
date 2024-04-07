@@ -6,8 +6,8 @@ import { NaveService} from '../../shared/nave.service';
 import { TransaccionService} from '../../shared/transaccion.service';
 import { CompraVentaDTO} from '../../model/compra-venta-dto';
 import { ProductoDTO } from '../../model/productoDTO';
-import { UsuarioDTO } from '../../model/usuario-dto';
 import { Planeta } from '../../model/planeta';
+import { UsuarioDTO } from '../../model/usuario-dto';
 
 
 @Component({
@@ -22,12 +22,15 @@ export class InfoProductoComponent {
   idPlaneta:number=0
   idProducto:number=0
   idNave:number=0
+  idJugador=0
   total:number=0
   volTotal:number=0
   producto:ProductoDTO= new ProductoDTO(0,"",0,"",0,0,0);
   nombreBoton:string=""
   compraVentaDTO:CompraVentaDTO= new CompraVentaDTO(0,0,0,0,0)
   @Output() eventChange = new EventEmitter<Event>();
+  usuarioString: string|null= sessionStorage.getItem("infoJugador");
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
 
   constructor(
     private nave: NaveService,
@@ -61,6 +64,8 @@ export class InfoProductoComponent {
 
   obtenerInfoVenta()
   {
+    console.log("infromacion info venta: ",this.idNave,this.idProducto,this.idPlaneta);
+    
     this.bodega.recuperarProductosPorBodega(this.idNave,this.idProducto,this.idPlaneta).subscribe(
       (producto: ProductoDTO) => {
         console.log('Respuesta del backend:', producto);
@@ -76,9 +81,16 @@ export class InfoProductoComponent {
 
   obtenerPlaneta()
   {
-    this.idNave=this.shared.leerInformacion().idNave
+    if(this.usuarioString)
+    {
+      this.usuarioDTO= JSON.parse(this.usuarioString);
+      this.idNave=this.usuarioDTO.idNave
+      this.idJugador=this.usuarioDTO.id
+    }
+    //this.idNave=this.shared.leerInformacion().idNave
+    //this.idJugador=this.shared.leerInformacion().id
     //revisar porque el id esta mal
-    console.log("id nave "+this.idNave);
+    console.log("id nave "+this.idNave, );
 
     this.nave.obtenerPlanetaPorNaveId(this.idNave).subscribe(
       (planeta: Planeta) => {
@@ -106,11 +118,6 @@ export class InfoProductoComponent {
     );
   }
 
-  //manejar lo de ingresar el valor de comprar
-  //realizar las validaciones necesarias
-  //hacer peticion
-  //obtener respuesta
-  //si hay error imprimir en log por ahora
   transaccion(event: Event)
   {
     //si la cantidad es la correcta
@@ -198,11 +205,9 @@ export class InfoProductoComponent {
 }
 
 //corregir consultas
-  //corregir consulta inicio de sesion
-  //corregir envio de id en usuario (no se envia)
-  //poner en las consultas el codigo de error correspondiente
+  //poner en las consultas el codigo de error correspondiente y devolver el json 
 //conectar pantallas
 //realizar manejo de errores desde el backend y mostrar notificaciones
-//diseno total con responsiveness
+//diseno total con responsiveness u notificaciones
 
 

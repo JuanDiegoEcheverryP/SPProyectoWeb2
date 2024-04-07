@@ -4,7 +4,7 @@ import { NaveService } from '../shared/nave.service';
 import { PatchRolNave } from '../model/patch-rol-nave';
 import { JugadorService } from '../shared/jugador.service';
 import { UsuarioDTO } from '../model/usuario-dto';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InfoGeneralUsuarioService } from '../shared/info-general-usuario.service';
 
 
@@ -19,9 +19,12 @@ export class UnirseATripulacionComponent {
   patchRolNave: PatchRolNave = new PatchRolNave(0, "");
   id: number = 1
 
-  constructor(private naveService: NaveService, private jugadorSevice: JugadorService, private router: Router, private shared: InfoGeneralUsuarioService) { }
+  constructor(private naveService: NaveService,  private route: ActivatedRoute, private jugadorSevice: JugadorService, private router: Router, private shared: InfoGeneralUsuarioService) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = Number(params['idJugador']); 
+    });
     this.obtenerTripulaciones();
     this.patchRolNave.rol = 'comerciante';
   }
@@ -43,9 +46,12 @@ export class UnirseATripulacionComponent {
     if (this.patchRolNave.naveId != 0) {
       this.jugadorSevice.modificarRolYNave(this.patchRolNave, this.id).subscribe(
         (usuario: UsuarioDTO) => {
-          console.log('Respuesta del backend:', usuario);
-          this.shared.guardarInformacion(usuario)
-          console.log('Respuesta del backend:', this.shared.leerInformacion().idNave);
+          //this.shared.guardarInformacion(usuario)
+          // Convertir el objeto usuario a una cadena JSON
+          const usuarioString = JSON.stringify(usuario);
+          
+          // Guardar la cadena JSON en sessionStorage
+          sessionStorage.setItem("infoJugador", usuarioString);
           this.router.navigate(['/menu']);
         },
         (error) => {

@@ -4,7 +4,7 @@
     <form (ngSubmit)="registro()">
         <input type="text" name="nombre-de-usuario" id="txtNombreUsuario" [(ngModel)]="jugadorRegistro.nombre" placeholder="nombre de usuario">
         <input type="password" name="contrasena1" id="contrasena1" [(ngModel)]="jugadorRegistro.contrasena" placeholder="contrasena">
-        <input type="password" name="contrasena2" id="contrasena2" placeholder="digite nuevamente la contrasena">
+        <input type="password" name="contrasena2" id="contrasena2" [(ngModel)]="jugadorRegistro.contrasena2" placeholder="digite nuevamente la contrasena">
         <button type="submit" (click)="accionSeleccionada = 'crear'">
             Crear nueva tripulación
         </button>

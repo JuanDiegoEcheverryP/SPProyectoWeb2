@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'viajarPlaneta/:idJugador/:idEstrella', component:  ViajarPlanetaComponent},
   { path: 'iniciarsesion', component:  IniciarsesionComponent},
   { path: 'registro', component:  RegistroComponent},
-  { path: 'unirseTripulacion', component:  UnirseATripulacionComponent},
+  { path: 'unirseTripulacion/:idJugador', component:  UnirseATripulacionComponent},
   { path: 'menu', component:  MenuPrincipalComponent},
   { path: 'comprar/:idProducto', component:  ComprarComponent},
   { path: 'vender/:idProducto', component:  VenderComponent},

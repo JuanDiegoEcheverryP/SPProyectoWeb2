@@ -20,13 +20,19 @@ export class MenuPrincipalComponent {
   nombreNave:string=""
   tipo:string=""
   velocidad:number=0
+  usuarioString: string|null= sessionStorage.getItem("infoJugador");
 
 
   constructor(private naveService: NaveService, private jugadorSevice: JugadorService, private router: Router, private shared: InfoGeneralUsuarioService) { }
 
   ngOnInit() {
-    this.usuarioDTO=this.shared.leerInformacion();
-    console.log("revisar",this.usuarioDTO.idNave);
+    
+    if(this.usuarioString)
+    {
+      this.usuarioDTO= JSON.parse(this.usuarioString);
+    }
+    //this.shared.leerInformacion();
+    console.log("revisar id dot",this.usuarioDTO.id);
     
     this.obtenerJugador();
     this.obtenerInfoNave();
@@ -49,7 +55,7 @@ export class MenuPrincipalComponent {
   obtenerJugador()
   {
     this.jugadorSevice.obtenerJugador(this.usuarioDTO.id).subscribe(
-      (jugador: Jugador) => {
+      (jugador: UsuarioDTO) => {
         console.log('Respuesta del backend:', jugador);
         this.nombre=jugador.nombre
         this.rol=jugador.rol

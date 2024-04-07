@@ -4,6 +4,8 @@ package com.example.spaceinvaders.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +33,7 @@ public class TransaccionController {
     private StockPlanetaService stockService;
 
     @PutMapping("/venta")
-    public String procesarVenta(@RequestBody CompraVentaDTO venta) {
+    public ResponseEntity<?> procesarVenta(@RequestBody CompraVentaDTO venta) {
         boolean cantidadVenta = bodegaService.validarCantidadVenta(venta.getIdProducto(), venta.getIdNave(), venta.getCantidadProducto());
         
         if (cantidadVenta ) {
@@ -44,22 +46,24 @@ public class TransaccionController {
                 // Actualizar el stock
                 stockService.actualizarStock(venta.getIdProducto(), venta.getIdPlaneta(), venta.getCantidadProducto()*-1);
                 // Confirmar transacción
-                return "Venta exitosa";
+                return ResponseEntity.ok().body("Venta exitosa");
             } catch (Exception e) {
                 // Si hay un error, revertir transacción
                 // Registrar el error
                 // Devolver mensaje de error
-                return "Error al realizar la venta: " + e.getMessage();
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Error al realizar la venta: " + e.getMessage());
             }
         } else {
             // Devolver mensaje indicando la causa de la falla
            
-                return "No hay suficientes unidades disponibles";
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("No hay suficientes unidades disponibles");
         }
     }
     
     @PutMapping("/compra")
-    public String procesarCompra(@RequestBody CompraVentaDTO compra) {
+    public ResponseEntity<?> procesarCompra(@RequestBody CompraVentaDTO compra) {
         System.out.println(compra.getIdPlaneta() +" "+ compra.getIdProducto());
         boolean stockCompra = stockService.validarStockCompra(compra.getIdProducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
         boolean creditoNave = naveService.validarCreditoNave(compra.getIdNave(), compra.getTotal());
@@ -75,21 +79,25 @@ public class TransaccionController {
                 // Actualizar el stock
                 stockService.actualizarStock(compra.getIdProducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
                 // Confirmar transacción
-                return "Compra exitosa";
+                return ResponseEntity.ok("Compra exitosa");
             } catch (Exception e) {
                 // Si hay un error, revertir transacción
                 // Registrar el error
                 // Devolver mensaje de error
-                return "Error al realizar la compra: " + e.getMessage();
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body( "Error al realizar la compra: " + e.getMessage());
             }
         } else {
             // Devolver mensaje indicando la causa de la falla
             if (!stockCompra) {
-                return "No hay suficiente stock disponible";
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("No hay suficiente stock disponible");
             } else if (!creditoNave) {
-                return "La nave no tiene suficiente crédito";
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("La nave no tiene suficiente crédito");
             } else {
-                return "La bodega no tiene suficiente capacidad para almacenar el producto";
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("La bodega no tiene suficiente capacidad para almacenar el producto");
             }
         }
     }
