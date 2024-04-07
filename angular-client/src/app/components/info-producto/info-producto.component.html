@@ -1,0 +1,39 @@
+<img src="" alt="foto producto">
+
+<div>
+    <button id="mas" (click)="aumentar()">
+        <img src="" alt="">
+        +
+    </button>
+    <button id="mas" (click)="borrar()">
+        <img src="" alt="">
+        basura
+    </button>
+    <form (ngSubmit)="transaccion($event)">
+        <input type="text" name="cantidad" id="editCantidad" type="number" [(ngModel)]="cantidad" min="0" step="1" placeholder="cantidad a productor" (input)="actualizarTotales()">
+        <button type="submit" id="productoBoton">
+            {{nombreBoton}}
+        </button>
+    </form>
+    <div>
+        <p>Id producto {{producto.id}} </p>
+        <p>Nombre del producto {{producto.nombre}}</p>
+        <p>Volumen por unidad  {{producto.volumen}}</p>
+        <p>
+            Precio unitario  
+            <span *ngIf="this.informacionRecibir[0] === 2">
+                {{ producto.precioOferta }}
+            </span>
+            <span *ngIf="this.informacionRecibir[0] === 1">
+                {{ producto.precioDemanda }}
+            </span>
+        </p>
+        <p>Cantidad maxima de productos {{producto.max}}</p>
+    </div>
+    <div>
+        <p>Total a pagar {{total}} </p>
+        <p>volument total {{volTotal}}</p>
+    </div>
+    <button routerLink="comerciar">Regresar</button>
+</div>
+

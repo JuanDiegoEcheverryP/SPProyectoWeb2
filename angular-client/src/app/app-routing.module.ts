@@ -12,6 +12,10 @@ import { ViajarPlanetaComponent } from './viajar-planeta/viajar-planeta.componen
 import { ViajarEstrellaComponent } from './viajar-estrella/viajar-estrella.component';
 import { IniciarsesionComponent } from './iniciar-sesion/iniciarsesion.component';
 import { RegistroComponent } from './registro/registro.component';
+import { UnirseATripulacionComponent} from './unirse-a-tripulacion/unirse-a-tripulacion.component';
+import { ComprarComponent } from './comprar/comprar.component';
+import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
+import { VenderComponent } from './vender/vender.component';
 import { BarraMenuComponent } from './components/barra-menu/barra-menu.component';
 
 const routes: Routes = [
@@ -25,8 +29,11 @@ const routes: Routes = [
   { path: 'viajarPlaneta/:idJugador/:idEstrella', component:  ViajarPlanetaComponent},
   { path: 'iniciarsesion', component:  IniciarsesionComponent},
   { path: 'registro', component:  RegistroComponent},
+  { path: 'unirseTripulacion', component:  UnirseATripulacionComponent},
+  { path: 'menu', component:  MenuPrincipalComponent},
+  { path: 'comprar/:idProducto', component:  ComprarComponent},
+  { path: 'vender/:idProducto', component:  VenderComponent},
   {path: '**', component: InicioComponent} //Inicio
-
   
 ];
 

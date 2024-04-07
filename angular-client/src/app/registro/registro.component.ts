@@ -4,6 +4,9 @@ import { AvatarService } from '../shared/avatar.service';
 import { Avatar } from '../model/avatar';
 import { UsuarioDTO } from '../model/usuario-dto';
 import { Jugador } from '../model/jugador';
+import { Router } from '@angular/router';
+import { InfoGeneralUsuarioService } from '../shared/info-general-usuario.service';
+
 
 @Component({
   selector: 'app-registro',
@@ -16,8 +19,9 @@ export class RegistroComponent {
   nombreAvatar: string = "";
   avatares: Avatar[] = [];
   seleccionado: boolean = false;
+  accionSeleccionada: string="";
 
-  constructor(private registroService: JugadorService, private avatarService: AvatarService) {}
+  constructor(private registroService: JugadorService, private avatarService: AvatarService,private router: Router, private shared:InfoGeneralUsuarioService) {}
 
   ngOnInit() {
     this.imagenPredeterminada();
@@ -28,6 +32,15 @@ export class RegistroComponent {
         this.registroService.registro(this.jugadorRegistro).subscribe(
           (usuario: UsuarioDTO) => {
             console.log('Respuesta del backend:', usuario);
+            this.shared.guardarInformacion(usuario)
+            if(this.accionSeleccionada=="crear")
+            {
+              this.router.navigate(['/registrarNuevaTripulacion']);
+            }
+            else if (this.accionSeleccionada=="unirse")
+            {
+              this.router.navigate(['/unirseTripulacion']);
+            }
             // Aquí puedes realizar cualquier acción con la respuesta del backend
           },
           (error) => {

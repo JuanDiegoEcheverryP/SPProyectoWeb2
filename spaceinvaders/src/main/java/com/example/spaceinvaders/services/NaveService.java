@@ -42,8 +42,12 @@ public class NaveService {
 
     public boolean validarCapacidadBodega(Long idNave,Long idProducto,int cant)
     {
+        Float volActual=0f;
         //pedir la suma de toda la bodega de la nave 
-        Float volActual=naveRepository.sumVolByNaveId(idNave);
+        if(naveRepository.sumVolByNaveId(idNave)!=null)
+        {
+            volActual=naveRepository.sumVolByNaveId(idNave);
+        }
         //pedir el volumen del producto multiplicarlo por la cantidad 
         Float volTotalProducto=cant*naveRepository.findVolumenByProductoId(idProducto);
         //obtener la capacidad de la nave

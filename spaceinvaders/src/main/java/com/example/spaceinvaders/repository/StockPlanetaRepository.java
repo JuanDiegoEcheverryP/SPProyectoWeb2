@@ -57,7 +57,7 @@ public interface StockPlanetaRepository  extends JpaRepository<Stock_planeta, Lo
 
     @Query("SELECT sp.stock FROM Stock_planeta sp WHERE sp.planeta.id = :planetaId AND sp.producto.id = :productoId")
     Integer findStockByPlanetaIdAndProductoId(@Param("planetaId") Long planetaId, @Param("productoId") Long productoId);
-
+    
     @Transactional
     @Modifying
     @Query("UPDATE Stock_planeta sp SET sp.stock = sp.stock - :cantidad WHERE sp.planeta.id = :planetaId AND sp.producto.id = :productoId")

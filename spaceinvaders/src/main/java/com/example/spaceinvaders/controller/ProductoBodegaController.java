@@ -28,7 +28,7 @@ public class ProductoBodegaController {
     private ProductoBodegaService BodegaService;
 
     @GetMapping("nave/{idNave}/producto/{idProducto}/planeta/{idPlaneta}")
-    public ResponseEntity<ProductoDTO> recuperarProductosXPlaneta(@PathVariable Long idPlaneta, @PathVariable Long idProducto,@PathVariable Long idNave) {
+    public ResponseEntity<ProductoDTO> recuperarProductosXBodega(@PathVariable Long idPlaneta, @PathVariable Long idProducto,@PathVariable Long idNave) {
         
         ProductoDTO producto = BodegaService.recuperarProductoXBodega(idPlaneta,idProducto,idNave);
         return ResponseEntity.ok().body(producto);

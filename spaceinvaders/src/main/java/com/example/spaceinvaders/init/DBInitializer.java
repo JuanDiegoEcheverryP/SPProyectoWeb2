@@ -287,10 +287,17 @@ public class DBInitializer implements CommandLineRunner{
         for(String nombre : equipoNombre)
         {
             nombreNave=nombre;
-            credito=rand.nextFloat() * 1000+1;
+            credito=rand.nextFloat() * 10000+1;
             tiempo=rand.nextFloat() * 10000+1;
+            Integer estrellaRadom=rand.nextInt(400);
             //Nave nave=new Nave(nombreNave,credito,tiempo,planetas.get(contador),tiposNave.get(contador));
-            Nave nave=new Nave(nombreNave,credito,tiempo,estrellas.get(rand.nextInt(40000)),tiposNave.get(contador));
+            Nave nave=new Nave(nombreNave,credito,tiempo,estrellas.get(estrellaRadom),tiposNave.get(contador));
+            
+            List<Planeta> planetasEstrellaRandom=estrellas.get(estrellaRadom).getListaPlanetas();
+            if(planetasEstrellaRandom.size()>0)
+            {
+                nave.setLocalizacionPlaneta(planetasEstrellaRandom.get(rand.nextInt(planetasEstrellaRandom.size())));
+            }
             naveRepository.save(nave);
             contador++;
         }

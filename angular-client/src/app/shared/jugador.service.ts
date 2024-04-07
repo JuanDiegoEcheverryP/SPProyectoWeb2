@@ -7,6 +7,7 @@ import { Estrella } from '../model/estrella';
 import { JugadorLogIn } from '../model/jugadorLogIn';
 import { UsuarioDTO } from '../model/usuario-dto';
 import { Jugador } from '../model/jugador';
+import { PatchRolNave } from '../model/patch-rol-nave';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,14 @@ export class JugadorService {
 
   registro(jugador: Jugador): Observable<UsuarioDTO> {
     return this.http.post<UsuarioDTO>(`${environment.serverUrl}/api/jugador/registro`, jugador, { headers: this.headers });
+  }
+
+  modificarRolYNave(patchRolNave: PatchRolNave, id:number): Observable<UsuarioDTO> {
+    return this.http.patch<UsuarioDTO>(`${environment.serverUrl}/api/jugador/${id}/rol/nave`, patchRolNave, { headers: this.headers });
+  }
+
+  obtenerJugador(id:number): Observable<Jugador> {
+    return this.http.get<Jugador>(`${environment.serverUrl}/api/jugador/${id}`);
   }
 
 

@@ -10,23 +10,17 @@ import lombok.Setter;
 public class CompraVentaDTO {
 
     //COMPRA Y VENTA
-    Long idproducto;
+    private Long idProducto;
+    private Integer cantidadProducto;
+    private Long idPlaneta;
+    private Long idNave;
+    private Float total;
 
-    Integer cantidadProducto;
-
-    Long idPlaneta;
-
-    Long idNave;
-
-    Float total;
-
-
-    CompraVentaDTO(Long idproducto, Integer cantidadProducto, Long idNave,Long idBodega,Float total)
-    {
-        this.idproducto=idproducto; 
-        this.idPlaneta=idPlaneta; 
-        this.idNave=idBodega; 
-        this.cantidadProducto=cantidadProducto;
-        this.total=total;
+    public CompraVentaDTO(Long idProducto, Integer cantidadProducto, Long idPlaneta, Long idNave, Float total) {
+        this.idProducto = idProducto;
+        this.cantidadProducto = cantidadProducto;
+        this.idPlaneta = idPlaneta;
+        this.idNave = idNave;
+        this.total = total;
     }
 }

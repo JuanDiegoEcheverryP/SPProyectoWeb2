@@ -23,4 +23,8 @@ export class StockProductoService {
   listarProductosPlaneta(id:number): Observable<ProductoDTO[]> {
     return this.http.get<ProductoDTO[]>(`${environment.serverUrl}/api/stock/planeta/${id}`)
   }
+
+  recuperarProductosPorStock(idProducto:number, idPlaneta:number): Observable<ProductoDTO> {
+    return this.http.get<ProductoDTO>(`${environment.serverUrl}/api/stock/planeta/${idPlaneta}/producto/${idProducto}`)
+  }
 }

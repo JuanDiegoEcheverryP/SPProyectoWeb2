@@ -19,6 +19,10 @@ import { BarraMenuComponent } from './components/barra-menu/barra-menu.component
 import { BarraEstadisticasComponent } from './components/barra-estadisticas/barra-estadisticas.component';
 import { RegistroComponent } from './registro/registro.component';
 import { UnirseATripulacionComponent } from './unirse-a-tripulacion/unirse-a-tripulacion.component';
+import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
+import { ComprarComponent } from './comprar/comprar.component';
+import { VenderComponent } from './vender/vender.component';
+import { InfoProductoComponent } from './components/info-producto/info-producto.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { UnirseATripulacionComponent } from './unirse-a-tripulacion/unirse-a-tri
     BarraEstadisticasComponent,
     RegistroComponent,
     UnirseATripulacionComponent,
+    MenuPrincipalComponent,
+    ComprarComponent,
+    VenderComponent,
+    InfoProductoComponent,
   ],
   imports: [
     BrowserModule,

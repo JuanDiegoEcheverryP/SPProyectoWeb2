@@ -53,7 +53,7 @@ public interface NaveRepository extends JpaRepository<Nave, Long> {
     @Query("UPDATE Nave n SET n.credito = n.credito - :nuevoCredito WHERE n.id = :idNave")
     int sumarCreditoNave(@Param("idNave") Long idNave, @Param("nuevoCredito") Float nuevoCredito);
 
-    @Query("SELECT n.localizacionPlaneta FROM Nave n WHERE n.id = :idNave")
+    @Query("SELECT p FROM Nave n JOIN n.localizacionPlaneta p WHERE n.id = :idNave")
     Planeta findPlanetByNaveId(@Param("idNave") Long idNave);
 
     @Query("SELECT n.localizacion FROM Nave n WHERE n.id = :idNave")

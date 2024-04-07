@@ -68,6 +68,7 @@ public class NaveController {
 
     @GetMapping("/obtenerPlaneta/{id}")
     public Planeta obtenerPlanetaPorNaveId(@PathVariable Long id) {
+        System.out.println("EL ID"+ id);
         return naveService.obtenerPlanetaPorNaveId(id);
     }
 

@@ -1,1 +1,27 @@
-<p>unirse-a-tripulacion works!</p>
+<img src="../../assets/logo.png" alt="logo" class="logo">
+<div id="fondo">
+    <div id="cuadrado">
+        <h3>UNIRSE A UNA TRIPULACION</h3>
+        <div id="scroll">
+            <table class="tableHeader">
+                <tr class="headerRow">
+                    <th class="header">Capitan</th>
+                    <th class="header">Nombre de la nave</th>
+                    <th class="header">Tripulacion</th>
+                </tr>
+            </table>
+            <table class="contentTable" *ngFor="let tripulacion of tripulaciones">
+                <tr class="contentRow" (click)="tripulacion.cantidadTripulantes !== 20 && asignarTripulacion(tripulacion.nave.id)">
+                    <td class="content">{{tripulacion.capitan}}</td>
+                    <td class="content">{{tripulacion.nave.nombre}}</td>
+                    <td class="content">{{tripulacion.cantidadTripulantes}}/20</td>
+                </tr>
+            </table>
+        </div>
+        <button  (click)="unirse()">Unirse a una tripulación</button>
+        <select name="rol" id="roles" [(ngModel)]="patchRolNave.rol" (change)="onChangeRol($event)">
+            <option value="comerciante">comerciante</option>
+            <option value="piloto">piloto</option>
+        </select>
+    </div>
+</div>

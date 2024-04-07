@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Nave } from '../model/nave';
 import { Planeta } from '../model/planeta';
 import { Estrella } from '../model/estrella';
+import { TripulacionDTO } from '../model/tripulacion-dto';
+import { NaveDTO } from '../model/nave-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +37,14 @@ export class NaveService {
   obtenerEstrellaPorNaveId(id:number): Observable<Estrella> {
     return this.http.get<Estrella>(`${environment.serverUrl}/api/nave/obtenerEstrella/${id}`)
   }
+
+  listaTripulaciones(): Observable<TripulacionDTO[]> {
+    return this.http.get<TripulacionDTO[]>(`${environment.serverUrl}/api/nave/tripulaciones`)
+  }
+
+  obtenerNave(id:number): Observable<NaveDTO> {
+    return this.http.get<NaveDTO>(`${environment.serverUrl}/api/nave/ver/${id}`)
+  }
+
 }
+
