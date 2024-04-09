@@ -25,29 +25,29 @@
             </button>
         </div>
     </div>
-    <div *ngIf="planetas[0].id != -1">
+    <div *ngIf="planetas[0].id != -1" (click)="planetaSelected(0)">
         <ul class="flex-container space-evenly estrella1" >
             <img src="../../assets/planeta1.png">
         </ul>
-        <ul class="flex-container space-evenly estrella1" >
+        <ul class="flex-container space-evenly estrella1" [class.seleccionado]="planetaSeleccionado === 0">
             <p>{{planetas[0].nombre}}</p>
             <p *ngIf="planetas[0].habitado" class="habitado">(habitado)</p>
         </ul>
     </div>
-    <div *ngIf="planetas[1].id != -1">
+    <div *ngIf="planetas[1].id != -1" (click)="planetaSelected(1)">
         <ul class="flex-container space-evenly estrella2">
             <img src="../../assets/planeta2.png">
         </ul>
-        <ul class="flex-container space-evenly estrella2">
+        <ul class="flex-container space-evenly estrella2" [class.seleccionado]="planetaSeleccionado === 1">
             <p>{{planetas[1].nombre}}</p>
             <p *ngIf="planetas[1].habitado" class="habitado">(habitado)</p>
         </ul>
     </div>
-    <div *ngIf="planetas[2].id != -1">
+    <div *ngIf="planetas[2].id != -1" (click)="planetaSelected(2)">
         <ul class="flex-container space-evenly estrella3" >
             <img src="../../assets/planeta3.png">
         </ul>
-        <ul class="flex-container space-evenly estrella3" >
+        <ul class="flex-container space-evenly estrella3" [class.seleccionado]="planetaSeleccionado === 2">
             <p>{{planetas[2].nombre}}</p>
             <p *ngIf="planetas[2].habitado" class="habitado">(habitado)</p>
         </ul>
@@ -59,7 +59,7 @@
         <ul class="flex-container space-evenly bottomBar" >
             <li class="flex-item">
                 <button id="botonBottom">Costo de viaje: {{costo}} L.Y</button>
-                <button> Viajar</button>
+                <button class="disponible" [class.noDisponible]="planetaSeleccionado === -1" (click)="viajar()"> Viajar</button>
             </li>
             <li class="flex-item">
                 <button (click)="regresar()">Regresar</button>

@@ -1,14 +1,17 @@
 package com.example.spaceinvaders.services;
 
+import com.example.spaceinvaders.model.Camino;
 import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.DTO.TripulacionDTO;
 import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.repository.CaminoRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
 import com.example.spaceinvaders.repository.JugadorRepository;
 import com.example.spaceinvaders.repository.NaveRepository;
+import com.example.spaceinvaders.repository.PlanetaRepository;
 import com.example.spaceinvaders.repository.ProductoBodegaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,12 @@ public class NaveService {
 
     @Autowired
     private EstrellaRepository estrellaRepository;
+
+    @Autowired
+    private PlanetaRepository planetaRepository;
+
+    @Autowired
+    private CaminoRepository caminoRepository;
 
     public boolean validarCreditoNave(Long idNave,Float total)
     {
@@ -147,7 +156,7 @@ public class NaveService {
     }
 
     public List<TripulacionDTO> obtenerInfotripulaciones() {
-       
+
         List<TripulacionDTO> tripulaciones = new ArrayList<>();
 
         // Obtener las listas de capitanes y cantidad de tripulantes por nave
@@ -185,6 +194,25 @@ public class NaveService {
         System.out.println(nuevaEstrella.getNombre());
         naveRepository.actualizarLocalizacionEstrella(idNave,nuevaEstrella);
     }
-    
 
+    public void actualizarLocalizacionEstrellaConPlaneta(Long idNave, Long idPlaneta) {
+        Planeta nuevoPlaneta =planetaRepository.findById(idPlaneta).orElseThrow();
+        naveRepository.actualizarLocalizacionEstrellaConPlaneta(idNave,nuevoPlaneta);
+    }
+
+    public void actualizarCantidad(Long idNave, Float cantidad) {
+        Nave a = naveRepository.findById(idNave).orElseThrow();
+
+        naveRepository.actualizarTiempo(idNave,a.getTiempo()-cantidad);
+    }
+
+    public Camino obtenerCaminoDosEstrellas(Long idInicio, Long idFinal) {
+        List<Camino> a = caminoRepository.findCaminosPorEstrellaInicio(idInicio);
+        for (Camino camino : a) {
+            if ((long)camino.getEstrellaFinal().getId() == idFinal) {
+                return camino;
+            }
+        }
+        return new Camino(null, null, null, null);
+    }
 }

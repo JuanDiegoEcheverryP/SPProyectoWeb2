@@ -21,6 +21,7 @@ export class ViajarPlanetaComponent {
   jugadorNave:Nave = new Nave(-1,"",-1,1)
   
   public planetas: Planeta[] = [new Planeta(-1,"",false,""),new Planeta(-1,"",false,""),new Planeta(-1,"",false,"")];
+  planetaSeleccionado:number = -1
 
   costo:number = 0;
 
@@ -78,6 +79,31 @@ export class ViajarPlanetaComponent {
         this.planetas[i] = planetas[i]
       }
     });
+  }
+
+  planetaSelected(id:number): void {
+    this.planetaSeleccionado = id;
+  }
+
+  viajar():void {
+    if(this.jugadorNave.tiempo < this.costo) {
+      alert("La nave no tiene energia suficiente")
+    }
+    else {
+      let idEstrella: number = -1;
+      this.route.params.subscribe(params => {
+        idEstrella = Number(params['idEstrella']); 
+      });
+      this.naveService.viajarConPlaneta(this.jugadorNave.id,idEstrella,this.planetas[this.planetaSeleccionado].id).subscribe(result =>{
+        if(result) {
+          this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+        }
+        else {
+          alert("Ha ocurrido un error")
+        }
+      })
+      //Viajar, se le pasa idNave, id estrella, id planeta
+    }
   }
 
   regresar() {

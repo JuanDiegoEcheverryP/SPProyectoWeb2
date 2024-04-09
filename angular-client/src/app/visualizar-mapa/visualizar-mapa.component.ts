@@ -99,6 +99,10 @@ export class VisualizarMapaComponent {
     
   }
 
+  irMenu():void {
+    this.router.navigate([`menu`]);
+  }
+
   cerrarSesion() {
     this.router.navigate([``]);
   }

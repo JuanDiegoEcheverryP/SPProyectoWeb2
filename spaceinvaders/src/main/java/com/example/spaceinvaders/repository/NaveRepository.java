@@ -70,4 +70,13 @@ public interface NaveRepository extends JpaRepository<Nave, Long> {
     @Query("UPDATE Nave n SET n.localizacion = :estrella WHERE n.id = :idNave")
     void actualizarLocalizacionEstrella(@Param("idNave") Long idNave, @Param("estrella") Estrella estrella);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE Nave n SET n.localizacionPlaneta = :planeta WHERE n.id = :idNave")
+    void actualizarLocalizacionEstrellaConPlaneta(@Param("idNave") Long idNave, @Param("planeta") Planeta nuevoPlaneta );
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Nave n SET n.tiempo = :tiempo WHERE n.id = :idNave")
+    void actualizarTiempo(@Param("idNave") Long idNave, @Param("tiempo") Float tiempo );
 }

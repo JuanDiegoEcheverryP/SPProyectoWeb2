@@ -82,11 +82,14 @@ public class CaminoService {
     }
 
     public Camino obtenerCaminoDosEstrellas(Long idInicio, Long idFinal) {
-        System.out.println(idInicio);
-        System.out.println(idFinal);
         List<Camino> a = caminoRepository.findCaminosPorEstrellaInicio(idInicio);
         for (Camino camino : a) {
-            if (camino.getEstrellaFinal().getId() == idFinal) {
+            //System.out.println("-----------");
+            //System.out.println(camino.getEstrellaInicio().getId());
+            //System.out.println(camino.getEstrellaFinal().getId());
+            //System.out.println(idFinal);
+            //System.out.println(camino.getEstrellaFinal().getId() == idFinal);
+            if ((long)camino.getEstrellaFinal().getId() == idFinal) {
                 return camino;
             }
         }

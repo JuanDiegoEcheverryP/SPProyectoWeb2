@@ -31,7 +31,7 @@
     <button *ngIf="EstrellaSeleccionada.id != -1" class="botonRutas botones" (click)="infoEstrellaSeleccionada(EstrellaSeleccionada.id)">Ver informacion {{EstrellaSeleccionada.nombre}}</button>
     <button *ngIf="EstrellaSeleccionada.id != -1" class="botonViajar botones" (click)="viajarEstrellaSeleccionada(EstrellaSeleccionada)">Viajar {{EstrellaSeleccionada.nombre}}</button>
     
-    <diV class="botonRegresar botones">
+    <diV class="botonRegresar botones" (click)="irMenu()">
         <button>Regresar</button>
     </diV>
     <table>

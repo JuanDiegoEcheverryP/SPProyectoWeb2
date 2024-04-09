@@ -7,6 +7,8 @@ import { Planeta } from '../model/planeta';
 import { Estrella } from '../model/estrella';
 import { TripulacionDTO } from '../model/tripulacion-dto';
 import { NaveDTO } from '../model/nave-dto';
+import { RegistroDTO } from '../model/registro-dto';
+import { UsuarioDTO } from '../model/usuario-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +46,10 @@ export class NaveService {
 
   obtenerNave(id:number): Observable<NaveDTO> {
     return this.http.get<NaveDTO>(`${environment.serverUrl}/api/nave/ver/${id}`)
+  }
+
+  viajarConPlaneta(id:number,idEstrella:number, idPlaneta:number): Observable<boolean> {
+    return this.http.put<boolean>(`${environment.serverUrl}/api/nave/actualizarBien/${id}/${idEstrella}/${idPlaneta}`,id,{ headers: this.headers })
   }
 
 }

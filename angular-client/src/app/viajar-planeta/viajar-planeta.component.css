@@ -156,11 +156,30 @@
     left: 65vw;
 }
 
+.estrella1:hover, .estrella2:hover, .estrella3:hover {
+    cursor: pointer;
+}
+
 .habitado {
     margin-top: 55px !important;
     font-size: 14px !important;
 }
 
+.seleccionado {
+    color: goldenrod;
+    text-shadow: 3px 3px #3b1d00;
+}
+
+.noDisponible {
+    background-color: #3e3e3e71;
+    border: none !important;
+    color: #838383bc;
+    cursor: not-allowed !important;
+}
+
+.disponible {
+    cursor:pointer;
+}
 
 /*
 .estrella2 {
