@@ -31,6 +31,7 @@
         </ul>
         <ul class="flex-container space-evenly estrella1" >
             <p>{{planetas[0].nombre}}</p>
+            <p *ngIf="planetas[0].habitado" class="habitado">(habitado)</p>
         </ul>
     </div>
     <div *ngIf="planetas[1].id != -1">
@@ -39,6 +40,7 @@
         </ul>
         <ul class="flex-container space-evenly estrella2">
             <p>{{planetas[1].nombre}}</p>
+            <p *ngIf="planetas[1].habitado" class="habitado">(habitado)</p>
         </ul>
     </div>
     <div *ngIf="planetas[2].id != -1">
@@ -47,33 +49,16 @@
         </ul>
         <ul class="flex-container space-evenly estrella3" >
             <p>{{planetas[2].nombre}}</p>
+            <p *ngIf="planetas[2].habitado" class="habitado">(habitado)</p>
         </ul>
     </div>
     <div *ngIf="planetas[0].id == -1" class="anuncio">
         <p>La estrella no tiene planetas</p>
     </div>
-    <!--
-    <div>
-        <ul class="flex-container space-evenly estrella2" >
-            <img src="../../assets/planeta2.png">
-        </ul>
-        <ul class="flex-container space-evenly estrella2" >
-            <p>{{planetas[1].nombre}}</p>
-        </ul>
-    </div>
-    <div>
-        <ul class="flex-container space-evenly estrella3" >
-            <img src="../../assets/planeta3.png">
-        </ul>
-        <ul class="flex-container space-evenly estrella3" >
-            <p>{{planetas[2].nombre}}</p>
-        </ul>
-    </div>
-    -->
     <div>
         <ul class="flex-container space-evenly bottomBar" >
             <li class="flex-item">
-                <button id="botonBottom">Costo de viaje: XXXXXXXX</button>
+                <button id="botonBottom">Costo de viaje: {{costo}} L.Y</button>
                 <button> Viajar</button>
             </li>
             <li class="flex-item">

@@ -1,7 +1,7 @@
 package com.example.spaceinvaders.services;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.spaceinvaders.model.Camino;
 import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.model.DTO.EstrellaDTO;
 import com.example.spaceinvaders.repository.CaminoRepository;
 
 @Service
@@ -60,5 +62,34 @@ public class CaminoService {
 
     public List<Estrella> obtenerEstrellaFinalPorEstrellaInicioId(Long id) {
         return caminoRepository.obtenerEstrellaFinalPorEstrellaInicioId(id);
+    }
+
+    public List<EstrellaDTO> obtenerEstrellasConectadasPorEstrellaInicioId(Long id) {
+        List<Camino> a = caminoRepository.findCaminosPorEstrellaInicio(id);
+        List<EstrellaDTO> estrellasFinales = new ArrayList<EstrellaDTO>();
+        for (Camino camino : a) {
+            boolean habitado = false;
+            for (Planeta planeta : camino.getEstrellaFinal().getListaPlanetas()) {
+                if (planeta.getHabitado()) {
+                    habitado= true;
+                }
+            }
+            EstrellaDTO nueva = new EstrellaDTO(camino.getEstrellaFinal().getId(), camino.getEstrellaFinal().getNombre(), camino.getDistancia(), habitado);
+            estrellasFinales.add(nueva);
+        }
+        return estrellasFinales;
+        
+    }
+
+    public Camino obtenerCaminoDosEstrellas(Long idInicio, Long idFinal) {
+        System.out.println(idInicio);
+        System.out.println(idFinal);
+        List<Camino> a = caminoRepository.findCaminosPorEstrellaInicio(idInicio);
+        for (Camino camino : a) {
+            if (camino.getEstrellaFinal().getId() == idFinal) {
+                return camino;
+            }
+        }
+        return new Camino(null, null, null, null);
     }
 }

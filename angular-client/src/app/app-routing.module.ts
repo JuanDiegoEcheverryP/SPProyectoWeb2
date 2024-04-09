@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'comerciar/:idJugador', component: ComerciarComponent },
   { path: 'bodega/:idJugador', component: BodegaComponent },
   { path: 'visualizarMapa/:idJugador', component: VisualizarMapaComponent },
-  { path: 'verInfoEstrella/:idJugador', component:  VerInfoEstrellaComponent},
+  { path: 'verInfoEstrella/:idJugador/:idEstrella', component:  VerInfoEstrellaComponent},
   { path: 'viajarEstrella/:idJugador/:idEstrella', component:  ViajarEstrellaComponent},
   { path: 'viajarPlaneta/:idJugador/:idEstrella', component:  ViajarPlanetaComponent},
   { path: 'iniciarsesion', component:  IniciarsesionComponent},

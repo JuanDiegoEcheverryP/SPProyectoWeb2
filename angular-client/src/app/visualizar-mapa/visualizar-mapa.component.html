@@ -25,10 +25,31 @@
             </button>
         </div>
     </div>
-    <button class="botonVerInformacionEstrella botones">Ver informacion estrella</button>
-    <button class="botonRutas botones">Buscar rutas indirectas</button>
-    <button class="botonViajar botones">Viajar</button>
+    <button class="botonVerInformacionEstrella botones" (click)="infoEstrellaActual()">Ver informacion estrella actual</button>
+    <button class="botonViajarInterno botones" (click)="cambiarPlanetaActual()">Viajar a otro planeta de la estrella</button>
+    <button class="separador botones"></button>
+    <button *ngIf="EstrellaSeleccionada.id != -1" class="botonRutas botones" (click)="infoEstrellaSeleccionada(EstrellaSeleccionada.id)">Ver informacion {{EstrellaSeleccionada.nombre}}</button>
+    <button *ngIf="EstrellaSeleccionada.id != -1" class="botonViajar botones" (click)="viajarEstrellaSeleccionada(EstrellaSeleccionada)">Viajar {{EstrellaSeleccionada.nombre}}</button>
+    
     <diV class="botonRegresar botones">
         <button>Regresar</button>
     </diV>
+    <table>
+        <caption>Lista de planetas</caption>
+        <thead>
+            <tr>
+                <th scope="col">Estrella</th>
+                <th scope="col">Distancia</th>
+                <th scope="col">Habitado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let estrella of estrellasCamino; let i = index" (click)="seleccionado(estrella, i)" [class.fila-seleccionada]="filaSeleccionada === i">
+                <td data-label="Account">{{estrella.nombre}}</td>
+                <td data-label="Due Date">{{estrella.distancia}} L.Y</td>
+                <td data-label="Due Date">{{estrella.habitado}}</td>
+            </tr>
+          </tbody>
+          
+    </table>
 </div>

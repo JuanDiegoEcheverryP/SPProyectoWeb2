@@ -5,6 +5,11 @@ import { JugadorService } from '../shared/jugador.service';
 import { Estrella } from '../model/estrella';
 import { NaveService } from '../shared/nave.service';
 import { Planeta } from '../model/planeta';
+import { CaminoService } from '../shared/camino.service';
+import { Camino } from '../model/camino';
+import { EstrellaDTO } from '../model/estrellaDTO';
+import { PlanetaService } from '../shared/planeta.service';
+import { Element } from '@angular/compiler';
 
 @Component({
   selector: 'app-visualizar-mapa',
@@ -12,17 +17,24 @@ import { Planeta } from '../model/planeta';
   styleUrl: './visualizar-mapa.component.css'
 })
 export class VisualizarMapaComponent {
-
   //Barra de arriba
   idJugador:number = 0
   estrellaJugador: Estrella = new Estrella(-1,"",-1,-1,-1);
   planetaNave: Planeta = new Planeta(-1,"Desconocido",false,"")
   jugadorNave:Nave = new Nave(-1,"",-1,1)
 
+  estrellasCamino: EstrellaDTO[] = [];
+
+  //Para ver info o viajar
+  filaSeleccionada: number | null = null;
+  EstrellaSeleccionada:EstrellaDTO = new EstrellaDTO(-1,"",0,false);
+
   constructor(
     private route: ActivatedRoute,
     private jugadorService: JugadorService,
     private naveService: NaveService,
+    private caminoService: CaminoService,
+    private planetaService: PlanetaService,
     private router: Router
   ) { }
 
@@ -38,6 +50,8 @@ export class VisualizarMapaComponent {
       this.jugadorNave = nave
       this.naveService.obtenerEstrellaPorNaveId(this.jugadorNave.id).subscribe(estrella => {
         this.estrellaJugador = estrella
+        this.cargarCaminos()
+        
       })
       this.naveService.obtenerPlanetaPorNaveId(this.jugadorNave.id).subscribe(planeta => {
         if(planeta != null) {
@@ -47,7 +61,47 @@ export class VisualizarMapaComponent {
     })
   }
 
+  cargarCaminos():void {
+    this.caminoService.obtenerCaminosPorEstrellaId(this.estrellaJugador.id).subscribe(camino => {
+      camino.forEach(element => {
+        this.estrellasCamino.push(element)
+      })
+    })
+    
+  }
+
+  infoEstrellaSeleccionada(id:number):void {
+    this.router.navigate([`verInfoEstrella/${this.idJugador}/${id}`]);
+  }
+
+  seleccionado(estrella:EstrellaDTO, index:number):void {
+    this.EstrellaSeleccionada = estrella;
+    this.filaSeleccionada = index;
+  }
+
+  cambiarPlanetaActual():void {
+    this.router.navigate([`viajarPlaneta/${this.idJugador}/${this.estrellaJugador.id}`]);
+  }
+
+  infoEstrellaActual():void {
+    this.router.navigate([`verInfoEstrella/${this.idJugador}/${this.estrellaJugador.id}`]);
+  }
+
+  viajarEstrellaSeleccionada(estrella:EstrellaDTO):void {
+    this.planetaService.listarPlanetasPorId(estrella.id).subscribe(planetas => {
+      if (planetas.length == 0) {
+        this.router.navigate([`viajarEstrella/${this.idJugador}/${estrella.id}`]);
+      }
+      else {
+        this.router.navigate([`viajarPlaneta/${this.idJugador}/${estrella.id}`]);
+      }
+    })
+    
+  }
+
   cerrarSesion() {
     this.router.navigate([``]);
   }
+
+  
 }

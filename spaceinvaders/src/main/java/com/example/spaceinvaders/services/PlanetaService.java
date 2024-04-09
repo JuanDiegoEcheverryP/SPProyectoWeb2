@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.spaceinvaders.model.Planeta;
-import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.repository.PlanetaRepository;
 
 @Service

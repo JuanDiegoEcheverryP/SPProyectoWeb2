@@ -25,5 +25,8 @@ public interface CaminoRepository extends JpaRepository<Camino, Long> {
 
     @Query("SELECT c.estrellaFinal FROM Camino c WHERE c.estrellaInicio.id = :idEstrella")
     List<Estrella> obtenerEstrellaFinalPorEstrellaInicioId(@Param("idEstrella") Long idEstrella);
+
+    //@Query("SELECT c FROM Camino c WHERE c.estrellaInicio.id = :idInicio AND c.estrellaFinal.id = idFinal")
+    //Camino obtenerCaminoDosEstrellas(@Param("idInicio") Long idInicio,@Param("idFinal") Long idFinal);
 }
 

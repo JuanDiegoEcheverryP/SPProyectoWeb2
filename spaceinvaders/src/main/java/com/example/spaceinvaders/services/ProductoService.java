@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.spaceinvaders.model.Producto;
 import com.example.spaceinvaders.model.ProductoBodega;
-import com.example.spaceinvaders.repository.ProductoBodegaRepository;
 import com.example.spaceinvaders.repository.ProductoRepository;
 
 @Service

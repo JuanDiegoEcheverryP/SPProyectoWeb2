@@ -8,6 +8,7 @@ import { Planeta } from '../model/planeta';
 import { PlanetaService } from '../shared/planeta.service';
 import { Estrella } from '../model/estrella';
 import { JugadorService } from '../shared/jugador.service';
+import { EstrellaService } from '../shared/estrella.service';
 
 @Component({
   selector: 'app-ver-info-estrella',
@@ -21,6 +22,7 @@ export class VerInfoEstrellaComponent {
   planetaNave: Planeta = new Planeta(-1,"Desconocido",false,"")
   jugadorNave:Nave = new Nave(-1,"",-1,1)
   
+  EstrellaVista: Estrella = new Estrella(-1,"",-1,-1,-1);
   naves: Nave[] = [];
   planeta: Planeta[] = [];
 
@@ -31,6 +33,7 @@ export class VerInfoEstrellaComponent {
     private naveService: NaveService,
     private planetaService: PlanetaService,
     private jugadorService: JugadorService,
+    private estrellaService: EstrellaService,
     private router: Router
   ) { }
 
@@ -57,7 +60,14 @@ export class VerInfoEstrellaComponent {
   }
 
   cargarContenido():void {
-    this.naveService.listarNavesPorEstrella(this.estrellaJugador.id).subscribe(naves => {
+    let idEstrella:number = 0
+    this.route.params.subscribe(params => {
+      idEstrella = Number(params['idEstrella']); 
+    });
+    this.estrellaService.obtenerEstrellaPorId(idEstrella).subscribe(estrella => {
+      this.EstrellaVista = estrella;
+    })
+    this.naveService.listarNavesPorEstrella(idEstrella).subscribe(naves => {
       naves.forEach(element => {
         this.naveService.obtenerPlanetaPorNaveId(element.id).subscribe(planeta => {
           this.naves.push(element)
@@ -66,18 +76,16 @@ export class VerInfoEstrellaComponent {
           }
           else {
             this.planeta.push(new Planeta(-1,"Ciberespacio (Ningun planeta)",false,""))
-            alert("Poniendole un planeta de la estrella en h2 para la estrella donde esta, se mostrará el sistema solar")
+            //alert("Poniendole un planeta de la estrella en h2 para la estrella donde esta, se mostrará el sistema solar")
           }
         })        
       });
     });
 
-    this.planetaService.listarPlanetasPorId(this.estrellaJugador.id).subscribe(planetas => {
+    this.planetaService.listarPlanetasPorId(idEstrella).subscribe(planetas => {
       for (let i = 0; i < planetas.length; i++) {
         this.planetas[i] = planetas[i]
       }
-      console.log(this.planetas);
-      
     });
   }
 

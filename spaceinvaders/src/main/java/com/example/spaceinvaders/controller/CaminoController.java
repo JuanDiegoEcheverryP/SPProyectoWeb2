@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spaceinvaders.model.Camino;
 import com.example.spaceinvaders.model.Estrella;
+import com.example.spaceinvaders.model.DTO.EstrellaDTO;
 import com.example.spaceinvaders.services.CaminoService;
 
 @RestController
@@ -25,10 +26,21 @@ public class CaminoController {
     public List<Camino> listarCaminos(@PathVariable Long id) {
         List<Camino> a =caminoService.listarCaminos(id);
         return a;
-    } 
+    }
+
+    @GetMapping("/inicioFinal/{idInicio}/{idFinal}")
+    public Camino obtenerCaminoDosEstrellas(@PathVariable Long idInicio,@PathVariable Long idFinal) {
+        return caminoService.obtenerCaminoDosEstrellas(idInicio,idFinal);
+    }
 
     @GetMapping("/estrellaFinal/{id}")
     public List<Estrella> obtenerEstrellaFinalPorEstrellaInicioId(@PathVariable Long id) {
         return caminoService.obtenerEstrellaFinalPorEstrellaInicioId(id);
-    } 
+    }
+
+    @GetMapping("/estrellasConectadas/{id}")
+    public List<EstrellaDTO> obtenerEstrellasConectadasPorEstrellaInicioId(@PathVariable Long id) {
+        return caminoService.obtenerEstrellasConectadasPorEstrellaInicioId(id);
+        
+    }
 }

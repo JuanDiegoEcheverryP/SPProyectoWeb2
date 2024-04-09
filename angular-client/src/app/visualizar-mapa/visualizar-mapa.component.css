@@ -89,7 +89,12 @@
     font-family: 'Koulen';
     border: none;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.botones:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
 }
 
 .botonVerInformacionEstrella {
@@ -97,19 +102,37 @@
     top: 30vh;
 }
 
-.botonRutas {
+.botonViajarInterno {
     left: 75vw;
     top: 40vh;
 }
 
-.botonViajar {
+.separador {
+    left: 75vw;
+    height: 2px;
+    background-color: #f0f0f0;
+    top: 47.5vh;
+}
+
+.botonRutas {
     left: 75vw;
     top: 50vh;
 }
 
+.botonViajar {
+    left: 75vw;
+    top: 60vh;
+}
+
+
 .botonRegresar {
     left: 75vw;
     top: 80vh;
+}
+
+div.botonRegresar.botones > button:hover {
+    background-color: #f0f0f0 ;
+    cursor: pointer;
 }
 
 .botonRegresar button {
@@ -122,3 +145,101 @@
     font-size: 24px;
 }
 
+table {
+    position: absolute;
+    top: 150px;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    left: 10px;
+    padding: 0;
+    width: 400px;
+    table-layout: fixed;
+}
+
+table caption {
+    font-size: 1.5em;
+    letter-spacing: 5px;
+    margin: .5em 0 .75em;
+    padding: 10px;
+    background-color: #FFf;
+    font-family: 'Koulen';
+} 
+
+table tr {
+    background-color: #f2f2f287;
+    border: 1px solid #ddd;
+    padding: .35em;
+    font-family: 'Koulen';
+    font-size: 16px;
+}
+table thead {
+    background-color: rgb(232, 232, 232);
+} 
+table th,table td {
+    padding: .625em;
+    text-align: center;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }  
+    table caption {
+        font-size: 1.3em;
+    }
+    
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+    
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    table td:last-child {
+        border-bottom: 0;
+    }
+}
+
+tr:hover {
+    background-color: rgba(220, 220, 220, 0.8) !important;
+    cursor: pointer;
+}
+tr:active {
+    background-color: rgb(214, 214, 174) !important;
+}
+
+.fila-seleccionada {
+    background-color: #f0f0f0 !important; /* Cambia esto por el color que prefieras */
+}
+  

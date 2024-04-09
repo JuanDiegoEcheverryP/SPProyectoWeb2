@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import java.util.Optional;
 
 import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Camino;

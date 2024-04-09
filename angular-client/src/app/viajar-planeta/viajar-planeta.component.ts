@@ -6,6 +6,7 @@ import { JugadorService } from '../shared/jugador.service';
 import { NaveService } from '../shared/nave.service';
 import { Estrella } from '../model/estrella';
 import { Nave } from '../model/nave';
+import { CaminoService } from '../shared/camino.service';
 
 @Component({
   selector: 'app-viajar-planeta',
@@ -21,16 +22,18 @@ export class ViajarPlanetaComponent {
   
   public planetas: Planeta[] = [new Planeta(-1,"",false,""),new Planeta(-1,"",false,""),new Planeta(-1,"",false,"")];
 
+  costo:number = 0;
+
   constructor(
     private route: ActivatedRoute,
     private planetaService: PlanetaService,
     private jugadorService: JugadorService,
     private naveService: NaveService,
+    private caminoService: CaminoService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    //Falta calcular mostrar el costo de viaje
     this.cargar()
   }
 
@@ -58,6 +61,19 @@ export class ViajarPlanetaComponent {
       idEstrella = Number(params['idEstrella']); 
     });
     this.planetaService.listarPlanetasPorId(idEstrella).subscribe(planetas => {
+      if(planetas.length != 0 && idEstrella != this.estrellaJugador.id) {
+        this.caminoService.obtenerCaminoPorEstrellas(this.estrellaJugador.id,idEstrella).subscribe(camino => {
+          if(camino.id == null) {
+            this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+          }
+          else {
+            this.costo = camino.distancia;
+          }
+        })
+      }
+      else {
+        
+      }
       for (let i = 0; i < planetas.length; i++) {
         this.planetas[i] = planetas[i]
       }
