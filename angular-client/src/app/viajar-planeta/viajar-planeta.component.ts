@@ -7,6 +7,7 @@ import { NaveService } from '../shared/nave.service';
 import { Estrella } from '../model/estrella';
 import { Nave } from '../model/nave';
 import { CaminoService } from '../shared/camino.service';
+import { UsuarioDTO } from '../model/usuario-dto';
 
 @Component({
   selector: 'app-viajar-planeta',
@@ -14,6 +15,8 @@ import { CaminoService } from '../shared/camino.service';
   styleUrl: './viajar-planeta.component.css'
 })
 export class ViajarPlanetaComponent {
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  
   //Barra de arriba
   idJugador:number = 0
   estrellaJugador: Estrella = new Estrella(-1,"",-1,-1,-1);
@@ -25,6 +28,8 @@ export class ViajarPlanetaComponent {
 
   costo:number = 0;
 
+  usuarioString: string|null= sessionStorage.getItem("infoJugador");
+
   constructor(
     private route: ActivatedRoute,
     private planetaService: PlanetaService,
@@ -35,14 +40,15 @@ export class ViajarPlanetaComponent {
   ) { }
 
   ngOnInit(): void {
+    if(this.usuarioString){
+      this.usuarioDTO= JSON.parse(this.usuarioString);
+    }
     this.cargar()
   }
 
   cargar(): void {
-    this.route.params.subscribe(params => {
-      this.idJugador = Number(params['idJugador']); 
-    });
-    this.jugadorService.obtenerNaveJugador(this.idJugador).subscribe(nave => {
+
+    this.jugadorService.obtenerNaveJugador(this.usuarioDTO.id).subscribe(nave => {
       this.jugadorNave = nave
       this.naveService.obtenerEstrellaPorNaveId(this.jugadorNave.id).subscribe(estrella => {
         this.estrellaJugador = estrella
@@ -96,7 +102,7 @@ export class ViajarPlanetaComponent {
       });
       this.naveService.viajarConPlaneta(this.jugadorNave.id,idEstrella,this.planetas[this.planetaSeleccionado].id).subscribe(result =>{
         if(result) {
-          this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+          this.router.navigate([`visualizarMapa`]);
         }
         else {
           alert("Ha ocurrido un error")
@@ -110,7 +116,7 @@ export class ViajarPlanetaComponent {
     this.route.params.subscribe(params => {
       this.idJugador = Number(params['idJugador']); 
     });
-    this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+    this.router.navigate([`visualizarMapa`]);
   }
 
   cerrarSesion() {

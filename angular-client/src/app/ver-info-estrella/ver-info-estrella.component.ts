@@ -9,6 +9,7 @@ import { PlanetaService } from '../shared/planeta.service';
 import { Estrella } from '../model/estrella';
 import { JugadorService } from '../shared/jugador.service';
 import { EstrellaService } from '../shared/estrella.service';
+import { UsuarioDTO } from '../model/usuario-dto';
 
 @Component({
   selector: 'app-ver-info-estrella',
@@ -16,6 +17,8 @@ import { EstrellaService } from '../shared/estrella.service';
   styleUrl: './ver-info-estrella.component.css'
 })
 export class VerInfoEstrellaComponent {
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  
   //Barra de arriba
   idJugador:number = 0
   estrellaJugador: Estrella = new Estrella(-1,"",-1,-1,-1);
@@ -28,6 +31,8 @@ export class VerInfoEstrellaComponent {
 
   public planetas: Planeta[] = [new Planeta(-1,"",false,""),new Planeta(-1,"",false,""),new Planeta(-1,"",false,"")];
 
+  usuarioString: string|null= sessionStorage.getItem("infoJugador");
+
   constructor(
     private route: ActivatedRoute,
     private naveService: NaveService,
@@ -38,14 +43,14 @@ export class VerInfoEstrellaComponent {
   ) { }
 
   ngOnInit(): void {
+    if(this.usuarioString){
+      this.usuarioDTO= JSON.parse(this.usuarioString);
+    }
     this.cargar()
   }
 
   cargar(): void {
-    this.route.params.subscribe(params => {
-      this.idJugador = Number(params['idJugador']); 
-    });
-    this.jugadorService.obtenerNaveJugador(this.idJugador).subscribe(nave => {
+    this.jugadorService.obtenerNaveJugador(this.usuarioDTO.id).subscribe(nave => {
       this.jugadorNave = nave
       this.naveService.obtenerEstrellaPorNaveId(this.jugadorNave.id).subscribe(estrella => {
         this.estrellaJugador = estrella
@@ -93,7 +98,7 @@ export class VerInfoEstrellaComponent {
     this.route.params.subscribe(params => {
       this.idJugador = Number(params['idJugador']); 
     });
-    this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+    this.router.navigate([`visualizarMapa`]);
   }
 
   cerrarSesion() {

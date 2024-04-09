@@ -10,6 +10,7 @@ import { Planeta } from '../model/planeta';
 import { JugadorService } from '../shared/jugador.service';
 import { Nave } from '../model/nave';
 import { NaveService } from '../shared/nave.service';
+import { UsuarioDTO } from '../model/usuario-dto';
 
 @Component({
   selector: 'app-bodega',
@@ -17,6 +18,8 @@ import { NaveService } from '../shared/nave.service';
   styleUrl: './bodega.component.css'
 })
 export class BodegaComponent {
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  
   //Barra de arriba
   idJugador:number = 0
   estrellaJugador: Estrella = new Estrella(-1,"",-1,-1,-1);
@@ -30,6 +33,8 @@ export class BodegaComponent {
   productosBodega: ProductoBodega[] = [];
   productos: Producto[] = [];
 
+  usuarioString: string|null= sessionStorage.getItem("infoJugador");
+
   constructor(
     private route: ActivatedRoute,
     private productoBodega: ProductoBodegaService,
@@ -40,14 +45,14 @@ export class BodegaComponent {
   ) { }
 
   ngOnInit(): void {
+    if(this.usuarioString){
+      this.usuarioDTO= JSON.parse(this.usuarioString);
+    }
     this.cargar()
   }
 
   cargar(): void {
-    this.route.params.subscribe(params => {
-      this.idJugador = Number(params['idJugador']); 
-    });
-    this.jugadorService.obtenerNaveJugador(this.idJugador).subscribe(nave => {
+  this.jugadorService.obtenerNaveJugador(this.usuarioDTO.id).subscribe(nave => {
       this.jugadorNave = nave
       this.naveService.obtenerEstrellaPorNaveId(this.jugadorNave.id).subscribe(estrella => {
         this.estrellaJugador = estrella

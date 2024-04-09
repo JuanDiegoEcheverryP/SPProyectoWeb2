@@ -7,6 +7,7 @@ import { JugadorService } from '../shared/jugador.service';
 import { NaveService } from '../shared/nave.service';
 import { Nave } from '../model/nave';
 import { CaminoService } from '../shared/camino.service';
+import { UsuarioDTO } from '../model/usuario-dto';
 
 @Component({
   selector: 'app-viajar-estrella',
@@ -14,6 +15,8 @@ import { CaminoService } from '../shared/camino.service';
   styleUrl: './viajar-estrella.component.css'
 })
 export class ViajarEstrellaComponent {
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  
   //Barra de arriba
   idJugador:number = 0
   estrellaJugador: Estrella = new Estrella(-1,"",-1,-1,-1);
@@ -25,6 +28,8 @@ export class ViajarEstrellaComponent {
 
   costo:number = 0;
 
+  usuarioString: string|null= sessionStorage.getItem("infoJugador");
+
   constructor(
     private route: ActivatedRoute,
     private estrellaService: EstrellaService,
@@ -35,15 +40,14 @@ export class ViajarEstrellaComponent {
   ) { }
 
   ngOnInit(): void {
-    this.cargar();
-    
+    if(this.usuarioString){
+      this.usuarioDTO= JSON.parse(this.usuarioString);
+    }
+    this.cargar()
   }
 
   cargar(): void {
-    this.route.params.subscribe(params => {
-      this.idJugador = Number(params['idJugador']); 
-    });
-    this.jugadorService.obtenerNaveJugador(this.idJugador).subscribe(nave => {
+    this.jugadorService.obtenerNaveJugador(this.usuarioDTO.id).subscribe(nave => {
       this.jugadorNave = nave
       this.naveService.obtenerEstrellaPorNaveId(this.jugadorNave.id).subscribe(estrella => {
         this.estrellaJugador = estrella
@@ -67,7 +71,7 @@ export class ViajarEstrellaComponent {
 
       this.caminoService.obtenerCaminoPorEstrellas(this.estrellaJugador.id,idEstrella).subscribe(camino => {
         if(camino.id == null) {
-          this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+          this.router.navigate([`visualizarMapa`]);
         }
         else {
           this.costo = camino.distancia;
@@ -87,7 +91,7 @@ export class ViajarEstrellaComponent {
       });
       this.naveService.viajarConPlaneta(this.jugadorNave.id,idEstrella,-1).subscribe(result =>{
         if(result) {
-          this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+          this.router.navigate([`visualizarMapa`]);
         }
         else {
           alert("Ha ocurrido un error")
@@ -101,7 +105,7 @@ export class ViajarEstrellaComponent {
     this.route.params.subscribe(params => {
       this.idJugador = Number(params['idJugador']); 
     });
-    this.router.navigate([`visualizarMapa/${this.idJugador}`]);
+    this.router.navigate([`visualizarMapa`]);
   }
 
   cerrarSesion() {

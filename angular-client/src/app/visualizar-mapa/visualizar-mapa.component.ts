@@ -10,6 +10,7 @@ import { Camino } from '../model/camino';
 import { EstrellaDTO } from '../model/estrellaDTO';
 import { PlanetaService } from '../shared/planeta.service';
 import { Element } from '@angular/compiler';
+import { UsuarioDTO } from '../model/usuario-dto';
 
 @Component({
   selector: 'app-visualizar-mapa',
@@ -17,6 +18,8 @@ import { Element } from '@angular/compiler';
   styleUrl: './visualizar-mapa.component.css'
 })
 export class VisualizarMapaComponent {
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  
   //Barra de arriba
   idJugador:number = 0
   estrellaJugador: Estrella = new Estrella(-1,"",-1,-1,-1);
@@ -29,6 +32,8 @@ export class VisualizarMapaComponent {
   filaSeleccionada: number | null = null;
   EstrellaSeleccionada:EstrellaDTO = new EstrellaDTO(-1,"",0,false);
 
+  usuarioString: string|null= sessionStorage.getItem("infoJugador");
+
   constructor(
     private route: ActivatedRoute,
     private jugadorService: JugadorService,
@@ -39,14 +44,14 @@ export class VisualizarMapaComponent {
   ) { }
 
   ngOnInit(): void {
+    if(this.usuarioString){
+      this.usuarioDTO= JSON.parse(this.usuarioString);
+    }
     this.cargarBarra()
   }
 
   cargarBarra(): void {
-    this.route.params.subscribe(params => {
-      this.idJugador = Number(params['idJugador']); 
-    });
-    this.jugadorService.obtenerNaveJugador(this.idJugador).subscribe(nave => {
+    this.jugadorService.obtenerNaveJugador(this.usuarioDTO.id).subscribe(nave => {
       this.jugadorNave = nave
       this.naveService.obtenerEstrellaPorNaveId(this.jugadorNave.id).subscribe(estrella => {
         this.estrellaJugador = estrella
@@ -71,7 +76,7 @@ export class VisualizarMapaComponent {
   }
 
   infoEstrellaSeleccionada(id:number):void {
-    this.router.navigate([`verInfoEstrella/${this.idJugador}/${id}`]);
+    this.router.navigate([`verInfoEstrella/${id}`]);
   }
 
   seleccionado(estrella:EstrellaDTO, index:number):void {
@@ -80,20 +85,20 @@ export class VisualizarMapaComponent {
   }
 
   cambiarPlanetaActual():void {
-    this.router.navigate([`viajarPlaneta/${this.idJugador}/${this.estrellaJugador.id}`]);
+    this.router.navigate([`viajarPlaneta/${this.estrellaJugador.id}`]);
   }
 
   infoEstrellaActual():void {
-    this.router.navigate([`verInfoEstrella/${this.idJugador}/${this.estrellaJugador.id}`]);
+    this.router.navigate([`verInfoEstrella/${this.estrellaJugador.id}`]);
   }
 
   viajarEstrellaSeleccionada(estrella:EstrellaDTO):void {
     this.planetaService.listarPlanetasPorId(estrella.id).subscribe(planetas => {
       if (planetas.length == 0) {
-        this.router.navigate([`viajarEstrella/${this.idJugador}/${estrella.id}`]);
+        this.router.navigate([`viajarEstrella/${estrella.id}`]);
       }
       else {
-        this.router.navigate([`viajarPlaneta/${this.idJugador}/${estrella.id}`]);
+        this.router.navigate([`viajarPlaneta/${estrella.id}`]);
       }
     })
     
