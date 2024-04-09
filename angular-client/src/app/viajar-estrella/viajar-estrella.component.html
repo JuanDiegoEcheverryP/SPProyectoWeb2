@@ -37,8 +37,8 @@
     <div>
         <ul class="flex-container space-evenly bottomBar" >
             <li class="flex-item">
-                <button id="botonBottom">Costo de viaje: XXXXXXXX</button>
-                <button> Viajar</button>
+                <button id="botonBottom">Costo de viaje: {{costo}} L.Y</button>
+                <button (click)="viajar()"> Viajar</button>
             </li>
             <li class="flex-item">
                 <button (click)="regresar()">Regresar</button>

@@ -196,8 +196,14 @@ public class NaveService {
     }
 
     public void actualizarLocalizacionEstrellaConPlaneta(Long idNave, Long idPlaneta) {
-        Planeta nuevoPlaneta =planetaRepository.findById(idPlaneta).orElseThrow();
-        naveRepository.actualizarLocalizacionEstrellaConPlaneta(idNave,nuevoPlaneta);
+        if(idPlaneta == -1) {
+            naveRepository.actualizarLocalizacionEstrellaConPlaneta(idNave,null);
+        }
+        else {
+            Planeta nuevoPlaneta =planetaRepository.findById(idPlaneta).orElseThrow();
+            naveRepository.actualizarLocalizacionEstrellaConPlaneta(idNave,nuevoPlaneta);
+        }
+
     }
 
     public void actualizarCantidad(Long idNave, Float cantidad) {
