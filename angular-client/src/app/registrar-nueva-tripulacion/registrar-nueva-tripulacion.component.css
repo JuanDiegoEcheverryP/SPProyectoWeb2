@@ -79,6 +79,22 @@
     border-radius: 10px;
 }
 
+.btn button {
+    height: 100%;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #eee;
+}
+
+.btn:active {
+    background: #fff;
+}
+
 .contenido {
     height: 500px;
     width: 80vw;
@@ -131,6 +147,15 @@
     width: 100%;
     height: 10%;
     margin-top: 10%;
+}
+
+.btnSeleccionar button:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+.btnSeleccionar button:active {
+    background: #fff;
 }
 
 #nombreNave {

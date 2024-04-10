@@ -25,13 +25,11 @@ export class RegistrarNuevaTripulacionComponent {
       this.naves = naves
       this.actual = this.naves[0];
       this.indice = 0;
-      console.log(this.actual);
-      
     });
   }
 
   siguienteNave() {
-    console.log(this.indice);
+    console.log(this.indice+1);
     
     if(this.indice == this.naves.length-1) {
       this.actual = this.naves[0];
@@ -54,5 +52,10 @@ export class RegistrarNuevaTripulacionComponent {
       this.actual = this.naves[this.indice-1];
       this.indice -= 1;
     }
+  }
+
+  empezarJuego() {
+    console.log(this.indice+1);
+    
   }
 }

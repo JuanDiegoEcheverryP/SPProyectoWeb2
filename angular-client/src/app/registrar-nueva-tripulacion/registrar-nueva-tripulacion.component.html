@@ -2,37 +2,9 @@
     <div class="nav">
         <img src="../../assets/logo.png" alt="logo" class="logo">
     </div>
-    <!--
-    <table>
-        <thead>
-            <tr>
-                <th>xxxxxxxxxxx</th>
-                <th>xxxxxxxxxxx</th>
-                <th>xxxxxxxxxxx</th>
-                <th>xxxxxxxxxxx</th>
-                <th>Nombre</th>
-                <th>Credito</th>
-                <th>Tiempo</th>
-                <th>Foto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let nave of naves">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{nave.nombre}}</td>
-                <td>{{nave.volBodega}}</td>
-                <td>{{nave.velocidad}}</td>
-                <td>{{nave.foto}}</td>
-            </tr>
-        </tbody>
-    </table>
-    -->
     <p id="titulo">Seleccionar Nave</p>
     <ul class="flex-container space-between">
-        <li class="btn" (click)="anteriorNave()"><</li>
+        <li class="btn" (click)="anteriorNave()"><button><</button></li>
             <ul class="contenido flex-container center">
                 <li class="imagen">
                     <img src="../../assets/spaceship.jpg">
@@ -52,7 +24,7 @@
                         <hr>
                         <p class="importante">Importante: Cuando eliges crear una tripulacion, automaticamente te conviertes en el capitan de tu nave</p>
                     </div>
-                    <div class="btnSeleccionar">
+                    <div class="btnSeleccionar" (click)="empezarJuego()">
                         <button>
                             Seleccionar nave
                         </button>
@@ -60,6 +32,6 @@
                 </li>
                 
             </ul>
-        <li class="btn" (click)="siguienteNave()">></li>
+        <li class="btn" (click)="siguienteNave()"><button>></button></li>
       </ul>
 </div>

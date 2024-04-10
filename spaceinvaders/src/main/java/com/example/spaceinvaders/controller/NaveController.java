@@ -3,9 +3,12 @@ package com.example.spaceinvaders.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,9 +17,13 @@ import com.example.spaceinvaders.model.Camino;
 import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.Planeta;
+import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.model.DTO.NaveDTO;
 import com.example.spaceinvaders.model.DTO.TripulacionDTO;
+import com.example.spaceinvaders.model.DTO.UsuarioDTO;
 import com.example.spaceinvaders.services.NaveService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/nave")
@@ -108,5 +115,40 @@ public class NaveController {
         }
         
     }
+
+    @PostMapping("registro/{idCapitan}/{nombreNave}/{tipoNave}")
+    public ResponseEntity<?> registrarConNave(@PathVariable Long idCapitan,@PathVariable String nombreNave,@PathVariable Long tipoNave) {
+        UsuarioDTO usuario=naveService.registrarConNave(idCapitan,nombreNave,tipoNave);
+        return ResponseEntity.ok(usuario);
+        /* 
+        UsuarioDTO usuario = new UsuarioDTO();
+        Jugador jugador=new Jugador();
+
+        if(registro.getContrasena().equals( registro.getContrasena2()))
+        {
+            jugador.setNombre(registro.getNombre());
+            jugador.setAvatar(registro.getAvatar());
+            jugador.setContrasena(registro.getContrasena());
+            
+            try {
+                usuario.setId(jugadorService.crearJugador(jugador).getId());
+                usuario.setNombre(jugador.getNombre());
+                usuario.setIdNave(null);
+                usuario.setAvatar(jugador.getAvatar().getImagen());
+                return ResponseEntity.ok(usuario);
+            } catch (DataIntegrityViolationException e) {
+                // El nombre de jugador ya existe, manejar el error aquí
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                    .body("El nombre de usuario ya está en uso");
+            }
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body("La contrasenas no son iguales");
+        }
+        */  
+        
+    } 
 
 }

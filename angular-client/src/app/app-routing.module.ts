@@ -20,8 +20,8 @@ import { BarraMenuComponent } from './components/barra-menu/barra-menu.component
 
 const routes: Routes = [
   { path: 'avatar/list', component: AvatarListComponent },
-  { path: 'registrarNuevaTripulacion', component: RegistrarNuevaTripulacionComponent },
-  { path: 'comerciar/:idJugador', component: ComerciarComponent },
+  { path: 'registrarNuevaTripulacion/:idJugador', component: RegistrarNuevaTripulacionComponent },
+  { path: 'comerciar', component: ComerciarComponent },
   { path: 'bodega', component: BodegaComponent },
   { path: 'visualizarMapa', component: VisualizarMapaComponent },
   { path: 'verInfoEstrella/:idEstrella', component:  VerInfoEstrellaComponent},

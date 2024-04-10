@@ -92,6 +92,10 @@ export class BodegaComponent {
     
   }
 
+  regresar() {
+    this.router.navigate([`menu`]);
+  }
+
   cerrarSesion() {
     this.router.navigate([``]);
   }

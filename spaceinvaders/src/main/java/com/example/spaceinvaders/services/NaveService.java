@@ -5,7 +5,9 @@ import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
 import com.example.spaceinvaders.model.ProductoBodega;
+import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.model.DTO.TripulacionDTO;
+import com.example.spaceinvaders.model.DTO.UsuarioDTO;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.repository.CaminoRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
@@ -13,12 +15,14 @@ import com.example.spaceinvaders.repository.JugadorRepository;
 import com.example.spaceinvaders.repository.NaveRepository;
 import com.example.spaceinvaders.repository.PlanetaRepository;
 import com.example.spaceinvaders.repository.ProductoBodegaRepository;
+import com.example.spaceinvaders.repository.TipoNaveRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class NaveService {
@@ -40,6 +44,9 @@ public class NaveService {
 
     @Autowired
     private CaminoRepository caminoRepository;
+
+    @Autowired
+    private TipoNaveRepository tipoNaveRepository;
 
     public boolean validarCreditoNave(Long idNave,Float total)
     {
@@ -220,5 +227,29 @@ public class NaveService {
             }
         }
         return new Camino(null, null, null, null);
+    }
+
+    public UsuarioDTO registrarConNave(Long idCapitan, String nombreNave,Long tipoNave) {
+        Random rand = new Random();
+        Long estrellaRadom= rand.nextLong(400);
+
+        TipoNave tipo = tipoNaveRepository.findById(tipoNave).orElseThrow();
+        Estrella star = estrellaRepository.findById(estrellaRadom).orElseThrow();
+
+        Nave nuevaNave = new Nave(nombreNave, (float)100000,(float)100000, star, tipo);
+        naveRepository.save(nuevaNave);
+        // Hasta aqui esta bien
+
+        jugadorRepository.actualizarNave(nuevaNave, idCapitan);
+
+        Jugador player = jugadorRepository.findById(idCapitan).orElseThrow();
+        
+        UsuarioDTO usuario=new UsuarioDTO();
+        usuario.setId(idCapitan);
+        usuario.setNombre(player.getNombre());
+        usuario.setRol(player.getRol());
+        usuario.setAvatar(player.getAvatar().getImagen());
+        usuario.setIdNave(player.getNaveJuego().getId());
+        return usuario;
     }
 }
