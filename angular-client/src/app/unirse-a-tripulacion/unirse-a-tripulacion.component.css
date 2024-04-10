@@ -1,0 +1,80 @@
+#fondo
+{
+    width: 100vw;
+    height: 100vh;
+    padding-left: 30px;
+    background-image: url('../../assets/saturn_athmosphere.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+#logo
+{
+    margin-top: 10px;
+}
+
+#cuadrado
+{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 133, 137, 0.574);
+    backdrop-filter: blur(3px);
+    width: 650px;
+    height: 550px;
+    align-self: center;
+    border-radius: 10px;
+}
+
+a, button, h3,p {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-family: 'Koulen'; 
+}
+
+
+#unirseButton {
+    position: relative;
+    overflow: hidden;
+    height: 3rem;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #3d3a4e;
+    background-size: 400%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+#unirseButton:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .button-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  #unirseButton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(
+      82.3deg,
+      rgb(112, 136, 233) 10.8%,
+      rgb(32, 58, 209) 94.3%
+    );
+    transition: all 0.475s;
+  }

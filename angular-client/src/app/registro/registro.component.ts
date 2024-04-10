@@ -30,33 +30,35 @@ export class RegistroComponent {
 
   registro() 
   {
-    console.log(this.jugadorRegistro.avatar);
-    
-        this.registroService.registro(this.jugadorRegistro).subscribe(
-          (usuario: UsuarioDTO) => {
-            console.log('Respuesta del backend:', usuario);
-            //this.shared.guardarInformacion(usuario)
-            // Convertir el objeto usuario a una cadena JSON
-            const usuarioString = JSON.stringify(usuario);
-            
-            // Guardar la cadena JSON en sessionStorage
-            sessionStorage.setItem("infoJugador", usuarioString);
-            
-            if(this.accionSeleccionada=="crear")
-            {
-              this.router.navigate([`/registrarNuevaTripulacion/${usuario.id}`]);
-            }
-            else if (this.accionSeleccionada=="unirse")
-            {
-              this.router.navigate([`/unirseTripulacion/${usuario.id}`]);
-            }
-            // Aquí puedes realizar cualquier acción con la respuesta del backend
-          },
-          (error) => {
-            console.error('Error al registrarse:', error);
-            // Maneja cualquier error que pueda ocurrir durante la solicitud
+    if(this.jugadorRegistro.nombre!="" && this.jugadorRegistro.contrasena2!="" && this.jugadorRegistro.contrasena!="")
+    {
+      this.registroService.registro(this.jugadorRegistro).subscribe(
+        (usuario: UsuarioDTO) => {
+          console.log('Respuesta del backend:', usuario);
+          //this.shared.guardarInformacion(usuario)
+          // Convertir el objeto usuario a una cadena JSON
+          const usuarioString = JSON.stringify(usuario);
+          
+          // Guardar la cadena JSON en sessionStorage
+          sessionStorage.setItem("infoJugador", usuarioString);
+          
+          if(this.accionSeleccionada=="crear")
+          {
+            this.router.navigate([`/registrarNuevaTripulacion/${usuario.id}`]);
           }
-        );
+          else if (this.accionSeleccionada=="unirse")
+          {
+            this.router.navigate([`/unirseTripulacion/${usuario.id}`]);
+          }
+          // Aquí puedes realizar cualquier acción con la respuesta del backend
+        },
+        (error) => {
+          console.error('Error al registrarse:', error);
+          // Maneja cualquier error que pueda ocurrir durante la solicitud
+        }
+      );
+    }
+        
   }
 
   imagenPredeterminada() {

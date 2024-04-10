@@ -1,29 +1,52 @@
-<div>
+<div id="registro_background">
     <app-barra-menu />
-    <h3>REGISTRARSE</h3>
-    <form (ngSubmit)="registro()">
-        <input type="text" name="nombre-de-usuario" id="txtNombreUsuario" [(ngModel)]="jugadorRegistro.nombre" placeholder="nombre de usuario">
-        <input type="password" name="contrasena1" id="contrasena1" [(ngModel)]="jugadorRegistro.contrasena" placeholder="contrasena">
-        <input type="password" name="contrasena2" id="contrasena2" [(ngModel)]="jugadorRegistro.contrasena2" placeholder="digite nuevamente la contrasena">
-        <button type="submit" (click)="accionSeleccionada = 'crear'">
-            Crear nueva tripulación
-        </button>
-        <button type="submit"  (click)="accionSeleccionada = 'unirse'">
-            Unirse a una tripulación
-        </button>
-    </form>
-    <img [src]="jugadorRegistro.avatar?.imagen" alt="" id="AvatarFoto" (click)="obtenerAvatares()">
-    <p id="nombreAvatarSeleccionado">{{ jugadorRegistro.avatar?.nombre}}</p>
-    <button href="" (click)="obtenerAvatares()">Cambiar avatar</button>
+    <div id="registroBlock">
+
+        <h2>REGISTRARSE</h2>
+
+        <div class="registroParts">
+            <form id="registroForms" (ngSubmit)="registro()">
+                <input type="text" name="nombre-de-usuario" id="txtNombreUsuario" [(ngModel)]="jugadorRegistro.nombre" placeholder="nombre de usuario">
+                <input type="password" name="contrasena1" id="contrasena1" [(ngModel)]="jugadorRegistro.contrasena" placeholder="contrasena">
+                <input type="password" name="contrasena2" id="contrasena2" [(ngModel)]="jugadorRegistro.contrasena2" placeholder="digite nuevamente la contrasena">
+                <div class="registroParts">
+                    <button id="botonIzquierdo" class="submitRegistroButon" type="submit" (click)="accionSeleccionada = 'crear'">
+                        <span class="button-content"> Crear nueva tripulación</span>
+                    </button>
+                    <button class="submitRegistroButon" type="submit"  (click)="accionSeleccionada = 'unirse'">
+                        <span class="button-content"> Unirse a una tripulación</span>
+                    </button>
+                </div>
+            
+            </form>
+
+            <div id="infoAvatarDiv">
+                <img [src]="jugadorRegistro.avatar?.imagen" alt="" id="AvatarFoto" (click)="obtenerAvatares()" width="150" height="160">
+                <p id="nombreAvatarSeleccionado">{{ jugadorRegistro.avatar?.nombre}}</p>
+                <button class="submitRegistroButon" href="" (click)="obtenerAvatares()">
+                    <span class="button-content"> Cambiar avatar </span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    
 </div> 
  
-<div *ngIf="seleccionado">
-    <button (click)="cerrar()"></button>
-    <h2>Avatares</h2>
-    <div id="listaAvatares" *ngFor="let avatar of avatares">
-        <div class="divAvatar" (click)="asignarAvatar(avatar)">
-            <img [src]="avatar.imagen" [alt]="avatar.nombre" class="fotoAvatar">
+<dialog open *ngIf="seleccionado" id="avataresDiv">
+   <div id="tituloAvataresDiv">
+        <button (click)="cerrar()" id="cerrarButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0b0288" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>    
+        </button>
+        <h2>Avatares</h2>
+        <div width="40" height="40">
+
+        </div>
+   </div>
+    <div id="listaAvatares">
+        <div class="divAvatar" (click)="asignarAvatar(avatar)" *ngFor="let avatar of avatares">
+            <img [src]="avatar.imagen" [alt]="avatar.nombre" class="fotoAvatar" width="150" height="160">
             <p class="nombreAvatar">{{ avatar.nombre }}</p>
         </div>
     </div>
-</div>
+</dialog>

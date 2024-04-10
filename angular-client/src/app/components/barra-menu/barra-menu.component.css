@@ -30,6 +30,11 @@ a, button {
     font-family: 'Koulen';
 }
 
+a:hover
+{
+    color: #f7fe2a;
+}
+
 .nav {
     display: flex;
     align-items: center;

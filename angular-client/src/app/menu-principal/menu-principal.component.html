@@ -1,5 +1,6 @@
-<div>
+<div class="contenedor-principal">
     <app-barra-estadisticas/>
+<<<<<<< Updated upstream
     <a href="" routerLink="/comprar/1"> revisar</a>
     <img src="" alt="" id="fondo">
     <h1>Usuario {{nombre}} </h1>
@@ -25,5 +26,36 @@
             Ver mapa
         </div>
     </a>
+=======
+
+    <div id="ContenidoPrincipal">
+        <div id="datosUsuario">
+            <h1>Usuario {{nombre}} </h1>
+            <h4>Tu rol es:{{rol}} </h4>
+            <p class="info">Nombre de la nave:{{nombreNave}} </p>
+            <p class="info">Tipo de nave:{{tipo}} </p>
+            <p class="info">Velocidad:{{velocidad}} </p>
+        </div>
+        
+        <a href="" class="botonMenu" routerLink="/bodega/{{usuarioDTO.id}}">
+            <div>
+                <img src="" alt=""> 
+                Ver bodega
+            </div>
+        </a>
+        <a href="" class="botonMenu" routerLink="/comerciar/{{usuarioDTO.id}}">
+            <div>
+                <img src="" alt=""> 
+                Comerciar
+            </div>
+        </a>
+        <a href="" class="botonMenu" routerLink="/visualizarMapa/{{usuarioDTO.id}}">
+            <div>
+                <img src="" alt=""> 
+                Ver mapa
+            </div>
+        </a>
+    </div>
+>>>>>>> Stashed changes
 
 </div>

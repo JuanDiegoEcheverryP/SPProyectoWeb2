@@ -1,0 +1,171 @@
+#registro_background
+{
+    width: 100vw;
+    height: 100vh;
+    padding-left: 30px;
+    background-image: url('../../assets/earth_athmosphere.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+#registroBlock {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 133, 137, 0.574);
+    backdrop-filter: blur(3px);
+    width: 650px;
+    height: 400px;
+    align-self: center;
+    border-radius: 10px;
+}
+
+h2
+{
+    margin-bottom: 30px;
+}
+
+.registroParts
+{
+    margin-top: 10xp;
+    display: flex;
+    align-self: center;
+    align-items: center;
+}
+
+.submitRegistroButon
+{
+    width: 150px;
+}
+
+#registroForms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#infoAvatarDiv {
+    margin-left: 100px; /* Ajusta el margen izquierdo según necesites */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input{
+    width: 300px;
+    border-radius: 10px;
+}
+
+#registroForms input, #registroForms button 
+{
+    margin-bottom: 20px; /* Espacio entre elementos */
+}
+
+a, button, h2,input::placeholder,p {
+    text-decoration: none;
+    font-family: 'Koulen'; 
+}
+
+
+a, button, h2,p {
+    color: rgb(255, 255, 255);
+}
+
+
+#botonIzquierdo
+{
+    margin-right: 30px;
+}
+
+.submitRegistroButon {
+    position: relative;
+    overflow: hidden;
+    height: 3rem;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #3d3a4e;
+    background-size: 400%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+.submitRegistroButon:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .button-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .submitRegistroButon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(
+      82.3deg,
+      rgb(112, 136, 233) 10.8%,
+      rgb(32, 58, 209) 94.3%
+    );
+    transition: all 0.475s;
+  }
+
+  #avataresDiv
+  {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    background-color: #b7b2d4;
+    border: transparent;
+    border-radius: 10px;
+    height: 500px;
+    width: 800px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    top: 50%;
+
+  }
+
+  #listaAvatares
+  {
+    display: grid;
+    grid-template-columns:repeat(3,1fr); /* Dos filas de altura automática */
+    gap: 10px; 
+
+  }
+
+  .divAvatar
+  {
+    width: 200px;
+  }
+
+  #tituloAvataresDiv
+  {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  #cerrarButton
+  {
+    background-color: transparent;
+    border: none;
+    width: min-content;
+    height: min-content;
+  }

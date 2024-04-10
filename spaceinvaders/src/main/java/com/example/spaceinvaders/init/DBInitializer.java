@@ -223,13 +223,14 @@ public class DBInitializer implements CommandLineRunner{
 
     private void insetarAvatares()
     {
-        String[] avatarNombre={"Tails","Zero","Ness","Samus","Yoshi","Diddi","Geno"};
-        String imagenAvatar="https://shorturl.at/gkJTU";
+        String[] avatarNombre = {"Tails", "Zero", "Ness", "Samus", "Yoshi", "Diddi"};
+        String[] imagenAvatar = {"../../assets/avatar1.png", "../../assets/avatar2.png", "../../assets/avatar3.png", "../../assets/avatar4.png", "../../assets/avatar5.png", "../../assets/avatar6.png"};
 
-        for(String nombre : avatarNombre)
-        {
-            Avatar avatar=new Avatar(nombre,imagenAvatar);
+        for (int i = 0; i < avatarNombre.length; i++) {
+            String nombre = avatarNombre[i];
+            String imagen = imagenAvatar[i];
 
+            Avatar avatar = new Avatar(nombre, imagen);
             avatarRepository.save(avatar);
         }
     }
@@ -258,16 +259,16 @@ public class DBInitializer implements CommandLineRunner{
                 //poner capitanes
                 if(contadorJugadores<10)
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,CAPITAN,naves.get(contadorJugadores),avatares.get(rand.nextInt(7))));
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,CAPITAN,naves.get(contadorJugadores),avatares.get(rand.nextInt(6))));
                 }
                 //poner navegantes
                 else if(contadorJugadores<20)
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,PILOTO,naves.get(contadorJugadores-10),avatares.get(rand.nextInt(7))));
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,PILOTO,naves.get(contadorJugadores-10),avatares.get(rand.nextInt(6))));
                 }
                 else
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,COMERCIANTE,naves.get(rand.nextInt(10)),avatares.get(rand.nextInt(7))));
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,COMERCIANTE,naves.get(rand.nextInt(10)),avatares.get(rand.nextInt(6))));
                 }
                 contadorJugadores++;
             }
