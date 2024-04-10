@@ -50,11 +50,11 @@
         <p>Precio venta unidad</p>
         <p class="resultado">${{productoSeleccionado.precioOferta}}</p>
     </diV>
-    <diV class="botonVender">
-        <button>Vender</button>
+    <diV class="botonVender" *ngIf="seleccionado">
+        <button (click)="irVender()">Vender</button>
     </diV>
-    <diV class="botonComprar">
-        <button>Comprar</button>
+    <diV class="botonComprar" *ngIf="seleccionado">
+        <button (click)="irComprar()">Comprar</button>
     </diV>
     <diV class="botonRegresar">
         <button (click)="regresar()">Regresar</button>

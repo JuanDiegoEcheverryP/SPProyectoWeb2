@@ -61,7 +61,6 @@ export class ComerciarComponent {
         else {
           alert("No esta asignado un planeta donde esta la nave, esto tenemos que cambiarlo para que tambien asigne el planeta. Por lo tanto no se cargan los items")
         }
-        console.log(planeta);
         
         this.cargarContenido()
       })
@@ -71,7 +70,6 @@ export class ComerciarComponent {
   cargarContenido(): void {
     this.stockProductoService.listarProductosPlaneta(this.planetaNave.id).subscribe(productosPlaneta => {
       this.productosPlaneta = productosPlaneta;
-      console.log(this.productosPlaneta);
       
     })
   }
@@ -80,8 +78,14 @@ export class ComerciarComponent {
   mostrarInformacion(Producto: ProductoDTO) {
     this.seleccionado = true;
     this.productoSeleccionado = Producto;
-    console.log(this.productoSeleccionado);
-    
+  }
+
+  irVender() {
+    this.router.navigate([`vender/${this.productoSeleccionado.id}`]);
+  }
+
+  irComprar() {
+    this.router.navigate([`comprar/${this.productoSeleccionado.id}`]);
   }
 
   regresar() {
