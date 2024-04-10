@@ -1,5 +1,6 @@
-<img src="../../assets/logo.png" alt="logo" class="logo">
 <div id="fondo">
+    <img id="logo" src="../../assets/logo.png" alt="logo" class="logo" width="40px" height="40px">
+    
     <div id="cuadrado">
         <h3>UNIRSE A UNA TRIPULACION</h3>
         <div id="scroll">
@@ -18,10 +19,13 @@
                 </tr>
             </table>
         </div>
-        <button  (click)="unirse()">Unirse a una tripulación</button>
+        <button  id="unirseButton" (click)="unirse()">
+            <span class="button-content"> Unirse</span>
+        </button>
         <select name="rol" id="roles" [(ngModel)]="patchRolNave.rol" (change)="onChangeRol($event)">
             <option value="comerciante">comerciante</option>
             <option value="piloto">piloto</option>
         </select>
     </div>
+
 </div>

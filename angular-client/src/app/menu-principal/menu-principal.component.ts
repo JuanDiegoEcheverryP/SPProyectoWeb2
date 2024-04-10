@@ -32,7 +32,7 @@ export class MenuPrincipalComponent {
       this.usuarioDTO= JSON.parse(this.usuarioString);
     }
     //this.shared.leerInformacion();
-    console.log("revisar id dot",this.usuarioDTO.id);
+    console.log("revisar id navee",this.usuarioDTO.idNave);
     
     this.obtenerJugador();
     this.obtenerInfoNave();

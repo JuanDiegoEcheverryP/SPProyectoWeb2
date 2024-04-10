@@ -14,11 +14,15 @@ export class BarraEstadisticasComponent {
   tiempoRestante: number=0
   creditos: number=0
   nave:NaveDTO= new NaveDTO("",0,"",0,"","",0,0,0,0,"",0)
+  usuarioString: string|null= sessionStorage.getItem("infoJugador");
 
   constructor(private naveService: NaveService, private shared: InfoGeneralUsuarioService) { }
 
   ngOnInit() {
-    this.usuarioDTO=this.shared.leerInformacion();
+    if(this.usuarioString)
+      {
+        this.usuarioDTO= JSON.parse(this.usuarioString);
+      }
     this.inicializarDatos()
   }
 

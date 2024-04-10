@@ -1,17 +1,30 @@
 <div class="EstadisticasBar">
-    <img src="../../assets/logo.png" alt="logo" class="logo">
-    <div class="navlinks">
-        <p id="EstrellaEstadistica" class="estadistica">ESTRELLA</p>
-        <P id="EstrellaValue" class="value">{{nave.nombreEstrella}}</P>
-        <p id="PlanetaEstadistica" class="estadistica">PLANETA</p>
-        <P id="PlanetaValue" class="value">{{nave.nombrePlaneta}}</P>
-        <p id="TiempoEstadistica" class="estadistica">TIEMPO RESTANTE</p>
-        <P id="TiempoValue" class="value">{{nave.tiempoRestante}}</P>
-        <p id="CreditosEstadistica" class="estadistica">CREDITOS</p>
-        <P class="value">{{nave.creditos}}</P>
-        <p id="CapacidadEstadistica" class="estadistica">CAPACIDAD</p>
-        <P class="value">{{nave.capadidadUtilizada}}/{{nave.capacidadMaxima}}</P>
+    <div class="navbar">
+        <div class="left-divs">
+            <div class="div-with-image">
+                <img src="../../assets/star-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>{{nave.nombreEstrella}}</span>
+            </div>
+            <div class="div-with-image">
+                <img src="../../assets/planet-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>{{nave.nombrePlaneta}}</span>
+            </div>
+            <div class="div-with-image">
+                <img src="../../assets/money-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>${{nave.creditos}}</span>
+            </div>
+            <div class="div-with-image">
+                <img src="../../assets/clock-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>{{nave.tiempoRestante}} l.y</span>
+            </div>
+            <div class="div-with-image">
+                <img src="../../assets/clock-icon.png" alt="Imagen del botón" width="24" height="24">
+                <span>{{nave.capadidadUtilizada}}/{{nave.capacidadMaxima}}</span>
+            </div>
+        </div>
+        <div class="right-divs">
+            <img [src]="usuarioDTO.avatar" alt="Imagen del botón" width="45" height="50">
+            <a href="" class="div-with-image" id="navUsuario"  routerLink="">Cerrar Sesión</a>
+        </div>
     </div>
-    <img [src]="usuarioDTO.avatar" alt="perfil" id="FotoPerfil">
-    <a href="" id="CerrarSesion" routerLink="">Cerrar Sesión</a>
 </div>
