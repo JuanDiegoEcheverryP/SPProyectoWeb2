@@ -376,7 +376,7 @@ public class DBInitializer implements CommandLineRunner{
         String[] nombreProducto3={"Magpie","Pygmy","Turtle","barbet","Goose"};
 
         String nombreProducto;
-        String imagenProducto="https://shorturl.at/afzIM";
+        String imagenProducto="../../../assets/productos/producto1.png";
         float volumen;
       
 
@@ -386,7 +386,8 @@ public class DBInitializer implements CommandLineRunner{
                 for (String nombre3 : nombreProducto3) {
                     volumen= rand.nextFloat() * 100+1;
                     nombreProducto=nombre1 + " " + nombre2 + " " + nombre3;
-                    Producto producto=new Producto(nombreProducto,imagenProducto,volumen);
+                    int numeroAleatorio = rand.nextInt(23) + 1;
+                    Producto producto=new Producto(nombreProducto,"../../../assets/productos/producto"+numeroAleatorio+".png",volumen);
                     productoRepository.save(producto);
                 }
             }
