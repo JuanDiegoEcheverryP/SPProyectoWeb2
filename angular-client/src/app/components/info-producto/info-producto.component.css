@@ -3,14 +3,19 @@
     display: flex;
     gap: 30px;
     justify-content: center;
+}
 
+.negrita
+{
+    font-weight: 700;
 }
 
 .cuadrado
 {
-    background-color: rgba(251, 251, 251, 0.776);
+    background-color: rgba(251, 251, 251, 0.68);
     border-radius: 40px;
     padding: 20px;
+    backdrop-filter: blur(5px);
 }
 
 #formComprar
