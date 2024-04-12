@@ -242,14 +242,15 @@ public class NaveService {
 
         jugadorRepository.actualizarNave(nuevaNave, idCapitan);
 
-        Jugador player = jugadorRepository.findById(idCapitan).orElseThrow();
-        
-        UsuarioDTO usuario=new UsuarioDTO();
-        usuario.setId(idCapitan);
-        usuario.setNombre(player.getNombre());
-        usuario.setRol(player.getRol());
-        usuario.setAvatar(player.getAvatar().getImagen());
-        usuario.setIdNave(player.getNaveJuego().getId());
-        return usuario;
+        jugadorRepository.actualizarRol("capitan", idCapitan);
+
+        Jugador jugador = jugadorRepository.findById(idCapitan).orElseThrow();
+        UsuarioDTO enviar=new UsuarioDTO();
+        enviar.setId(jugador.getId());
+        enviar.setNombre(jugador.getNombre());
+        enviar.setRol(jugador.getRol());
+        enviar.setAvatar(jugador.getAvatar().getImagen());
+        enviar.setIdNave(jugador.getNaveJuego().getId());
+        return enviar;
     }
 }

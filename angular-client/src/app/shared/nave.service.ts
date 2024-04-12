@@ -52,5 +52,8 @@ export class NaveService {
     return this.http.put<boolean>(`${environment.serverUrl}/api/nave/actualizarBien/${id}/${idEstrella}/${idPlaneta}`,id,{ headers: this.headers })
   }
 
+  registrarNuevaNave(idCapitan:number,nombreNave:string, idTipoNave:number): Observable<number> {
+    return this.http.post<number>(`${environment.serverUrl}/api/nave/registro/${idCapitan}/${nombreNave}/${idTipoNave}`,idCapitan,{ headers: this.headers })
+  }
 }
 

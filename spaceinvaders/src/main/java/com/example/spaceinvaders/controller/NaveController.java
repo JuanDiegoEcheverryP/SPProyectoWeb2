@@ -118,36 +118,7 @@ public class NaveController {
 
     @PostMapping("registro/{idCapitan}/{nombreNave}/{tipoNave}")
     public ResponseEntity<?> registrarConNave(@PathVariable Long idCapitan,@PathVariable String nombreNave,@PathVariable Long tipoNave) {
-        UsuarioDTO usuario=naveService.registrarConNave(idCapitan,nombreNave,tipoNave);
-        return ResponseEntity.ok(usuario);
-        /* 
-        UsuarioDTO usuario = new UsuarioDTO();
-        Jugador jugador=new Jugador();
-
-        if(registro.getContrasena().equals( registro.getContrasena2()))
-        {
-            jugador.setNombre(registro.getNombre());
-            jugador.setAvatar(registro.getAvatar());
-            jugador.setContrasena(registro.getContrasena());
-            
-            try {
-                usuario.setId(jugadorService.crearJugador(jugador).getId());
-                usuario.setNombre(jugador.getNombre());
-                usuario.setIdNave(null);
-                usuario.setAvatar(jugador.getAvatar().getImagen());
-                return ResponseEntity.ok(usuario);
-            } catch (DataIntegrityViolationException e) {
-                // El nombre de jugador ya existe, manejar el error aquí
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                                    .body("El nombre de usuario ya está en uso");
-            }
-        }
-        else
-        {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body("La contrasenas no son iguales");
-        }
-        */  
+        return ResponseEntity.ok(naveService.registrarConNave(idCapitan,nombreNave,tipoNave));
         
     } 
 
