@@ -1,0 +1,120 @@
+.ordenacionHorizontalDiv, form
+{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+
+}
+
+.cuadrado
+{
+    background-color: rgba(251, 251, 251, 0.776);
+    border-radius: 40px;
+    padding: 20px;
+}
+
+#formComprar
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bloquePrincipal
+{
+    justify-content: center;
+    align-items: center;
+}
+
+#titulo1, #titulo2,#fotoProducto
+{
+    width: 400px;
+    text-align: center;
+}
+
+#fotoProducto
+{
+    height: 350px;
+    align-items: center;
+}
+
+#fotoProducto img {
+    max-width: 100%; /* Para asegurar que la imagen no exceda el tamaño del contenedor */
+    max-height: 100%; /* Para asegurar que la imagen no exceda el tamaño del contenedor */
+}
+
+.suma, input
+{
+    background-color: transparent;
+    border: none;
+}
+
+input
+{
+    width: 60px;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+    font-family: 'arial';
+    height: 24px;
+}
+
+.info
+{
+    width: 200px;
+}
+
+#cantidadDiv
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    height: 30px;
+}
+
+#infoProducto
+{
+    padding-left: 70px;
+}
+
+.botonesAccion
+{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+#bloquePrincipal #productoBoton {
+    position: absolute; /* Cambia el posicionamiento a absoluto */
+    top: 528px; /* Ajusta la posición vertical según sea necesario */
+    right: 200px; /* Ajusta la posición horizontal según sea necesario */
+}
+
+#regresar
+{
+    margin-top: 40px;
+}
+
+button, h2
+{
+    text-decoration: none;
+    font-family: 'Koulen'; 
+}
+
+p,span{
+    text-decoration: none;
+    font-family: 'arial'; 
+}
+ 
+#seccionCompra
+{
+    margin-top: 20px;
+}
+
+

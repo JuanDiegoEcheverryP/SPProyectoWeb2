@@ -66,6 +66,12 @@ export class UnirseATripulacionComponent {
     console.log('naveId', naveId);
   }
 
+  //poner notificacion ALERTA
+  NotificarTripulacionLlena()
+  {
+
+  }
+
   onChangeRol(event: any) {
     // Esta función se llamará cada vez que cambie la selección del select
     // Aquí puedes acceder al valor seleccionado a través del evento
@@ -73,6 +79,12 @@ export class UnirseATripulacionComponent {
     this.patchRolNave.rol = event.target.value;
     console.log('this.patchRolNave.rol', this.patchRolNave.rol);
 
+  }
+
+  selectedRowIndex: number = -1;
+
+  seleccionarFila(index: number) {
+    this.selectedRowIndex = index;
   }
 
 }

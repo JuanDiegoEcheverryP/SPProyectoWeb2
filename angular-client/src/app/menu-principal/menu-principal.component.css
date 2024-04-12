@@ -1,0 +1,69 @@
+.contenedor-principal
+{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/spaceships.jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+} 
+  
+#botones
+{
+    margin-top: 30px;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    width: 100%;
+}
+
+h1,h3{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-family: 'Koulen'; 
+    background-color: rgba(47, 49, 50, 0.597);
+    padding: 10px;
+}
+
+ a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-family: 'arial'; 
+}
+
+.botonMenuDiv
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    border: 3px solid white; /* Borde blanco delgado */
+    border-radius: 50%; /* Hacer el elemento circular */
+    width: 100px; /* Ajusta el tamaño según tus necesidades */
+    height: 100px; /* Ajusta el tamaño según tus necesidades */
+    padding: 10px; /* Ajusta el relleno según tus necesidades */
+}
+
+#datosUsuario
+{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: end;
+}
+
+.info
+{
+    background-color: white;
+    font-family: 'arial'; 
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}

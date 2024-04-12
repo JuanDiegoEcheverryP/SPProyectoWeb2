@@ -1,0 +1,9 @@
+.contenedor-principal
+{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/marketPlace.webp');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+} 
