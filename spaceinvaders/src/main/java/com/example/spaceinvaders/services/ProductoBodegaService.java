@@ -5,6 +5,7 @@ import com.example.spaceinvaders.model.Producto;
 import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.Stock_planeta;
 import com.example.spaceinvaders.model.DTO.ProductoDTO;
+import com.example.spaceinvaders.model.DTO.productoBodegaDTO;
 import com.example.spaceinvaders.repository.NaveRepository;
 import com.example.spaceinvaders.repository.ProductoBodegaRepository;
 import com.example.spaceinvaders.repository.ProductoRepository;
@@ -12,6 +13,7 @@ import com.example.spaceinvaders.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -122,6 +124,16 @@ public class ProductoBodegaService {
         return productoBodegaRepository.findProductosByNnaveId(id); 
     }
 
+    public List<productoBodegaDTO> buscarProductosDTOPorBodega(Long id) {
+        List<ProductoBodega> a =productoBodegaRepository.findProductosByNnaveId(id);
+        List<productoBodegaDTO> f = new ArrayList<>();
+        for (ProductoBodega productoBodega : a) {
+            Producto temp = productoBodega.getProducto();
+            productoBodegaDTO insertar = new productoBodegaDTO(temp.getId(),temp.getNombre(),productoBodega.getCantidad(),productoBodega.getVol());
+            f.add(insertar);
+        }
+        return f; 
+    }
     
     
 }

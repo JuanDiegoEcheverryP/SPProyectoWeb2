@@ -11,6 +11,7 @@ import { JugadorService } from '../shared/jugador.service';
 import { Nave } from '../model/nave';
 import { NaveService } from '../shared/nave.service';
 import { UsuarioDTO } from '../model/usuario-dto';
+import { ProductoBodegaDTO } from '../model/productoBodegaDTO';
 
 @Component({
   selector: 'app-bodega',
@@ -27,9 +28,9 @@ export class BodegaComponent {
   jugadorNave:Nave = new Nave(-1,"",-1,1)
   
   seleccionado: boolean = false;
-  productoSeleccionado: ProductoxproductoBodega = new ProductoxproductoBodega(-1, "",-1,1,"");
+  productoSeleccionado: ProductoBodegaDTO = new ProductoBodegaDTO(-1,"",-1,-1);
 
-  productosBodegaNave: ProductoxproductoBodega[] = [];
+  productosBodegaNave: ProductoBodegaDTO[] = [];
   productosBodega: ProductoBodega[] = [];
   productos: Producto[] = [];
 
@@ -38,7 +39,6 @@ export class BodegaComponent {
   constructor(
     private route: ActivatedRoute,
     private productoBodega: ProductoBodegaService,
-    private productoService: ProductoService,
     private jugadorService: JugadorService,
     private naveService: NaveService,
     private router: Router
@@ -67,25 +67,14 @@ export class BodegaComponent {
   }
 
   cargarContenido() {
-    let idNave: number = -1;
-    this.route.params.subscribe(params => {
-      idNave = Number(params['idNave']); 
-    });
-    this.productoBodega.listarProductosPorNave(1).subscribe(productosBodega => {
-      this.productosBodega = productosBodega;
-      this.productoService.listarProductos().subscribe(productos => {
-        this.productos = productos;
-        productosBodega.forEach(element => {
-          let a = new ProductoxproductoBodega(element.id, productos[element.id].nombre, element.cantidad, element.volTotal, productos[element.id].imagen)
-          this.productosBodegaNave.push(a)
-        });
-        console.log(this.productosBodegaNave);
-      })
+    this.productoBodega.listarProductosDTOPorNave(this.jugadorNave.id).subscribe(productosBodega => {
+      console.log(productosBodega);
+      this.productosBodegaNave = productosBodega
     });
   }
   
 
-  mostrarInformacion(producto: ProductoxproductoBodega) {
+  mostrarInformacion(producto: ProductoBodegaDTO) {
     this.seleccionado = true;
     this.productoSeleccionado = producto;
     console.log(this.productoSeleccionado);

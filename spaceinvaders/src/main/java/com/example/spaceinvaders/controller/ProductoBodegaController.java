@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.spaceinvaders.model.ProductoBodega;
 
 import com.example.spaceinvaders.model.DTO.ProductoDTO;
+import com.example.spaceinvaders.model.DTO.productoBodegaDTO;
 import com.example.spaceinvaders.services.ProductoBodegaService;
 
 @RestController
@@ -46,6 +47,11 @@ public class ProductoBodegaController {
     @GetMapping("/{id}")
     public List<ProductoBodega> obtenerBodegaPorNaveId(@PathVariable Long id) {
         return BodegaService.buscarProductosPorBodega(id);
+    }
+
+    @GetMapping("/listarBodega/{id}")
+    public List<productoBodegaDTO> obtenerBodegaDTOPorNaveId(@PathVariable Long id) {
+        return BodegaService.buscarProductosDTOPorBodega(id);
     }
 
 }
