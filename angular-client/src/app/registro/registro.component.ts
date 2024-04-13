@@ -20,7 +20,9 @@ export class RegistroComponent {
   nombreAvatar: string = "";
   avatares: Avatar[] = [];
   seleccionado: boolean = false;
+  error: boolean = false;
   accionSeleccionada: string="";
+  notificacionText:string=""
 
   constructor(private registroService: JugadorService, private avatarService: AvatarService,private router: Router, private shared:InfoGeneralUsuarioService) {}
 
@@ -54,9 +56,16 @@ export class RegistroComponent {
         },
         (error) => {
           console.error('Error al registrarse:', error);
-          // Maneja cualquier error que pueda ocurrir durante la solicitud
+          this.notificacionText=error.error;
+          this.error=true
         }
       );
+    }
+    else
+    {
+      //notificacion de que hay campos vacios
+      this.notificacionText="Todos los campos deven estar llenos"
+      this.error=true
     }
         
   }
@@ -95,5 +104,10 @@ export class RegistroComponent {
     this.jugadorRegistro.avatar = avatar;
     console.log(this.jugadorRegistro.avatar);
     
+  }
+
+  AceptarError()
+  {
+    this.error=false
   }
 }

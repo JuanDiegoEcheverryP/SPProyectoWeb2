@@ -8,6 +8,7 @@ import { CompraVentaDTO} from '../../model/compra-venta-dto';
 import { ProductoDTO } from '../../model/productoDTO';
 import { Planeta } from '../../model/planeta';
 import { UsuarioDTO } from '../../model/usuario-dto';
+import { RespuestaTransaccionDTO } from '../../model/respuesta-transaccion-dto';
 
 
 @Component({
@@ -31,6 +32,9 @@ export class InfoProductoComponent {
   @Output() eventChange = new EventEmitter<Event>();
   usuarioString: string|null= sessionStorage.getItem("infoJugador");
   usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  error: boolean = false;
+  success: boolean = false;
+  notificacionText:string=""
 
   constructor(
     private nave: NaveService,
@@ -56,7 +60,8 @@ export class InfoProductoComponent {
         // Aquí puedes realizar cualquier acción con la respuesta del backend
       },
       (error) => {
-        console.error('Error al iniciar sesión:', error);
+
+        console.error('Error compra', error);
         // Maneja cualquier error que pueda ocurrir durante la solicitud
       }
     );
@@ -64,7 +69,7 @@ export class InfoProductoComponent {
 
   obtenerInfoVenta()
   {
-    console.log("infromacion info venta: ",this.idNave,this.idProducto,this.idPlaneta);
+    console.log("infromacion info venta: nave",this.idNave," producto ",this.idProducto,"planeta: ",this.idPlaneta);
     
     this.bodega.recuperarProductosPorBodega(this.idNave,this.idProducto,this.idPlaneta).subscribe(
       (producto: ProductoDTO) => {
@@ -73,7 +78,7 @@ export class InfoProductoComponent {
         // Aquí puedes realizar cualquier acción con la respuesta del backend
       },
       (error) => {
-        console.error('Error al iniciar sesión:', error);
+        console.error('Error venta:', error);
         // Maneja cualquier error que pueda ocurrir durante la solicitud
       }
     );
@@ -129,7 +134,7 @@ export class InfoProductoComponent {
         this.compraVentaDTO.cantidadProducto=this.cantidad
         this.compraVentaDTO.total=this.total
 
-        console.log(this.idProducto,this.idNave,this.idPlaneta,this.cantidad,this.total);
+        console.log("producto",this.idProducto,"nave",this.idNave,"planeta",this.idPlaneta,"cantidad",this.cantidad,"total",this.total);
         
 
         if(this.informacionRecibir[0]==1)
@@ -145,22 +150,26 @@ export class InfoProductoComponent {
     }
     else
     {
-      console.log("cantidad invalida");
-      
+      this.error=true
+      this.notificacionText="cantidad invalida"
     }
 
   }
 
   comprar(event: Event){
     this.transaccionService.compra(this.compraVentaDTO).subscribe(
-      (resp: string) => {
+      (resp: RespuestaTransaccionDTO) => {
         console.log('Respuesta del backend:', resp);
         this.eventChange.emit(event); 
+        this.success=true
+        this.notificacionText=resp.mensaje
+        this.obtenerInfoCompra()
         // Aquí puedes realizar cualquier acción con la respuesta del backend
       },
       (error) => {
         console.error('Error al hacer compra:', error);
-        this.eventChange.emit(event); 
+        this.error=true
+        this.notificacionText=error.error
         // Maneja cualquier error que pueda ocurrir durante la solicitud
       }
     );
@@ -169,14 +178,18 @@ export class InfoProductoComponent {
   vender(event: Event)
   {
     this.transaccionService.venta(this.compraVentaDTO).subscribe(
-      (resp: string) => {
+      (resp: RespuestaTransaccionDTO) => {
         console.log('Respuesta del backend:', resp);
         this.eventChange.emit(event);
+        this.success=true
+        this.notificacionText=resp.mensaje
+        this.obtenerInfoVenta()
         // Aquí puedes realizar cualquier acción con la respuesta del backend
       },
       (error) => {
         console.error('Error al hacer venta:', error);
-        this.eventChange.emit(event); 
+        this.error=true
+        this.notificacionText=error.error
         // Maneja cualquier error que pueda ocurrir durante la solicitud
       }
     );
@@ -196,18 +209,31 @@ export class InfoProductoComponent {
 
   actualizarTotales() {
     if (!isNaN(this.cantidad)) {
-      this.total = this.cantidad*this.producto.precioDemanda;
+      if(this.informacionRecibir[0]==1)
+      {
+        //realizar la compra
+        this.total = this.cantidad*this.producto.precioDemanda;
+      }
+      else if(this.informacionRecibir[0]==2)
+      {
+        //realizar la venta
+        this.total = this.cantidad*this.producto.precioOferta;
+      }
       console.log('Respuesta del backend:', this.total);
       this.volTotal = this.cantidad*this.producto.volumen;
     }
   }
 
-}
+  AceptarError()
+  {
+    this.error=false
+  }
 
-//corregir consultas
-  //poner en las consultas el codigo de error correspondiente y devolver el json 
-//conectar pantallas
-//realizar manejo de errores desde el backend y mostrar notificaciones
-//diseno total con responsiveness u notificaciones
+  AceptarSuccess()
+  {
+    this.success=false
+  }
+
+}
 
 

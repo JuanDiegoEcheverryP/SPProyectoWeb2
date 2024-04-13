@@ -1,6 +1,8 @@
 package com.example.spaceinvaders.controller;
 
 
+import java.util.Collections;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.spaceinvaders.model.DTO.CompraVentaDTO;
+import com.example.spaceinvaders.model.DTO.RespuestaTransaccionDTO;
 import com.example.spaceinvaders.services.NaveService;
 import com.example.spaceinvaders.services.ProductoBodegaService;
 import com.example.spaceinvaders.services.StockPlanetaService;
@@ -46,11 +49,14 @@ public class TransaccionController {
                 // Actualizar el stock
                 stockService.actualizarStock(venta.getIdProducto(), venta.getIdPlaneta(), venta.getCantidadProducto()*-1);
                 // Confirmar transacción
-                return ResponseEntity.ok().body("Venta exitosa");
+                RespuestaTransaccionDTO mensaje= new RespuestaTransaccionDTO();
+                mensaje.setMensaje("Venta exitosa");
+                return ResponseEntity.ok().body(mensaje);
             } catch (Exception e) {
                 // Si hay un error, revertir transacción
                 // Registrar el error
                 // Devolver mensaje de error
+                System.err.println("holis");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Error al realizar la venta: " + e.getMessage());
             }
@@ -79,7 +85,9 @@ public class TransaccionController {
                 // Actualizar el stock
                 stockService.actualizarStock(compra.getIdProducto(), compra.getIdPlaneta(), compra.getCantidadProducto());
                 // Confirmar transacción
-                return ResponseEntity.ok("Compra exitosa");
+                RespuestaTransaccionDTO mensaje= new RespuestaTransaccionDTO();
+                mensaje.setMensaje("Compra exitosa!");
+                return ResponseEntity.ok().body(mensaje);
             } catch (Exception e) {
                 // Si hay un error, revertir transacción
                 // Registrar el error

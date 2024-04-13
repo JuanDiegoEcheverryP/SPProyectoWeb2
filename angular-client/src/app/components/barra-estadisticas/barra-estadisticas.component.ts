@@ -40,7 +40,12 @@ export class BarraEstadisticasComponent {
     this.naveService.obtenerNave(this.usuarioDTO.idNave).subscribe(
       (nave: NaveDTO) => {
         console.log('Respuesta del backend:', nave);
+        if(nave.idPlaneta==null)
+        {
+          nave.nombrePlaneta="No existe"
+        }
         this.nave= nave;
+
       },
       (error) => {
         console.error('Error al obtener nave:', error);

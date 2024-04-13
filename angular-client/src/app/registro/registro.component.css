@@ -117,8 +117,8 @@ a, button, h2,p {
     border-radius: inherit;
     background: linear-gradient(
       82.3deg,
-      rgb(112, 136, 233) 10.8%,
-      rgb(32, 58, 209) 94.3%
+      rgb(160, 115, 200) 10.8%,
+      rgb(97, 21, 164) 94.3%
     );
     transition: all 0.475s;
   }
@@ -128,7 +128,7 @@ a, button, h2,p {
     position: absolute;
     z-index: 3;
     top: 0;
-    background-color: #b7b2d4;
+    background-color: #4a475b;
     border: transparent;
     border-radius: 10px;
     height: 500px;

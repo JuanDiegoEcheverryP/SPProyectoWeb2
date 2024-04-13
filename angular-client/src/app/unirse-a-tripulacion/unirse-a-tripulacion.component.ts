@@ -17,7 +17,9 @@ export class UnirseATripulacionComponent {
 
   tripulaciones: TripulacionDTO[] = [];
   patchRolNave: PatchRolNave = new PatchRolNave(0, "");
-  id: number = 1
+  id: number = 0
+  error: boolean = false;
+  notificacionText:string=""
 
   constructor(private naveService: NaveService,  private route: ActivatedRoute, private jugadorSevice: JugadorService, private router: Router, private shared: InfoGeneralUsuarioService) { }
 
@@ -59,6 +61,11 @@ export class UnirseATripulacionComponent {
         }
       );
     }
+    else
+    {
+      this.notificacionText="Seleccione una nave"
+      this.error=true
+    }
   }
 
   asignarTripulacion(naveId: number) {
@@ -69,7 +76,8 @@ export class UnirseATripulacionComponent {
   //poner notificacion ALERTA
   NotificarTripulacionLlena()
   {
-
+    this.notificacionText="Nave llena, escoger otra"
+    this.error=true
   }
 
   onChangeRol(event: any) {
@@ -87,4 +95,8 @@ export class UnirseATripulacionComponent {
     this.selectedRowIndex = index;
   }
 
+  AceptarError()
+  {
+    this.error=false
+  }
 }

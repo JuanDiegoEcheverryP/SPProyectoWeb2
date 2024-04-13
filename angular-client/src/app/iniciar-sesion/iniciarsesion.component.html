@@ -12,3 +12,4 @@
         </form>
     </div>
 </div>  
+<app-error *ngIf="error" [informacionRecibir]="notificacionText"  (cerrar)="AceptarError()"/>

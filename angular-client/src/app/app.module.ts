@@ -23,6 +23,8 @@ import { MenuPrincipalComponent } from './menu-principal/menu-principal.componen
 import { ComprarComponent } from './comprar/comprar.component';
 import { VenderComponent } from './vender/vender.component';
 import { InfoProductoComponent } from './components/info-producto/info-producto.component';
+import { ErrorComponent } from './components/notifications/error/error.component';
+import { SuccessComponent } from './components/notifications/success/success.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { InfoProductoComponent } from './components/info-producto/info-producto.
     ComprarComponent,
     VenderComponent,
     InfoProductoComponent,
+    ErrorComponent,
+    SuccessComponent,
   ],
   imports: [
     BrowserModule,

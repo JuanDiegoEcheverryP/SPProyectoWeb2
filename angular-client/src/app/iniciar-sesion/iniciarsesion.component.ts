@@ -14,6 +14,8 @@ import { InfoGeneralUsuarioService } from '../shared/info-general-usuario.servic
 export class IniciarsesionComponent {
 
   jugadorLogIn: JugadorLogIn = new JugadorLogIn("", ""); // Crear una instancia de JugadorLogIn
+  error: boolean = false;
+  notificacionText:string=""
 
   constructor(private iniciarSesionService: JugadorService,private router: Router, private shared:InfoGeneralUsuarioService) {} // Inyectar el servicio para iniciar sesión
 
@@ -34,10 +36,21 @@ export class IniciarsesionComponent {
         },
         (error) => {
           console.error('Error al iniciar sesión:', error);
+          this.notificacionText=error.error;
+          this.error=true
           // Maneja cualquier error que pueda ocurrir durante la solicitud
         }
       );
     }
+    else
+    {
+      this.notificacionText="Todos los campos deben estar llenos"
+      this.error=true
+    }
   }
 
+  AceptarError()
+  {
+    this.error=false
+  }
 }

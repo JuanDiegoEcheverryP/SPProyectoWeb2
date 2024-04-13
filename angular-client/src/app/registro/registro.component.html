@@ -50,3 +50,4 @@
         </div>
     </div>
 </dialog>
+<app-error *ngIf="error" [informacionRecibir]="notificacionText"  (cerrar)="AceptarError()"/>

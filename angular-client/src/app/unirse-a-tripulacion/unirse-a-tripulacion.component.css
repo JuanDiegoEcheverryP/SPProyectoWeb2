@@ -74,8 +74,8 @@ a, button, h3,p,span, th {
     border-radius: inherit;
     background: linear-gradient(
       82.3deg,
-      rgb(112, 136, 233) 10.8%,
-      rgb(32, 58, 209) 94.3%
+      rgb(160, 115, 200) 10.8%,
+      rgb(97, 21, 164) 94.3%
     );
     transition: all 0.475s;
   }
@@ -96,28 +96,28 @@ a, button, h3,p,span, th {
   }
   
   .radio-input:checked + .radio-tile {
-    border-color: #2260ff;
+    border-color: #dc99f7;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    color: #2260ff;
+    color: #ecbbf7;
   }
   
   .radio-input:checked + .radio-tile:before {
     transform: scale(1);
     opacity: 1;
-    background-color: #2260ff;
-    border-color: #2260ff;
+    background-color: #ba7bcb;
+    border-color: #b587cc;
   }
   
   .radio-input:checked + .radio-tile .radio-icon svg {
-    fill: #2260ff;
+    fill: #d6a7ea;
   }
   
   .radio-input:checked + .radio-tile .radio-label {
-    color: #2260ff;
+    color: #c297ca;
   }
   
   .radio-input:focus + .radio-tile {
-    border-color: #2260ff;
+    border-color: #e1b7ee;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #b5c9fc;
   }
   
@@ -158,7 +158,7 @@ a, button, h3,p,span, th {
 }
 
 .radio-tile:hover {
-  border-color: #2260ff;
+  border-color: #dbafee;
 }
 
 .radio-tile:hover:before {
