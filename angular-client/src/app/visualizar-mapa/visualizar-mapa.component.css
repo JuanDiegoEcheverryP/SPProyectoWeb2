@@ -242,4 +242,21 @@ tr:active {
 .fila-seleccionada {
     background-color: #f0f0f0 !important; /* Cambia esto por el color que prefieras */
 }
+
+
+@keyframes example {
+    0%{
+        transform: rotate(0deg);
+       }
+    100%{
+        transform: rotate(360deg);
+       }
+  }
   
+#blackhole {
+    position: absolute;
+    top: 30vh;
+    left: 40vw;
+    animation: example 40s linear infinite;
+}
+
