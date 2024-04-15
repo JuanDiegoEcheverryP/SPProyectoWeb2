@@ -54,6 +54,11 @@ public class ProductoBodegaController {
         return BodegaService.buscarProductosDTOPorBodega(id);
     }
 
+    @GetMapping("/ProductoBodegaExist/{idNave}/{idProducto}")
+    public boolean obtenerProductoBodega(@PathVariable Long idNave,@PathVariable Long idProducto) {
+        return BodegaService.obtenerProductoBodega(idNave,idProducto);
+    }
+
 }
 
 

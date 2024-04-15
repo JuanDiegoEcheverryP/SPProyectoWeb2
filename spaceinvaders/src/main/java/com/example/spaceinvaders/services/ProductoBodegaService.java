@@ -134,6 +134,17 @@ public class ProductoBodegaService {
         }
         return f; 
     }
+
+    public boolean obtenerProductoBodega(Long idNave, Long idProducto) {
+        List<ProductoBodega> a =productoBodegaRepository.findProductosByNnaveId(idNave);
+        for (ProductoBodega producto : a) {
+            System.out.println(producto.getProducto().getId());
+            if(producto.getProducto().getId() == idProducto) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     
 }

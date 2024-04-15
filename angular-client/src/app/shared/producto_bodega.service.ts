@@ -32,4 +32,8 @@ export class ProductoBodegaService {
   recuperarProductosPorBodega(idNave:number, idProducto:number, idPlaneta:number): Observable<ProductoDTO> {
     return this.http.get<ProductoDTO>(`${environment.serverUrl}/api/bodega/nave/${idNave}/producto/${idProducto}/planeta/${idPlaneta}`)
   }
+
+  ProductoBodegaExist(idNave:number,idProducto:number): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.serverUrl}/api/bodega/ProductoBodegaExist/${idNave}/${idProducto}`)
+  }
 }

@@ -8,6 +8,7 @@ import { Nave } from '../model/nave';
 import { JugadorService } from '../shared/jugador.service';
 import { NaveService } from '../shared/nave.service';
 import { UsuarioDTO } from '../model/usuario-dto';
+import { ProductoBodegaService } from '../shared/producto_bodega.service';
 
 @Component({
   selector: 'app-comerciar',
@@ -33,6 +34,7 @@ export class ComerciarComponent {
   constructor(
     private route: ActivatedRoute,
     private stockProductoService: StockProductoService,
+    private productoBodegaService: ProductoBodegaService,
     private jugadorService: JugadorService,
     private naveService: NaveService,
     private router: Router
@@ -81,7 +83,16 @@ export class ComerciarComponent {
   }
 
   irVender() {
-    this.router.navigate([`vender/${this.productoSeleccionado.id}`]);
+    this.productoBodegaService.ProductoBodegaExist(this.usuarioDTO.idNave,this.productoSeleccionado.id).subscribe(res => {
+      if(!res) {
+        alert("La nave no tiene este producto, asi que no puedes venderlo")
+      }
+      else {
+        this.router.navigate([`vender/${this.productoSeleccionado.id}`]);
+      }
+      
+    })
+    
   }
 
   irComprar() {

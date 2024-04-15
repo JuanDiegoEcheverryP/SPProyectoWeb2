@@ -119,3 +119,8 @@ li {
     background: none;
     border: 2px solid #fff;
 }
+
+#botonJugar:hover {
+    cursor: pointer;
+    background-color: rgba(216, 216, 216, 0.408);
+}
