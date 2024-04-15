@@ -6,11 +6,11 @@
     </div>
     <div class="flexbox" >
         <div *ngFor="let producto of productosBodegaNave" (click)="mostrarInformacion(producto)">
-            <img src="../../assets/caja.png" alt="Imagen del botón">
+            <img [src]="producto.imagen" alt="Imagen del botón">
         </div>
     </div>
     <diV class="imagenProductoSeleccionado" *ngIf="seleccionado">
-        <img src="../../assets/caja.png" alt="Imagen del botón">
+        <img [src]="productoSeleccionado.imagen" alt="Imagen del botón">
     </diV>
     <diV class="infoProductoSeleccionado" *ngIf="seleccionado">
         <p>Id Producto:</p>

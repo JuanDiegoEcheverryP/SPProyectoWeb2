@@ -13,13 +13,15 @@ public class productoBodegaDTO {
     private String nombre;
     private int cantidad;
     private Float espacio;
+    private String imagen;
 
-    public productoBodegaDTO(Long id,String nombre,int cantidad,Float espacio)
+    public productoBodegaDTO(Long id,String nombre,int cantidad,Float espacio, String imagen)
     {
         this.id=id;
         this.nombre=nombre;
         this.cantidad = cantidad;
         this.espacio = espacio;
+        this.imagen = imagen;
     }
 }
 

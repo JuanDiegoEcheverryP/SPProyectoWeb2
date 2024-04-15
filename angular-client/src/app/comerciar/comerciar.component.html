@@ -1,41 +1,16 @@
 <div id="html_body">
-    <div class="navbar">
-        <div class="left-buttons">
-            <button class="button-with-image">
-                <img src="../../assets/star-icon.png" alt="Imagen del botón" width="24" height="24">
-                <span>{{estrellaJugador.nombre}}</span>
-            </button>
-            <button class="button-with-image">
-                <img src="../../assets/planet-icon.png" alt="Imagen del botón" width="24" height="24">
-                <span>{{planetaNave.nombre}}</span>
-            </button>
-            <button class="button-with-image">
-                <img src="../../assets/money-icon.png" alt="Imagen del botón" width="24" height="24">
-                <span>${{jugadorNave.credito}}</span>
-            </button>
-            <button class="button-with-image">
-                <img src="../../assets/clock-icon.png" alt="Imagen del botón" width="24" height="24">
-                <span>{{jugadorNave.tiempo}} l.y</span>
-            </button>
-        </div>
-        <div class="right-buttons">
-            <button class="button-with-image" id="navUsuario" (click)="cerrarSesion()">
-                <img src="https://www.webwise.ie/wp-content/uploads/2020/12/IMG1207.jpg" alt="Imagen del botón" width="24" height="24">
-                <span>Cerrar Sesion</span>
-            </button>
-        </div>
-    </div>
+    <app-barra-estadisticas/>
 
     <div class="tituloItems">
         <button>Items Planeta</button>
     </div>
     <div class="flexbox" >
         <div *ngFor="let producto of productosPlaneta" (click)="mostrarInformacion(producto)">
-            <img src="../../assets/caja.png" alt="Imagen del botón">
+            <img [src]="producto.imagen" alt="Imagen del botón">
         </div>
     </div>
     <diV class="imagenProductoSeleccionado" *ngIf="seleccionado">
-        <img src="../../assets/caja.png" alt="Imagen del botón">
+        <img [src]="productoSeleccionado.imagen" alt="Imagen del botón">
     </diV>
     <diV class="infoProductoSeleccionado" *ngIf="seleccionado">
         <p>Id Producto:</p>

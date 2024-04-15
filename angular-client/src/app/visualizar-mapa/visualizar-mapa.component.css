@@ -4,7 +4,7 @@
     background-image: url('../../assets/espacio.jpg');
     background-size: cover;
     background-position: center;
-
+    overflow: hidden;
 }
 
 * {
@@ -145,9 +145,16 @@ div.botonRegresar.botones > button:hover {
     font-size: 24px;
 }
 
-table {
+#listContainer {
     position: absolute;
     top: 150px;
+    height: 75vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+table {
+    
     border: 1px solid #ccc;
     border-collapse: collapse;
     margin: 0;
@@ -260,3 +267,21 @@ tr:active {
     animation: example 40s linear infinite;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1c3; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #777; 
+  }

@@ -4,6 +4,7 @@ export class ProductoBodegaDTO {
         public id: number,
         public nombre: string,
         public cantidad: number,
-        public espacio: number
+        public espacio: number,
+        public imagen: string
     ) { }
 }

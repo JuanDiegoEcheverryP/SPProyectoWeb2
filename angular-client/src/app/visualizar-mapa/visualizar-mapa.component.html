@@ -9,23 +9,25 @@
     <diV class="botonRegresar botones" (click)="irMenu()">
         <button>Regresar</button>
     </diV>
-    <table>
-        <caption>Lista de planetas</caption>
-        <thead>
-            <tr>
-                <th scope="col">Estrella</th>
-                <th scope="col">Distancia</th>
-                <th scope="col">Habitado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let estrella of estrellasCamino; let i = index" (click)="seleccionado(estrella, i)" [class.fila-seleccionada]="filaSeleccionada === i">
-                <td data-label="Account">{{estrella.nombre}}</td>
-                <td data-label="Due Date">{{estrella.distancia}} L.Y</td>
-                <td data-label="Due Date">{{estrella.habitado}}</td>
-            </tr>
-          </tbody>
-          
-    </table>
+    <div id="listContainer">
+        <table>
+            <caption>Lista de planetas</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Estrella</th>
+                    <th scope="col">Distancia</th>
+                    <th scope="col">Habitado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let estrella of estrellasCamino; let i = index" (click)="seleccionado(estrella, i)" [class.fila-seleccionada]="filaSeleccionada === i">
+                    <td data-label="Account">{{estrella.nombre}}</td>
+                    <td data-label="Due Date">{{estrella.distancia}} L.Y</td>
+                    <td data-label="Due Date">{{estrella.habitado}}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
     <img src="../../assets/black-hole.png" id="blackhole">
 </div>

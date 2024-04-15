@@ -5,6 +5,7 @@
     background-image: url('../../assets/earth_athmosphere.png');
     background-size: cover;
     background-position: center;
+    overflow: hidden;
 }
 
 * {

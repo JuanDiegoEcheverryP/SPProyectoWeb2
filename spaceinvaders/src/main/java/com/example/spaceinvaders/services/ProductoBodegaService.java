@@ -129,7 +129,7 @@ public class ProductoBodegaService {
         List<productoBodegaDTO> f = new ArrayList<>();
         for (ProductoBodega productoBodega : a) {
             Producto temp = productoBodega.getProducto();
-            productoBodegaDTO insertar = new productoBodegaDTO(temp.getId(),temp.getNombre(),productoBodega.getCantidad(),productoBodega.getVol());
+            productoBodegaDTO insertar = new productoBodegaDTO(temp.getId(),temp.getNombre(),productoBodega.getCantidad(),productoBodega.getVol(),temp.getImagen());
             f.add(insertar);
         }
         return f; 

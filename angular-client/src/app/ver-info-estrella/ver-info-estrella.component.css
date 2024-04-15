@@ -4,6 +4,7 @@
     background-image: url('../../assets/espacio.jpg');
     background-size: cover;
     background-position: center;
+    overflow: hidden;
 }
 
 * {
@@ -218,7 +219,6 @@
 }
 
 table {
-  
   border: 1px solid #ccc;
   border-collapse: collapse;
   margin: 0;

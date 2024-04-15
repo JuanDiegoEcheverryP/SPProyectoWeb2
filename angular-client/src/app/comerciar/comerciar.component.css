@@ -4,6 +4,7 @@
     background-image: url('../../assets/sci_fi.jpg');
     background-size: cover;
     background-position: center;
+    overflow: hidden;
 }
 
 * {

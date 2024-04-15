@@ -6,6 +6,7 @@
     background-size: cover;
     background-position: center;
     position: relative;
+    overflow: hidden;
 } 
   
 #botones
@@ -15,6 +16,8 @@
     gap: 50px;
     justify-content: center;
     width: 100%;
+    position: absolute;
+    bottom: 10vh;
 }
 
 h1,h3{

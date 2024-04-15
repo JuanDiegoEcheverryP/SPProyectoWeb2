@@ -28,7 +28,7 @@ export class BodegaComponent {
   jugadorNave:Nave = new Nave(-1,"",-1,1)
   
   seleccionado: boolean = false;
-  productoSeleccionado: ProductoBodegaDTO = new ProductoBodegaDTO(-1,"",-1,-1);
+  productoSeleccionado: ProductoBodegaDTO = new ProductoBodegaDTO(-1,"",-1,-1,"");
 
   productosBodegaNave: ProductoBodegaDTO[] = [];
   productosBodega: ProductoBodega[] = [];
