@@ -65,8 +65,16 @@ public class NaveController {
                 respuesta.setIdPlaneta(null);
                 respuesta.setNombrePlaneta(null);
             }
+
+            if(naveService.obtenerVolumenTotal(id)!=null)
+            {
+                respuesta.setCapadidadUtilizada(naveService.obtenerVolumenTotal(id));
+            }
+            else
+            {
+                respuesta.setCapadidadUtilizada(0f);
+            }
             //fijar volumen que se ha utilizado
-            respuesta.setCapadidadUtilizada(naveService.obtenerVolumenTotal(id));
 
             return ResponseEntity.ok().body(respuesta);
         }

@@ -45,7 +45,14 @@ public class JugadorController {
             usuario.setAvatar(encontrado.get(0).getAvatar().getImagen());
             usuario.setNombre(encontrado.get(0).getNombre());
             usuario.setRol(encontrado.get(0).getRol());
-            usuario.setIdNave(encontrado.get(0).getNaveJuego().getId());
+            if(encontrado.get(0).getRol()!=null)
+            {
+                usuario.setIdNave(encontrado.get(0).getNaveJuego().getId());
+            }
+            else
+            {
+                usuario.setIdNave(null);
+            }
             usuario.setId(encontrado.get(0).getId());
         }
         else

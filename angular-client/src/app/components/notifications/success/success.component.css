@@ -35,6 +35,7 @@
     font-weight: 100;
     color: darken(#777777, 10%);
     letter-spacing: 1px;
+    font-family: 'Lato', sans-serif;
   }
   
   button, .dot {

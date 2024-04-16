@@ -143,17 +143,25 @@ export class InfoProductoComponent {
 
         console.log("producto",this.idProducto,"nave",this.idNave,"planeta",this.idPlaneta,"cantidad",this.cantidad,"total",this.total);
         
-
-        if(this.informacionRecibir[0]==1)
+        if(this.cantidad>0)
         {
-          //realizar la compra
-          this.comprar(event)
+          if(this.informacionRecibir[0]==1)
+          {
+            //realizar la compra
+            this.comprar(event)
+          }
+          else if(this.informacionRecibir[0]==2)
+          {
+            //realizar la venta
+            this.vender(event)
+          }
         }
-        else if(this.informacionRecibir[0]==2)
+        else
         {
-          //realizar la venta
-          this.vender(event)
+          this.error=true
+          this.notificacionText="Cantidad debe ser mayor a cero"
         }
+        
     }
     else
     {

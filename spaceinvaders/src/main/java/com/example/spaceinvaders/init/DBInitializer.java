@@ -376,7 +376,6 @@ public class DBInitializer implements CommandLineRunner{
         String[] nombreProducto3={"Magpie","Pygmy","Turtle","barbet","Goose"};
 
         String nombreProducto;
-        String imagenProducto="../../../assets/productos/producto1.png";
         float volumen;
       
 
