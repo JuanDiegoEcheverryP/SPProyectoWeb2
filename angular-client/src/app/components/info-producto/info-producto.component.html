@@ -23,10 +23,10 @@
             </div>
             <div style="display: flex;">
                 <p class="negrita">Precio unitario:&nbsp; </p>
-                <p *ngIf="this.informacionRecibir[0] === 2">
+                <p *ngIf="this.informacionRecibir[0] === 1">
                     {{ producto.precioOferta }}
                 </p>
-                <p *ngIf="this.informacionRecibir[0] === 1">
+                <p *ngIf="this.informacionRecibir[0] === 2">
                     {{ producto.precioDemanda }}
                 </p>
             </div>

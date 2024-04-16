@@ -74,7 +74,14 @@ export class InfoProductoComponent {
     this.bodega.recuperarProductosPorBodega(this.idNave,this.idProducto,this.idPlaneta).subscribe(
       (producto: ProductoDTO) => {
         console.log('Respuesta del backend:', producto);
-        this.producto=producto
+        if(producto.nombre!=null)
+        {
+           this.producto=producto
+        }
+        else
+        {
+          this.producto.max=0
+        }
         // Aquí puedes realizar cualquier acción con la respuesta del backend
       },
       (error) => {

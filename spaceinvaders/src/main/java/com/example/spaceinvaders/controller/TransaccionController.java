@@ -51,12 +51,11 @@ public class TransaccionController {
                 // Confirmar transacción
                 RespuestaTransaccionDTO mensaje= new RespuestaTransaccionDTO();
                 mensaje.setMensaje("Venta exitosa");
-                return ResponseEntity.ok().body(mensaje);
+                return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
             } catch (Exception e) {
                 // Si hay un error, revertir transacción
                 // Registrar el error
                 // Devolver mensaje de error
-                System.err.println("holis");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Error al realizar la venta: " + e.getMessage());
             }
@@ -87,7 +86,7 @@ public class TransaccionController {
                 // Confirmar transacción
                 RespuestaTransaccionDTO mensaje= new RespuestaTransaccionDTO();
                 mensaje.setMensaje("Compra exitosa!");
-                return ResponseEntity.ok().body(mensaje);
+                return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
             } catch (Exception e) {
                 // Si hay un error, revertir transacción
                 // Registrar el error

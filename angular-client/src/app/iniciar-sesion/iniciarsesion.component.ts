@@ -31,8 +31,17 @@ export class IniciarsesionComponent {
           
           // Guardar la cadena JSON en sessionStorage
           sessionStorage.setItem("infoJugador", usuarioString);
+
+          if(usuario.rol==null)
+          {
+            this.router.navigate([`/unirseTripulacion/${usuario.id}`]);
+          }
+          else
+          {
+             this.router.navigate(['/menu']);
+          }
           
-          this.router.navigate(['/menu']);
+         
         },
         (error) => {
           console.error('Error al iniciar sesión:', error);

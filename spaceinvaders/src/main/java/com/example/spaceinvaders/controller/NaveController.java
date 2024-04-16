@@ -1,6 +1,7 @@
 package com.example.spaceinvaders.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,44 +39,54 @@ public class NaveController {
     } 
 
     @GetMapping("/ver/{id}")
-    public NaveDTO obtenerInfoNave( @PathVariable Long id) {
-        
-        Nave naveObtenida=naveService.recuperarNave(id);
+    public ResponseEntity<?> obtenerInfoNave( @PathVariable Long id) { 
+        try
+        {
+            Nave naveObtenida=naveService.recuperarNave(id);
+            NaveDTO respuesta=new NaveDTO();
+            respuesta.setNombre(naveObtenida.getNombre());
+            respuesta.setTipoNave(naveObtenida.getTipoNave().getNombre());
+            respuesta.setCreditos(naveObtenida.getCredito());
+            respuesta.setTiempoRestante(naveObtenida.getTiempo());
+            respuesta.setCapacidadMaxima(naveObtenida.getTipoNave().getVolBodega());
+            respuesta.setFoto(naveObtenida.getTipoNave().getFoto());
+            respuesta.setVelocidad(naveObtenida.getTipoNave().getVelocidad());
 
-        NaveDTO respuesta=new NaveDTO();
-        respuesta.setNombre(naveObtenida.getNombre());
-        respuesta.setTipoNave(naveObtenida.getTipoNave().getNombre());
-        respuesta.setCreditos(naveObtenida.getCredito());
-        respuesta.setTiempoRestante(naveObtenida.getTiempo());
-        respuesta.setCapacidadMaxima(naveObtenida.getTipoNave().getVolBodega());
-        respuesta.setFoto(naveObtenida.getTipoNave().getFoto());
-        respuesta.setVelocidad(naveObtenida.getTipoNave().getVelocidad());
+            //obtener la localizacion
+            //fijar estrella
+            respuesta.setIdEstrella(naveObtenida.getLocalizacion().getId());
+            respuesta.setNombreEstrella(naveObtenida.getLocalizacion().getNombre());
 
-        //obtener la localizacion
-        //fijar estrella
-        respuesta.setIdEstrella(naveObtenida.getLocalizacion().getId());
-        respuesta.setNombreEstrella(naveObtenida.getLocalizacion().getNombre());
+            //fijar planeta 
+            if (naveObtenida.getLocalizacionPlaneta() != null) {
+                respuesta.setIdPlaneta(naveObtenida.getLocalizacionPlaneta().getId());
+                respuesta.setNombrePlaneta(naveObtenida.getLocalizacionPlaneta().getNombre());
+            } else {
+                respuesta.setIdPlaneta(null);
+                respuesta.setNombrePlaneta(null);
+            }
+            //fijar volumen que se ha utilizado
+            respuesta.setCapadidadUtilizada(naveService.obtenerVolumenTotal(id));
 
-        //fijar planeta 
-        // fijar planeta
-        if (naveObtenida.getLocalizacionPlaneta() != null) {
-            respuesta.setIdPlaneta(naveObtenida.getLocalizacionPlaneta().getId());
-            respuesta.setNombrePlaneta(naveObtenida.getLocalizacionPlaneta().getNombre());
-        } else {
-            // handle the case when LocalizacionPlaneta is null
-            respuesta.setIdPlaneta(null);
-            respuesta.setNombrePlaneta(null);
+            return ResponseEntity.ok().body(respuesta);
         }
-        //fijar volumen que se ha utilizado
-        respuesta.setCapadidadUtilizada(naveService.obtenerVolumenTotal(id));
-
-        return respuesta;
-        
+        catch (NoSuchElementException e)
+        {
+            String errorMessage = "No existe una nave con ese id";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
     }
 
     @GetMapping("/obtenerPlaneta/{id}")
-    public Planeta obtenerPlanetaPorNaveId(@PathVariable Long id) {
-        return naveService.obtenerPlanetaPorNaveId(id);
+    public ResponseEntity<?> obtenerPlanetaPorNaveId(@PathVariable Long id) {
+        try{
+            return ResponseEntity.ok().body(naveService.obtenerPlanetaPorNaveId(id));
+        }
+        catch (NoSuchElementException e)
+        {
+            String errorMessage = "No existe un planeta para esa nave con dicho id";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }  
     }
 
     

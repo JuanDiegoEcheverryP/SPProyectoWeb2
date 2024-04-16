@@ -1,8 +1,11 @@
 package com.example.spaceinvaders.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +24,26 @@ public class AvatarController {
     private AvatarService avatarService;
 
     @GetMapping("/list")
-    public List<Avatar> listarAvatares() {
-        return avatarService.listarAvatars();
+    public ResponseEntity<?>  listarAvatares() {
+        if(avatarService.listarAvatars()!=null)
+        {
+            return ResponseEntity.ok(avatarService.listarAvatars());
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No hay avatares");
+        }
     } 
 
     @GetMapping("/{id}")
-    public Avatar findAvatar(@PathVariable Long id) {
-        return avatarService.recuperarAvatar(id);
-    } 
+    public ResponseEntity<?> findAvatar(@PathVariable Long id) {
+        try {
+            Avatar avatar = avatarService.recuperarAvatar(id);
+            return ResponseEntity.ok(avatar);
+        } catch (NoSuchElementException e) {
+            String errorMessage = "No existe un avatar con ese id";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
+    }
     
 }

@@ -1,6 +1,7 @@
 package com.example.spaceinvaders.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -77,7 +78,7 @@ public class JugadorController {
                 usuario.setNombre(jugador.getNombre());
                 usuario.setIdNave(null);
                 usuario.setAvatar(jugador.getAvatar().getImagen());
-                return ResponseEntity.ok(usuario);
+                return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
             } catch (DataIntegrityViolationException e) {
                 // El nombre de jugador ya existe, manejar el error aquí
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -87,14 +88,13 @@ public class JugadorController {
         else
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body("La contrasenas no son iguales");
+            .body("Las contraseñas no son iguales");
         }
-        
-        
+         
     } 
 
     @PatchMapping("{id}/rol/nave")
-    public UsuarioDTO modificarRolYNave(@PathVariable Long id, @RequestBody PatchRolNave actualizacion) {
+    public ResponseEntity<?> modificarRolYNave(@PathVariable Long id, @RequestBody PatchRolNave actualizacion) {
         Jugador jugador=jugadorService.recuperarJugador(id);
 
         jugadorService.actualizarRolJugador(id,actualizacion.getRol());
@@ -108,18 +108,27 @@ public class JugadorController {
         respuesta.setRol(actualizacion.getRol());
         respuesta.setIdNave(actualizacion.getNaveId());
 
-        return respuesta;
+        return ResponseEntity.ok().body(respuesta);
     }
 
     @GetMapping("/{idJugador}")
-    public UsuarioDTO verJugador(@PathVariable Long idJugador) {
-        Jugador jugador = jugadorService.recuperarJugador(idJugador);
-        UsuarioDTO enviar=new UsuarioDTO();
-        enviar.setId(jugador.getId());
-        enviar.setNombre(jugador.getNombre());
-        enviar.setRol(jugador.getRol());
-        enviar.setAvatar(jugador.getAvatar().getImagen());
-        return enviar;
+    public ResponseEntity<?> verJugador(@PathVariable Long idJugador) {
+        try
+        {
+            Jugador jugador = jugadorService.recuperarJugador(idJugador);
+            UsuarioDTO enviar=new UsuarioDTO();
+            enviar.setId(jugador.getId());
+            enviar.setNombre(jugador.getNombre());
+            enviar.setRol(jugador.getRol());
+            enviar.setAvatar(jugador.getAvatar().getImagen());
+            return ResponseEntity.ok().body(enviar);
+        } 
+        catch (NoSuchElementException e)
+        {
+            String errorMessage = "No existe un jugador con ese id";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
+        
     }
 
 }
