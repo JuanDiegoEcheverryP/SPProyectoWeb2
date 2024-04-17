@@ -77,23 +77,32 @@ export class RegistrarNuevaTripulacionComponent {
       alert("Debe ingresar un nombre para la nave")
       return
     }
-    this.naveService.registrarNuevaNave(this.usuarioDTO.id,nombreNave,this.indice+1).subscribe(
-        usuario => {
-        console.log('Respuesta del backend:', usuario);
-        //this.shared.guardarInformacion(usuario)
-        // Convertir el objeto usuario a una cadena JSON
-        const usuarioString = JSON.stringify(usuario);
-        
-        // Guardar la cadena JSON en sessionStorage
-        sessionStorage.setItem("infoJugador", usuarioString);
-        
-        this.router.navigate(['/menu']);
-      },
-      (error) => {
-        console.error('Error al iniciar sesión:', error);
-        // Maneja cualquier error que pueda ocurrir durante la solicitud
+    this.naveService.existeNave(nombreNave).subscribe( res => {
+      if(!res) {
+        this.naveService.registrarNuevaNave(this.usuarioDTO.id,nombreNave,this.indice+1).subscribe(
+          usuario => {
+          console.log('Respuesta del backend:', usuario);
+          //this.shared.guardarInformacion(usuario)
+          // Convertir el objeto usuario a una cadena JSON
+          const usuarioString = JSON.stringify(usuario);
+          
+          // Guardar la cadena JSON en sessionStorage
+          sessionStorage.setItem("infoJugador", usuarioString);
+          
+          this.router.navigate(['/menu']);
+        },
+        (error) => {
+          console.error('Error al iniciar sesión:', error);
+          // Maneja cualquier error que pueda ocurrir durante la solicitud
+        }
+      )
       }
-    )
+      else {
+        alert("La nave ya existe");
+        return
+      }
+    })
+    
     //console.log(this.usuarioDTO.id, nombreNave,this.indice+1);
     
   }

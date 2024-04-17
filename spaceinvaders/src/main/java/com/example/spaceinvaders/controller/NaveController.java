@@ -141,4 +141,8 @@ public class NaveController {
         
     } 
 
+    @GetMapping("exist/{nombreNave}")
+    public boolean naveExist(@PathVariable String nombreNave) {
+        return naveService.naveExist(nombreNave);
+    }
 }

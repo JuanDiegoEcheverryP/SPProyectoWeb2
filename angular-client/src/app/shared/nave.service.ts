@@ -55,5 +55,9 @@ export class NaveService {
   registrarNuevaNave(idCapitan:number,nombreNave:string, idTipoNave:number): Observable<number> {
     return this.http.post<number>(`${environment.serverUrl}/api/nave/registro/${idCapitan}/${nombreNave}/${idTipoNave}`,idCapitan,{ headers: this.headers })
   }
+
+  existeNave(nombre:String): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.serverUrl}/api/nave/exist/${nombre}`)
+  }
 }
 

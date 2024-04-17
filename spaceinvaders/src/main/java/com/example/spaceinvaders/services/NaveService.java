@@ -253,4 +253,9 @@ public class NaveService {
         enviar.setIdNave(jugador.getNaveJuego().getId());
         return enviar;
     }
+
+    public boolean naveExist(String nombreNave) {
+        List<Nave> naves = naveRepository.findAllByNombre(nombreNave);
+        return !naves.isEmpty();
+    }
 }
