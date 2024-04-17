@@ -356,15 +356,16 @@ public class DBInitializer implements CommandLineRunner{
         String[] tipoNaveNombre2={"Violaceae", "Asteraceae","Orchidaceae", "Portulacaceae","Physciaceae","Aster","Sapotaceae","Hymenophyllaceae","Pinaceae","Astirrea"};
         String imagenNave="https://shorturl.at/tvwUW", nombreTipoNave;
         float volumenBodega, velocidad;
-
+        int contador = 1;
         for (String nombre1 : tipoNaveNombre1) {
             for (String nombre2 : tipoNaveNombre2) {
 
                 nombreTipoNave=nombre1 + " " + nombre2;
                 volumenBodega= rand.nextFloat(1000) +1;
                 velocidad=rand.nextFloat(100) +1;
-                TipoNave tipoNave=new TipoNave(nombreTipoNave,volumenBodega,velocidad,imagenNave);
+                TipoNave tipoNave=new TipoNave(nombreTipoNave,volumenBodega,velocidad,"../../../assets/naves/space"+contador+".png");
                 tipoNaveRepository.save(tipoNave);
+                contador++;
             }
         }
     }
