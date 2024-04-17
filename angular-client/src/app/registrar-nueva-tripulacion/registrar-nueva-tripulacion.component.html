@@ -7,7 +7,7 @@
         <li class="btn" (click)="anteriorNave()"><button><</button></li>
             <ul class="contenido flex-container center">
                 <li class="imagen">
-                    <img src="../../assets/spaceship.jpg">
+                    <img src="../../assets/spacetest.png">
                 </li>
                 <li class="descripcion">
                     <div class="informacion">
@@ -24,9 +24,14 @@
                         <hr>
                         <p class="importante">Importante: Cuando eliges crear una tripulacion, automaticamente te conviertes en el capitan de tu nave</p>
                     </div>
-                    <div class="btnSeleccionar" (click)="empezarJuego()">
+                    <div class="btnSeleccionar btnEmpezar" (click)="empezarJuego()">
                         <button>
                             Seleccionar nave
+                        </button>
+                    </div>
+                    <div class="btnUnirse btnSeleccionar" routerLink="/unirseTripulacion/{{id}}">
+                        <button>
+                            Unirse a una tripulacion
                         </button>
                     </div>
                 </li>

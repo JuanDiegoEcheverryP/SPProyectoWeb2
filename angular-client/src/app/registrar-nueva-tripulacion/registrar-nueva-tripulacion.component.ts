@@ -17,6 +17,7 @@ export class RegistrarNuevaTripulacionComponent {
   naves: TipoNave[] = [];
   actual: TipoNave = new TipoNave(1,"ss",1,1,"dd");
   indice:number = -1;
+  id: number = -1;
 
   nombreNave:String = "";
 
@@ -31,6 +32,7 @@ export class RegistrarNuevaTripulacionComponent {
   ngOnInit(): void {
     if(this.usuarioString){
       this.usuarioDTO= JSON.parse(this.usuarioString);
+      this.id = this.usuarioDTO.id
     }
     this.tipoNaveService.listarTipoNaves().subscribe(naves => {
       this.naves = naves
