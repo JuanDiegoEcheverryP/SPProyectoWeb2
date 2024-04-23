@@ -60,7 +60,7 @@ a, button {
     letter-spacing: -2px;
     margin-left: 30px;
     position: absolute;
-    top: 170px;
+    top: 200px;
 }
 
 #barra {
@@ -69,7 +69,7 @@ a, button {
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(27,0,255,0) 100%);
     position: absolute;
-    top: 430px;
+    top: 460px;
     margin-left: 30px;
 }
 
@@ -80,7 +80,7 @@ a, button {
     font-size: 24px;
     margin-left: 30px;
     position: absolute;
-    top: 470px;
+    top: 500px;
 }
 
 #autores {
@@ -90,7 +90,7 @@ a, button {
     font-size: 24px;
     margin-left: 30px;
     position: absolute;
-    bottom: 300px;
+    top: 620px;
 }
 
 ul {
@@ -100,7 +100,7 @@ ul {
     font-size: 18px;
     margin-left: 50px;
     position: absolute;
-    bottom: 230px;
+    top: 650px;
 }
 
 li {
@@ -115,7 +115,7 @@ li {
     font-size: 36px;
     margin-left: 30px;
     position: absolute;
-    bottom: 150px;
+    top: 730px;
 
     background: none;
     border: 2px solid #fff;
