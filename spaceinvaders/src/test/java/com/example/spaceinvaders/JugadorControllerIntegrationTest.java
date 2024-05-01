@@ -36,7 +36,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 @ActiveProfiles("integration-testing")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-class JugadorControlerIntegrationTest {
+class JugadorControllerIntegrationTest {
 
 	private static final String SERVER_URL = "http://localhost:8081";
 

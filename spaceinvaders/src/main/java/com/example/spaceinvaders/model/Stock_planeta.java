@@ -38,4 +38,13 @@ public class Stock_planeta {
         this.FactorOferta=FactorOferta;
         this.stock=stock;
     }
+
+    public Stock_planeta(Long FactorDemanda,Long FactorOferta,Integer stock, Planeta planeta, Producto producto)
+    {
+        this.FactorDemanda=FactorDemanda;
+        this.FactorOferta=FactorOferta;
+        this.stock=stock;
+        this.producto=producto;
+        this.planeta=planeta;
+    }
 }

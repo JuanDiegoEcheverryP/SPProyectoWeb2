@@ -23,8 +23,8 @@ public class ProductoDTO {
         this.nombre=nombre;
         this.imagen=imagen;
         this.volumen=volumen;
-        this.precioDemanda=(float) (FactorDemanda/(1+stock));
-        this.precioOferta=(float) (FactorOferta/(1+stock));
+        this.precioDemanda= ((float)FactorDemanda/(1+(float)stock));
+        this.precioOferta=((float)FactorOferta/(1+(float)stock));
     }
 
     public ProductoDTO(Long id,String nombre,String imagen,Float volumen,Long FactorDemanda,Long FactorOferta,Integer stock, Integer max)
@@ -33,8 +33,8 @@ public class ProductoDTO {
         this.nombre=nombre;
         this.imagen=imagen;
         this.volumen=volumen;
-        this.precioDemanda=(float) (FactorDemanda/(1+stock));
-        this.precioOferta=(float) (FactorOferta/(1+stock));
+        this.precioDemanda= ((float)FactorDemanda/(1+(float)stock));
+        this.precioOferta=((float)FactorOferta/(1+(float)stock));
         this.max=max;
     }
 

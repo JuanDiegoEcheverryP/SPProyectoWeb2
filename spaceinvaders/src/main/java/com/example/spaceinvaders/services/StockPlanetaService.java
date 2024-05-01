@@ -23,7 +23,6 @@ public class StockPlanetaService {
 
     public boolean validarStockCompra(Long idProducto,Long idPlaneta, int cant)
     {
-        log.error("hola cant "+ cant);
         log.error("hola stock "+ stockPlanetaRepository.findStockByPlanetaIdAndProductoId(idPlaneta, idProducto));
         if(cant<=stockPlanetaRepository.findStockByPlanetaIdAndProductoId(idPlaneta, idProducto))
             return true;
@@ -76,6 +75,7 @@ public class StockPlanetaService {
 
             // Create ProductoDTO object from retrieved data
             productoDTO = new ProductoDTO(producto.getId(),producto.getNombre(),producto.getImagen(),producto.getVolumen(),stockPlaneta.getFactorDemanda(), stockPlaneta.getFactorOferta(),stockPlaneta.getStock(),stockPlaneta.getStock());            // Set properties of productoDTO using data from stockPlaneta and producto
+            System.out.println("ver "+stockPlaneta.getFactorDemanda());
             // Add productoDTO to stockSinPrecios list
         }
        

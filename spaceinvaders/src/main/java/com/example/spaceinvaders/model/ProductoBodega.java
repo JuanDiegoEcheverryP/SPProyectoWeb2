@@ -41,6 +41,14 @@ public class ProductoBodega {
         this.vol=vol;
     }
 
+    public ProductoBodega(Integer cantidad, Float vol, Producto producto, Nave nave)
+    {
+        this.cantidad=cantidad;
+        this.vol=vol;
+        this.producto=producto;
+        this.nave=nave;
+    }
+
 
     
 
