@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Eliminar Stock</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Eliminar Stock</h1>
+        <form action="#" th:action="@{/stock-planeta/borrar}" th:object="${stock}" method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            
+            <p th:text="|Se va a borrar el stock de: ${stock.producto.nombre} con ${stock.planeta.nombre}|"></p>
+
+            <button type="submit">BORRAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/stock-planeta/menu}">Cancelar</a>
+</body>
+
+</html>

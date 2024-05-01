@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Producto Bodegas</title>
+</head>
+<body>
+    <h1>Lista de Producto Bodegas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Credito</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="productoBodega : ${productoBodegas}">
+                <td th:text="${productoBodega.id}"></td>
+                <td th:text="${productoBodega.cantidad}"></td>
+                <td th:text="${productoBodega.volTotal}"></td>
+                <!--<td th:text="${nave.localizacion.nombre}"></td>-->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Crear Nave</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Crear Nave</h1>
+        <form action="#" th:action="@{/nave/crear}" th:object="${nave}" method="post">
+
+            <label for="naveTipo">Tipo nave: </label>
+            <select th:field="*{tipoNave.id}">
+                <option th:each="tipoNave : ${tipoNaves}" th:value="${tipoNave.id}" th:text="${tipoNave.nombre}"></option>
+            </select>
+
+            <label for="naveTipo">localizacion: </label>
+            <select th:field="*{localizacion.id}">
+                <option th:each="localizacion : ${estrella}" th:value="${localizacion.id}" th:text="${localizacion.nombre}"></option>
+            </select>
+            
+            <label for="naveNombre">Nombre: </label>
+            <input type="text" th:field="*{nombre}" id="naveNombre" required>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
+            
+            <label for="naveCredito">Credito: </label>
+            <input type="number" min="0" step="any" th:field="*{credito}" id="naveCredito" required>
+            <span th:if="${#fields.hasErrors('credito')}" th:errors="*{credito}"
+                th:class="${#fields.hasErrors('credito')} ? 'error' : ''"></span>
+
+            <label for="naveTiempo">Tiempo: </label>
+            <input type="number" min="0" step="any" th:field="*{tiempo}" id="naveTiempo" required>
+            <span th:if="${#fields.hasErrors('tiempo')}" th:errors="*{tiempo}"
+                th:class="${#fields.hasErrors('tiempo')} ? 'error' : ''"></span>
+
+            <button type="submit">CREAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/nave/menu}">Cancelar</a>
+</body>
+
+</html>

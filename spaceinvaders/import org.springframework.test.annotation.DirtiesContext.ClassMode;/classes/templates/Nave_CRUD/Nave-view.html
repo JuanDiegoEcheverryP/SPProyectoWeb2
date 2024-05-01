@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Editar Nave</title>
+</head>
+
+<body>
+    <h1>Nave</h1>
+    <p th:text="|Nombre: ${nave.nombre}|"></p>
+    <p th:text="|Crédito: ${nave.credito}|"></p>
+    <p th:text="|Tiempo: ${nave.tiempo}|"></p>
+    <a th:href="@{/nave/list}">Volver</a>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Editar Avatar</title>
+</head>
+
+<body>
+    <h1>Avatar</h1>
+    <p th:text="|Nombre: ${avatar.nombre}|"></p>
+    <p th:text="|Imagen: ${avatar.imagen}|"></p>
+    <a th:href="@{/avatar/menu}">Atras</a>
+</body>
+
+
+</html>

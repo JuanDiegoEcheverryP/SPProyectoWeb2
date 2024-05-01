@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Naves</title>
+</head>
+<body>
+    <h1>Lista de Naves</h1>
+    <a th:href="@{/nave/menu}">Atras</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Credito</th>
+                <th>Tiempo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="nave : ${naves}">
+                <td th:text="${nave.id}"></td>
+                <td th:text="${nave.nombre}"></td>
+                <td th:text="${nave.credito}"></td>
+                <td th:text="${nave.tiempo}"></td>
+                <td>
+                    <a th:href="@{/nave/ver/{id}(id=${nave.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/nave/editar/{id}(id=${nave.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/nave/borrar-form/{id}(id=${nave.id})}">Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

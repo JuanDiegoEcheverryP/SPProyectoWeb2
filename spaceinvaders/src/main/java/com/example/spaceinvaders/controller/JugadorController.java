@@ -128,6 +128,7 @@ public class JugadorController {
             enviar.setNombre(jugador.getNombre());
             enviar.setRol(jugador.getRol());
             enviar.setAvatar(jugador.getAvatar().getImagen());
+            enviar.setIdNave(jugador.getNaveJuego().getId());
             return ResponseEntity.ok().body(enviar);
         } 
         catch (NoSuchElementException e)

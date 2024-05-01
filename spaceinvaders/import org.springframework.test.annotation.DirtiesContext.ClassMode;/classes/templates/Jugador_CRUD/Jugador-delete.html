@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Eliminar Jugador</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Jugador</h1>
+        <form action="#" th:action="@{/jugador/borrar}" th:object="${jugador}" method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            
+            <p th:text="|Jugador que se va a borrar: ${jugador.nombre}|"></p>
+
+            <button type="submit">BORRAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/jugador/list}">Cancelar</a>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Crear Producto</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Crear Producto</h1>
+        <form action="#" th:action="@{/producto/crear}" th:object="${producto}" method="post">
+            
+            <label for="productoNombre">Nombre: </label>
+            <input type="text" th:field="*{nombre}" id="productoNombre" required>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
+            
+            <label for="productoVolumen">Volumen: </label>
+            <input type="text" th:field="*{volumen}" id="productoCoordX" required>
+            <span th:if="${#fields.hasErrors('volumen')}" th:errors="*{volumen}"
+                th:class="${#fields.hasErrors('volumen')} ? 'error' : ''"></span>
+
+            <button type="submit">CREAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/producto/menu}">Cancelar</a>
+</body>
+
+</html>

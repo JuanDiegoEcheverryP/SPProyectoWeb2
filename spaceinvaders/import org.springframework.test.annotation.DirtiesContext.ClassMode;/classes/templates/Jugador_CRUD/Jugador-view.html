@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Editar Jugador</title>
+</head>
+
+<body>
+    <h1>Jugador</h1>
+    <p th:text="|Id: ${jugador.id}|"></p>
+    <p th:text="|Nombre: ${jugador.nombre}|"></p>
+    <p th:text="|Contraseña: ${jugador.contrasena}|"></p>
+    <a th:href="@{/jugador/list}">Volver</a>
+</body>
+
+</html>

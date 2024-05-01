@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Eliminar Nave</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Nave</h1>
+        <form action="#" th:action="@{/nave/borrar}" th:object="${nave}" method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            
+            <p th:text="|Nave que se va a borrar: ${nave.nombre}|"></p>
+
+            <button type="submit">BORRAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/nave/list}">Cancelar</a>
+</body>
+
+</html>

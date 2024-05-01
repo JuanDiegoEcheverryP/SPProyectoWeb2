@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Editar producto</title>
+</head>
+
+<body>
+    <h1>Editar producto</h1>
+    <p th:text="|Nombre: ${producto.nombre}|"></p>
+    <p th:text="|Volumen: ${producto.volumen}|"></p>
+    <a th:href="@{/producto/menu}">Volver</a>
+</body>
+    <a th:href="@{/producto/menu}">Atras</a>
+
+</html>

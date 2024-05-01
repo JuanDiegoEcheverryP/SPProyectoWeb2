@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Crear Planeta</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Crear Planeta</h1>
+        <form action="#" th:action="@{/planeta/crear}" th:object="${planeta}" method="post">
+            
+            <label for="stockPlanetaNombre">Estrella a la que le pertenece: </label>
+            <select th:field="*{estrella.id}">
+                <option th:each="estrella : ${estrella}" th:value="${estrella.id}" th:text="${estrella.nombre}"></option>
+            </select>
+
+            <label for="planetaNombre">Nombre: </label>
+            <input type="text" th:field="*{nombre}" id="planetaNombre" required>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
+            
+            <label for="habitado">El planera estara habitado: </label>
+            <input type="checkbox" th:field="*{habitado}" />
+            <span th:if="${#fields.hasErrors('habitado')}" th:errors="*{habitado}"
+                th:class="${#fields.hasErrors('habitado')} ? 'error' : ''"></span>
+
+            <button type="submit">CREAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/planeta/menu}">Cancelar</a>
+</body>
+
+</html>

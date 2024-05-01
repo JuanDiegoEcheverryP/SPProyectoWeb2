@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Tipo Nave</title>
+</head>
+
+<body>
+
+    <form method="get" action="#" th:action="@{/tipoNave/search}">
+        <label for="searchText">Buscar por nombre</label>
+        <input type="text" id="searchText" name="searchText">
+        <button type="submit">Buscar</button>
+    </form>
+    <a th:href="@{/tipoNave/menu}">Atras</a>
+
+    <h1>Tipo Nave</h1>
+    <table class="entity-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>volBodega</th>
+                <th>velocidad</th>
+                <th>foto</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="tipoNave : ${tipoNave}">
+                <td style="padding-left: 20px;" th:text="${tipoNave.id}"></td>
+                <td style="padding-left: 20px;" th:text="${tipoNave.nombre}"></td>
+                <td style="padding-left: 20px;" th:text="${tipoNave.volBodega}"></td>
+                <td style="padding-left: 20px;" th:text="${tipoNave.velocidad}"></td>
+                <td style="padding-left: 20px;" th:text="${tipoNave.foto}"></td>
+                <td>
+                    <a th:href="@{/tipoNave/ver/{id}(id=${tipoNave.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/tipoNave/editar/{id}(id=${tipoNave.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/tipoNave/borrar-form/{id}(id=${tipoNave.id})}">Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+
+</html>

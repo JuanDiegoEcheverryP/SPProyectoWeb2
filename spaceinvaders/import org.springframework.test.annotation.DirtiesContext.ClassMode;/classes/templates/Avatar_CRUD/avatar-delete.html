@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Eliminar Avatar</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Avatar</h1>
+        <form action="#" th:action="@{/avatar/borrar}" th:object="${avatar}" method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            
+            <p th:text="|Avatar que se va a borrar: ${avatar.nombre}|"></p>
+
+            <button type="submit">BORRAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/avatar/menu}">Cancelar</a>
+</body>
+
+</html>

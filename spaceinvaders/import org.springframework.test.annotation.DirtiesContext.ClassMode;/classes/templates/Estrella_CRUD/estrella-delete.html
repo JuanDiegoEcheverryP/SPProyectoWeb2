@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Eliminar Estrella</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Estrella</h1>
+        <form action="#" th:action="@{/estrella/borrar}" th:object="${estrella}" method="post">
+            <input type="hidden" th:field="*{id}" id="id">
+            
+            <p th:text="|Estrella que se va a borrar: ${estrella.nombre}|"></p>
+
+            <button type="submit">BORRAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/estrella/menu}">Cancelar</a>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Crear Jugador</title>
+</head>
+
+<body>
+    <div class="formcontainer">
+        <h1>Crear Jugador</h1>
+        <form action="#" th:action="@{/jugador/crear}" th:object="${jugador}" method="post">
+            
+            <label for="stockAvatarNombre">Avatar: </label>
+            <select th:field="*{avatar.id}">
+                <option th:each="avatar : ${avatares}" th:value="${avatar.id}" th:text="${avatar.nombre}"></option>
+            </select>
+
+            <label for="ss">Nave: </label>
+            <select th:field="*{naveJuego.id}">
+                <option th:each="naveJuego : ${naves}" th:value="${naveJuego.id}" th:text="${naveJuego.nombre}"></option>
+            </select>
+
+            <label for="jugadorNombre">Nombre: </label>
+            <input type="text" th:field="*{nombre}" id="jugadorNombre" required>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                th:class="${#fields.hasErrors('nombre')} ? 'error' : ''"></span>
+            
+            <label for="jugadorContrasena">Contraseña: </label>
+            <input type="text" th:field="*{contrasena}" id="jugadorContrasena" required>
+            <span th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"
+                th:class="${#fields.hasErrors('contrasena')} ? 'error' : ''"></span>
+            
+                <label for="jugadorRol">Rol: </label>
+                <select th:field="*{rol}" id="jugadorRol">
+                    <option value="capitan">Capitan</option>
+                    <option value="piloto">Piloto</option>
+                    <option value="comerciante">Comerciante</option>
+                </select>
+                <span th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}" th:class="${#fields.hasErrors('rol')} ? 'error' : ''"></span>
+                
+
+            <button type="submit">CREAR</button>
+        </form>
+    </div>
+    
+    
+
+    <a th:href="@{/jugador/menu}">Cancelar</a>
+</body>
+
+</html>

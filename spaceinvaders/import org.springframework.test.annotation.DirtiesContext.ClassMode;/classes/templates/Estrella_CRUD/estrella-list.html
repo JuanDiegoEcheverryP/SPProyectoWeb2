@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Estrellas</title>
+</head>
+<body>
+    <h1>Listado de Estrellas</h1>
+    <a th:href="@{/estrella/menu}">Atras</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>coord x</th>
+                <th>coord y</th>
+                <th>coord z</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="estrella : ${estrella}">
+                <td style="padding-left: 20px;" th:text="${estrella.id}"></td>
+                <td style="padding-left: 20px;" th:text="${estrella.nombre}"></td>
+                <td style="padding-left: 20px;" th:text="${estrella.coord_x}"></td>
+                <td style="padding-left: 20px;" th:text="${estrella.coord_y}"></td>
+                <td style="padding-left: 20px;" th:text="${estrella.coord_z}"></td>
+                <td>
+                    <a th:href="@{/estrella/ver/{id}(id=${estrella.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/estrella/editar/{id}(id=${estrella.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/estrella/borrar-form/{id}(id=${estrella.id})}">Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

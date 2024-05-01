@@ -4,11 +4,10 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-
 import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Camino;
 import com.example.spaceinvaders.model.Estrella;
@@ -30,7 +29,7 @@ import com.example.spaceinvaders.repository.ProductoRepository;
 import com.example.spaceinvaders.repository.StockPlanetaRepository;
 import com.example.spaceinvaders.repository.TipoNaveRepository;
 
-
+@Profile({"default"})
 @Component
 public class DBInitializer implements CommandLineRunner{
     @Autowired

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Avatares</title>
+</head>
+<body>
+    <h1>Listado de Avatares</h1>
+    <a th:href="@{/avatar/menu}">Atras</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="avatar : ${avatar}">
+                <td style="padding-left: 20px;" th:text="${avatar.id}"></td>
+                <td style="padding-left: 20px;" th:text="${avatar.nombre}"></td>
+                <td style="padding-left: 20px;" th:text="${avatar.imagen}"></td>
+                <td>
+                    <a th:href="@{/avatar/ver/{id}(id=${avatar.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/avatar/editar/{id}(id=${avatar.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/avatar/borrar-form/{id}(id=${avatar.id})}">Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

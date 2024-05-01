@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Stock</title>
+</head>
+<body>
+    <h1>Listado de Stock</h1>
+    <a th:href="@{/stock-planeta/menu}">Atras</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Planeta</th>
+                <th>Stock</th>
+                <th>Factor Oferta</th>
+                <th>Factor Demanda</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="stock : ${stock}">
+                <td style="padding-left: 20px;" th:text="${stock.id}"></td>
+                <td style="padding-left: 20px;" th:text="${stock.producto.nombre}"></td>
+                <td style="padding-left: 20px;" th:text="${stock.planeta.nombre}"></td>
+                <td style="padding-left: 20px;" th:text="${stock.stock}"></td>
+                <td style="padding-left: 20px;" th:text="${stock.FactorOferta}"></td>
+                <td style="padding-left: 20px;" th:text="${stock.FactorDemanda}"></td>
+                <td>
+                    <a th:href="@{/stock-planeta/ver/{id}(id=${stock.id})}">Ver</a>
+                </td>
+                <td>
+                    <a th:href="@{/stock-planeta/editar/{id}(id=${stock.id})}">Editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/stock-planeta/borrar-form/{id}(id=${stock.id})}">Borrar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

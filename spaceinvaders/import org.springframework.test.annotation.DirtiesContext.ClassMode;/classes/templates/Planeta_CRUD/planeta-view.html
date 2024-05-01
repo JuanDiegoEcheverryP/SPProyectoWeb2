@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Editar planeta</title>
+</head>
+
+<body>
+    <h1>planeta</h1>
+    <p th:text="|Nombre: ${planeta.nombre}|"></p>
+    <p th:text="|Habitado: ${planeta.habitado}|"></p>
+
+    <a th:href="@{/planeta/menu}">Volver</a>
+</body>
+
+</html>
