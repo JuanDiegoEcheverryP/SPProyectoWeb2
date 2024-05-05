@@ -1,16 +1,20 @@
 package com.example.spaceinvaders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.hc.core5.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -135,4 +139,29 @@ class JugadorControllerIntegrationTest {
 		
 	}
 
+
+	//GET
+	@Test
+	void verJugadorExistente() {
+		String[] nombreJugadorPt1 = {"Cedric","Sorcha","Pacorro","Riobard"};
+        String[] nombreJugadorPt2 = {"Turban","Float","Yateman","Tibols","Matthis","Elcy","Maidlow","Lamburne"};
+		int contador = 1;
+		for(String nombre1:nombreJugadorPt1 )
+        {
+            for(String nombre2:nombreJugadorPt2)
+            {
+				UsuarioDTO jugadorO = rest.getForObject(SERVER_URL + "/api/jugador/" + contador, UsuarioDTO.class);
+				assertNotEquals("No existe un jugador con ese id", jugadorO); //Verificamos primero que no tiene el mensaje de error
+				assertEquals(nombre1 + " " + nombre2, jugadorO.getNombre());
+				contador++;
+            }
+        }
+		
+	}
+
+	@Test
+	void verJugadorInexistente() {
+		ResponseEntity<String> respuesta = rest.getForEntity(SERVER_URL + "/api/jugador/999", String.class);
+		assertEquals("No existe un jugador con ese id", respuesta.getBody());
+	}
 }
