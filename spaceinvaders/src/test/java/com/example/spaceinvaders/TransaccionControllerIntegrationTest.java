@@ -1,12 +1,24 @@
 package com.example.spaceinvaders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.TimeoutException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -46,6 +58,11 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class TransaccionControllerIntegrationTest {
+
+    //Selenium
+    String baseUrl;
+    private ChromeDriver driver;
+    private WebDriverWait wait;
     
     private static final String SERVER_URL = "http://localhost:8081";
 	
@@ -79,8 +96,12 @@ public class TransaccionControllerIntegrationTest {
     @Autowired
 	private StockPlanetaRepository stockRepository;
 	
+    
+
     @BeforeEach
     void init() {
+
+        
 
         Avatar avatar=new Avatar("alka", "");
 		avatarRepository.save(avatar);
@@ -133,6 +154,26 @@ public class TransaccionControllerIntegrationTest {
         //se guarda un jugador de tipo capitan en cada nave 
         jugadorRepository.save(new Jugador("jugador1","123","capitan",naves.get(0),avatar));
         jugadorRepository.save(new Jugador("jugador2","123","capitan",naves.get(1),avatar));
+
+        
+        //Selenium
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox"); // Bypass OS security model, MUST BE THE VERY FIRST OPTION
+        // options.addArguments("--headless"); // To hide Chrome window
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+
+        this.driver = new ChromeDriver(options);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        
+        this.baseUrl = "http://localhost:4200";
+    }
+
+    //Selenium
+    @AfterEach
+    void end() {
+        this.driver.quit();
     }
 
     //prueba 1: realizar una compra de un producto para una nave
@@ -186,7 +227,7 @@ public class TransaccionControllerIntegrationTest {
         //respuesta esperada del repositorio
         int stock=4;
         assertEquals(stock,stockRepository.findStockByPlanetaIdAndProductoId(planetas.get(0).getId(), productos.get(0).getId()));
-   
+
         int cantEnBodega=14;
         assertEquals(cantEnBodega,bodegaRepository.findByNaveIdAndProductoId(jugadores.get(0).getNaveJuego().getId(), productos.get(0).getId()).getCantidad());
     }
@@ -225,12 +266,11 @@ public class TransaccionControllerIntegrationTest {
             String.class
         );
 
-
         // Obtener el cuerpo de la respuesta
         String error = (String) responseEntity.getBody();
         System.out.println("Error: " + error);
         assertEquals("No hay suficiente stock disponible",error);
- 
+
         //revisar los valores del repositorio
         Float creditoRestante=100f;
         System.out.println("Credito obtenido: "+naveRepository.findAll().get(0).getCredito());
@@ -280,12 +320,11 @@ public class TransaccionControllerIntegrationTest {
             String.class
         );
 
-
         // Obtener el cuerpo de la respuesta
         String error = (String) responseEntity.getBody();
         System.out.println("Error: " + error);
         assertEquals("La nave no tiene suficiente crédito",error);
- 
+
         //revisar los valores del repositorio
         Float creditoRestante=100f;
         System.out.println("Credito obtenido: "+naveRepository.findAll().get(0).getCredito());
@@ -299,7 +338,19 @@ public class TransaccionControllerIntegrationTest {
         //respuesta esperada del repositorio
         int stock=19;
         assertEquals(stock,stockRepository.findStockByPlanetaIdAndProductoId(planetas.get(0).getId(), productos.get(2).getId()));
-
     }
 
+    //Selenium
+    @Test
+    void selenium() {
+        driver.get(baseUrl + "");
+        WebElement btnRegistrarse = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("registrarse")));
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(btnRegistrarse));
+        } catch (TimeoutException e) {
+            fail("No se pudo encontrar el boton de registrarse");
+        }
+        assertEquals(true, true);
+        //TODO: Completar selenium
+    }
 }
