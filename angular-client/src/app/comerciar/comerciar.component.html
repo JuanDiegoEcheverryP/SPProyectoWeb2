@@ -4,7 +4,7 @@
     <div class="tituloItems">
         <button>Items Planeta</button>
     </div>
-    <div class="flexbox" >
+    <div class="flexbox" id="ProductosPlaneta">
         <div *ngFor="let producto of productosPlaneta" (click)="mostrarInformacion(producto)">
             <img [src]="producto.imagen" alt="Imagen del botón">
         </div>
@@ -17,21 +17,21 @@
         <p class="resultado">{{productoSeleccionado.id}}</p>
 
         <p>Nombre Producto:</p>
-        <p class="resultado">{{productoSeleccionado.nombre}}</p>
+        <p class="resultado" id="itenName">{{productoSeleccionado.nombre}}</p>
 
         <p>Precio compra unidad:</p>
-        <p class="resultado">${{productoSeleccionado.precioDemanda}}</p>
+        <p class="resultado" id="priceCompra">${{productoSeleccionado.precioDemanda}}</p>
         
         <p>Precio venta unidad</p>
-        <p class="resultado">${{productoSeleccionado.precioOferta}}</p>
+        <p class="resultado" id="priceVenta">${{productoSeleccionado.precioOferta}}</p>
     </diV>
     <diV class="botonVender" *ngIf="seleccionado">
-        <button (click)="irVender()">Vender</button>
+        <button (click)="irVender()" id="btnVender">Vender</button>
     </diV>
     <diV class="botonComprar" *ngIf="seleccionado">
-        <button (click)="irComprar()">Comprar</button>
+        <button (click)="irComprar()" id="btnComprar">Comprar</button>
     </diV>
     <diV class="botonRegresar">
-        <button (click)="regresar()">Regresar</button>
+        <button (click)="regresar()" id="btnRegresar">Regresar</button>
     </diV>
 </div>

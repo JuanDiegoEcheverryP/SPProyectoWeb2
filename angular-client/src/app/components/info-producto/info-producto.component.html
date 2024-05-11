@@ -23,10 +23,10 @@
             </div>
             <div style="display: flex;">
                 <p class="negrita">Precio unitario:&nbsp; </p>
-                <p *ngIf="this.informacionRecibir[0] === 1">
+                <p *ngIf="this.informacionRecibir[0] === 1" id="precioUnitario">
                     {{ producto.precioOferta }}
                 </p>
-                <p *ngIf="this.informacionRecibir[0] === 2">
+                <p *ngIf="this.informacionRecibir[0] === 2" id="volumenUnitario">
                     {{ producto.precioDemanda }}
                 </p>
             </div>
@@ -40,10 +40,10 @@
                 <div class="cuadrado info">
                     <div style="display: flex;">
                         <p class="negrita">Total a pagar: &nbsp;</p>
-                        <p>{{total}} </p>
+                        <p id="totalPrecio">{{total}} </p>
                     </div>
                     <div style="display: flex;">
-                        <p class="negrita">Volumen total:&nbsp;</p>
+                        <p class="negrita" id="totalVolumen">Volumen total:&nbsp;</p>
                         <p> {{volTotal}}</p>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                             </button>
                             <input type="text" name="cantidad" id="editCantidad" type="number" [(ngModel)]="cantidad" min="0" step="1" placeholder="cantidad a productor" (input)="actualizarTotales()">
-                            <button type="button" class="suma" (click)="aumentar()">
+                            <button type="button" class="suma" (click)="aumentar()" id="plus">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d0d0d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </button>
                          </div>
