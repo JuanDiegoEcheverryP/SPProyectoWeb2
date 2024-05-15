@@ -1,4 +1,6 @@
 package com.example.spaceinvaders.model.DTO;
+import com.example.spaceinvaders.model.Enum.Rol;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,10 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PatchRolNave {
-    String rol;
+    Rol rol;
     Long naveId;
 
-    public PatchRolNave(String rol, Long naveId)
+    public PatchRolNave(Rol rol, Long naveId)
     {
         this.naveId=naveId;
 

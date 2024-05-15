@@ -5,5 +5,6 @@ export class UsuarioDTO {
         public rol: string,
         public avatar: string,
         public idNave: number,
+        public token: string,
     ) { }
 }

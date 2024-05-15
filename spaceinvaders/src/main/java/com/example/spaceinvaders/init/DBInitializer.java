@@ -17,6 +17,7 @@ import com.example.spaceinvaders.model.Producto;
 import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.Stock_planeta;
 import com.example.spaceinvaders.model.TipoNave;
+import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.repository.AvatarRepository;
 import com.example.spaceinvaders.repository.CaminoRepository;
@@ -62,9 +63,9 @@ public class DBInitializer implements CommandLineRunner{
     @Autowired
     private TipoNaveRepository tipoNaveRepository;
 
-    public static final String CAPITAN = "capitan";
-    public static final String PILOTO = "piloto";
-    public static final String COMERCIANTE = "comerciante";
+    public static final Rol CAPITAN = Rol.capitan;
+    public static final Rol PILOTO = Rol.piloto;
+    public static final Rol COMERCIANTE = Rol.comerciante;
     private  Random rand = new Random();
     
     @Override
@@ -258,16 +259,16 @@ public class DBInitializer implements CommandLineRunner{
                 //poner capitanes
                 if(contadorJugadores<10)
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,CAPITAN,naves.get(contadorJugadores),avatares.get(rand.nextInt(6))));
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,Rol.capitan,naves.get(contadorJugadores),avatares.get(rand.nextInt(6))));
                 }
                 //poner navegantes
                 else if(contadorJugadores<20)
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,PILOTO,naves.get(contadorJugadores-10),avatares.get(rand.nextInt(6))));
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,Rol.piloto,naves.get(contadorJugadores-10),avatares.get(rand.nextInt(6))));
                 }
                 else
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,COMERCIANTE,naves.get(rand.nextInt(10)),avatares.get(rand.nextInt(6))));
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,Rol.capitan,naves.get(rand.nextInt(10)),avatares.get(rand.nextInt(6))));
                 }
                 contadorJugadores++;
             }

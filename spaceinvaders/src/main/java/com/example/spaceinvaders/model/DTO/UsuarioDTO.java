@@ -1,4 +1,6 @@
 package com.example.spaceinvaders.model.DTO;
+import com.example.spaceinvaders.model.Enum.Rol;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,11 +12,12 @@ public class UsuarioDTO {
 
     private Long id;
     private String nombre;
-    private String rol;
+    private Rol rol;
     private String avatar;
     private Long idNave;
+    private String token;
 
-    public UsuarioDTO(Long id, String nombre, String rol, String avatar, Long idNave) {
+    public UsuarioDTO(Long id, String nombre, Rol rol, String avatar, Long idNave) {
         this.id = id;
         this.nombre = nombre;
         this.rol = rol;

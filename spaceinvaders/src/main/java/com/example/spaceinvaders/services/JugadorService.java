@@ -2,8 +2,12 @@ package com.example.spaceinvaders.services;
 
 import com.example.spaceinvaders.model.Jugador;
 import com.example.spaceinvaders.model.Nave;
+import com.example.spaceinvaders.model.DTO.UsuarioDTO;
+import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.repository.JugadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +17,12 @@ public class JugadorService {
 
     @Autowired
     private JugadorRepository jugadorRepository;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     public List<Jugador> obtenerTodasLasJugadors() {
         return jugadorRepository.findAll();
@@ -65,19 +75,44 @@ public class JugadorService {
     public Jugador crearJugador(Jugador jugador) {
 
         Jugador nueva=jugadorRepository.save(jugador);
+        jwtService.generateToken(jugador);
         return nueva;
     }
 
-    public List<Jugador> obtenerJugadorXUsuarioXContrasena(String nombre, String contrasena)
+    public UsuarioDTO obtenerJugadorXUsuarioXContrasena(String nombre, String contrasena)
     {
-        return jugadorRepository.findJugadorByContrasenAndNombre(nombre,contrasena);
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(nombre, contrasena));
+        List<Jugador> jugador = jugadorRepository.findJugadorByContrasenAndNombre(nombre,contrasena);
+        UsuarioDTO usuario=new UsuarioDTO();
+
+        if(jugador.size()!=0)
+        {
+            String jwt = jwtService.generateToken(jugador.get(0));
+            usuario.setAvatar(jugador.get(0).getAvatar().getImagen());
+            usuario.setNombre(jugador.get(0).getNombre());
+            usuario.setRol(jugador.get(0).getRol());
+            
+            if(jugador.get(0).getRol()!=null)
+            {
+                usuario.setIdNave(jugador.get(0).getNaveJuego().getId());
+            }
+            else
+            {
+                usuario.setIdNave(null);
+            }
+
+            usuario.setId(jugador.get(0).getId());
+            usuario.setToken(jwt);
+        }
+       
+        return usuario;
     }
 
     public Nave obtenerNavePorJugadorId(Long id) {
         return jugadorRepository.findNavePorJugadorId(id);
     }
 
-    public void actualizarRolJugador(Long id, String rol)
+    public void actualizarRolJugador(Long id, Rol rol)
     {
         jugadorRepository.actualizarRol(rol, id);
     }

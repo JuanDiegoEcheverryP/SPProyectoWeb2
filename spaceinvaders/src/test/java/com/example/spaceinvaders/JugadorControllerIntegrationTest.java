@@ -27,6 +27,7 @@ import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.model.DTO.PatchRolNave;
 import com.example.spaceinvaders.model.DTO.RegistroDTO;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
+import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.repository.AvatarRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
 import com.example.spaceinvaders.repository.JugadorRepository;
@@ -85,7 +86,7 @@ class JugadorControllerIntegrationTest {
 		String[] nombreJugadorPt1 = {"Cedric","Sorcha","Pacorro","Riobard"};
         String[] nombreJugadorPt2 = {"Turban","Float","Yateman","Tibols","Matthis","Elcy","Maidlow","Lamburne"};
 
-		String[] rol= {"piloto","comerciante"};
+		Rol[] rol= {Rol.piloto,Rol.comerciante};
 
 		int contadorJugadores=0;
 		
@@ -99,7 +100,7 @@ class JugadorControllerIntegrationTest {
                 //poner capitanes
                 if(contadorJugadores<2)
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,"capitan",naves.get(contadorJugadores),avatar));
+                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,Rol.capitan,naves.get(contadorJugadores),avatar));
                 }
                 //poner navegantes
                 else if(contadorJugadores<20)
@@ -125,13 +126,13 @@ class JugadorControllerIntegrationTest {
 		List<Nave> naves = naveRepository.findAll();
 		UsuarioDTO usuarionuevo=rest.postForObject(SERVER_URL + "/api/jugador/registro",new RegistroDTO("jugador1", "123", null, null, avatares.get(0), "123"), UsuarioDTO.class);
 		
-		UsuarioDTO usuarioActualizado=rest.patchForObject(SERVER_URL +"/api/jugador/"+ usuarionuevo.getId()+"/rol/nave",new PatchRolNave("piloto",naves.get(0).getId()) ,UsuarioDTO.class);
+		UsuarioDTO usuarioActualizado=rest.patchForObject(SERVER_URL +"/api/jugador/"+ usuarionuevo.getId()+"/rol/nave",new PatchRolNave(Rol.piloto,naves.get(0).getId()) ,UsuarioDTO.class);
 		System.out.println(usuarioActualizado.toString());
 
 		UsuarioDTO usuarioActualizadoGET =rest.getForObject(SERVER_URL +"/api/jugador/"+ usuarionuevo.getId(), UsuarioDTO.class);
 		System.out.println("actualizado "+usuarioActualizadoGET.toString());
         
-		UsuarioDTO usuarioEsperado = new UsuarioDTO(usuarioActualizado.getId(),"jugador1", "piloto","",naves.get(0).getId());
+		UsuarioDTO usuarioEsperado = new UsuarioDTO(usuarioActualizado.getId(),"jugador1", Rol.piloto,"",naves.get(0).getId());
         System.out.println("esperado "+usuarioEsperado.toString());
 
 

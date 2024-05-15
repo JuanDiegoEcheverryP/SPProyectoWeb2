@@ -25,6 +25,7 @@ import com.example.spaceinvaders.model.DTO.ProductoDTO;
 import com.example.spaceinvaders.model.DTO.RegistroDTO;
 import com.example.spaceinvaders.model.DTO.RespuestaTransaccionDTO;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
+import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.repository.AvatarRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
 import com.example.spaceinvaders.repository.JugadorRepository;
@@ -131,8 +132,8 @@ public class TransaccionControllerIntegrationTest {
         bodegaRepository.save(bodega2);
 
         //se guarda un jugador de tipo capitan en cada nave 
-        jugadorRepository.save(new Jugador("jugador1","123","capitan",naves.get(0),avatar));
-        jugadorRepository.save(new Jugador("jugador2","123","capitan",naves.get(1),avatar));
+        jugadorRepository.save(new Jugador("jugador1","123",Rol.capitan,naves.get(0),avatar));
+        jugadorRepository.save(new Jugador("jugador2","123",Rol.capitan,naves.get(1),avatar));
     }
 
     //prueba 1: realizar una compra de un producto para una nave

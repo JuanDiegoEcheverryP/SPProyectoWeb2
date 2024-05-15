@@ -8,6 +8,7 @@ import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.model.DTO.TripulacionDTO;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
+import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.model.Planeta;
 import com.example.spaceinvaders.repository.CaminoRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
@@ -242,7 +243,7 @@ public class NaveService {
 
         jugadorRepository.actualizarNave(nuevaNave, idCapitan);
 
-        jugadorRepository.actualizarRol("capitan", idCapitan);
+        jugadorRepository.actualizarRol(Rol.capitan, idCapitan);
 
         Jugador jugador = jugadorRepository.findById(idCapitan).orElseThrow();
         UsuarioDTO enviar=new UsuarioDTO();

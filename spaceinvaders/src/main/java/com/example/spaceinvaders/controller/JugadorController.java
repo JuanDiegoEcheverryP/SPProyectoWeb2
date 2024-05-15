@@ -22,6 +22,7 @@ import com.example.spaceinvaders.model.DTO.JugadorLogInDTO;
 import com.example.spaceinvaders.model.DTO.PatchRolNave;
 import com.example.spaceinvaders.model.DTO.RegistroDTO;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
+import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.services.JugadorService;
 
 @RestController
@@ -37,23 +38,11 @@ public class JugadorController {
     @PostMapping("login")
     public ResponseEntity<?> iniciarSesion(@RequestBody JugadorLogInDTO jugador) {
        
-        List<Jugador> encontrado=jugadorService.obtenerJugadorXUsuarioXContrasena(jugador.getNombre(),jugador.getContrasena());
-        UsuarioDTO usuario=new UsuarioDTO();
-        
-        if(encontrado.size()!=0)
+        UsuarioDTO encontrado=jugadorService.obtenerJugadorXUsuarioXContrasena(jugador.getNombre(),jugador.getContrasena());
+       
+        if(encontrado!=null)
         {
-            usuario.setAvatar(encontrado.get(0).getAvatar().getImagen());
-            usuario.setNombre(encontrado.get(0).getNombre());
-            usuario.setRol(encontrado.get(0).getRol());
-            if(encontrado.get(0).getRol()!=null)
-            {
-                usuario.setIdNave(encontrado.get(0).getNaveJuego().getId());
-            }
-            else
-            {
-                usuario.setIdNave(null);
-            }
-            usuario.setId(encontrado.get(0).getId());
+            return ResponseEntity.ok(encontrado);
         }
         else
         {
@@ -61,8 +50,10 @@ public class JugadorController {
                                  .body("Contraseña o nombre de usuario incorrecto");
         }
 
-        return ResponseEntity.ok(usuario);
+
     }
+
+   
 
     @GetMapping("/nave/{id}")
     public Nave obtenerNavePorJugadorId(@PathVariable Long id) {
