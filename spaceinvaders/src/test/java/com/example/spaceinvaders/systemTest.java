@@ -38,6 +38,7 @@ import com.example.spaceinvaders.model.DTO.ProductoDTO;
 import com.example.spaceinvaders.model.DTO.RegistroDTO;
 import com.example.spaceinvaders.model.DTO.RespuestaTransaccionDTO;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
+import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.repository.AvatarRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
 import com.example.spaceinvaders.repository.JugadorRepository;
@@ -144,8 +145,9 @@ public class systemTest {
         bodegaRepository.save(bodega2);
 
         //se guarda un jugador de tipo capitan en cada nave 
-        jugadorRepository.save(new Jugador("jugador1","123","capitan",naves.get(0),avatar));
-        jugadorRepository.save(new Jugador("jugador2","123","capitan",naves.get(1),avatar));
+
+        jugadorRepository.save(new Jugador("jugador1","123",Rol.capitan,naves.get(0),avatar));
+        jugadorRepository.save(new Jugador("jugador2","123",Rol.capitan,naves.get(1),avatar));
 
         
         //Selenium
@@ -191,11 +193,13 @@ public class systemTest {
             wait.until(ExpectedConditions.elementToBeClickable(btnLogin));
             btnLogin.click();
 
+            
             //Menu de jugador
             WebElement btnComercio = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnComercio")));
             wait.until(ExpectedConditions.elementToBeClickable(btnComercio));
             btnComercio.click();
 
+            
             //Comerciar
             WebElement productoManzana = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"ProductosPlaneta\"]/div[2]")));
             wait.until(ExpectedConditions.elementToBeClickable(productoManzana));
@@ -217,12 +221,24 @@ public class systemTest {
             for (int i = 0; i < 9; i++) {
                 addManzanas.click();
             }
-            //Preguntarle al profe como puedo esperar hasta que se carguen los datos de la BDD para verificar precio unitario * 10 == total a pagar
+
+            WebElement totalAPagar = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("totalPrecio")));
+            WebElement dineroAntesDePagar = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("dineroNave")));
+            Float total = Float.parseFloat(totalAPagar.getText());
+            Float dinero = Float.parseFloat((dineroAntesDePagar.getText()).substring(1)) - total;
+            
+            WebElement btnComprarConfirm = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("botonCompra")));
+            wait.until(ExpectedConditions.elementToBeClickable(btnComprarConfirm));
+            btnComprarConfirm.click();
+
+            Float dineroActualizado = Float.parseFloat((dineroAntesDePagar.getText()).substring(1)) - total;
+            
+            assertEquals(dinero,dineroActualizado);
+            
+            
 
         } catch (TimeoutException e) {
             fail("No se pudo encontrar el boton de registrarse");
         }
-        assertEquals(true, true);
-        //TODO: Completar selenium
     }
 }
