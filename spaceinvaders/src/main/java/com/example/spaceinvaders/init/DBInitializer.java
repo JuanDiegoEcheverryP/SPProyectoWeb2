@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.example.spaceinvaders.model.Avatar;
 import com.example.spaceinvaders.model.Camino;
@@ -62,6 +63,10 @@ public class DBInitializer implements CommandLineRunner{
 
     @Autowired
     private TipoNaveRepository tipoNaveRepository;
+
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public static final Rol CAPITAN = Rol.capitan;
     public static final Rol PILOTO = Rol.piloto;
@@ -259,16 +264,16 @@ public class DBInitializer implements CommandLineRunner{
                 //poner capitanes
                 if(contadorJugadores<10)
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,Rol.capitan,naves.get(contadorJugadores),avatares.get(rand.nextInt(6))));
+                    jugadorRepository.save(new Jugador(nombreJugador,passwordEncoder.encode(contrasena),Rol.capitan,naves.get(contadorJugadores),avatares.get(rand.nextInt(6))));
                 }
                 //poner navegantes
                 else if(contadorJugadores<20)
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,Rol.piloto,naves.get(contadorJugadores-10),avatares.get(rand.nextInt(6))));
+                    jugadorRepository.save(new Jugador(nombreJugador,passwordEncoder.encode(contrasena),Rol.piloto,naves.get(contadorJugadores-10),avatares.get(rand.nextInt(6))));
                 }
                 else
                 {
-                    jugadorRepository.save(new Jugador(nombreJugador,contrasena,Rol.capitan,naves.get(rand.nextInt(10)),avatares.get(rand.nextInt(6))));
+                    jugadorRepository.save(new Jugador(nombreJugador,passwordEncoder.encode(contrasena),Rol.capitan,naves.get(rand.nextInt(10)),avatares.get(rand.nextInt(6))));
                 }
                 contadorJugadores++;
             }

@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JugadorService {
@@ -82,26 +83,28 @@ public class JugadorService {
     public UsuarioDTO obtenerJugadorXUsuarioXContrasena(String nombre, String contrasena)
     {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(nombre, contrasena));
-        List<Jugador> jugador = jugadorRepository.findJugadorByContrasenAndNombre(nombre,contrasena);
+        Optional<Jugador> jugador = jugadorRepository.findByNombre(nombre);
         UsuarioDTO usuario=new UsuarioDTO();
 
-        if(jugador.size()!=0)
+        if(jugador.isPresent())
         {
-            String jwt = jwtService.generateToken(jugador.get(0));
-            usuario.setAvatar(jugador.get(0).getAvatar().getImagen());
-            usuario.setNombre(jugador.get(0).getNombre());
-            usuario.setRol(jugador.get(0).getRol());
+            System.out.println("REVISAR "+jugadorRepository.findByNombre(nombre));
+
+            String jwt = jwtService.generateToken(jugador.get());
+            usuario.setAvatar(jugador.get().getAvatar().getImagen());
+            usuario.setNombre(jugador.get().getNombre());
+            usuario.setRol(jugador.get().getRol());
             
-            if(jugador.get(0).getRol()!=null)
+            if(jugador.get().getRol()!=null)
             {
-                usuario.setIdNave(jugador.get(0).getNaveJuego().getId());
+                usuario.setIdNave(jugador.get().getNaveJuego().getId());
             }
             else
             {
                 usuario.setIdNave(null);
             }
 
-            usuario.setId(jugador.get(0).getId());
+            usuario.setId(jugador.get().getId());
             usuario.setToken(jwt);
         }
        

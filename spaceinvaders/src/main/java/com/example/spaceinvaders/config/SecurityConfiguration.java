@@ -48,9 +48,10 @@ public class SecurityConfiguration {
         return http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/jugador/login","/api/jugador/registro")
                         .permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest()
+                        .authenticated()
 
                 )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))

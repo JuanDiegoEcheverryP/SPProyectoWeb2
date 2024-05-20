@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,6 +33,10 @@ public class JugadorController {
 
     @Autowired
     private JugadorService jugadorService;
+
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     //buscar jugador para iniciar sesion
     //este retorna el jugador, exceptuando su contrasena
@@ -69,7 +74,7 @@ public class JugadorController {
         {
             jugador.setNombre(registro.getNombre());
             jugador.setAvatar(registro.getAvatar());
-            jugador.setContrasena(registro.getContrasena());
+            jugador.setContrasena(passwordEncoder.encode(registro.getContrasena()));
             
             try {
                 usuario.setId(jugadorService.crearJugador(jugador).getId());
