@@ -25,6 +25,7 @@ import com.example.spaceinvaders.model.DTO.RegistroDTO;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
 import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.services.JugadorService;
+import com.example.spaceinvaders.services.JwtService;
 
 @RestController
 @RequestMapping("/api/jugador")
@@ -37,6 +38,9 @@ public class JugadorController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtService jwtService;
     
     //buscar jugador para iniciar sesion
     //este retorna el jugador, exceptuando su contrasena
@@ -81,6 +85,8 @@ public class JugadorController {
                 usuario.setNombre(jugador.getNombre());
                 usuario.setIdNave(null);
                 usuario.setAvatar(jugador.getAvatar().getImagen());
+                String jwt = jwtService.generateToken(jugador);
+                usuario.setToken(jwt);
                 return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
             } catch (DataIntegrityViolationException e) {
                 // El nombre de jugador ya existe, manejar el error aquí

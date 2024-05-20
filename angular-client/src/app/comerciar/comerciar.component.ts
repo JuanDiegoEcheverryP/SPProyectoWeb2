@@ -16,7 +16,7 @@ import { ProductoBodegaService } from '../shared/producto_bodega.service';
   styleUrl: './comerciar.component.css'
 })
 export class ComerciarComponent {
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO=new UsuarioDTO(0,"","","",0,"")
   
   //Barra de arriba
   idJugador:number = 0

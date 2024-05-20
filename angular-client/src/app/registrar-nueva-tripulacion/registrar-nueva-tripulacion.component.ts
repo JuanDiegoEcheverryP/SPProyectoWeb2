@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './registrar-nueva-tripulacion.component.css'
 })
 export class RegistrarNuevaTripulacionComponent {
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0,"")
   
   naves: TipoNave[] = [];
   actual: TipoNave = new TipoNave(1,"ss",1,1,"dd");
@@ -88,7 +88,7 @@ export class RegistrarNuevaTripulacionComponent {
           
           // Guardar la cadena JSON en sessionStorage
           sessionStorage.setItem("infoJugador", usuarioString);
-          
+          sessionStorage.setItem("rol", "capitan");
           this.router.navigate(['/menu']);
         },
         (error) => {

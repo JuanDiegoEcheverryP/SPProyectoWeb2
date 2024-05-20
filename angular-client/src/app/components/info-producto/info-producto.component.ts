@@ -31,7 +31,7 @@ export class InfoProductoComponent {
   compraVentaDTO:CompraVentaDTO= new CompraVentaDTO(0,0,0,0,0)
   @Output() eventChange = new EventEmitter<Event>();
   usuarioString: string|null= sessionStorage.getItem("infoJugador");
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0,"")
   error: boolean = false;
   success: boolean = false;
   notificacionText:string=""

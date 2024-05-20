@@ -3,6 +3,7 @@ import { InfoGeneralUsuarioService } from '../../shared/info-general-usuario.ser
 import { UsuarioDTO } from '../../model/usuario-dto';
 import { NaveService } from '../../shared/nave.service';
 import { NaveDTO } from '../../model/nave-dto';
+import { JugadorService } from '../../shared/jugador.service';
 
 @Component({
   selector: 'app-barra-estadisticas',
@@ -10,13 +11,13 @@ import { NaveDTO } from '../../model/nave-dto';
   styleUrl: './barra-estadisticas.component.css'
 })
 export class BarraEstadisticasComponent {
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0,"")
   tiempoRestante: number=0
   creditos: number=0
   nave:NaveDTO= new NaveDTO("",0,"",0,"","",0,0,0,0,"",0)
   usuarioString: string|null= sessionStorage.getItem("infoJugador");
 
-  constructor(private naveService: NaveService, private shared: InfoGeneralUsuarioService) { }
+  constructor(private naveService: NaveService, private shared: InfoGeneralUsuarioService,private auth: JugadorService) { }
 
   ngOnInit() {
     if(this.usuarioString)
@@ -53,5 +54,9 @@ export class BarraEstadisticasComponent {
     );
   }
 
+  cerrarSesion()
+  {
+    this.auth.logout()
+  }
 
 }

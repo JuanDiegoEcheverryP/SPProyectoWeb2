@@ -19,7 +19,7 @@ import { ProductoBodegaDTO } from '../model/productoBodegaDTO';
   styleUrl: './bodega.component.css'
 })
 export class BodegaComponent {
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0,"")
   
   //Barra de arriba
   idJugador:number = 0

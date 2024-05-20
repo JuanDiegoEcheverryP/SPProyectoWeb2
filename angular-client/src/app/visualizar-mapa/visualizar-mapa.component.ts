@@ -18,7 +18,7 @@ import { UsuarioDTO } from '../model/usuario-dto';
   styleUrl: './visualizar-mapa.component.css'
 })
 export class VisualizarMapaComponent {
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0,"")
   
   //Barra de arriba
   idJugador:number = 0

@@ -16,7 +16,7 @@ export class MenuPrincipalComponent {
 
   nombre:string=""
   rol:string | null=""
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0,"")
   nombreNave:string=""
   tipo:string=""
   velocidad:number=0
@@ -59,6 +59,7 @@ export class MenuPrincipalComponent {
         console.log('Respuesta del backend:', jugador);
         this.nombre=jugador.nombre
         this.rol=jugador.rol
+        sessionStorage.setItem("rol", jugador.rol);
       },
       (error) => {
         console.error('Error al obtener jugador:', error);

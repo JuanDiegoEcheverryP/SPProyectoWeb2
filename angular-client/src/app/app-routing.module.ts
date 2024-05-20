@@ -16,23 +16,23 @@ import { UnirseATripulacionComponent} from './unirse-a-tripulacion/unirse-a-trip
 import { ComprarComponent } from './comprar/comprar.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 import { VenderComponent } from './vender/vender.component';
-import { BarraMenuComponent } from './components/barra-menu/barra-menu.component';
+import { AuthGuard } from './guards/AuthGuard';
 
 const routes: Routes = [
-  { path: 'avatar/list', component: AvatarListComponent },
-  { path: 'registrarNuevaTripulacion/:idJugador', component: RegistrarNuevaTripulacionComponent },
-  { path: 'comerciar', component: ComerciarComponent },
-  { path: 'bodega', component: BodegaComponent },
-  { path: 'visualizarMapa', component: VisualizarMapaComponent },
-  { path: 'verInfoEstrella/:idEstrella', component:  VerInfoEstrellaComponent},
-  { path: 'viajarEstrella/:idEstrella', component:  ViajarEstrellaComponent},
-  { path: 'viajarPlaneta/:idEstrella', component:  ViajarPlanetaComponent},
+  { path: 'avatar/list', component: AvatarListComponent, },
+  { path: 'registrarNuevaTripulacion/:idJugador', component: RegistrarNuevaTripulacionComponent,canActivate: [AuthGuard] },
+  { path: 'comerciar', component: ComerciarComponent,canActivate: [AuthGuard]  },
+  { path: 'bodega', component: BodegaComponent,canActivate: [AuthGuard] },
+  { path: 'visualizarMapa', component: VisualizarMapaComponent,canActivate: [AuthGuard]  },
+  { path: 'verInfoEstrella/:idEstrella', component:  VerInfoEstrellaComponent,canActivate: [AuthGuard] },
+  { path: 'viajarEstrella/:idEstrella', component:  ViajarEstrellaComponent,canActivate: [AuthGuard] },
+  { path: 'viajarPlaneta/:idEstrella', component:  ViajarPlanetaComponent,canActivate: [AuthGuard] },
   { path: 'iniciarsesion', component:  IniciarsesionComponent},
   { path: 'registro', component:  RegistroComponent},
-  { path: 'unirseTripulacion/:idJugador', component:  UnirseATripulacionComponent},
-  { path: 'menu', component:  MenuPrincipalComponent},
-  { path: 'comprar/:idProducto', component:  ComprarComponent},
-  { path: 'vender/:idProducto', component:  VenderComponent},
+  { path: 'unirseTripulacion/:idJugador', component:  UnirseATripulacionComponent,canActivate: [AuthGuard] },
+  { path: 'menu', component:  MenuPrincipalComponent,canActivate: [AuthGuard] },
+  { path: 'comprar/:idProducto', component:  ComprarComponent,canActivate: [AuthGuard] },
+  { path: 'vender/:idProducto', component:  VenderComponent,canActivate: [AuthGuard] },
   {path: '**', component: InicioComponent} //Inicio
   
 ];

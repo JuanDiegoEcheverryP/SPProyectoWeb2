@@ -17,7 +17,7 @@ import { UsuarioDTO } from '../model/usuario-dto';
   styleUrl: './ver-info-estrella.component.css'
 })
 export class VerInfoEstrellaComponent {
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0,"")
   
   //Barra de arriba
   idJugador:number = 0

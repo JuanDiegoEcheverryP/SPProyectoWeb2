@@ -32,12 +32,15 @@ export class IniciarsesionComponent {
           // Guardar la cadena JSON en sessionStorage
           sessionStorage.setItem("infoJugador", usuarioString);
 
+          sessionStorage.setItem("token", usuario.token);
+          
           if(usuario.rol==null)
           {
             this.router.navigate([`/unirseTripulacion/${usuario.id}`]);
           }
           else
           {
+             sessionStorage.setItem("rol", usuario.rol);
              this.router.navigate(['/menu']);
           }
           
@@ -45,7 +48,7 @@ export class IniciarsesionComponent {
         },
         (error) => {
           console.error('Error al iniciar sesión:', error);
-          this.notificacionText=error.error;
+          this.notificacionText="usuario o contrasena incorrecta";
           this.error=true
           // Maneja cualquier error que pueda ocurrir durante la solicitud
         }

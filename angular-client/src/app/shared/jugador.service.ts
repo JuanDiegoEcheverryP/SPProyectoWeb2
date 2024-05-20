@@ -10,6 +10,9 @@ import { Jugador } from '../model/jugador';
 import { PatchRolNave } from '../model/patch-rol-nave';
 import { RegistroDTO } from '../model/registro-dto';
 
+const JWT_TOKEN = "token";
+const ROLE = "rol";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,5 +47,22 @@ export class JugadorService {
     return this.http.get<UsuarioDTO>(`${environment.serverUrl}/api/jugador/${id}`);
   }
 
+  logout() {
+    sessionStorage.removeItem(JWT_TOKEN);
+    sessionStorage.removeItem("infoJugador");
+  }
 
+  isAuthenticated() {
+    return sessionStorage.getItem(JWT_TOKEN) != null;
+  }
+
+
+  token() {
+    return sessionStorage.getItem(JWT_TOKEN);
+  }
+
+  role() {
+    return sessionStorage.getItem(ROLE);
+  }
+  
 }

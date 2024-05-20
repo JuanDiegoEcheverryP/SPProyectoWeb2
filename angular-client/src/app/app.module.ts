@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AvatarListComponent } from './avatar/avatar-list/avatar-list.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -25,6 +25,7 @@ import { VenderComponent } from './vender/vender.component';
 import { InfoProductoComponent } from './components/info-producto/info-producto.component';
 import { ErrorComponent } from './components/notifications/error/error.component';
 import { SuccessComponent } from './components/notifications/success/success.component';
+import { AuthInterceptor } from '../app/Interceptor/AuthInterceptor';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { SuccessComponent } from './components/notifications/success/success.com
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

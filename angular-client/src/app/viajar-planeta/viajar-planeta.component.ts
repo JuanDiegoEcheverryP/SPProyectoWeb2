@@ -15,7 +15,7 @@ import { UsuarioDTO } from '../model/usuario-dto';
   styleUrl: './viajar-planeta.component.css'
 })
 export class ViajarPlanetaComponent {
-  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0)
+  usuarioDTO: UsuarioDTO= new UsuarioDTO(0,"","","",0,"")
   
   //Barra de arriba
   idJugador:number = 0

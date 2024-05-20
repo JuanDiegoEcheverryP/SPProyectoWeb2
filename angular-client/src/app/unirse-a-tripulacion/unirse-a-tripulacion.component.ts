@@ -54,6 +54,7 @@ export class UnirseATripulacionComponent {
           
           // Guardar la cadena JSON en sessionStorage
           sessionStorage.setItem("infoJugador", usuarioString);
+          sessionStorage.setItem("rol", usuario.rol);
           this.router.navigate(['/menu']);
         },
         (error) => {

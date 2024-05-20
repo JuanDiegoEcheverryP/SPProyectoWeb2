@@ -5,7 +5,7 @@ import { UsuarioDTO } from '../model/usuario-dto';
   providedIn: 'root'
 })
 export class InfoGeneralUsuarioService {
-  usuarioDTO:UsuarioDTO= new UsuarioDTO(1,"","","",1)
+  usuarioDTO:UsuarioDTO= new UsuarioDTO(1,"","","",1,"")
 
   constructor() { }
 
