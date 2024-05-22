@@ -20,7 +20,7 @@ import { AuthGuard } from './guards/AuthGuard';
 
 const routes: Routes = [
   { path: 'avatar/list', component: AvatarListComponent, },
-  { path: 'registrarNuevaTripulacion/:idJugador', component: RegistrarNuevaTripulacionComponent,},
+  { path: 'registrarNuevaTripulacion/:idJugador', component: RegistrarNuevaTripulacionComponent, canActivate: [AuthGuard]},
   { path: 'comerciar', component: ComerciarComponent,canActivate: [AuthGuard]  },
   { path: 'bodega', component: BodegaComponent,canActivate: [AuthGuard] },
   { path: 'visualizarMapa', component: VisualizarMapaComponent,canActivate: [AuthGuard]  },
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'viajarPlaneta/:idEstrella', component:  ViajarPlanetaComponent,canActivate: [AuthGuard] },
   { path: 'iniciarsesion', component:  IniciarsesionComponent},
   { path: 'registro', component:  RegistroComponent},
-  { path: 'unirseTripulacion/:idJugador', component:  UnirseATripulacionComponent,},
+  { path: 'unirseTripulacion/:idJugador', component:  UnirseATripulacionComponent,canActivate: [AuthGuard]},
   { path: 'menu', component:  MenuPrincipalComponent,canActivate: [AuthGuard] },
   { path: 'comprar/:idProducto', component:  ComprarComponent,canActivate: [AuthGuard] },
   { path: 'vender/:idProducto', component:  VenderComponent,canActivate: [AuthGuard] },

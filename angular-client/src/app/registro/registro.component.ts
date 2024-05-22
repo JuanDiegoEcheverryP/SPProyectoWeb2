@@ -44,6 +44,7 @@ export class RegistroComponent {
           // Guardar la cadena JSON en sessionStorage
           sessionStorage.setItem("infoJugador", usuarioString);
           sessionStorage.setItem("token", usuario.token);
+          sessionStorage.removeItem("rol")
           if(this.accionSeleccionada=="crear")
           {
             this.router.navigate([`/registrarNuevaTripulacion/${usuario.id}`]);
