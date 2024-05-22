@@ -2,10 +2,10 @@ package com.example.spaceinvaders.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,18 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.spaceinvaders.model.Camino;
 import com.example.spaceinvaders.model.Estrella;
 import com.example.spaceinvaders.model.Nave;
-import com.example.spaceinvaders.model.Planeta;
-import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.model.DTO.NaveDTO;
 import com.example.spaceinvaders.model.DTO.TripulacionDTO;
-import com.example.spaceinvaders.model.DTO.UsuarioDTO;
 import com.example.spaceinvaders.services.NaveService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/nave")
@@ -108,12 +103,14 @@ public class NaveController {
         return naveService.obtenerInfotripulaciones();
     }
 
+    @Secured({ "capitan", "piloto" })
     @PutMapping("/actualizar/{idNave}/{idEstrella}")
     public List<Nave> actualizarLocalizacionEstrella(@PathVariable Long idNave,@PathVariable Long idEstrella) {
         naveService.actualizarLocalizacionEstrella(idNave,idEstrella);
         return naveService.listaNaves();
     }
 
+    @Secured({ "capitan", "piloto" })
     @PutMapping("/actualizarBien/{idNave}/{idEstrella}/{idPlaneta}")
     public boolean actualizarNave(@PathVariable Long idNave,@PathVariable Long idEstrella,@PathVariable Long idPlaneta) {
         Nave naveObtenida=naveService.recuperarNave(idNave);

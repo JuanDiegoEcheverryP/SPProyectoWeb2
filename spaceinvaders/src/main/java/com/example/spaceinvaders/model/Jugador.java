@@ -36,7 +36,7 @@ public class Jugador implements UserDetails{
     private String contrasena;
 
     @Column(columnDefinition = "VARCHAR(255) CHECK (rol IN ('capitan', 'piloto', 'comerciante'))")
-    @Enumerated(EnumType.STRING) // Esto indica a JPA que la enumeración se debe mapear como una cadena
+    @Enumerated(EnumType.STRING) 
     private Rol rol;
 
     @ManyToOne

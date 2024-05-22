@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,7 @@ public class TransaccionController {
     @Autowired
     private StockPlanetaService stockService;
 
+    @Secured({ "capitan", "comerciante" })
     @PutMapping("/venta")
     public ResponseEntity<?> procesarVenta(@RequestBody CompraVentaDTO venta) {
         boolean cantidadVenta = bodegaService.validarCantidadVenta(venta.getIdProducto(), venta.getIdNave(), venta.getCantidadProducto());
@@ -66,7 +68,8 @@ public class TransaccionController {
                 .body("No hay suficientes unidades disponibles");
         }
     }
-    
+   
+    @Secured({ "capitan", "comerciante" })
     @PutMapping("/compra")
     public ResponseEntity<?> procesarCompra(@RequestBody CompraVentaDTO compra) {
         System.out.println(compra.getIdPlaneta() +" "+ compra.getIdProducto());

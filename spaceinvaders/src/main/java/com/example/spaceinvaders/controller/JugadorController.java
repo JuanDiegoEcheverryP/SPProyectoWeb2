@@ -59,10 +59,7 @@ public class JugadorController {
                                  .body("Contraseña o nombre de usuario incorrecto");
         }
 
-
     }
-
-   
 
     @GetMapping("/nave/{id}")
     public Nave obtenerNavePorJugadorId(@PathVariable Long id) {
