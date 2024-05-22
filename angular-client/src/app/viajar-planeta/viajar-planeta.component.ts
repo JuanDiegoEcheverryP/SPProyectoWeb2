@@ -91,24 +91,32 @@ export class ViajarPlanetaComponent {
     this.planetaSeleccionado = id;
   }
 
-  viajar():void {
-    if(this.jugadorNave.tiempo < this.costo) {
-      alert("La nave no tiene energia suficiente")
-    }
-    else {
+  viajar(): void {
+    if (this.jugadorNave.tiempo < this.costo) {
+      alert("La nave no tiene energía suficiente");
+    } else {
       let idEstrella: number = -1;
       this.route.params.subscribe(params => {
-        idEstrella = Number(params['idEstrella']); 
+        idEstrella = Number(params['idEstrella']);
       });
-      this.naveService.viajarConPlaneta(this.jugadorNave.id,idEstrella,this.planetas[this.planetaSeleccionado].id).subscribe(result =>{
-        if(result) {
-          this.router.navigate([`visualizarMapa`]);
-        }
-        else {
-          alert("Ha ocurrido un error")
-        }
-      })
-      //Viajar, se le pasa idNave, id estrella, id planeta
+  
+      this.naveService.viajarConPlaneta(this.jugadorNave.id, idEstrella, this.planetas[this.planetaSeleccionado].id)
+        .subscribe({
+          next: (result) => {
+            if (result) {
+              this.router.navigate([`visualizarMapa`]);
+            } else {
+              alert("Ha ocurrido un error");
+            }
+          },
+          error: (err) => {
+            if (err.status === 403) {
+              alert("No tienes permisos para realizar esta acción");
+            } else {
+              alert("Ha ocurrido un error");
+            }
+          }
+        });
     }
   }
 

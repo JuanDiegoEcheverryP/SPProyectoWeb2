@@ -182,10 +182,19 @@ export class InfoProductoComponent {
         // Aquí puedes realizar cualquier acción con la respuesta del backend
       },
       (error) => {
-        console.error('Error al hacer compra:', error);
-        this.error=true
-        this.notificacionText=error.error
-        // Maneja cualquier error que pueda ocurrir durante la solicitud
+        if(error.status==403)
+        {
+          console.error('Error al hacer compra:', error);
+          this.error=true
+          this.notificacionText="No tienes permiso para hacer la transaccion"
+        }
+        else
+        {
+          console.error('Error al hacer compra:', error);
+          this.error=true
+          this.notificacionText=error.error
+          // Maneja cualquier error que pueda ocurrir durante la solicitud
+        }
       }
     );
   }

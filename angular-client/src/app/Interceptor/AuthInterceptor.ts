@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 import {
   HttpRequest,
   HttpHandler,
@@ -7,15 +8,27 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JugadorService } from '../shared/jugador.service';
-
-// https://stackoverflow.com/questions/52468071/how-to-send-jwt-token-as-authorization-header-in-angular-6
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private auth: JugadorService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let token = this.auth.token();
+    const token = this.auth.token();
+    const url = request.url;
+    console.log(request.url)
+    // Lista de URLs que deben excluirse del interceptor
+    const excludedUrls = [
+      `${environment.serverUrl}/api/jugador/login`,
+      `${environment.serverUrl}/api/jugador/registro`,
+      `${environment.serverUrl}/api/avatar/list`,
+      `${environment.serverUrl}/api/avatar/1`
+    ];
+
+    // Verificar si la URL está en la lista de exclusión
+    if (excludedUrls.some(excludedUrl => url.includes(excludedUrl))) {
+      return next.handle(request);
+    }
 
     if (token == null) {
       return next.handle(request);
@@ -26,3 +39,4 @@ export class AuthInterceptor implements HttpInterceptor {
     }
   }
 }
+

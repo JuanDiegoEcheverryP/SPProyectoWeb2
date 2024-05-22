@@ -103,14 +103,14 @@ public class NaveController {
         return naveService.obtenerInfotripulaciones();
     }
 
-    @Secured({ "capitan", "piloto" })
+    @Secured({"capitan","piloto"})
     @PutMapping("/actualizar/{idNave}/{idEstrella}")
     public List<Nave> actualizarLocalizacionEstrella(@PathVariable Long idNave,@PathVariable Long idEstrella) {
         naveService.actualizarLocalizacionEstrella(idNave,idEstrella);
         return naveService.listaNaves();
     }
 
-    @Secured({ "capitan", "piloto" })
+    @Secured({"capitan","piloto"})
     @PutMapping("/actualizarBien/{idNave}/{idEstrella}/{idPlaneta}")
     public boolean actualizarNave(@PathVariable Long idNave,@PathVariable Long idEstrella,@PathVariable Long idPlaneta) {
         Nave naveObtenida=naveService.recuperarNave(idNave);

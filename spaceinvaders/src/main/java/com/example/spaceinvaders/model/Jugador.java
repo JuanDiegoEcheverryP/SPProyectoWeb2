@@ -3,6 +3,7 @@ package com.example.spaceinvaders.model;
 import com.example.spaceinvaders.model.Enum.Rol;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.jsonwebtoken.lang.Collections;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -62,9 +63,14 @@ public class Jugador implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.rol == null) {
+            // Si el rol es nulo, devolver una colección vacía o cualquier otra lógica que desees
+            return Collections.emptyList();
+        }
+
         return List.of(new SimpleGrantedAuthority(rol.name()));
     }
-
+    
     @Override
     public String getUsername() {
         // email in our case

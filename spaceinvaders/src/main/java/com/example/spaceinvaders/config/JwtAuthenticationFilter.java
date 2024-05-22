@@ -18,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.example.spaceinvaders.services.JwtService;
 import com.example.spaceinvaders.services.UserService;
 
+import io.jsonwebtoken.lang.Collections;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -53,8 +54,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         .loadUserByUsername(userName);
                 if (jwtService.isTokenValid(jwt, userDetails)) {
                     SecurityContext context = SecurityContextHolder.createEmptyContext();
-                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken authToken;
+
+                    if (userDetails.getAuthorities() != null && !userDetails.getAuthorities().isEmpty()) {
+                        authToken = new UsernamePasswordAuthenticationToken(
+                                userDetails, null, userDetails.getAuthorities());
+                    } else {
+                        authToken = new UsernamePasswordAuthenticationToken(
+                                userDetails, null, Collections.emptyList());
+                    }
+                    
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     context.setAuthentication(authToken);
                     SecurityContextHolder.setContext(context);

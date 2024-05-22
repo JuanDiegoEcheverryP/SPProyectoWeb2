@@ -50,6 +50,7 @@ export class JugadorService {
   logout() {
     sessionStorage.removeItem(JWT_TOKEN);
     sessionStorage.removeItem("infoJugador");
+    sessionStorage.removeItem(ROLE);
   }
 
   isAuthenticated() {
