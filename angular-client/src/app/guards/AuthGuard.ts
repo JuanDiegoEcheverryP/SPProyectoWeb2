@@ -16,9 +16,9 @@ export class AuthGuard {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const currentUrl = state.url;
+    const regex = /\/(registrarNuevaTripulacion|unirseTripulacion)\/\d+/; // Expresión regular para las rutas con parámetros dinámicos
 
     if (this.auth.isAuthenticated() && this.auth.role() != null) {
-      const regex = /\/(registrarNuevaTripulacion|unirseTripulacion)\/\d+/; // Expresión regular para las rutas con parámetros dinámicos
 
       if (regex.test(currentUrl)) {
         this.router.navigateByUrl("/menu");
@@ -29,14 +29,21 @@ export class AuthGuard {
           
     } else if (this.auth.isAuthenticated() && this.auth.role() == null) {
       //si se autentico y no ha elegido su rol
-      var usuarioString = sessionStorage.getItem("infoJugador");
-      if (usuarioString) {
-        var usuarioDTO = JSON.parse(usuarioString)
-        this.router.navigate([`/unirseTripulacion/${usuarioDTO.id}`]);
-      } else {
-        this.router.navigateByUrl("/iniciarsesion");
+      if (regex.test(currentUrl)) {
+        return true;
+      } 
+      else
+      {
+        var usuarioString = sessionStorage.getItem("infoJugador");
+        if (usuarioString) {
+          var usuarioDTO = JSON.parse(usuarioString)
+          this.router.navigate([`/unirseTripulacion/${usuarioDTO.id}`]);
+        } else {
+          this.router.navigateByUrl("/iniciarsesion");
+        }
+        return false;
       }
-      return false;
+      
     } else {
 
       this.router.navigateByUrl("/iniciarsesion");

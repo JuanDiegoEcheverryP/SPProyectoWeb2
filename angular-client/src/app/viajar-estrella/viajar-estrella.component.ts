@@ -89,14 +89,22 @@ export class ViajarEstrellaComponent {
       this.route.params.subscribe(params => {
         idEstrella = Number(params['idEstrella']); 
       });
-      this.naveService.viajarConPlaneta(this.jugadorNave.id,idEstrella,-1).subscribe(result =>{
-        if(result) {
-          this.router.navigate([`visualizarMapa`]);
-        }
-        else {
-          alert("Ha ocurrido un error")
-        }
-      })
+      this.naveService.viajarConPlaneta(this.jugadorNave.id,idEstrella,-1).subscribe({
+          next: (result) => {
+            if (result) {
+              this.router.navigate([`visualizarMapa`]);
+            } else {
+              alert("Ha ocurrido un error");
+            }
+          },
+          error: (err) => {
+            if (err.status === 403) {
+              alert("No tienes permisos para realizar esta acción");
+            } else {
+              alert("Ha ocurrido un error");
+            }
+          }
+        });
       //Viajar, se le pasa idNave, id estrella, id planeta
     }
   }
