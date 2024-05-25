@@ -438,7 +438,7 @@ public class DBInitializer implements CommandLineRunner{
                 
                 do
                 {
-                    cantidad=rand.nextInt(9);
+                    cantidad=rand.nextInt(9)+1;
                 }while(tipo.getVolBodega()<=productos.get(i).getVolumen()*cantidad);
 
                 // Crear un nuevo stock para el producto en este planeta

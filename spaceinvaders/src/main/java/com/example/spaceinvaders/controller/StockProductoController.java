@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +34,14 @@ public class StockProductoController {
 
     // http://localhost:8080/api/stock/planeta/ID
     @Operation(summary = "Buscar productos que tiene planeta por ID")
-
+    @Secured({ "capitan", "comerciante" })
     @GetMapping("/planeta/{idPlaneta}")
     public List<ProductoDTO> recuperarProductosXPlaneta(@PathVariable Long idPlaneta) {
         return stockPlanetaService.recuperarStockDePlaneta(idPlaneta);
     }
 
     // http://localhost:8080/api/stock/planeta/ID/producto/ID
+    
     @Operation(summary = "Buscar producto por ID del planeta ID")
     @GetMapping("planeta/{idPlaneta}/producto/{idProducto}")
     public ResponseEntity<?> recuperarProductosXPlaneta(@PathVariable Long idPlaneta, @PathVariable Long idProducto) {

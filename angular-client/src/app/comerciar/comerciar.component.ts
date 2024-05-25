@@ -9,6 +9,7 @@ import { JugadorService } from '../shared/jugador.service';
 import { NaveService } from '../shared/nave.service';
 import { UsuarioDTO } from '../model/usuario-dto';
 import { ProductoBodegaService } from '../shared/producto_bodega.service';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-comerciar',
@@ -68,13 +69,23 @@ export class ComerciarComponent {
       })
     })
   }
-
+  
   cargarContenido(): void {
-    this.stockProductoService.listarProductosPlaneta(this.planetaNave.id).subscribe(productosPlaneta => {
+    this.stockProductoService.listarProductosPlaneta(this.planetaNave.id).pipe(
+      catchError(error => {
+        console.error('Error al listar productos del planeta:', error);
+        if (error.status === 403) {
+          alert('Error 403: No tienes permisos para realizar esta acción');
+        } else {
+          alert('Ha ocurrido un error al listar productos del planeta. Consulta la consola para más detalles.');
+        }
+        return of([]); // Emite un array vacío y permite continuar con el flujo
+      })
+    ).subscribe(productosPlaneta => {
       this.productosPlaneta = productosPlaneta;
-      
-    })
+    });
   }
+  
   
 
   mostrarInformacion(Producto: ProductoDTO) {

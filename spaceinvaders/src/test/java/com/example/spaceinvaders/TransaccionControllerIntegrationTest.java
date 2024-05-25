@@ -2,6 +2,7 @@ package com.example.spaceinvaders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +22,8 @@ import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.Stock_planeta;
 import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.model.DTO.CompraVentaDTO;
+import com.example.spaceinvaders.model.DTO.JugadorLogInDTO;
+import com.example.spaceinvaders.model.DTO.PatchRolNave;
 import com.example.spaceinvaders.model.DTO.ProductoDTO;
 import com.example.spaceinvaders.model.DTO.RegistroDTO;
 import com.example.spaceinvaders.model.DTO.RespuestaTransaccionDTO;
@@ -36,10 +39,13 @@ import com.example.spaceinvaders.repository.ProductoRepository;
 import com.example.spaceinvaders.repository.StockPlanetaRepository;
 import com.example.spaceinvaders.repository.TipoNaveRepository;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @ActiveProfiles("integration-testing")
@@ -79,7 +85,8 @@ public class TransaccionControllerIntegrationTest {
     @Autowired
 	private StockPlanetaRepository stockRepository;
 	
-    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     void init() {
@@ -132,11 +139,14 @@ public class TransaccionControllerIntegrationTest {
         bodegaRepository.save(bodega2);
 
         //se guarda un jugador de tipo capitan en cada nave 
-        jugadorRepository.save(new Jugador("jugador1","123",Rol.capitan,naves.get(0),avatar));
-        jugadorRepository.save(new Jugador("jugador2","123",Rol.capitan,naves.get(1),avatar));
+        jugadorRepository.save(new Jugador("jugador1",passwordEncoder.encode("123"),Rol.capitan,naves.get(0),avatar));
+        jugadorRepository.save(new Jugador("jugador2",passwordEncoder.encode("123"),Rol.capitan,naves.get(1),avatar));
     }
 
     //prueba 1: realizar una compra de un producto para una nave
+    @Autowired
+    private TestRestTemplate restTemplate;
+
     @SuppressWarnings("null")
     @Test
 	void compraParaUnaNave() {
@@ -146,9 +156,33 @@ public class TransaccionControllerIntegrationTest {
 
         List<Jugador> jugadores = jugadorRepository.findAll();
 
+        JugadorLogInDTO jugadorLogIn= new JugadorLogInDTO();
+        jugadorLogIn.setNombre("jugador1");
+        jugadorLogIn.setContrasena("123");
+        //iniciar sesion para obtener el token
+        UsuarioDTO usuarionuevo=rest.postForObject(SERVER_URL + "/api/jugador/login",jugadorLogIn, UsuarioDTO.class);
+
+        		//esto se anade porque nos aparecio un problema despues de anadir el jwt
+		//pero ahora todo funciona si enviamos el token respectivo
+		restTemplate.getRestTemplate().setInterceptors(Collections.singletonList((request, body, execution) -> {
+            HttpHeaders headers = request.getHeaders();
+            headers.add("Authorization", "Bearer " + usuarionuevo.getToken());
+            return execution.execute(request, body);
+        }));
+
+        // Crear el objeto de solicitud con el token JWT en el encabezado de autorización
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBearerAuth(usuarionuevo.getToken());			
+
         //se obtiene el producto del planeta que se va a comprar
-        ProductoDTO producto=rest.getForObject(SERVER_URL +"/api/stock/planeta/"+planetas.get(0).getId()+"/producto/"+productos.get(0).getId(), ProductoDTO.class);
-        
+        ProductoDTO producto = rest.exchange(
+            SERVER_URL + "/api/stock/planeta/" + planetas.get(0).getId() + "/producto/" + productos.get(0).getId(),
+            HttpMethod.GET,
+            new HttpEntity<>(headers),
+            ProductoDTO.class
+        ).getBody();
+
         //revisar si el precio es el esperado 
         Float precioEsperado=100f/(1+9);
         System.out.println("PRECIOS: esperado "+ precioEsperado+" VS del back "+producto.getPrecioDemanda());
@@ -160,12 +194,13 @@ public class TransaccionControllerIntegrationTest {
         System.out.println("TOTAL: "+total);
         CompraVentaDTO compra= new CompraVentaDTO(productos.get(0).getId(),cantidadProducto, planetas.get(0).getId(), jugadores.get(0).getNaveJuego().getId(), total);
 
+        HttpEntity<CompraVentaDTO> requestEntity = new HttpEntity<>(compra, headers);
         //se realiza la compra
         // Realizar la solicitud PUT y obtener la respuesta
         ResponseEntity<RespuestaTransaccionDTO> response = rest.exchange(
             SERVER_URL + "/api/transaccion/compra",         
             HttpMethod.PUT,                                 
-            new HttpEntity<>(compra),         
+            requestEntity,         
             RespuestaTransaccionDTO.class
         );
 
@@ -202,9 +237,34 @@ public class TransaccionControllerIntegrationTest {
 
         List<Jugador> jugadores = jugadorRepository.findAll();
 
+        JugadorLogInDTO jugadorLogIn= new JugadorLogInDTO();
+        jugadorLogIn.setNombre("jugador1");
+        jugadorLogIn.setContrasena("123");
+        //iniciar sesion para obtener el token
+        UsuarioDTO usuarionuevo=rest.postForObject(SERVER_URL + "/api/jugador/login",jugadorLogIn, UsuarioDTO.class);
+
+        		//esto se anade porque nos aparecio un problema despues de anadir el jwt
+		//pero ahora todo funciona si enviamos el token respectivo
+		restTemplate.getRestTemplate().setInterceptors(Collections.singletonList((request, body, execution) -> {
+            HttpHeaders headers = request.getHeaders();
+            headers.add("Authorization", "Bearer " + usuarionuevo.getToken());
+            return execution.execute(request, body);
+        }));
+
+        // Crear el objeto de solicitud con el token JWT en el encabezado de autorización
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBearerAuth(usuarionuevo.getToken());
+
+
         //se obtiene el producto del planeta que se va a comprar
-        ProductoDTO producto=rest.getForObject(SERVER_URL +"/api/stock/planeta/"+planetas.get(0).getId()+"/producto/"+productos.get(1).getId(), ProductoDTO.class);
-        
+        ProductoDTO producto = rest.exchange(
+            SERVER_URL + "/api/stock/planeta/" + planetas.get(0).getId() + "/producto/" + productos.get(1).getId(),
+            HttpMethod.GET,
+            new HttpEntity<>(headers),
+            ProductoDTO.class
+        ).getBody();
+
         //revisar si el precio es el esperado 
         Float precioEsperado=50f/(1+19);
         System.out.println("PRECIOS: esperado "+ precioEsperado+" VS del back "+producto.getPrecioDemanda());
@@ -217,14 +277,16 @@ public class TransaccionControllerIntegrationTest {
         System.out.println("TOTAL: "+total);
         CompraVentaDTO compra= new CompraVentaDTO(productos.get(1).getId(),cantidadProducto, planetas.get(0).getId(), jugadores.get(0).getNaveJuego().getId(), total);
 
-    //se realiza la compra
+        HttpEntity<CompraVentaDTO> requestEntity = new HttpEntity<>(compra, headers);
+
         // Realizar la solicitud PUT y obtener la respuesta
         ResponseEntity<String> responseEntity = rest.exchange(
             SERVER_URL + "/api/transaccion/compra",         
             HttpMethod.PUT,                                 
-            new HttpEntity<>(compra),         
+            requestEntity,         
             String.class
         );
+
 
         // Obtener el cuerpo de la respuesta
         String error = (String) responseEntity.getBody();
@@ -256,9 +318,34 @@ public class TransaccionControllerIntegrationTest {
 
         List<Jugador> jugadores = jugadorRepository.findAll();
 
+        JugadorLogInDTO jugadorLogIn= new JugadorLogInDTO();
+        jugadorLogIn.setNombre("jugador1");
+        jugadorLogIn.setContrasena("123");
+        //iniciar sesion para obtener el token
+        UsuarioDTO usuarionuevo=rest.postForObject(SERVER_URL + "/api/jugador/login",jugadorLogIn, UsuarioDTO.class);
+
+        		//esto se anade porque nos aparecio un problema despues de anadir el jwt
+		//pero ahora todo funciona si enviamos el token respectivo
+		restTemplate.getRestTemplate().setInterceptors(Collections.singletonList((request, body, execution) -> {
+            HttpHeaders headers = request.getHeaders();
+            headers.add("Authorization", "Bearer " + usuarionuevo.getToken());
+            return execution.execute(request, body);
+        }));
+
+        // Crear el objeto de solicitud con el token JWT en el encabezado de autorización
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBearerAuth(usuarionuevo.getToken());
+
+
         //se obtiene el producto del planeta que se va a comprar
-        ProductoDTO producto=rest.getForObject(SERVER_URL +"/api/stock/planeta/"+planetas.get(0).getId()+"/producto/"+productos.get(2).getId(), ProductoDTO.class);
-        
+        ProductoDTO producto = rest.exchange(
+            SERVER_URL + "/api/stock/planeta/" + planetas.get(0).getId() + "/producto/" + productos.get(2).getId(),
+            HttpMethod.GET,
+            new HttpEntity<>(headers),
+            ProductoDTO.class
+        ).getBody();
+
         //revisar si el precio es el esperado 
         Float precioEsperado=50000f/(1+19);
         System.out.println("PRECIOS: esperado "+ precioEsperado+" VS del back "+producto.getPrecioDemanda());
@@ -274,9 +361,9 @@ public class TransaccionControllerIntegrationTest {
     //se realiza la compra
         // Realizar la solicitud PUT y obtener la respuesta
         ResponseEntity<String> responseEntity = rest.exchange(
-            SERVER_URL + "/api/transaccion/compra",         
-            HttpMethod.PUT,                                 
-            new HttpEntity<>(compra),         
+            SERVER_URL + "/api/transaccion/compra",
+            HttpMethod.PUT,
+            new HttpEntity<>(compra, headers),
             String.class
         );
 
