@@ -3,6 +3,7 @@ package com.example.spaceinvaders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -23,11 +24,13 @@ import com.example.spaceinvaders.model.ProductoBodega;
 import com.example.spaceinvaders.model.Stock_planeta;
 import com.example.spaceinvaders.model.TipoNave;
 import com.example.spaceinvaders.model.DTO.CompraVentaDTO;
+import com.example.spaceinvaders.model.DTO.JugadorLogInDTO;
 import com.example.spaceinvaders.model.DTO.NaveDTO;
 import com.example.spaceinvaders.model.DTO.ProductoDTO;
 import com.example.spaceinvaders.model.DTO.RegistroDTO;
 import com.example.spaceinvaders.model.DTO.RespuestaTransaccionDTO;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
+import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.repository.AvatarRepository;
 import com.example.spaceinvaders.repository.EstrellaRepository;
 import com.example.spaceinvaders.repository.JugadorRepository;
@@ -38,10 +41,13 @@ import com.example.spaceinvaders.repository.ProductoRepository;
 import com.example.spaceinvaders.repository.StockPlanetaRepository;
 import com.example.spaceinvaders.repository.TipoNaveRepository;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @ActiveProfiles("integration-testing")
@@ -72,19 +78,16 @@ public class NaveControllerIntegrationTest {
     @Autowired
 	private PlanetaRepository planetaRepository;
 
-    @Autowired
-	private ProductoRepository productoRepository;
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-	private ProductoBodegaRepository bodegaRepository;
-
-    @Autowired
-	private StockPlanetaRepository stockRepository;
+    private TestRestTemplate restTemplate;
 	
     @BeforeEach
     void init() {
 
-        		//crear un avatar
+        //crear un avatar
 		Avatar avatar=new Avatar("Bazinga", "");
 		avatarRepository.save(avatar);
 
@@ -102,11 +105,34 @@ public class NaveControllerIntegrationTest {
         Nave nave = new Nave("Estrella de la muerte",9876f,5000f,estrella, tipo);
 		naveRepository.save(nave);
 
+		List<Nave> naves = naveRepository.findAll();
+
+		//se guarda un jugador de tipo capitan en cada nave 
+        jugadorRepository.save(new Jugador("jugador1",passwordEncoder.encode("123"),Rol.capitan,naves.get(0),avatar));
+
     }
 
     @SuppressWarnings("null")
     @Test
     void actualizarNave() {
+        JugadorLogInDTO jugadorLogIn= new JugadorLogInDTO();
+        jugadorLogIn.setNombre("jugador1");
+        jugadorLogIn.setContrasena("123");
+
+        //iniciar sesion para obtener el token
+        UsuarioDTO usuarionuevo=rest.postForObject(SERVER_URL + "/api/jugador/login",jugadorLogIn, UsuarioDTO.class);
+
+		restTemplate.getRestTemplate().setInterceptors(Collections.singletonList((request, body, execution) -> {
+            HttpHeaders headers = request.getHeaders();
+            headers.add("Authorization", "Bearer " + usuarionuevo.getToken());
+            return execution.execute(request, body);
+        }));
+
+        // Crear el objeto de solicitud con el token JWT en el encabezado de autorización
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBearerAuth(usuarionuevo.getToken());		
+
         Long idNave = naveRepository.findAll().get(0).getId();
         Long idEstrella = estrellaRepository.findAll().get(0).getId();
         Long idPlaneta = planetaRepository.findAll().get(0).getId();

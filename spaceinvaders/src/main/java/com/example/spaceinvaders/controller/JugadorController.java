@@ -1,6 +1,5 @@
 package com.example.spaceinvaders.controller;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import com.example.spaceinvaders.model.DTO.JugadorLogInDTO;
 import com.example.spaceinvaders.model.DTO.PatchRolNave;
 import com.example.spaceinvaders.model.DTO.RegistroDTO;
 import com.example.spaceinvaders.model.DTO.UsuarioDTO;
-import com.example.spaceinvaders.model.Enum.Rol;
 import com.example.spaceinvaders.services.JugadorService;
 import com.example.spaceinvaders.services.JwtService;
 

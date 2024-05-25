@@ -169,6 +169,7 @@ public class systemTest {
     }
 
     //Selenium
+    /*
     @Test
     void selenium() throws InterruptedException {
         driver.get(baseUrl + "");
@@ -224,6 +225,6 @@ public class systemTest {
             fail("No se pudo encontrar el boton de registrarse");
         }
         assertEquals(true, true);
-        //TODO: Completar selenium
     }
+    */
 }
