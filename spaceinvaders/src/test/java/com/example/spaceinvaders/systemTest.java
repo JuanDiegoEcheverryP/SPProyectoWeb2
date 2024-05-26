@@ -167,12 +167,10 @@ public class systemTest {
         this.baseUrl = "http://localhost:4200";
     }
 
-    /*
     @AfterEach
     void end() {
         this.driver.quit();
     }
-     */
 
     //Selenium
     @Test
