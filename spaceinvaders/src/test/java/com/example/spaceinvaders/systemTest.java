@@ -53,6 +53,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @ActiveProfiles("system-test")
@@ -93,6 +94,9 @@ public class systemTest {
 
     @Autowired
 	private StockPlanetaRepository stockRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 	
     @BeforeEach
     void init() {
@@ -145,8 +149,8 @@ public class systemTest {
         bodegaRepository.save(bodega2);
 
         //se guarda un jugador de tipo capitan en cada nave 
-        jugadorRepository.save(new Jugador("jugador1","123",Rol.capitan,naves.get(0),avatar));
-        jugadorRepository.save(new Jugador("jugador2","123",Rol.capitan,naves.get(1),avatar));
+        jugadorRepository.save(new Jugador("jugador1",passwordEncoder.encode("123"),Rol.capitan,naves.get(0),avatar));
+        jugadorRepository.save(new Jugador("jugador2",passwordEncoder.encode("123"),Rol.capitan,naves.get(1),avatar));
 
         
         //Selenium
@@ -163,13 +167,14 @@ public class systemTest {
         this.baseUrl = "http://localhost:4200";
     }
 
+    /*
     @AfterEach
     void end() {
         this.driver.quit();
     }
+     */
 
     //Selenium
-    /*
     @Test
     void selenium() throws InterruptedException {
         driver.get(baseUrl + "");
@@ -216,15 +221,51 @@ public class systemTest {
             wait.until(ExpectedConditions.elementToBeClickable(addManzanas));
             addManzanas.click();
             
-            for (int i = 0; i < 9; i++) {
-                addManzanas.click();
-            }
-            //Preguntarle al profe como puedo esperar hasta que se carguen los datos de la BDD para verificar precio unitario * 10 == total a pagar
+
+            //Coger dinero actual
+            WebElement dineroAntes = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"credit\"]")));
+            String dineroAntesString = dineroAntes.getText().substring(1);
+            
+            //Coger espacio actual
+            WebElement espacioAntes = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"espacio\"]")));
+            String espacioAntesString = espacioAntes.getText();
+            int indiceSlash = espacioAntesString.indexOf('/');
+            
+            //Coger total a pagar
+            WebElement totalAPagar = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"totalPrecio\"]")));
+            String totalAPagarString = totalAPagar.getText();
+
+            //Coger volumen a bodega
+            WebElement volumenAdd = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"seccionCompra\"]/div[1]/div/div[2]/p[2]")));
+            String volumenAddString = volumenAdd.getText();
+
+            //**********/
+            //Comprar
+            WebElement btnRealizarComprar = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("botonCompra")));
+            wait.until(ExpectedConditions.elementToBeClickable(btnRealizarComprar));
+            btnRealizarComprar.click();
+            
+            
+            //Click boton aceptar
+            WebElement btnYay = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='success-box']/button")));
+            wait.until(ExpectedConditions.elementToBeClickable(btnYay));
+            btnYay.click();
+            //**********/
+
+            //Coger dinero actual
+            WebElement dineroDespues = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"credit\"]")));
+            String dineroDespuesString = dineroDespues.getText().substring(1);
+            assertEquals(Float.parseFloat(dineroAntesString) - Float.parseFloat(totalAPagarString), Float.parseFloat(dineroDespuesString));
+            
+            //Coger espacio actual
+            WebElement espacioDespues = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"espacio\"]")));
+            String espacioDespuesString = espacioDespues.getText();
+            int indiceSlash1 = espacioDespuesString.indexOf('/');
+            assertEquals(Float.parseFloat(espacioAntesString.substring(0,indiceSlash)) + Float.parseFloat(volumenAddString),Float.parseFloat(espacioDespuesString.substring(0,indiceSlash1)));
+
 
         } catch (TimeoutException e) {
             fail("No se pudo encontrar el boton de registrarse");
         }
-        assertEquals(true, true);
     }
-    */
 }
