@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class TransaccionController {
     private StockPlanetaService stockService;
 
     @Secured({ "capitan", "comerciante" })
-    @PutMapping("/venta")
+    @PostMapping("/venta")
     public ResponseEntity<?> procesarVenta(@RequestBody CompraVentaDTO venta) {
         boolean cantidadVenta = bodegaService.validarCantidadVenta(venta.getIdProducto(), venta.getIdNave(), venta.getCantidadProducto());
         
@@ -67,7 +68,7 @@ public class TransaccionController {
     }
    
     @Secured({ "capitan", "comerciante" })
-    @PutMapping("/compra")
+    @PostMapping("/compra")
     public ResponseEntity<?> procesarCompra(@RequestBody CompraVentaDTO compra) {
         System.out.println(compra.getIdPlaneta() +" "+ compra.getIdProducto());
         boolean stockCompra = stockService.validarStockCompra(compra.getIdProducto(), compra.getIdPlaneta(), compra.getCantidadProducto());

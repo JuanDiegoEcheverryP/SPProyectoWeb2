@@ -134,6 +134,7 @@ class JugadorControllerIntegrationTest {
 	@Autowired
     private TestRestTemplate rest;
 
+	//PATCH
 	@Test
 	void anadirJugadorEnNaveDisponible() {
 		JugadorLogInDTO jugadorLogIn= new JugadorLogInDTO();

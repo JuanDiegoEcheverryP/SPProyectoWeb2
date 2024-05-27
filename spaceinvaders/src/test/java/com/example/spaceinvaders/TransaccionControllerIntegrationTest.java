@@ -196,10 +196,10 @@ public class TransaccionControllerIntegrationTest {
 
         HttpEntity<CompraVentaDTO> requestEntity = new HttpEntity<>(compra, headers);
         //se realiza la compra
-        // Realizar la solicitud PUT y obtener la respuesta
+        // Realizar la solicitud POST y obtener la respuesta
         ResponseEntity<RespuestaTransaccionDTO> response = rest.exchange(
             SERVER_URL + "/api/transaccion/compra",         
-            HttpMethod.PUT,                                 
+            HttpMethod.POST,                                 
             requestEntity,         
             RespuestaTransaccionDTO.class
         );
@@ -279,10 +279,10 @@ public class TransaccionControllerIntegrationTest {
 
         HttpEntity<CompraVentaDTO> requestEntity = new HttpEntity<>(compra, headers);
 
-        // Realizar la solicitud PUT y obtener la respuesta
+        // Realizar la solicitud POST y obtener la respuesta
         ResponseEntity<String> responseEntity = rest.exchange(
             SERVER_URL + "/api/transaccion/compra",         
-            HttpMethod.PUT,                                 
+            HttpMethod.POST,                                 
             requestEntity,         
             String.class
         );
@@ -359,10 +359,10 @@ public class TransaccionControllerIntegrationTest {
         CompraVentaDTO compra= new CompraVentaDTO(productos.get(2).getId(),cantidadProducto, planetas.get(0).getId(), jugadores.get(0).getNaveJuego().getId(), total);
 
     //se realiza la compra
-        // Realizar la solicitud PUT y obtener la respuesta
+        // Realizar la solicitud POST y obtener la respuesta
         ResponseEntity<String> responseEntity = rest.exchange(
             SERVER_URL + "/api/transaccion/compra",
-            HttpMethod.PUT,
+            HttpMethod.POST,
             new HttpEntity<>(compra, headers),
             String.class
         );

@@ -20,10 +20,10 @@ export class TransaccionService {
 
 
   compra(compra: CompraVentaDTO): Observable<RespuestaTransaccionDTO> {
-    return this.http.put<RespuestaTransaccionDTO>(`${environment.serverUrl}/api/transaccion/compra`, compra, { headers: this.headers });
+    return this.http.post<RespuestaTransaccionDTO>(`${environment.serverUrl}/api/transaccion/compra`, compra, { headers: this.headers });
   }
 
   venta(venta: CompraVentaDTO): Observable<RespuestaTransaccionDTO> {
-    return this.http.put<RespuestaTransaccionDTO>(`${environment.serverUrl}/api/transaccion/venta`, venta, { headers: this.headers });
+    return this.http.post<RespuestaTransaccionDTO>(`${environment.serverUrl}/api/transaccion/venta`, venta, { headers: this.headers });
   }
 }
